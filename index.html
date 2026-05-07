@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coin Castor — Vakantiehuis in Wanne, Ardennen</title>
+  <meta name="description" content="Coin Castor is een modern vakantiehuis in Lavaux, Trois-Ponts, Ardennen. Natuur, rust en comfort voor tot 10 personen."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #1a1a1a;
+      --gray:  #888;
+      --light: #f4f2ed;
+      --white: #ffffff;
+      --border: #e2dfd8;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Raleway', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--black); background: var(--white); -webkit-font-smoothing: antialiased; }
+
+    /* HERO — foto + naam + nav alles samen, geen aparte navbar */
+    .hero { position: relative; height: 100vh; min-height: 560px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 4rem; overflow: hidden; }
+    .hero img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,.05) 30%, rgba(0,0,0,.48) 100%); }
+    .hero-content { position: relative; z-index: 2; text-align: center; color: white; width: 100%; }
+    .hero-content h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(3rem,8vw,6.5rem); text-transform: uppercase; letter-spacing: .05em; line-height: 1; margin-bottom: 2.75rem; }
+    .hero-nav { display: grid; grid-template-columns: repeat(6,1fr); list-style: none; width: 100%; padding: 0; }
+    .hero-nav li { display: flex; justify-content: center; }
+    .hero-nav a { font-size: .72rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.85); text-decoration: none; transition: color .2s; white-space: nowrap; padding: .3rem 0; position: relative; }
+    .hero-nav a::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: rgba(255,255,255,.6); transform: scaleX(0); transition: transform .22s; }
+    .hero-nav a:hover { color: white; }
+    .hero-nav a:hover::after { transform: scaleX(1); }
+    /* Taalknoppen */
+    .lang-bar { position: absolute; top: 1.4rem; right: 1.8rem; z-index: 10; display: flex; gap: .4rem; }
+    .lang-btn {
+      font-family: var(--sans); font-size: .62rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(255,255,255,.65); background: none;
+      border: 1px solid rgba(255,255,255,.3); padding: .32rem .6rem;
+      cursor: pointer; transition: all .18s;
+    }
+    .lang-btn:hover { color: white; border-color: rgba(255,255,255,.7); }
+    .lang-btn.active { color: white; border-color: white; background: rgba(255,255,255,.15); }
+
+    /* Mobiele hamburger — alleen zichtbaar op small screens */
+    .hbtn { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hbtn span { display: block; width: 22px; height: 1.5px; background: white; }
+    .mnav { display: none; position: absolute; bottom: 0; left: 0; right: 0; z-index: 3; background: rgba(0,0,0,.7); padding: 1.5rem 2rem; }
+    .mnav.open { display: block; }
+    .mnav ul { list-style: none; display: flex; flex-direction: column; gap: 1.1rem; }
+    .mnav a { font-size: .78rem; font-weight: 400; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.8); text-decoration: none; }
+
+    /* SECTIONS */
+    .sec { padding: 5.5rem 2rem; }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+    .narrow { max-width: 660px; margin: 0 auto; text-align: center; }
+    .tag { font-size: .63rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gray); margin-bottom: .6rem; }
+    h2 { font-family: var(--serif); font-size: clamp(1.5rem,2.8vw,2.1rem); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; margin-bottom: 1.4rem; }
+    p { font-size: .95rem; font-weight: 300; color: #444; line-height: 1.85; }
+    p + p { margin-top: .9rem; }
+    strong { font-weight: 600; color: var(--black); }
+    .hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
+    /* INTRO */
+    .intro-logo { width: 90px; height: 90px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
+
+    /* FOTO GRID — 5 col × 3 rijen, alles vierkant */
+    .pgrid { display: grid; gap: 5px; }
+    .pgrid-5 { grid-template-columns: repeat(5, 1fr); }
+    .pgrid-5 + .pgrid-5 { margin-top: 5px; }
+    .pi { overflow: hidden; aspect-ratio: 1; background: var(--light); cursor: pointer; }
+    .pi img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .48s ease; }
+    .pi:hover img { transform: scale(1.04); }
+
+    /* PRAKTISCH */
+    .praktisch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .specs { list-style: none; border-top: 1px solid var(--border); }
+    .spec { display: flex; justify-content: space-between; align-items: baseline; padding: .85rem 0; border-bottom: 1px solid var(--border); }
+    .sl { font-size: .68rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gray); }
+    .sv { font-family: var(--serif); font-size: .97rem; font-weight: 700; }
+    .amen { display: grid; grid-template-columns: 1fr 1fr; gap: .55rem .5rem; margin-top: 1.5rem; }
+    .am { font-size: .87rem; font-weight: 300; display: flex; align-items: center; gap: .45rem; color: #444; }
+    .am::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--gray); flex-shrink: 0; }
+    .pcollage { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+    .pcollage .pi { aspect-ratio: 4/3; }
+
+    /* PRIJZEN */
+    .stag { display: flex; align-items: center; gap: .45rem; font-size: .7rem; font-weight: 400; color: #444; padding: .38rem .85rem; border: 1px solid var(--border); }
+    .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .dg { background: #3d8f3d; } .dy { background: #a8880e; } .do { background: #b85c12; } .dr { background: #a02020; }
+    .stags { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 2.5rem; justify-content: center; }
+    .ptable { width: 100%; border-collapse: collapse; }
+    .ptable th { font-size: .63rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--gray); padding: .7rem 1.2rem; text-align: right; border-bottom: 1px solid var(--border); }
+    .ptable th:first-child { text-align: left; }
+    .ptable td { padding: .95rem 1.2rem; border-bottom: 1px solid var(--border); vertical-align: top; text-align: right; }
+    .ptable td:first-child { text-align: left; }
+    .ptable tr:last-child td { border-bottom: none; }
+    .pp { font-weight: 500; font-size: .9rem; color: var(--black); display: block; }
+    .ps { font-size: .73rem; font-weight: 300; color: var(--gray); display: block; margin-top: .1rem; }
+    .pv { font-family: var(--serif); font-size: 1rem; font-weight: 700; display: block; }
+    .pn { font-size: .7rem; font-weight: 300; color: var(--gray); display: block; }
+    .ptable thead th:nth-child(2) { color: #3d8f3d; }
+    .ptable thead th:nth-child(3) { color: #a8880e; }
+    .ptable thead th:nth-child(4) { color: #b85c12; }
+    .pgrid-peak { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); margin-top: 2rem; }
+    .pc { background: white; padding: 1.4rem 1.25rem; }
+    .pck { font-weight: 500; font-size: .9rem; }
+    .pcs { font-size: .73rem; font-weight: 300; color: var(--gray); margin-top: .15rem; }
+    .pcv { font-family: var(--serif); font-size: 1.3rem; font-weight: 700; margin-top: .7rem; }
+    .pcn { font-size: .7rem; font-weight: 300; color: var(--gray); }
+    .pcnote { grid-column: span 4; background: var(--light); padding: 1.2rem 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .pcnote p { font-size: .82rem; }
+
+    /* BOEKING */
+    .boeking-email { font-family: var(--serif); font-size: clamp(1.3rem,3vw,2rem); font-weight: 700; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 2px; transition: opacity .2s; }
+    .boeking-email:hover { opacity: .55; }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .cb { margin-bottom: 2rem; }
+    .cl { font-size: .62rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gray); margin-bottom: .45rem; }
+    .cv { font-size: .93rem; font-weight: 300; line-height: 1.75; }
+    .cv a { color: var(--black); text-decoration: none; border-bottom: 1px solid var(--border); }
+    .cv a:hover { border-color: var(--black); }
+    .mapbox { background: var(--light); border: 1px dashed var(--border); aspect-ratio: 4/3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .5rem; color: var(--gray); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; }
+
+    /* FOOTER */
+    footer { background: var(--black); color: rgba(255,255,255,.38); text-align: center; padding: 1.6rem 2rem; font-size: .7rem; font-weight: 300; letter-spacing: .08em; }
+    footer a { color: rgba(255,255,255,.38); text-decoration: none; }
+
+    /* LIGHTBOX */
+    #lb { display: none; position: fixed; inset: 0; background: rgba(8,6,3,.94); z-index: 500; align-items: center; justify-content: center; }
+    #lb.on { display: flex; }
+    #lb img { max-width: 92vw; max-height: 90vh; object-fit: contain; }
+    #lbx { position: absolute; top: 1.2rem; right: 1.8rem; font-size: 2rem; color: white; cursor: pointer; line-height: 1; }
+    #lbp, #lbn { position: absolute; top: 50%; transform: translateY(-50%); font-size: 2.2rem; color: rgba(255,255,255,.55); cursor: pointer; padding: 0 1.2rem; user-select: none; }
+    #lbp { left: 0; } #lbn { right: 0; }
+    #lbc { position: absolute; bottom: .9rem; left: 50%; transform: translateX(-50%); font-size: .7rem; color: rgba(255,255,255,.3); letter-spacing: .1em; white-space: nowrap; }
+
+    /* REVEAL */
+    .r { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+    .r.in { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 920px) {
+      .hero-nav { display: none; }
+      .hbtn { display: flex; }
+      .pgrid-5 { grid-template-columns: repeat(3,1fr); }
+      .praktisch-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .pgrid-peak { grid-template-columns: repeat(2,1fr); }
+      .pcnote { grid-column: span 2; }
+      .hero-nav { gap: 1.5rem; }
+    }
+    @media (max-width: 560px) {
+      .sec { padding: 4rem 1.2rem; }
+      .pgrid-5 { grid-template-columns: repeat(2,1fr); }
+      .amen { grid-template-columns: 1fr; }
+      .pgrid-peak { grid-template-columns: 1fr; }
+      .pcnote { grid-column: span 1; grid-template-columns: 1fr; }
+      .ptable th, .ptable td { padding: .7rem .4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LIGHTBOX -->
+<div id="lb">
+  <span id="lbx" onclick="lbClose()">&times;</span>
+  <span id="lbp" onclick="lbMove(-1)">&#8592;</span>
+  <img id="lbi" src="" alt=""/>
+  <span id="lbn" onclick="lbMove(1)">&#8594;</span>
+  <span id="lbc"></span>
+</div>
+
+<!-- HERO — bevat ook de volledige navigatie -->
+<section id="top" class="hero">
+  <img class="bg" src="fotos/IMG_1833.jpg" alt="Coin Castor buitenzicht"/>
+  <div class="hero-overlay"></div>
+
+  <!-- Taalknoppen -->
+  <div class="lang-bar">
+    <button class="lang-btn active" onclick="setLang('nl')">NL</button>
+    <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+
+  <!-- Mobiele hamburger -->
+  <button class="hbtn" id="hbtn" aria-label="Menu" style="position:absolute;top:1.4rem;left:1.8rem;z-index:4">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="mnav" id="mnav">
+    <ul>
+      <li><a href="#huis"      onclick="mnClose()" data-i18n="nav_huis">Het huis</a></li>
+      <li><a href="#fotos"     onclick="mnClose()" data-i18n="nav_fotos">Foto's</a></li>
+      <li><a href="#praktisch" onclick="mnClose()" data-i18n="nav_praktisch">Praktisch</a></li>
+      <li><a href="#prijzen"   onclick="mnClose()" data-i18n="nav_prijzen">Prijzen</a></li>
+      <li><a href="#boeking"   onclick="mnClose()" data-i18n="nav_boeking">Boeking</a></li>
+      <li><a href="#contact"   onclick="mnClose()" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Naam + navigatie onderaan de foto -->
+  <div class="hero-content">
+    <h1>Coin Castor</h1>
+    <ul class="hero-nav">
+      <li><a href="#huis"      data-i18n="nav_huis">Het huis</a></li>
+      <li><a href="#fotos"     data-i18n="nav_fotos">Foto's</a></li>
+      <li><a href="#praktisch" data-i18n="nav_praktisch">Praktisch</a></li>
+      <li><a href="#prijzen"   data-i18n="nav_prijzen">Prijzen</a></li>
+      <li><a href="#boeking"   data-i18n="nav_boeking">Boeking</a></li>
+      <li><a href="#contact"   data-i18n="nav_contact">Contact</a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section id="huis" class="sec">
+  <div class="wrap">
+    <div class="narrow r">
+      <div class="intro-logo">
+        <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
+          <circle cx="25" cy="25" r="24" stroke="#1a1a1a" stroke-width="1"/>
+          <line x1="25" y1="41" x2="25" y2="23" stroke="#1a1a1a" stroke-width="1.2"/>
+          <polygon points="25,9 18,21 32,21" fill="none" stroke="#1a1a1a" stroke-width="1" stroke-linejoin="round"/>
+          <polygon points="25,15 16,25 34,25" fill="none" stroke="#1a1a1a" stroke-width="1" stroke-linejoin="round"/>
+          <polygon points="25,20 13,31 37,31" fill="none" stroke="#1a1a1a" stroke-width="1" stroke-linejoin="round"/>
+          <ellipse cx="25" cy="42" rx="5" ry="2" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+        </svg>
+      </div>
+      <p class="tag" data-i18n="intro_tag">Coin Castor</p>
+      <h2 data-i18n="intro_h2">Je hebt ons gevonden!</h2>
+      <p data-i18n="intro_p1">Dat wil zeggen dat je op zoek bent naar <strong>natuur, rust, of net avontuur</strong> in een prachtig stuk Ardennen. Coin Castor is een perfect uitvalsnest om te genieten, te rusten, te verkennen en te ontdekken.</p>
+      <p data-i18n="intro_p2">In het pittoreske Lavaux, in de vallei van de Salm, staat dit gloednieuwe huis midden in de natuur. Niet enkel vogels en reeën bevolken de omgeving — de wildcamera spotte al <strong>bevers, vossen, dassen en marters</strong> in de omringende bossen.</p>
+      <p data-i18n="intro_p3">Van bij het huis wandel je zo de natuur in. De omgeving is prachtig op àlle momenten van het jaar: <strong>zinderend groen in de lente, verkoeling in de zomer, herfstige kleurenpracht of winterse sneeuwpret</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOTO GRID -->
+<section id="fotos" style="background:white;padding:0">
+  <div style="max-width:1400px;margin:0 auto">
+    <div class="pgrid pgrid-5 r">
+      <div class="pi" onclick="lbOpen(0)"><img src="fotos/IMG_1868.jpg" alt="Eethoek"/></div>
+      <div class="pi" onclick="lbOpen(1)"><img src="fotos/IMG_1869.jpg" alt="Keuken en leefruimte"/></div>
+      <div class="pi" onclick="lbOpen(2)"><img src="fotos/IMG_1829.jpg" alt="Terras"/></div>
+      <div class="pi" onclick="lbOpen(3)"><img src="fotos/IMG_1864.jpg" alt="Living"/></div>
+      <div class="pi" onclick="lbOpen(4)"><img src="fotos/IMG_1863.jpg" alt="Zithoek"/></div>
+    </div>
+    <div class="pgrid pgrid-5 r" style="transition-delay:.1s;margin-top:5px">
+      <div class="pi" onclick="lbOpen(5)"><img src="fotos/IMG_1874.jpg" alt="Keuken"/></div>
+      <div class="pi" onclick="lbOpen(6)"><img src="fotos/IMG_1876.jpg" alt="Kasten"/></div>
+      <div class="pi" onclick="lbOpen(7)"><img src="fotos/IMG_1870.jpg" alt="Leefruimte"/></div>
+      <div class="pi" onclick="lbOpen(8)"><img src="fotos/IMG_1852.jpg" alt="Slaapkamer"/></div>
+      <div class="pi" onclick="lbOpen(9)"><img src="fotos/IMG_1853.jpg" alt="Bed detail"/></div>
+    </div>
+    <div class="pgrid pgrid-5 r" style="transition-delay:.2s;margin-top:5px">
+      <div class="pi" onclick="lbOpen(10)"><img src="fotos/IMG_1849.jpg" alt="Slaapkamer 2"/></div>
+      <div class="pi" onclick="lbOpen(11)"><img src="fotos/IMG_1840.jpg" alt="Kamer raam"/></div>
+      <div class="pi" onclick="lbOpen(12)"><img src="fotos/IMG_1836.jpg" alt="Badkamer bad"/></div>
+      <div class="pi" onclick="lbOpen(13)"><img src="fotos/IMG_1837.jpg" alt="Badkamer douche"/></div>
+      <div class="pi" onclick="lbOpen(14)"><img src="fotos/IMG_1839.jpg" alt="Hal trap"/></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRAKTISCH -->
+<section id="praktisch" class="sec" style="background:var(--light)">
+  <div class="wrap">
+    <div class="praktisch-grid">
+      <div class="r">
+        <p class="tag" data-i18n="prak_tag">Praktische info</p>
+        <h2 data-i18n="prak_h2">Het huis</h2>
+        <p data-i18n="prak_p1">Het huis ligt in Lavaux, deelgemeente van Trois-Ponts in de provincie Luik, midden in de vallei van de Salm.</p>
+        <p data-i18n="prak_p2">Coin Castor is geschikt voor een verblijf <strong>tot 10 personen</strong>. Er zijn <strong>3 slaapkamers</strong> en <strong>2 badkamers</strong>. De derde slaapkamer beschikt bovendien over een eigen douche en lavabo. De grote open leefruimte met volledig uitgeruste keuken, de eethoek met panoramische terrasdeuren en het ruime terras maken van Coin Castor een ideale plek om samen te zijn.</p>
+        <p data-i18n="prak_p3" style="margin-top:.9rem">Beleef dagen die bijblijven met mensen die je dierbaar zijn. Hopelijk tot gauw!</p>
+        <hr class="hr"/>
+        <ul class="specs">
+          <li class="spec"><span class="sl" data-i18n="spec_gasten">Max. gasten</span><span class="sv" data-i18n="spec_gasten_val">10 personen</span></li>
+          <li class="spec"><span class="sl" data-i18n="spec_slaap">Slaapkamers</span><span class="sv" data-i18n="spec_slaap_val">3 kamers</span></li>
+          <li class="spec"><span class="sl" data-i18n="spec_bad">Badkamers</span><span class="sv" data-i18n="spec_bad_val">2 badkamers</span></li>
+          <li class="spec"><span class="sl" data-i18n="spec_extra">Extra sanitair</span><span class="sv" data-i18n="spec_extra_val">Douche + lavabo in kamer 3</span></li>
+          <li class="spec"><span class="sl" data-i18n="spec_in">Inchecken</span><span class="sv" data-i18n="spec_in_val">Vanaf 16:00</span></li>
+          <li class="spec"><span class="sl" data-i18n="spec_out">Uitchecken</span><span class="sv" data-i18n="spec_out_val">Voor 11:00</span></li>
+          <li class="spec"><span class="sl" data-i18n="spec_pets">Huisdieren</span><span class="sv" data-i18n="spec_pets_val">Op aanvraag</span></li>
+          <li class="spec"><span class="sl" data-i18n="spec_min">Min. verblijf</span><span class="sv" data-i18n="spec_min_val">2 nachten</span></li>
+        </ul>
+        <div class="amen">
+          <span class="am" data-i18n="am_wifi">Gratis WiFi</span>
+          <span class="am" data-i18n="am_keuken">Volledige keuken</span>
+          <span class="am" data-i18n="am_vaat">Vaatwasser</span>
+          <span class="am" data-i18n="am_was">Wasmachine</span>
+          <span class="am" data-i18n="am_tv">Smart TV</span>
+          <span class="am" data-i18n="am_terras">Terras + tuinmeubilair</span>
+          <span class="am" data-i18n="am_park">Gratis parkeren</span>
+          <span class="am" data-i18n="am_beddengoed">Beddengoed inbegrepen</span>
+          <span class="am" data-i18n="am_handdoek">Handdoeken inbegrepen</span>
+          <span class="am" data-i18n="am_stapel">Stapelbed voor kinderen</span>
+        </div>
+      </div>
+      <div class="r" style="transition-delay:.15s">
+        <div class="pcollage">
+          <div class="pi" onclick="lbOpen(0)"><img src="fotos/IMG_1868.jpg" alt="Eethoek"/></div>
+          <div class="pi" onclick="lbOpen(1)"><img src="fotos/IMG_1874.jpg" alt="Keuken"/></div>
+          <div class="pi" onclick="lbOpen(10)"><img src="fotos/IMG_1849.jpg" alt="Slaapkamer"/></div>
+          <div class="pi" onclick="lbOpen(12)"><img src="fotos/IMG_1836.jpg" alt="Badkamer"/></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIJZEN -->
+<section id="prijzen" class="sec" style="background:#f7f6f3">
+  <div class="wrap">
+
+    <!-- Seizoensdefinities -->
+    <div class="r" style="margin-bottom:2.5rem">
+      <p class="tag" data-i18n="prijs_tag" style="margin-bottom:1.25rem">Seizoensdefinities</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem">
+
+        <!-- Laagseizoen -->
+        <div style="background:white;border:1px solid #e8e5de;border-radius:10px;padding:1.4rem">
+          <span style="display:inline-block;background:#edf7ed;color:#2e7d32;font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .65rem;border-radius:20px;margin-bottom:.9rem" data-i18n="badge_laag">Laagseizoen</span>
+          <p style="font-size:.9rem;font-weight:500;color:#1a1a1a;margin-bottom:.4rem" data-i18n="s_laag_maand">Jan · Feb · Nov · Dec*</p>
+          <p style="font-size:.8rem;font-weight:300;color:#888;line-height:1.6" data-i18n="s_laag_info">Excl. kerstperiode · Excl. krokusvakantie</p>
+        </div>
+
+        <!-- Tussenseizoen -->
+        <div style="background:white;border:1px solid #e8e5de;border-radius:10px;padding:1.4rem">
+          <span style="display:inline-block;background:#fff8e1;color:#b45309;font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .65rem;border-radius:20px;margin-bottom:.9rem" data-i18n="badge_tussen">Tussenseizoen</span>
+          <p style="font-size:.9rem;font-weight:500;color:#1a1a1a;margin-bottom:.4rem" data-i18n="s_tussen_maand">Mrt · Apr · Jun · Sep · Okt</p>
+          <p style="font-size:.8rem;font-weight:300;color:#888;line-height:1.6" data-i18n="s_tussen_info">+ krokusvakantie BE · + voorjaarsvakantie NL · + herfstvakantie BE/NL · + lange weekenden</p>
+        </div>
+
+        <!-- Hoogseizoen -->
+        <div style="background:white;border:1px solid #e8e5de;border-radius:10px;padding:1.4rem">
+          <span style="display:inline-block;background:#e8f0fe;color:#1a56b0;font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .65rem;border-radius:20px;margin-bottom:.9rem" data-i18n="badge_hoog">Hoogseizoen</span>
+          <p style="font-size:.9rem;font-weight:500;color:#1a1a1a;margin-bottom:.4rem" data-i18n="s_hoog_maand">Juli · Augustus</p>
+          <p style="font-size:.8rem;font-weight:300;color:#888;line-height:1.6" data-i18n="s_hoog_info">+ paasvakantie BE · + meivakantie NL · + zomervakantie BE/NL</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prijstabel -->
+    <div class="r" style="transition-delay:.08s;margin-bottom:.75rem">
+      <p class="tag" style="margin-bottom:1.25rem" data-i18n="tabel_tag">Prijstabel</p>
+      <div style="background:white;border:1px solid #e8e5de;border-radius:10px;overflow:hidden">
+        <table class="ptable" style="border-radius:0">
+          <thead>
+            <tr style="background:white">
+              <th style="text-align:left;color:#888;padding:1rem 1.4rem;border-bottom:1px solid #e8e5de" data-i18n="th_periode">Periode</th>
+              <th style="color:#2e7d32;padding:1rem 1.4rem;border-bottom:1px solid #e8e5de;text-align:right" data-i18n="th_laag">Laagseizoen</th>
+              <th style="color:#b45309;padding:1rem 1.4rem;border-bottom:1px solid #e8e5de;text-align:right" data-i18n="th_tussen">Tussenseizoen</th>
+              <th style="color:#1a56b0;padding:1rem 1.4rem;border-bottom:1px solid #e8e5de;text-align:right" data-i18n="th_hoog">Hoogseizoen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #e8e5de">
+              <td style="padding:1.1rem 1.4rem;text-align:left"><span class="pp" data-i18n="pt_weekend">Weekend</span><span class="ps" data-i18n="pt_weekend_s">Vr–ma · 3 nachten</span></td>
+              <td style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€595</span><span class="pn" data-i18n="pn_w_l">€198/nacht</span></td>
+              <td style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€750</span><span class="pn" data-i18n="pn_w_t">€250/nacht</span></td>
+              <td style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.045</span><span class="pn" data-i18n="pn_w_h">€348/nacht</span></td>
+            </tr>
+            <tr style="border-bottom:1px solid #e8e5de">
+              <td style="padding:1.1rem 1.4rem;text-align:left"><span class="pp" data-i18n="pt_week">Volledige week</span><span class="ps" data-i18n="pt_week_s">Vr–vr of za–za · 7 nachten</span></td>
+              <td style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.100</span><span class="pn" data-i18n="pn_wk_l">€157/nacht</span></td>
+              <td style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.400</span><span class="pn" data-i18n="pn_wk_t">€200/nacht</span></td>
+              <td style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.925</span><span class="pn" data-i18n="pn_wk_h">€275/nacht</span></td>
+            </tr>
+            <tr style="border-bottom:1px solid #e8e5de">
+              <td style="padding:1.1rem 1.4rem;text-align:left"><span class="pp" data-i18n="pt_mid">Midweek</span><span class="ps" data-i18n="pt_mid_s">Ma–vr · 4 nachten</span></td>
+              <td style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€695</span><span class="pn" data-i18n="pn_m_l">€174/nacht</span></td>
+              <td style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€875</span><span class="pn" data-i18n="pn_m_t">€219/nacht</span></td>
+              <td style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.155</span><span class="pn" data-i18n="pn_m_h">€289/nacht</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="padding:.9rem 1.4rem;font-size:.78rem;font-weight:300;color:#888;border-top:1px solid #e8e5de;line-height:1.6" data-i18n="prijs_footer">
+          Alle prijzen zijn inclusief schoonmaak en linnen · Andere periodes op aanvraag (min. 2 nachten) · *December = laagseizoen, tenzij kerstperiode
+        </p>
+      </div>
+    </div>
+
+    <!-- Kerstperiode — compacter -->
+    <div class="r" style="transition-delay:.16s">
+      <p class="tag" style="margin-bottom:1rem" data-i18n="kerst_tag_title">Kerstperiode</p>
+      <div style="background:white;border:1px solid #e8e5de;border-radius:10px;padding:1rem 1.25rem">
+        <!-- Header balk -->
+        <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;padding-bottom:.85rem;border-bottom:1px solid #e8e5de">
+          <span style="background:#fee2e2;color:#b91c1c;font-size:.6rem;font-weight:600;padding:.2rem .6rem;border-radius:20px;white-space:nowrap" data-i18n="kerst_badge">23 dec – 5 jan</span>
+          <p style="font-size:.82rem;font-weight:400;color:#666" data-i18n="kerst_sub">Aparte tarieven · bij voorkeur min. 7 nachten</p>
+        </div>
+        <!-- Drie opties — compacter -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#e8e5de;border-radius:6px;overflow:hidden">
+          <div style="background:white;padding:.85rem 1.1rem">
+            <p style="font-size:.68rem;font-weight:500;color:#888;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.08em" data-i18n="kerst_w1">Week 1</p>
+            <p style="font-family:var(--serif);font-size:1.3rem;font-weight:700;color:#1a1a1a;margin-bottom:.15rem">€2.100</p>
+            <p style="font-size:.7rem;font-weight:300;color:#aaa" data-i18n="kerst_w1_s">23–29 dec · 7 nts</p>
+          </div>
+          <div style="background:white;padding:.85rem 1.1rem">
+            <p style="font-size:.68rem;font-weight:500;color:#888;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.08em" data-i18n="kerst_w2">Week 2</p>
+            <p style="font-family:var(--serif);font-size:1.3rem;font-weight:700;color:#1a1a1a;margin-bottom:.15rem">€2.100</p>
+            <p style="font-size:.7rem;font-weight:300;color:#aaa" data-i18n="kerst_w2_s">30 dec–5 jan · 7 nts</p>
+          </div>
+          <div style="background:white;padding:.85rem 1.1rem">
+            <p style="font-size:.68rem;font-weight:500;color:#888;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.08em" data-i18n="kerst_vol">Volle periode</p>
+            <p style="font-family:var(--serif);font-size:1.3rem;font-weight:700;color:#1a1a1a;margin-bottom:.15rem">€4.000</p>
+            <p style="font-size:.7rem;font-weight:300;color:#aaa" data-i18n="kerst_vol_s">23 dec–5 jan · 14 nts</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seizoenskalender -->
+    <div class="r" style="transition-delay:.22s;margin-top:2rem">
+      <p class="tag" style="margin-bottom:1rem" data-i18n="kal_tag">Seizoenskalender 2025–2026</p>
+
+      <!-- Navigatie + legenda -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;gap:1rem;flex-wrap:wrap">
+        <button id="kal-prev" onclick="kalMove(-1)" style="background:white;border:1px solid #e8e5de;border-radius:6px;padding:.45rem .9rem;font-family:var(--sans);font-size:.72rem;font-weight:500;cursor:pointer;color:#1a1a1a;flex-shrink:0">← Vorige</button>
+        <button id="kal-next" onclick="kalMove(1)" style="background:white;border:1px solid #e8e5de;border-radius:6px;padding:.45rem .9rem;font-family:var(--sans);font-size:.72rem;font-weight:500;cursor:pointer;color:#1a1a1a;flex-shrink:0">Volgende →</button>
+      </div>
+
+      <!-- Legenda in twee rijen -->
+      <div style="background:white;border:1px solid #e8e5de;border-radius:10px;padding:.85rem 1.1rem;margin-bottom:1rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem .75rem">
+        <!-- Seizoenen -->
+        <div style="grid-column:span 2;font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#bbb;margin-bottom:.2rem" data-i18n="leg_seizoen">Seizoen</div>
+        <span style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:#444"><span style="width:14px;height:14px;border-radius:3px;background:#d1ebd1;flex-shrink:0;display:inline-block"></span><span data-i18n="badge_laag">Laagseizoen</span></span>
+        <span style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:#444"><span style="width:14px;height:14px;border-radius:3px;background:#fef3c7;flex-shrink:0;display:inline-block"></span><span data-i18n="badge_tussen">Tussenseizoen</span></span>
+        <span style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:#444"><span style="width:14px;height:14px;border-radius:3px;background:#dbeafe;flex-shrink:0;display:inline-block"></span><span data-i18n="badge_hoog">Hoogseizoen</span></span>
+        <span style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:#444"><span style="width:14px;height:14px;border-radius:3px;background:#fee2e2;flex-shrink:0;display:inline-block"></span><span data-i18n="kerst_tag_title">Kerstperiode</span></span>
+
+        <!-- Scheidingslijn -->
+        <div style="grid-column:span 2;border-top:1px solid #e8e5de;margin:.3rem 0"></div>
+
+        <!-- Beschikbaarheid -->
+        <div style="grid-column:span 2;font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#bbb;margin-bottom:.2rem" data-i18n="leg_beschik">Beschikbaarheid</div>
+        <!-- Beschikbaar: seizoenskleur, lichte rand -->
+        <span style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:#444">
+          <span style="width:14px;height:14px;border-radius:3px;background:#dbeafe;border:1.5px solid #93c5fd;flex-shrink:0;display:inline-block"></span>
+          <span data-i18n="leg_vrij">Beschikbaar</span>
+        </span>
+        <!-- Geboekt: gearceerd -->
+        <span style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:#444">
+          <span style="width:14px;height:14px;border-radius:3px;flex-shrink:0;display:inline-block;position:relative;overflow:hidden;background:#e8e5de">
+            <svg viewBox="0 0 14 14" style="position:absolute;inset:0;width:100%;height:100%"><line x1="0" y1="14" x2="14" y2="0" stroke="#aaa" stroke-width="1.5"/></svg>
+          </span>
+          <span data-i18n="leg_geboekt">Geboekt</span>
+        </span>
+      </div>
+
+      <!-- Kalender grid — 3 maanden -->
+      <div id="kal-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem"></div>
+
+      <!-- Boekingsnota -->
+      <p style="font-size:.72rem;font-weight:300;color:#aaa;margin-top:.75rem;text-align:center" data-i18n="kal_nota">Klik op een dag voor meer info · Kalender is indicatief, contacteer ons voor definitieve beschikbaarheid</p>
+    </div>
+
+  </div>
+</section>
+
+<script>
+/* ── SEIZOENSKALENDER MET DAG-UITLEG ── */
+
+// Paaszondag (Meeus/Jones/Butcher)
+function easterSunday(year) {
+  const a=year%19,b=Math.floor(year/100),c=year%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25);
+  const g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4;
+  const l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451);
+  return new Date(year, Math.floor((h+l-7*m+114)/31)-1, ((h+l-7*m+114)%31)+1);
+}
+
+function dateKey(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const day = String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+
+function addDays(date, n) { const d=new Date(date); d.setDate(d.getDate()+n); return d; }
+
+// Bouw een map: dateKey -> { season, reasons: {nl,fr,en}[] }
+function buildDayMap(year) {
+  const map = {}; // key -> { season, reasons }
+
+  function markDay(date, season, reasons) {
+    const k = dateKey(date);
+    if (!map[k]) map[k] = { season, reasons };
+    else {
+      // Hogere prioriteit wint: kerst > hoog > tussen > laag
+      const prio = { kerst:4, hoog:3, tussen:2, laag:1 };
+      if (prio[season] > prio[map[k].season]) map[k] = { season, reasons };
+      else if (prio[season] === prio[map[k].season]) {
+        // Zelfde prioriteit: voeg reden toe
+        map[k].reasons.nl = [...new Set([...map[k].reasons.nl, ...reasons.nl])];
+        map[k].reasons.fr = [...new Set([...map[k].reasons.fr, ...reasons.fr])];
+        map[k].reasons.en = [...new Set([...map[k].reasons.en, ...reasons.en])];
+      }
+    }
+  }
+
+  function markRange(start, end, season, reasons) {
+    const d = new Date(start);
+    while (d <= end) { markDay(d, season, reasons); d.setDate(d.getDate()+1); }
+  }
+
+  function weekendAround(date, reasons) {
+    // Bepaal vr–ma rond de feestdag
+    const dow = date.getDay(); // 0=zo
+    let fri, mon;
+    if      (dow===4) { fri=addDays(date,-1); mon=addDays(date,3); }
+    else if (dow===5) { fri=new Date(date);   mon=addDays(date,3); }
+    else if (dow===6) { fri=addDays(date,-1); mon=addDays(date,2); }
+    else if (dow===0) { fri=addDays(date,-2); mon=addDays(date,1); }
+    else if (dow===1) { fri=addDays(date,-3); mon=new Date(date);  }
+    else if (dow===2) { fri=addDays(date,3);  mon=addDays(date,6); }
+    else              { fri=addDays(date,2);  mon=addDays(date,5); }
+    markRange(fri, mon, 'hoog', reasons);
+  }
+
+  const easter = easterSunday(year);
+
+  // Kerstperiode
+  markRange(new Date(year-1,11,23), new Date(year,0,5), 'kerst', {
+    nl:['Kerstperiode'], fr:['Période de Noël'], en:['Christmas period']
+  });
+  markRange(new Date(year,11,23), new Date(year+1,0,5), 'kerst', {
+    nl:['Kerstperiode'], fr:['Période de Noël'], en:['Christmas period']
+  });
+
+  // Juli & Augustus
+  markRange(new Date(year,6,1), new Date(year,7,31), 'hoog', {
+    nl:['Zomervakantie'], fr:['Vacances d\'été'], en:['Summer holidays']
+  });
+
+  // Paasweekend
+  markRange(addDays(easter,-2), addDays(easter,1), 'hoog', {
+    nl:['Paasweekend'], fr:['Week-end de Pâques'], en:['Easter weekend']
+  });
+  // Paasvakantie BE (Pasen + hele week)
+  markRange(addDays(easter,-3), addDays(easter,13), 'hoog', {
+    nl:['Paasvakantie BE'], fr:['Vacances de Pâques BE'], en:['Easter holidays BE']
+  });
+
+  // Meivakantie NL (~25 apr – 11 mei)
+  markRange(new Date(year,3,25), new Date(year,4,11), 'hoog', {
+    nl:['Meivakantie NL'], fr:['Vacances de mai NL'], en:['May holidays NL']
+  });
+
+  // Koningsdag NL — 27 april (26 apr als 27 is zondag)
+  const koningsdag = new Date(year,3,27).getDay()===0 ? new Date(year,3,26) : new Date(year,3,27);
+  weekendAround(koningsdag, { nl:['Koningsdag Nederland'], fr:['Fête du Roi NL'], en:['King\'s Day Netherlands'] });
+
+  // Bevrijdingsdag NL — 5 mei
+  weekendAround(new Date(year,4,5), { nl:['Bevrijdingsdag Nederland'], fr:['Jour de la Libération NL'], en:['Liberation Day Netherlands'] });
+
+  // 1 mei — Dag van de Arbeid
+  weekendAround(new Date(year,4,1), { nl:['Verlengd weekend 1 mei (Dag van de Arbeid)'], fr:['Week-end prolongé 1er mai (Fête du Travail)'], en:['Extended weekend May 1st (Labour Day)'] });
+
+  // Hemelvaart
+  const ascension = addDays(easter, 39);
+  weekendAround(ascension, { nl:['Verlengd weekend Hemelvaart'], fr:['Week-end prolongé Ascension'], en:['Extended weekend Ascension'] });
+
+  // Pinksteren
+  const pentecost = addDays(easter, 49);
+  markRange(pentecost, addDays(pentecost,1), 'hoog', {
+    nl:['Pinksterweekend'], fr:['Week-end de Pentecôte'], en:['Pentecost weekend']
+  });
+  weekendAround(pentecost, { nl:['Verlengd weekend Pinksteren'], fr:['Week-end prolongé Pentecôte'], en:['Extended weekend Pentecost'] });
+
+  // 11 juli — Vlaamse feestdag
+  weekendAround(new Date(year,6,11), { nl:['Verlengd weekend Vlaamse feestdag'], fr:['Week-end prolongé Fête flamande'], en:['Extended weekend Flemish holiday'] });
+
+  // 21 juli — Belgische Nationale feestdag
+  weekendAround(new Date(year,6,21), { nl:['Verlengd weekend Belgische Nationale feestdag'], fr:['Week-end prolongé Fête nationale belge'], en:['Extended weekend Belgian National Day'] });
+
+  // 15 augustus — OLV Hemelvaart
+  weekendAround(new Date(year,7,15), { nl:['Verlengd weekend OLV Hemelvaart'], fr:['Week-end prolongé Assomption'], en:['Extended weekend Assumption Day'] });
+
+  // 1 november — Allerheiligen
+  weekendAround(new Date(year,10,1), { nl:['Verlengd weekend Allerheiligen'], fr:['Week-end prolongé Toussaint'], en:['Extended weekend All Saints\' Day'] });
+
+  // 11 november — Wapenstilstand
+  weekendAround(new Date(year,10,11), { nl:['Verlengd weekend Wapenstilstand'], fr:['Week-end prolongé Armistice'], en:['Extended weekend Armistice Day'] });
+
+  // Krokusvakantie BE (~7 dagen voor Pasen -49 dagen, altijd in feb)
+  const krokusEnd = addDays(easter,-42);
+  const krokusStart = addDays(krokusEnd,-6);
+  markRange(krokusStart, krokusEnd, 'tussen', {
+    nl:['Krokusvakantie BE'], fr:['Vacances de carnaval BE'], en:['Carnival holidays BE']
+  });
+
+  // Herfstvakantie BE/NL (~25 okt – 3 nov)
+  markRange(new Date(year,9,25), new Date(year,10,3), 'tussen', {
+    nl:['Herfstvakantie BE/NL'], fr:['Vacances d\'automne BE/NL'], en:['Autumn break BE/NL']
+  });
+
+  return map;
+}
+
+// Cache per jaar
+const dayMapCache = {};
+function getDayMap(year) {
+  if (!dayMapCache[year]) dayMapCache[year] = buildDayMap(year);
+  return dayMapCache[year];
+}
+
+function getDayInfo(date) {
+  const map = getDayMap(date.getFullYear());
+  const k = dateKey(date);
+  const y = date.getFullYear(), m = date.getMonth()+1, day = date.getDate();
+  const md = m*100+day;
+
+  if (map[k]) return map[k];
+
+  // Fallback op basis van maand
+  if (m===7||m===8) return { season:'hoog', reasons:{nl:['Zomervakantie'],fr:['Vacances d\'été'],en:['Summer holidays']} };
+  if (m===6||m===9) return { season:'tussen', reasons:{nl:['Tussenseizoen'],fr:['Moyenne saison'],en:['Mid season']} };
+  if (m===3||m===4||m===5||m===10) return { season:'tussen', reasons:{nl:['Tussenseizoen'],fr:['Moyenne saison'],en:['Mid season']} };
+  return { season:'laag', reasons:{nl:['Laagseizoen'],fr:['Basse saison'],en:['Low season']} };
+}
+
+const SEASON_COLOR = {
+  laag:  { bg:'#d1ebd1', text:'#1a4d1a', border:'#a8d5a8' },
+  tussen:{ bg:'#fef3c7', text:'#7c5c00', border:'#f0d96e' },
+  hoog:  { bg:'#dbeafe', text:'#1e3a8a', border:'#93c5fd' },
+  kerst: { bg:'#fee2e2', text:'#991b1b', border:'#fca5a5' },
+};
+
+const SEASON_LABEL = {
+  nl:{ laag:'Laagseizoen', tussen:'Tussenseizoen', hoog:'Hoogseizoen', kerst:'Kerstperiode' },
+  fr:{ laag:'Basse saison', tussen:'Moyenne saison', hoog:'Haute saison', kerst:'Période de Noël' },
+  en:{ laag:'Low season', tussen:'Mid season', hoog:'High season', kerst:'Christmas period' },
+};
+
+const MONTHS = {
+  nl:['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'],
+  fr:['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
+  en:['January','February','March','April','May','June','July','August','September','October','November','December'],
+};
+const DAYS = {
+  nl:['Ma','Di','Wo','Do','Vr','Za','Zo'],
+  fr:['Lu','Ma','Me','Je','Ve','Sa','Di'],
+  en:['Mo','Tu','We','Th','Fr','Sa','Su'],
+};
+const MONTHS_SHORT = {
+  nl:['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'],
+  fr:['jan','fév','mars','avr','mai','juin','juil','août','sep','oct','nov','déc'],
+  en:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+};
+
+let kalOffset = 0;
+
+// ── GEBOEKTE PERIODES ──────────────────────────────────────────────────
+// Pas deze lijst aan om boekingen bij te houden.
+// Formaat: ['YYYY-MM-DD', 'YYYY-MM-DD'] = van en t/m (beide inbegrepen)
+const BOOKED_PERIODS = [
+  ['2026-05-14', '2026-05-17'],
+  ['2026-10-23', '2026-10-25'],
+];
+
+// Bouw een Set van geboekte datum-strings
+function buildBookedSet() {
+  const booked = new Set();
+  BOOKED_PERIODS.forEach(([from, to]) => {
+    // Gebruik lokale tijdzone via split om UTC-verschuiving te vermijden
+    const [fy,fm,fd] = from.split('-').map(Number);
+    const [ty,tm,td] = to.split('-').map(Number);
+    const d = new Date(fy, fm-1, fd);
+    const end = new Date(ty, tm-1, td);
+    while (d <= end) {
+      booked.add(dateKey(d));
+      d.setDate(d.getDate()+1);
+    }
+  });
+  return booked;
+}
+const BOOKED = buildBookedSet();
+
+// Tooltip
+let activeTooltip = null;
+function showTooltip(cell, date, info) {
+  if (activeTooltip) activeTooltip.remove();
+  const lang = typeof currentLang !== 'undefined' ? currentLang : 'nl';
+  const sc = info.booked ? { border:'#c8c4bb', text:'#555' } : SEASON_COLOR[info.season];
+  const label = SEASON_LABEL[lang][info.season];
+  const reasons = info.reasons[lang] || info.reasons.nl;
+  const ms = MONTHS_SHORT[lang];
+
+  const tip = document.createElement('div');
+  tip.style.cssText = `position:fixed;z-index:9999;background:white;border:1.5px solid ${sc.border};border-radius:10px;padding:.85rem 1rem;box-shadow:0 6px 24px rgba(0,0,0,.12);min-width:190px;max-width:250px;pointer-events:auto`;
+
+  const dateStr = `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`;
+
+  // Status badge bovenaan
+  const statusHtml = info.booked
+    ? `<div style="display:inline-flex;align-items:center;gap:.4rem;background:#f0ede6;border-radius:20px;padding:.25rem .65rem;margin-bottom:.55rem">
+         <svg width="8" height="8" viewBox="0 0 8 8"><line x1="0" y1="8" x2="8" y2="0" stroke="#aaa" stroke-width="1.5"/><line x1="0" y1="4" x2="4" y2="0" stroke="#aaa" stroke-width="1.5"/><line x1="4" y1="8" x2="8" y2="4" stroke="#aaa" stroke-width="1.5"/></svg>
+         <span style="font-size:.65rem;font-weight:600;color:#888;letter-spacing:.08em;text-transform:uppercase">${{nl:'Geboekt',fr:'Réservé',en:'Booked'}[lang]}</span>
+       </div>`
+    : `<div style="display:inline-flex;align-items:center;gap:.4rem;background:${SEASON_COLOR[info.season].bg};border-radius:20px;padding:.25rem .65rem;margin-bottom:.55rem">
+         <span style="width:6px;height:6px;border-radius:50%;background:${SEASON_COLOR[info.season].text};display:inline-block"></span>
+         <span style="font-size:.65rem;font-weight:600;color:${SEASON_COLOR[info.season].text};letter-spacing:.08em;text-transform:uppercase">${{nl:'Beschikbaar',fr:'Disponible',en:'Available'}[lang]}</span>
+       </div>`;
+
+  tip.innerHTML = `
+    ${statusHtml}
+    <p style="font-size:.65rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#bbb;margin-bottom:.2rem">${label}</p>
+    <p style="font-size:.78rem;font-weight:500;color:#333;margin-bottom:.45rem">${dateStr}</p>
+    <ul style="list-style:none;padding:0;margin:0">
+      ${reasons.map(r=>`<li style="font-size:.72rem;font-weight:300;color:#777;padding:.2rem 0;border-top:1px solid #f0ede6">${r}</li>`).join('')}
+    </ul>`;
+
+  document.body.appendChild(tip);
+  activeTooltip = tip;
+
+  const rect = cell.getBoundingClientRect();
+  const tw = tip.offsetWidth, th = tip.offsetHeight;
+  let top = rect.top - th - 10 + window.scrollY;
+  if (top < window.scrollY + 8) top = rect.bottom + 10 + window.scrollY;
+  let left = rect.left + rect.width/2 - tw/2 + window.scrollX;
+  left = Math.max(8, Math.min(left, window.innerWidth - tw - 8));
+  tip.style.top = top + 'px';
+  tip.style.left = left + 'px';
+}
+
+function hideTooltip() { if (activeTooltip) { activeTooltip.remove(); activeTooltip = null; } }
+document.addEventListener('click', e => { if (activeTooltip && !activeTooltip.contains(e.target)) hideTooltip(); });
+
+function renderKal() {
+  const grid = document.getElementById('kal-grid');
+  grid.innerHTML = '';
+  const now = new Date();
+  const startMonth = now.getMonth() + kalOffset;
+  const startYear = now.getFullYear();
+
+  for (let mi = 0; mi < 3; mi++) {
+    const totalMonth = startMonth + mi;
+    const year = startYear + Math.floor(totalMonth / 12);
+    const month = ((totalMonth % 12) + 12) % 12;
+    const lang = typeof currentLang !== 'undefined' ? currentLang : 'nl';
+
+    const col = document.createElement('div');
+    col.style.cssText = 'background:white;border:1px solid #e8e5de;border-radius:10px;padding:1rem';
+
+    // Maandtitel
+    const title = document.createElement('p');
+    title.textContent = `${MONTHS[lang][month]} ${year}`;
+    title.style.cssText = 'font-size:.78rem;font-weight:600;color:#1a1a1a;margin-bottom:.75rem;text-align:center';
+    col.appendChild(title);
+
+    // Dag-headers
+    const hrow = document.createElement('div');
+    hrow.style.cssText = 'display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:3px';
+    DAYS[lang].forEach(d => {
+      const cell = document.createElement('div');
+      cell.textContent = d;
+      cell.style.cssText = 'font-size:.58rem;font-weight:600;color:#bbb;text-align:center;padding:.15rem 0';
+      hrow.appendChild(cell);
+    });
+    col.appendChild(hrow);
+
+    // Dagen grid
+    const dgrid = document.createElement('div');
+    dgrid.style.cssText = 'display:grid;grid-template-columns:repeat(7,1fr);gap:2px';
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const offset = (firstDay === 0) ? 6 : firstDay - 1;
+    for (let i = 0; i < offset; i++) dgrid.appendChild(document.createElement('div'));
+
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const today = new Date(); today.setHours(0,0,0,0);
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const date = new Date(year, month, d);
+      const info = getDayInfo(date);
+      const sc = SEASON_COLOR[info.season];
+      const isToday = date.getTime() === today.getTime();
+      const isBooked = BOOKED.has(dateKey(date));
+      const isPast = date < today;
+
+      const cell = document.createElement('div');
+      cell.style.cssText = `
+        position:relative;overflow:hidden;
+        font-size:.68rem;font-weight:${isToday?'700':'400'};
+        text-align:center;padding:.28rem .1rem;border-radius:4px;
+        line-height:1;cursor:pointer;transition:filter .12s;
+        background:${isBooked ? '#ededea' : sc.bg};
+        color:${isBooked ? '#aaa' : isPast ? sc.text+'99' : sc.text};
+        ${isToday ? `outline:2px solid ${sc.text};outline-offset:-2px;` : ''}
+        ${isPast && !isBooked ? 'opacity:.55;' : ''}
+      `;
+
+      // Dag-getal
+      const num = document.createElement('span');
+      num.textContent = d;
+      num.style.cssText = 'position:relative;z-index:1';
+      cell.appendChild(num);
+
+      // Gearceerde overlay voor geboekte dagen
+      if (isBooked) {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+        svg.setAttribute('viewBox','0 0 20 20');
+        svg.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none';
+        const lines = [
+          [0,20,20,0], [0,14,14,0], [0,8,8,0], [6,20,20,6], [12,20,20,12]
+        ];
+        lines.forEach(([x1,y1,x2,y2]) => {
+          const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+          line.setAttribute('x1',x1); line.setAttribute('y1',y1);
+          line.setAttribute('x2',x2); line.setAttribute('y2',y2);
+          line.setAttribute('stroke','#c8c4bb'); line.setAttribute('stroke-width','1');
+          svg.appendChild(line);
+        });
+        cell.appendChild(svg);
+      }
+
+      cell.addEventListener('mouseenter', () => { if (!isPast) cell.style.filter='brightness(.92)'; });
+      cell.addEventListener('mouseleave', () => { cell.style.filter=''; });
+      cell.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const bookInfo = { ...info };
+        if (isBooked) {
+          bookInfo.booked = true;
+          bookInfo.bookedReasons = {
+            nl: ['Geboekt'],
+            fr: ['Réservé'],
+            en: ['Booked'],
+          };
+        }
+        showTooltip(cell, date, bookInfo);
+      });
+      dgrid.appendChild(cell);
+    }
+    col.appendChild(dgrid);
+    grid.appendChild(col);
+  }
+
+  document.getElementById('kal-prev').disabled = (kalOffset <= -6);
+  document.getElementById('kal-next').disabled = (kalOffset >= 12);
+}
+
+function kalMove(dir) { kalOffset += (dir * 3); hideTooltip(); renderKal(); }
+renderKal();
+</script>
+
+<!-- BOEKING -->
+<section id="boeking" class="sec" style="background:var(--light)">
+  <div class="wrap">
+    <div class="r" style="max-width:780px;margin:0 auto">
+      <p class="tag" style="text-align:center;margin-bottom:.5rem" data-i18n="boek_tag">Boeking</p>
+      <h2 style="text-align:center;margin-bottom:.4rem" data-i18n="boek_h2">Contacteer ons</h2>
+      <p style="text-align:center;margin-bottom:2rem;font-size:.9rem" data-i18n="boek_intro">Stel een vraag of dien een boekingsaanvraag in. We antwoorden binnen 24 uur.</p>
+
+      <!-- Tab-knoppen -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#e8e5de;border-radius:10px;padding:4px;margin-bottom:1.75rem">
+        <button id="tab-contact" onclick="switchTab('contact')"
+          style="font-family:var(--sans);font-size:.78rem;font-weight:500;border:none;border-radius:7px;padding:.75rem 1rem;cursor:pointer;transition:all .18s;background:white;color:#1a1a1a;box-shadow:0 1px 4px rgba(0,0,0,.08)">
+          ✉️ <span data-i18n="tab_contact">Contactformulier</span>
+        </button>
+        <button id="tab-booking" onclick="switchTab('booking')"
+          style="font-family:var(--sans);font-size:.78rem;font-weight:500;border:none;border-radius:7px;padding:.75rem 1rem;cursor:pointer;transition:all .18s;background:transparent;color:#888;box-shadow:none">
+          📅 <span data-i18n="tab_boeking">Boekingsaanvraag</span>
+        </button>
+      </div>
+
+      <!-- CONTACTFORMULIER -->
+      <div id="form-contact">
+        <form id="fc" action="https://formspree.io/f/xwvynbvb" method="POST" style="background:white;border:1px solid #e8e5de;border-radius:10px;padding:2rem;display:flex;flex-direction:column;gap:1.1rem">
+          <input type="hidden" name="_subject" value="Coin Castor — Contactvraag"/>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
+            <div>
+              <label style="display:block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:.35rem" data-i18n="f_voornaam">Voornaam</label>
+              <input name="voornaam" required placeholder="Jan" style="width:100%;border:1px solid #e8e5de;border-radius:6px;padding:.6rem .8rem;font-family:var(--sans);font-size:.9rem;outline:none;transition:border .15s" onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#e8e5de'"/>
+            </div>
+            <div>
+              <label style="display:block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:.35rem" data-i18n="f_naam">Familienaam</label>
+              <input name="familienaam" required placeholder="Janssen" style="width:100%;border:1px solid #e8e5de;border-radius:6px;padding:.6rem .8rem;font-family:var(--sans);font-size:.9rem;outline:none;transition:border .15s" onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#e8e5de'"/>
+            </div>
+          </div>
+
+          <div>
+            <label style="display:block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:.35rem" data-i18n="f_email">E-mailadres</label>
+            <input name="email" type="email" required placeholder="jan@voorbeeld.be" style="width:100%;border:1px solid #e8e5de;border-radius:6px;padding:.6rem .8rem;font-family:var(--sans);font-size:.9rem;outline:none;transition:border .15s" onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#e8e5de'"/>
+          </div>
+
+          <div>
+            <label style="display:block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:.35rem" data-i18n="f_titel">Onderwerp</label>
+            <input name="onderwerp" required placeholder="Vraag over het huis..." style="width:100%;border:1px solid #e8e5de;border-radius:6px;padding:.6rem .8rem;font-family:var(--sans);font-size:.9rem;outline:none;transition:border .15s" onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#e8e5de'"/>
+          </div>
+
+          <div>
+            <label style="display:block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:.35rem" data-i18n="f_vraag">Vraag of opmerking</label>
+            <textarea name="vraag" required rows="4" placeholder="Schrijf hier jouw vraag..." style="width:100%;border:1px solid #e8e5de;border-radius:6px;padding:.6rem .8rem;font-family:var(--sans);font-size:.9rem;outline:none;resize:vertical;transition:border .15s" onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#e8e5de'"></textarea>
+          </div>
+
+          <button type="submit" style="background:#1a1a1a;color:white;border:none;border-radius:6px;padding:.8rem 2rem;font-family:var(--sans);font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .18s;align-self:flex-start" onmouseover="this.style.background='#444'" onmouseout="this.style.background='#1a1a1a'">
+            <span data-i18n="f_verstuur">Verstuur vraag</span>
+          </button>
+        </form>
+        <div id="fc-success" style="display:none;background:white;border:1px solid #a8d5a8;border-radius:10px;padding:2rem;text-align:center">
+          <p style="font-size:1.5rem;margin-bottom:.5rem">✅</p>
+          <p style="font-weight:500;color:#1a4d1a" data-i18n="f_succes_contact">Jouw vraag is verstuurd! We antwoorden zo snel mogelijk.</p>
+        </div>
+      </div>
+
+      <!-- BOEKINGSAANVRAAG -->
+      <div id="form-booking" style="display:none">
+        <form id="fb" action="https://formspree.io/f/xwvynbvb" method="POST" style="background:white;border:1px solid #e8e5de;border-radius:10px;padding:2rem;display:flex;flex-direction:column;gap:1.25rem">
+          <input type="hidden" name="_subject" value="Coin Castor — Boekingsaanvraag"/>
+          <input type="hidden" name="prijs_berekend" id="fb-prijs-hidden"/>
+          <input type="hidden" name="periode_type" id="fb-type-hidden"/>
+
+          <!-- Naam + e-mail -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
+            <div>
+              <label style="display:block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:.35rem" data-i18n="f_voornaam">Voornaam</label>
+              <input name="voornaam" required placeholder="Jan" style="width:100%;border:1px solid #e8e5de;border-radius:6px;padding:.6rem .8rem;font-family:var(--sans);font-size:.9rem;outline:none;transition:border .15s" onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#e8e5de'"/>
+            </div>
+            <div>
+              <label style="display:block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:.35rem" data-i18n="f_naam">Familienaam</label>
+              <input name="familienaam" required placeholder="Janssen" style="width:100%;border:1px solid #e8e5de;border-radius:6px;padding:.6rem .8rem;font-family:var(--sans);font-size:.9rem;outline:none;transition:border .15s" onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#e8e5de'"/>
+            </div>
+          </div>
+
+          <div>
+            <label style="display:block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:.35rem" data-i18n="f_email">E-mailadres</label>
+            <input name="email" type="email" required placeholder="jan@voorbeeld.be" style="width:100%;border:1px solid #e8e5de;border-radius:6px;padding:.6rem .8rem;font-family:var(--sans);font-size:.9rem;outline:none;transition:border .15s" onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#e8e5de'"/>
+          </div>
+
+          <!-- Gezelschap -->
+          <div>
+            <label style="display:block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:.35rem" data-i18n="f_gezelschap">Gezelschap</label>
+            <input name="gezelschap" required placeholder="Bv. 2 volwassenen + 3 kinderen" style="width:100%;border:1px solid #e8e5de;border-radius:6px;padding:.6rem .8rem;font-family:var(--sans);font-size:.9rem;outline:none;transition:border .15s" onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#e8e5de'"/>
+          </div>
+
+          <!-- Periodesoort -->
+          <div>
+            <label style="display:block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:.6rem" data-i18n="f_periodesoort">Type verblijf</label>
+            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem" id="period-btns">
+              <button type="button" onclick="selectPeriod('weekend')" data-period="weekend"
+                style="border:1.5px solid #e8e5de;border-radius:7px;padding:.65rem .9rem;font-family:var(--sans);font-size:.78rem;font-weight:500;cursor:pointer;text-align:left;background:white;transition:all .15s">
+                <span style="display:block;font-weight:600;margin-bottom:.1rem" data-i18n="period_weekend">Weekend</span>
+                <span style="font-size:.68rem;font-weight:300;color:#888" data-i18n="period_weekend_s">Vr–ma · 3 nachten</span>
+              </button>
+              <button type="button" onclick="selectPeriod('midweek')" data-period="midweek"
+                style="border:1.5px solid #e8e5de;border-radius:7px;padding:.65rem .9rem;font-family:var(--sans);font-size:.78rem;font-weight:500;cursor:pointer;text-align:left;background:white;transition:all .15s">
+                <span style="display:block;font-weight:600;margin-bottom:.1rem" data-i18n="period_midweek">Midweek</span>
+                <span style="font-size:.68rem;font-weight:300;color:#888" data-i18n="period_midweek_s">Ma–vr · 4 nachten</span>
+              </button>
+              <button type="button" onclick="selectPeriod('week')" data-period="week"
+                style="border:1.5px solid #e8e5de;border-radius:7px;padding:.65rem .9rem;font-family:var(--sans);font-size:.78rem;font-weight:500;cursor:pointer;text-align:left;background:white;transition:all .15s">
+                <span style="display:block;font-weight:600;margin-bottom:.1rem" data-i18n="period_week">Volledige week</span>
+                <span style="font-size:.68rem;font-weight:300;color:#888" data-i18n="period_week_s">Vr–vr of za–za · 7 nachten</span>
+              </button>
+              <button type="button" onclick="selectPeriod('verlengd')" data-period="verlengd"
+                style="border:1.5px solid #e8e5de;border-radius:7px;padding:.65rem .9rem;font-family:var(--sans);font-size:.78rem;font-weight:500;cursor:pointer;text-align:left;background:white;transition:all .15s">
+                <span style="display:block;font-weight:600;margin-bottom:.1rem" data-i18n="period_verlengd">Verlengd weekend</span>
+                <span style="font-size:.68rem;font-weight:300;color:#888" data-i18n="period_verlengd_s">Do/vr–ma · 4–5 nachten</span>
+              </button>
+              <button type="button" onclick="selectPeriod('aanvraag')" data-period="aanvraag"
+                style="border:1.5px solid #e8e5de;border-radius:7px;padding:.65rem .9rem;font-family:var(--sans);font-size:.78rem;font-weight:500;cursor:pointer;text-align:left;background:white;grid-column:span 2;transition:all .15s">
+                <span style="display:block;font-weight:600;margin-bottom:.1rem" data-i18n="period_aanvraag">Andere periode</span>
+                <span style="font-size:.68rem;font-weight:300;color:#888" data-i18n="period_aanvraag_s">Min. 2 nachten · prijs op aanvraag</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Startdatum -->
+          <div id="date-row">
+            <label style="display:block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:.35rem" data-i18n="f_aankomst">Aankomstdatum</label>
+            <input name="aankomstdatum" id="fb-arrival" type="date" required
+              style="width:100%;border:1px solid #e8e5de;border-radius:6px;padding:.6rem .8rem;font-family:var(--sans);font-size:.9rem;outline:none;transition:border .15s"
+              onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#e8e5de'"
+              onchange="calcPrice()"/>
+            <p id="fb-datehelp" style="font-size:.72rem;color:#aaa;margin-top:.3rem"></p>
+          </div>
+
+          <!-- Prijsberekening -->
+          <div id="price-box" style="display:none;background:#f7f6f3;border:1px solid #e8e5de;border-radius:8px;padding:1.1rem 1.25rem">
+            <p style="font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#aaa;margin-bottom:.75rem" data-i18n="f_prijsoverzicht">Prijsoverzicht</p>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.4rem">
+              <span style="font-size:.85rem;font-weight:300;color:#555" id="pb-label"></span>
+              <span style="font-family:var(--serif);font-size:1.3rem;font-weight:700;color:#1a1a1a" id="pb-total"></span>
+            </div>
+            <div style="border-top:1px solid #e8e5de;margin:.6rem 0"></div>
+            <div style="display:flex;justify-content:space-between;font-size:.78rem;font-weight:300;color:#888;margin-bottom:.2rem">
+              <span data-i18n="f_voorschot">Voorschot (30% + borg €500)</span>
+              <span id="pb-voorschot" style="font-weight:500;color:#444"></span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:.78rem;font-weight:300;color:#888">
+              <span data-i18n="f_saldo">Saldo (ten laatste 1 maand voor aankomst)</span>
+              <span id="pb-saldo" style="font-weight:500;color:#444"></span>
+            </div>
+            <p id="pb-kerst" style="display:none;font-size:.72rem;font-weight:300;color:#b91c1c;margin-top:.6rem" data-i18n="f_kerst_nota">Kerstperiode: prijs op aanvraag — neem contact op voor exacte tarieven.</p>
+            <p id="pb-aanvraag" style="display:none;font-size:.72rem;font-weight:300;color:#888;margin-top:.6rem" data-i18n="f_aanvraag_nota">Prijs op aanvraag — we berekenen een offerte na ontvangst van jouw aanvraag.</p>
+          </div>
+
+          <!-- Bevestigingsnota -->
+          <div style="background:#fefcf8;border:1px solid #f0ede6;border-radius:8px;padding:1rem 1.25rem">
+            <p style="font-size:.78rem;font-weight:300;color:#888;line-height:1.7" data-i18n="f_voorwaarden">
+              ⓘ De boeking is pas <strong>definitief bevestigd</strong> na schriftelijke bevestiging door Greet & Michiel en betaling van het voorschot (30% van de huurprijs + borg €500). Het saldo is verschuldigd ten laatste 1 maand voor aankomst.
+            </p>
+          </div>
+
+          <!-- Vragen / wensen -->
+          <div>
+            <label style="display:block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:.35rem" data-i18n="f_wensen">Vragen of specifieke wensen</label>
+            <textarea name="wensen" rows="3" placeholder="Bv. huisdier, babybedje, specifieke vragen..." style="width:100%;border:1px solid #e8e5de;border-radius:6px;padding:.6rem .8rem;font-family:var(--sans);font-size:.9rem;outline:none;resize:vertical;transition:border .15s" onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#e8e5de'"></textarea>
+          </div>
+
+          <button type="submit" style="background:#1a1a1a;color:white;border:none;border-radius:6px;padding:.8rem 2rem;font-family:var(--sans);font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .18s;align-self:flex-start" onmouseover="this.style.background='#444'" onmouseout="this.style.background='#1a1a1a'">
+            <span data-i18n="f_verstuur_boeking">Stuur boekingsaanvraag</span>
+          </button>
+        </form>
+        <div id="fb-success" style="display:none;background:white;border:1px solid #a8d5a8;border-radius:10px;padding:2rem;text-align:center">
+          <p style="font-size:1.5rem;margin-bottom:.5rem">✅</p>
+          <p style="font-weight:500;color:#1a4d1a" data-i18n="f_succes_boeking">Jouw boekingsaanvraag is verstuurd! Greet & Michiel nemen zo snel mogelijk contact op.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+/* ── TABS ── */
+function switchTab(tab) {
+  const isContact = tab === 'contact';
+  document.getElementById('form-contact').style.display = isContact ? 'block' : 'none';
+  document.getElementById('form-booking').style.display = isContact ? 'none' : 'block';
+  const active = 'background:white;color:#1a1a1a;box-shadow:0 1px 4px rgba(0,0,0,.08)';
+  const inactive = 'background:transparent;color:#888;box-shadow:none';
+  document.getElementById('tab-contact').style.cssText += ';' + (isContact ? active : inactive);
+  document.getElementById('tab-booking').style.cssText += ';' + (!isContact ? active : inactive);
+}
+
+/* ── PERIODE SELECTIE ── */
+let selectedPeriod = null;
+function selectPeriod(p) {
+  selectedPeriod = p;
+  document.querySelectorAll('#period-btns button').forEach(btn => {
+    const sel = btn.getAttribute('data-period') === p;
+    btn.style.borderColor = sel ? '#1a1a1a' : '#e8e5de';
+    btn.style.background = sel ? '#1a1a1a' : 'white';
+    btn.style.color = sel ? 'white' : '#1a1a1a';
+    btn.querySelectorAll('span').forEach(s => s.style.color = sel ? 'rgba(255,255,255,.8)' : '');
+  });
+  document.getElementById('fb-type-hidden').value = p;
+  // Datumhint aanpassen
+  const hints = {
+    weekend: 'Kies de aankomstdatum (vrijdag)',
+    midweek: 'Kies de aankomstdatum (maandag)',
+    week: 'Kies de aankomstdatum (vrijdag of zaterdag)',
+    verlengd: 'Kies de aankomstdatum (donderdag of vrijdag)',
+    aanvraag: 'Kies de gewenste aankomstdatum',
+  };
+  document.getElementById('fb-datehelp').textContent = hints[p] || '';
+  calcPrice();
+}
+
+/* ── PRIJSBEREKENING ── */
+// Tarieven per seizoen
+const RATES = {
+  laag:   { weekend:595, week:1100, midweek:695, verlengd:695, nacht:225 },
+  tussen: { weekend:750, week:1400, midweek:875, verlengd:875, nacht:275 },
+  hoog:   { weekend:1045, week:1925, midweek:1155, verlengd:1155, nacht:385 },
+  kerst:  { weekend:null, week:null, midweek:null, verlengd:null, nacht:425 },
+};
+const BORG = 500;
+
+function calcPrice() {
+  const arrivalInput = document.getElementById('fb-arrival');
+  const box = document.getElementById('price-box');
+  if (!selectedPeriod || !arrivalInput.value) { box.style.display='none'; return; }
+  if (selectedPeriod === 'aanvraag') {
+    box.style.display='block';
+    document.getElementById('pb-label').textContent='';
+    document.getElementById('pb-total').textContent='';
+    document.getElementById('pb-voorschot').textContent='';
+    document.getElementById('pb-saldo').textContent='';
+    document.getElementById('pb-kerst').style.display='none';
+    document.getElementById('pb-aanvraag').style.display='block';
+    document.getElementById('fb-prijs-hidden').value='Op aanvraag';
+    return;
+  }
+
+  const [ay,am,ad] = arrivalInput.value.split('-').map(Number);
+  const arrival = new Date(ay, am-1, ad);
+  const season = getDayInfo(arrival).season;
+
+  const periodNights = { weekend:3, midweek:4, week:7, verlengd:4 };
+  const nights = periodNights[selectedPeriod];
+  const departure = new Date(arrival); departure.setDate(arrival.getDate()+nights);
+
+  box.style.display='block';
+  document.getElementById('pb-aanvraag').style.display='none';
+  document.getElementById('pb-kerst').style.display='none';
+
+  if (season === 'kerst') {
+    document.getElementById('pb-total').textContent='';
+    document.getElementById('pb-label').textContent='';
+    document.getElementById('pb-voorschot').textContent='';
+    document.getElementById('pb-saldo').textContent='';
+    document.getElementById('pb-kerst').style.display='block';
+    document.getElementById('fb-prijs-hidden').value='Kerstperiode – op aanvraag';
+    return;
+  }
+
+  const rate = RATES[season][selectedPeriod];
+  const depStr = `${departure.getDate()} ${['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'][departure.getMonth()]} ${departure.getFullYear()}`;
+  const arrStr = `${arrival.getDate()} ${['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'][arrival.getMonth()]} ${arrival.getFullYear()}`;
+
+  const periodLabels = {
+    nl:{ weekend:'Weekend',midweek:'Midweek',week:'Volledige week',verlengd:'Verlengd weekend' },
+  };
+  const lang = typeof currentLang !== 'undefined' ? currentLang : 'nl';
+  const lbl = (periodLabels[lang]||periodLabels.nl)[selectedPeriod];
+
+  document.getElementById('pb-label').textContent = `${lbl} · ${arrStr} → ${depStr}`;
+  document.getElementById('pb-total').textContent = `€${rate.toLocaleString('nl-BE')}`;
+
+  const voorschot30 = Math.round(rate * 0.30);
+  const voorschot = voorschot30 + BORG;
+  const saldo = rate - voorschot30;
+
+  document.getElementById('pb-voorschot').textContent = `€${voorschot.toLocaleString('nl-BE')}`;
+  document.getElementById('pb-saldo').textContent = `€${saldo.toLocaleString('nl-BE')}`;
+  document.getElementById('fb-prijs-hidden').value = `€${rate} (${lbl}, ${arrStr} → ${depStr})`;
+}
+
+/* ── FORMSPREE SUBMIT (fetch, geen pagina-redirect) ── */
+async function fsSubmit(formEl, successEl) {
+  const btn = formEl.querySelector('button[type=submit]');
+  btn.disabled = true;
+  btn.style.opacity = '.55';
+  try {
+    const res = await fetch('https://formspree.io/f/xwvynbvb', {
+      method: 'POST',
+      body: new FormData(formEl),
+      headers: { 'Accept': 'application/json' },
+    });
+    if (res.ok) {
+      formEl.style.display = 'none';
+      successEl.style.display = 'block';
+      successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      const data = await res.json();
+      const msg = (data.errors || []).map(e => e.message).join(', ') || 'Onbekende fout';
+      alert('Er ging iets mis: ' + msg + '\nProbeer opnieuw of mail info@coincastor.be');
+      btn.disabled = false; btn.style.opacity = '1';
+    }
+  } catch {
+    alert('Verbindingsfout. Controleer je internet en probeer opnieuw, of mail info@coincastor.be');
+    btn.disabled = false; btn.style.opacity = '1';
+  }
+}
+
+document.getElementById('fc').addEventListener('submit', function(e) {
+  e.preventDefault();
+  fsSubmit(this, document.getElementById('fc-success'));
+});
+
+document.getElementById('fb').addEventListener('submit', function(e) {
+  e.preventDefault();
+  if (!selectedPeriod) {
+    alert('Kies eerst een type verblijf.');
+    return;
+  }
+  fsSubmit(this, document.getElementById('fb-success'));
+});
+</script>
+
+<!-- CONTACT -->
+<section id="contact" class="sec" style="background:white">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="r">
+        <p class="tag" data-i18n="contact_tag">Contact</p>
+        <h2 data-i18n="contact_h2">Adres</h2>
+        <div class="cb"><p class="cl" data-i18n="contact_adres_lbl">Adres</p><p class="cv">Coin Castor<br/>Lavaux 18<br/>4980 Trois-Ponts<br/><span data-i18n="contact_land">België</span></p></div>
+        <div class="cb"><p class="cl" data-i18n="contact_email_lbl">E-mail</p><p class="cv"><a href="mailto:info@coincastor.be">info@coincastor.be</a></p></div>
+        <div class="cb"><p class="cl" data-i18n="contact_volg_lbl">Volg ons</p><p class="cv"><a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a></p></div>
+      </div>
+      <div class="r" style="transition-delay:.12s">
+        <!-- Vervang door: <iframe src="https://www.google.com/maps/embed?pb=..." width="100%" height="420" style="border:0" allowfullscreen loading="lazy"></iframe> -->
+        <div class="mapbox">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M15 3C9.477 3 5 7.477 5 13c0 7 10 14 10 14s10-7 10-14c0-5.523-4.477-10-10-10z" stroke="#888" stroke-width="1.2"/><circle cx="15" cy="13" r="3" stroke="#888" stroke-width="1.2"/></svg>
+          <span>Google Maps embed</span>
+          <span style="font-size:.6rem;opacity:.6">Wanne · Stavelot · België</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer><p>&copy; 2025 Coin Castor &nbsp;&middot;&nbsp; Wanne, Trois-Ponts &nbsp;&middot;&nbsp; <a href="#">Privacybeleid</a></p></footer>
+
+<script>
+  /* ── VERTALINGEN ── */
+  const T = {
+    nl: {
+      nav_huis:'Het huis', nav_fotos:"Foto's", nav_praktisch:'Praktisch',
+      nav_prijzen:'Prijzen', nav_boeking:'Boeking', nav_contact:'Contact',
+      intro_tag:'Coin Castor', intro_h2:'Je hebt ons gevonden!',
+      intro_p1:'Dat wil zeggen dat je op zoek bent naar <strong>natuur, rust, of net avontuur</strong> in een prachtig stuk Ardennen. Coin Castor is een perfect uitvalsnest om te genieten, te rusten, te verkennen en te ontdekken.',
+      intro_p2:'In het pittoreske Lavaux, in de vallei van de Salm, staat dit gloednieuwe huis midden in de natuur. Niet enkel vogels en reeën bevolken de omgeving — de wildcamera spotte al <strong>bevers, vossen, dassen en marters</strong> in de omringende bossen.',
+      intro_p3:'Van bij het huis wandel je zo de natuur in. De omgeving is prachtig op àlle momenten van het jaar: <strong>zinderend groen in de lente, verkoeling in de zomer, herfstige kleurenpracht of winterse sneeuwpret</strong>.',
+      prak_tag:'Praktische info', prak_h2:'Het huis',
+      prak_p1:'Het huis ligt in Lavaux, deelgemeente van Trois-Ponts in de provincie Luik, midden in de vallei van de Salm.',
+      prak_p2:'Coin Castor is geschikt voor een verblijf <strong>tot 10 personen</strong>. Er zijn <strong>3 slaapkamers</strong> en <strong>2 badkamers</strong>. De derde slaapkamer beschikt bovendien over een eigen douche en lavabo. De grote open leefruimte met volledig uitgeruste keuken, de eethoek met panoramische terrasdeuren en het ruime terras maken van Coin Castor een ideale plek om samen te zijn.',
+      prak_p3:'Beleef dagen die bijblijven met mensen die je dierbaar zijn. Hopelijk tot gauw!',
+      spec_gasten:'Max. gasten', spec_gasten_val:'10 personen',
+      spec_slaap:'Slaapkamers', spec_slaap_val:'3 kamers',
+      spec_bad:'Badkamers', spec_bad_val:'2 badkamers',
+      spec_extra:'Extra sanitair', spec_extra_val:'Douche + lavabo in kamer 3',
+      spec_in:'Inchecken', spec_in_val:'Vanaf 16:00',
+      spec_out:'Uitchecken', spec_out_val:'Voor 11:00',
+      spec_pets:'Huisdieren', spec_pets_val:'Op aanvraag',
+      spec_min:'Min. verblijf', spec_min_val:'2 nachten',
+      am_wifi:'Gratis WiFi', am_keuken:'Volledige keuken', am_vaat:'Vaatwasser',
+      am_was:'Wasmachine', am_tv:'Smart TV', am_terras:'Terras + tuinmeubilair',
+      am_park:'Gratis parkeren', am_beddengoed:'Beddengoed inbegrepen',
+      am_handdoek:'Handdoeken inbegrepen', am_stapel:'Stapelbed voor kinderen',
+      prijs_tag:'Seizoensdefinities', prijs_h2:'Eerlijke prijzen',
+      prijs_sub:'Inclusief schoonmaak en linnen. *December = laagseizoen, tenzij kerstperiode.',
+      badge_laag:'Laagseizoen', badge_tussen:'Tussenseizoen', badge_hoog:'Hoogseizoen',
+      s_laag_maand:'Jan · Feb · Nov · Dec*',
+      s_laag_info:'Excl. kerstperiode · Excl. krokusvakantie',
+      s_tussen_maand:'Mrt · Apr · Jun · Sep · Okt',
+      s_tussen_info:'+ krokusvakantie BE · + voorjaarsvakantie NL · + herfstvakantie BE/NL · + lange weekenden',
+      s_hoog_maand:'Juli · Augustus',
+      s_hoog_info:'+ paasvakantie BE · + meivakantie NL · + zomervakantie BE/NL',
+      tabel_tag:'Prijstabel',
+      th_periode:'Periode', th_laag:'Laagseizoen', th_tussen:'Tussenseizoen', th_hoog:'Hoogseizoen',
+      pt_weekend:'Weekend', pt_weekend_s:'Vr–ma · 3 nachten',
+      pt_week:'Volledige week', pt_week_s:'Vr–vr of za–za · 7 nachten',
+      pt_mid:'Midweek', pt_mid_s:'Ma–vr · 4 nachten',
+      pt_nacht:'Per nacht', pt_nacht_s:'Op aanvraag · min. 2 nachten',
+      pn_w_l:'€198/nacht', pn_w_t:'€250/nacht', pn_w_h:'€348/nacht',
+      pn_wk_l:'€157/nacht', pn_wk_t:'€200/nacht', pn_wk_h:'€275/nacht',
+      pn_m_l:'€174/nacht', pn_m_t:'€219/nacht', pn_m_h:'€289/nacht',
+      pn_n_lbl:'per nacht', pn_n_lbl2:'per nacht', pn_n_lbl3:'per nacht',
+      prijs_footer:'Alle prijzen zijn inclusief schoonmaak en linnen · Andere periodes op aanvraag (min. 2 nachten) · *December = laagseizoen, tenzij kerstperiode',
+      kerst_tag_title:'Kerstperiode',
+      kerst_badge:'23 dec – 5 jan',
+      kerst_tag:'Kerstperiode — 23 dec – 5 jan',
+      kerst_sub:'Aparte tarieven · bij voorkeur min. 7 nachten',
+      kerst_w1:'Week 1', kerst_w1_s:'23–29 dec · 7 nachten',
+      kerst_w2:'Week 2', kerst_w2_s:'30 dec–5 jan · 7 nachten',
+      kerst_vol:'Volle periode', kerst_vol_s:'23 dec–5 jan · 14 nachten',
+      kerst_nacht:'Per nacht', kerst_nacht_s:'Op aanvraag · min. 2 nachten',
+      kal_tag:'Seizoenskalender 2025–2026',
+      leg_seizoen:'Seizoen', leg_beschik:'Beschikbaarheid',
+      leg_vrij:'Beschikbaar', leg_geboekt:'Geboekt',
+      kal_nota:'Klik op een dag voor meer info · Kalender is indicatief, contacteer ons voor definitieve beschikbaarheid',
+      boek_tag:'Boeking', boek_h2:'Contacteer ons',
+      boek_intro:'Stel een vraag of dien een boekingsaanvraag in. We antwoorden binnen 24 uur.',
+      tab_contact:'Contactformulier', tab_boeking:'Boekingsaanvraag',
+      f_voornaam:'Voornaam', f_naam:'Familienaam', f_email:'E-mailadres',
+      f_titel:'Onderwerp', f_vraag:'Vraag of opmerking',
+      f_gezelschap:'Gezelschap', f_periodesoort:'Type verblijf',
+      f_aankomst:'Aankomstdatum',
+      period_weekend:'Weekend', period_weekend_s:'Vr–ma · 3 nachten',
+      period_midweek:'Midweek', period_midweek_s:'Ma–vr · 4 nachten',
+      period_week:'Volledige week', period_week_s:'Vr–vr of za–za · 7 nachten',
+      period_verlengd:'Verlengd weekend', period_verlengd_s:'Do/vr–ma · 4–5 nachten',
+      period_aanvraag:'Andere periode', period_aanvraag_s:'Min. 2 nachten · prijs op aanvraag',
+      f_prijsoverzicht:'Prijsoverzicht',
+      f_voorschot:'Voorschot (30% + borg €500)',
+      f_saldo:'Saldo (ten laatste 1 maand voor aankomst)',
+      f_kerst_nota:'Kerstperiode: prijs op aanvraag — neem contact op voor exacte tarieven.',
+      f_aanvraag_nota:'Prijs op aanvraag — we berekenen een offerte na ontvangst van jouw aanvraag.',
+      f_voorwaarden:'ⓘ De boeking is pas <strong>definitief bevestigd</strong> na schriftelijke bevestiging door Greet & Michiel en betaling van het voorschot (30% van de huurprijs + borg €500). Het saldo is verschuldigd ten laatste 1 maand voor aankomst.',
+      f_wensen:'Vragen of specifieke wensen',
+      f_verstuur:'Verstuur vraag', f_verstuur_boeking:'Stuur boekingsaanvraag',
+      f_succes_contact:'Jouw vraag is verstuurd! We antwoorden zo snel mogelijk.',
+      f_succes_boeking:'Jouw boekingsaanvraag is verstuurd! Greet & Michiel nemen zo snel mogelijk contact op.',
+      contact_tag:'Contact', contact_h2:'Adres',
+      contact_adres_lbl:'Adres', contact_email_lbl:'E-mail', contact_volg_lbl:'Volg ons',
+      contact_land:'België',
+    },
+    fr: {
+      nav_huis:'La maison', nav_fotos:'Photos', nav_praktisch:'Infos pratiques',
+      nav_prijzen:'Tarifs', nav_boeking:'Réservation', nav_contact:'Contact',
+      intro_tag:'Coin Castor', intro_h2:'Vous nous avez trouvés !',
+      intro_p1:'Cela signifie que vous êtes à la recherche de <strong>nature, de calme, ou d\'aventure</strong> dans un magnifique coin des Ardennes. Coin Castor est l\'endroit idéal pour se ressourcer, se détendre, explorer et découvrir.',
+      intro_p2:'Dans le pittoresque hameau de Lavaux, dans la vallée de la Salm, cette maison toute neuve se dresse au cœur de la nature. Oiseaux et chevreuils ne sont pas les seuls habitants — la caméra animalière a déjà repéré <strong>castors, renards, blaireaux et martres</strong> dans les bois environnants.',
+      intro_p3:'Depuis la maison, vous accédez directement à la nature. Le paysage est magnifique en toutes saisons : <strong>vert éclatant au printemps, fraîcheur en été, couleurs automnales flamboyantes ou neige en hiver</strong>.',
+      prak_tag:'Infos pratiques', prak_h2:'La maison',
+      prak_p1:'La maison est située à Lavaux, sous-commune de Trois-Ponts dans la province de Liège, au cœur de la vallée de la Salm.',
+      prak_p2:'Coin Castor peut accueillir <strong>jusqu\'à 10 personnes</strong>. Elle dispose de <strong>3 chambres</strong> et <strong>2 salles de bain</strong>. La troisième chambre dispose en outre de sa propre douche et lavabo. Le grand séjour avec cuisine entièrement équipée, la salle à manger avec portes-fenêtres panoramiques et la terrasse spacieuse font de Coin Castor un endroit idéal pour passer du temps ensemble.',
+      prak_p3:'Vivez des moments inoubliables avec ceux qui vous sont chers. À bientôt !',
+      spec_gasten:'Capacité', spec_gasten_val:'10 personnes',
+      spec_slaap:'Chambres', spec_slaap_val:'3 chambres',
+      spec_bad:'Salles de bain', spec_bad_val:'2 salles de bain',
+      spec_extra:'Sanitaire supplémentaire', spec_extra_val:'Douche + lavabo dans chambre 3',
+      spec_in:'Arrivée', spec_in_val:'À partir de 16h00',
+      spec_out:'Départ', spec_out_val:'Avant 11h00',
+      spec_pets:'Animaux', spec_pets_val:'Sur demande',
+      spec_min:'Séjour min.', spec_min_val:'2 nuits',
+      am_wifi:'WiFi gratuit', am_keuken:'Cuisine complète', am_vaat:'Lave-vaisselle',
+      am_was:'Lave-linge', am_tv:'Smart TV', am_terras:'Terrasse + mobilier de jardin',
+      am_park:'Parking gratuit', am_beddengoed:'Linge de lit inclus',
+      am_handdoek:'Serviettes incluses', am_stapel:'Lits superposés pour enfants',
+      prijs_tag:'Définitions des saisons', prijs_h2:'Des prix transparents',
+      prijs_sub:'Nettoyage final et linge inclus. *Décembre = basse saison, sauf période de Noël.',
+      badge_laag:'Basse saison', badge_tussen:'Moyenne saison', badge_hoog:'Haute saison',
+      s_laag_maand:'Jan · Fév · Nov · Déc*',
+      s_laag_info:'Excl. période de Noël · Excl. vacances de carnaval',
+      s_tussen_maand:'Mars · Avr · Juin · Sep · Oct',
+      s_tussen_info:'+ carnaval BE · + printemps NL · + Toussaint BE/NL · + longs week-ends',
+      s_hoog_maand:'Juillet · Août',
+      s_hoog_info:'+ Pâques BE · + mai NL · + grandes vacances BE/NL',
+      tabel_tag:'Grille tarifaire',
+      th_periode:'Période', th_laag:'Basse saison', th_tussen:'Moyenne saison', th_hoog:'Haute saison',
+      pt_weekend:'Week-end', pt_weekend_s:'Ven–lun · 3 nuits',
+      pt_week:'Semaine complète', pt_week_s:'Ven–ven ou sam–sam · 7 nuits',
+      pt_mid:'Milieu de semaine', pt_mid_s:'Lun–ven · 4 nuits',
+      pt_nacht:'Par nuit', pt_nacht_s:'Sur demande · min. 2 nuits',
+      pn_w_l:'€198/nuit', pn_w_t:'€250/nuit', pn_w_h:'€348/nuit',
+      pn_wk_l:'€157/nuit', pn_wk_t:'€200/nuit', pn_wk_h:'€275/nuit',
+      pn_m_l:'€174/nuit', pn_m_t:'€219/nuit', pn_m_h:'€289/nuit',
+      pn_n_lbl:'par nuit', pn_n_lbl2:'par nuit', pn_n_lbl3:'par nuit',
+      prijs_footer:'Tous les prix incluent le ménage et le linge · Autres périodes sur demande (min. 2 nuits) · *Décembre = basse saison, sauf Noël',
+      kerst_tag_title:'Période de Noël',
+      kerst_badge:'23 déc – 5 jan',
+      kerst_tag:'Période de Noël — 23 déc – 5 jan',
+      kerst_sub:'Tarifs spéciaux · de préférence min. 7 nuits',
+      kerst_w1:'Semaine 1', kerst_w1_s:'23–29 déc · 7 nuits',
+      kerst_w2:'Semaine 2', kerst_w2_s:'30 déc–5 jan · 7 nuits',
+      kerst_vol:'Période complète', kerst_vol_s:'23 déc–5 jan · 14 nuits',
+      kerst_nacht:'Par nuit', kerst_nacht_s:'Sur demande · min. 2 nuits',
+      kal_tag:'Calendrier des saisons 2025–2026',
+      leg_seizoen:'Saison', leg_beschik:'Disponibilité',
+      leg_vrij:'Disponible', leg_geboekt:'Réservé',
+      kal_nota:'Cliquez sur un jour pour plus d\'infos · Calendrier indicatif, contactez-nous pour disponibilité définitive',
+      boek_tag:'Réservation', boek_h2:'Contactez-nous',
+      boek_intro:'Posez une question ou faites une demande de réservation. Nous répondons dans les 24 heures.',
+      tab_contact:'Formulaire de contact', tab_boeking:'Demande de réservation',
+      f_voornaam:'Prénom', f_naam:'Nom', f_email:'Adresse e-mail',
+      f_titel:'Sujet', f_vraag:'Question ou remarque',
+      f_gezelschap:'Groupe', f_periodesoort:'Type de séjour',
+      f_aankomst:'Date d\'arrivée',
+      period_weekend:'Week-end', period_weekend_s:'Ven–lun · 3 nuits',
+      period_midweek:'Milieu de semaine', period_midweek_s:'Lun–ven · 4 nuits',
+      period_week:'Semaine complète', period_week_s:'Ven–ven ou sam–sam · 7 nuits',
+      period_verlengd:'Week-end prolongé', period_verlengd_s:'Jeu/ven–lun · 4–5 nuits',
+      period_aanvraag:'Autre période', period_aanvraag_s:'Min. 2 nuits · prix sur demande',
+      f_prijsoverzicht:'Aperçu des prix',
+      f_voorschot:'Acompte (30% + caution €500)',
+      f_saldo:'Solde (au plus tard 1 mois avant l\'arrivée)',
+      f_kerst_nota:'Période de Noël: prix sur demande — contactez-nous pour les tarifs exacts.',
+      f_aanvraag_nota:'Prix sur demande — nous établirons un devis après réception de votre demande.',
+      f_voorwaarden:'ⓘ La réservation n\'est <strong>définitivement confirmée</strong> qu\'après confirmation écrite de Greet & Michiel et paiement de l\'acompte (30% du loyer + caution €500). Le solde est dû au plus tard 1 mois avant l\'arrivée.',
+      f_wensen:'Questions ou souhaits particuliers',
+      f_verstuur:'Envoyer la question', f_verstuur_boeking:'Envoyer la demande',
+      f_succes_contact:'Votre question a été envoyée ! Nous répondrons dès que possible.',
+      f_succes_boeking:'Votre demande de réservation a été envoyée ! Greet & Michiel vous contacteront bientôt.',
+      contact_tag:'Contact', contact_h2:'Adresse',
+      contact_adres_lbl:'Adresse', contact_email_lbl:'E-mail', contact_volg_lbl:'Suivez-nous',
+      contact_land:'Belgique',
+    },
+    en: {
+      nav_huis:'The house', nav_fotos:'Photos', nav_praktisch:'Info',
+      nav_prijzen:'Prices', nav_boeking:'Booking', nav_contact:'Contact',
+      intro_tag:'Coin Castor', intro_h2:'You found us!',
+      intro_p1:'Which means you\'re looking for <strong>nature, peace, or even adventure</strong> in a beautiful corner of the Ardennes. Coin Castor is the perfect base to relax, explore, and discover.',
+      intro_p2:'In the picturesque hamlet of Lavaux, in the Salm valley, this brand-new house sits in the heart of nature. Birds and deer are not the only residents — the wildlife camera has already spotted <strong>beavers, foxes, badgers and pine martens</strong> in the surrounding forests.',
+      intro_p3:'Step outside and you\'re instantly in nature. The surroundings are beautiful in every season: <strong>lush green in spring, cool shade in summer, stunning autumn colours or a magical winter landscape</strong>.',
+      prak_tag:'Practical info', prak_h2:'The house',
+      prak_p1:'The house is located in Lavaux, a hamlet of Trois-Ponts in the province of Liège, in the heart of the Salm valley.',
+      prak_p2:'Coin Castor sleeps <strong>up to 10 people</strong>. There are <strong>3 bedrooms</strong> and <strong>2 bathrooms</strong>. The third bedroom also has its own private shower and washbasin. The open-plan living area with a fully equipped kitchen, the dining area with panoramic patio doors, and the spacious terrace make Coin Castor the perfect place to spend time together.',
+      prak_p3:'Create memories with the people you love. Hope to see you soon!',
+      spec_gasten:'Max. guests', spec_gasten_val:'10 persons',
+      spec_slaap:'Bedrooms', spec_slaap_val:'3 rooms',
+      spec_bad:'Bathrooms', spec_bad_val:'2 bathrooms',
+      spec_extra:'Extra facilities', spec_extra_val:'Shower + washbasin in bedroom 3',
+      spec_in:'Check-in', spec_in_val:'From 4:00 PM',
+      spec_out:'Check-out', spec_out_val:'Before 11:00 AM',
+      spec_pets:'Pets', spec_pets_val:'On request',
+      spec_min:'Min. stay', spec_min_val:'2 nights',
+      am_wifi:'Free WiFi', am_keuken:'Fully equipped kitchen', am_vaat:'Dishwasher',
+      am_was:'Washing machine', am_tv:'Smart TV', am_terras:'Terrace + garden furniture',
+      am_park:'Free parking', am_beddengoed:'Bed linen included',
+      am_handdoek:'Towels included', am_stapel:'Bunk bed for children',
+      prijs_tag:'Season definitions', prijs_h2:'Honest pricing',
+      prijs_sub:'Cleaning and linen included. *December = low season, unless Christmas period.',
+      badge_laag:'Low season', badge_tussen:'Mid season', badge_hoog:'High season',
+      s_laag_maand:'Jan · Feb · Nov · Dec*',
+      s_laag_info:'Excl. Christmas period · Excl. carnival holidays',
+      s_tussen_maand:'Mar · Apr · Jun · Sep · Oct',
+      s_tussen_info:'+ carnival BE · + spring break NL · + autumn break BE/NL · + long weekends',
+      s_hoog_maand:'July · August',
+      s_hoog_info:'+ Easter BE · + May holidays NL · + summer holidays BE/NL',
+      tabel_tag:'Price table',
+      th_periode:'Period', th_laag:'Low season', th_tussen:'Mid season', th_hoog:'High season',
+      pt_weekend:'Weekend', pt_weekend_s:'Fri–Mon · 3 nights',
+      pt_week:'Full week', pt_week_s:'Fri–Fri or Sat–Sat · 7 nights',
+      pt_mid:'Midweek', pt_mid_s:'Mon–Fri · 4 nights',
+      pt_nacht:'Per night', pt_nacht_s:'On request · min. 2 nights',
+      pn_w_l:'€198/night', pn_w_t:'€250/night', pn_w_h:'€348/night',
+      pn_wk_l:'€157/night', pn_wk_t:'€200/night', pn_wk_h:'€275/night',
+      pn_m_l:'€174/night', pn_m_t:'€219/night', pn_m_h:'€289/night',
+      pn_n_lbl:'per night', pn_n_lbl2:'per night', pn_n_lbl3:'per night',
+      prijs_footer:'All prices include cleaning and linen · Other periods on request (min. 2 nights) · *December = low season, unless Christmas',
+      kerst_tag_title:'Christmas period',
+      kerst_badge:'23 Dec – 5 Jan',
+      kerst_tag:'Christmas period — 23 Dec – 5 Jan',
+      kerst_sub:'Special rates · preferably min. 7 nights',
+      kerst_w1:'Week 1', kerst_w1_s:'23–29 Dec · 7 nights',
+      kerst_w2:'Week 2', kerst_w2_s:'30 Dec–5 Jan · 7 nights',
+      kerst_vol:'Full period', kerst_vol_s:'23 Dec–5 Jan · 14 nights',
+      kerst_nacht:'Per night', kerst_nacht_s:'On request · min. 2 nights',
+      kal_tag:'Season calendar 2025–2026',
+      leg_seizoen:'Season', leg_beschik:'Availability',
+      leg_vrij:'Available', leg_geboekt:'Booked',
+      kal_nota:'Click any day for more info · Calendar is indicative, contact us for definitive availability',
+      boek_tag:'Booking', boek_h2:'Contact us',
+      boek_intro:'Ask a question or submit a booking request. We reply within 24 hours.',
+      tab_contact:'Contact form', tab_boeking:'Booking request',
+      f_voornaam:'First name', f_naam:'Last name', f_email:'Email address',
+      f_titel:'Subject', f_vraag:'Question or comment',
+      f_gezelschap:'Group', f_periodesoort:'Type of stay',
+      f_aankomst:'Arrival date',
+      period_weekend:'Weekend', period_weekend_s:'Fri–Mon · 3 nights',
+      period_midweek:'Midweek', period_midweek_s:'Mon–Fri · 4 nights',
+      period_week:'Full week', period_week_s:'Fri–Fri or Sat–Sat · 7 nights',
+      period_verlengd:'Extended weekend', period_verlengd_s:'Thu/Fri–Mon · 4–5 nights',
+      period_aanvraag:'Other period', period_aanvraag_s:'Min. 2 nights · price on request',
+      f_prijsoverzicht:'Price overview',
+      f_voorschot:'Deposit (30% + security deposit €500)',
+      f_saldo:'Balance (due at least 1 month before arrival)',
+      f_kerst_nota:'Christmas period: price on request — contact us for exact rates.',
+      f_aanvraag_nota:'Price on request — we\'ll send a quote after receiving your request.',
+      f_voorwaarden:'ⓘ The booking is only <strong>definitively confirmed</strong> after written confirmation by Greet & Michiel and payment of the deposit (30% of the rental fee + security deposit €500). The balance is due at least 1 month before arrival.',
+      f_wensen:'Questions or special requests',
+      f_verstuur:'Send question', f_verstuur_boeking:'Send booking request',
+      f_succes_contact:'Your question has been sent! We\'ll reply as soon as possible.',
+      f_succes_boeking:'Your booking request has been sent! Greet & Michiel will contact you soon.',
+      contact_tag:'Contact', contact_h2:'Address',
+      contact_adres_lbl:'Address', contact_email_lbl:'Email', contact_volg_lbl:'Follow us',
+      contact_land:'Belgium',
+    }
+  };
+
+  let currentLang = 'nl';
+
+  function setLang(lang) {
+    currentLang = lang;
+    const t = T[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      if (btn.textContent === lang.toUpperCase()) btn.classList.add('active');
+    });
+    document.documentElement.lang = lang;
+    renderKal(); // herrender kalender in nieuwe taal
+  }
+
+  /* Scroll reveal */
+  const obs = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('in'); }), { threshold: .07 });
+  document.querySelectorAll('.r').forEach(el => obs.observe(el));
+
+  /* Mobile nav */
+  document.getElementById('hbtn').addEventListener('click', () => document.getElementById('mnav').classList.toggle('open'));
+  function mnClose() { document.getElementById('mnav').classList.remove('open'); }
+
+  /* Lightbox */
+  const PH = [
+    {s:'fotos/IMG_1868.jpg',c:'Eethoek met zicht op buiten'},
+    {s:'fotos/IMG_1869.jpg',c:'Keuken en leefruimte'},
+    {s:'fotos/IMG_1829.jpg',c:'Terras'},
+    {s:'fotos/IMG_1864.jpg',c:'Living met terrasdeuren'},
+    {s:'fotos/IMG_1863.jpg',c:'Zithoek boven'},
+    {s:'fotos/IMG_1874.jpg',c:'Keuken — RVS werkblad'},
+    {s:'fotos/IMG_1876.jpg',c:'Ingebouwde kasten en oven'},
+    {s:'fotos/IMG_1870.jpg',c:'Leefruimte'},
+    {s:'fotos/IMG_1852.jpg',c:'Slaapkamer met stapelbed'},
+    {s:'fotos/IMG_1853.jpg',c:'Slaapkamer — bed detail'},
+    {s:'fotos/IMG_1849.jpg',c:'Slaapkamer'},
+    {s:'fotos/IMG_1840.jpg',c:'Kamer met raam op natuur'},
+    {s:'fotos/IMG_1836.jpg',c:'Badkamer met bad'},
+    {s:'fotos/IMG_1837.jpg',c:'Badkamer met douche'},
+    {s:'fotos/IMG_1839.jpg',c:'Hal en trap'},
+  ];
+  let lbC=0;
+  function lbOpen(i){lbC=i;document.getElementById('lbi').src=PH[i].s;document.getElementById('lbc').textContent=PH[i].c;document.getElementById('lb').classList.add('on');document.body.style.overflow='hidden';}
+  function lbClose(){document.getElementById('lb').classList.remove('on');document.body.style.overflow='';}
+  function lbMove(d){lbC=(lbC+d+PH.length)%PH.length;document.getElementById('lbi').src=PH[lbC].s;document.getElementById('lbc').textContent=PH[lbC].c;}
+  document.getElementById('lb').addEventListener('click',e=>{if(e.target===e.currentTarget)lbClose();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')lbClose();if(e.key==='ArrowRight')lbMove(1);if(e.key==='ArrowLeft')lbMove(-1);});
+</script>
+</body>
+</html>
