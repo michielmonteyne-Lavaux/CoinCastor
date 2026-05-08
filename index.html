@@ -72,9 +72,15 @@
     .pgrid { display: grid; gap: 5px; }
     .pgrid-5 { grid-template-columns: repeat(5, 1fr); }
     .pgrid-5 + .pgrid-5 { margin-top: 5px; }
+    .pgrid-all { grid-template-columns: repeat(5, 1fr); }
     .pi { overflow: hidden; aspect-ratio: 1; background: var(--light); cursor: pointer; }
     .pi img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .48s ease; }
     .pi:hover img { transform: scale(1.04); }
+
+    /* Responsive grids voor seizoenen, kerstperiode en kalender */
+    .season-defs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .kerst-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #e8e5de; border-radius: 6px; overflow: hidden; }
+    .kal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 
     /* PRAKTISCH */
     .praktisch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
@@ -149,19 +155,54 @@
     @media (max-width: 920px) {
       .hero-nav { display: none; }
       .hbtn { display: flex; }
-      .pgrid-5 { grid-template-columns: repeat(3,1fr); }
+      .pgrid-5, .pgrid-all { grid-template-columns: repeat(3,1fr); }
       .praktisch-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
       .pgrid-peak { grid-template-columns: repeat(2,1fr); }
       .pcnote { grid-column: span 2; }
       .hero-nav { gap: 1.5rem; }
+      .season-defs { grid-template-columns: 1fr; }
+      .kerst-options { grid-template-columns: 1fr; }
+      .kal-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 560px) {
-      .sec { padding: 4rem 1.2rem; }
-      .pgrid-5 { grid-template-columns: repeat(2,1fr); }
+      .sec { padding: 4rem 1.1rem; }
+      .pgrid-5, .pgrid-all { grid-template-columns: repeat(3,1fr); }
       .amen { grid-template-columns: 1fr; }
       .pgrid-peak { grid-template-columns: 1fr; }
       .pcnote { grid-column: span 1; grid-template-columns: 1fr; }
-      .ptable th, .ptable td { padding: .7rem .4rem; }
+
+      /* Prijstabel als kaarten op mobiel */
+      .ptable, .ptable thead, .ptable tbody, .ptable tr, .ptable td { display: block; width: 100%; }
+      .ptable thead { display: none; }
+      .ptable tr { padding: 1rem 1.1rem !important; border-bottom: 1px solid #e8e5de; }
+      .ptable tr:last-child { border-bottom: none; }
+      .ptable td { padding: .4rem 0 !important; border: none !important; text-align: left !important; }
+      .ptable td:first-child {
+        padding: 0 0 .55rem 0 !important;
+        margin-bottom: .35rem;
+        border-bottom: 1px solid #f0ede6 !important;
+      }
+      .ptable td[data-label] {
+        display: flex; justify-content: space-between; align-items: baseline;
+      }
+      .ptable td[data-label]::before {
+        content: attr(data-label);
+        font-size: .62rem; font-weight: 600; letter-spacing: .1em;
+        text-transform: uppercase; color: #888;
+        flex-shrink: 0; margin-right: .75rem;
+      }
+      .ptable td[data-label] .pv { font-size: .98rem; }
+      .ptable td[data-label] .pn { display: inline-block; margin-left: .5rem; }
+      .ptable td[data-label] > span:not(.pv):not(.pn) { display: inline-flex; flex-direction: column; align-items: flex-end; }
+
+      /* Algemeen: voorkom dat formulieren te breed worden */
+      input, textarea, select { max-width: 100%; }
+
+      /* Seizoenskaarten: kleinere padding op mobiel */
+      .season-defs > div, .kerst-options > div { padding: 1.1rem !important; }
+
+      /* Kalender: iets groter op mobiel zodat dagen leesbaar zijn */
+      #kal-grid > div { padding: 1.1rem !important; }
     }
   </style>
 </head>
@@ -240,24 +281,20 @@
   </div>
 </section>
 
-<!-- FOTO GRID -->
+<!-- FOTO GRID — 15 foto's in één doorlopend grid (5 col desktop, 3 col mobiel — altijd vol) -->
 <section id="fotos" style="background:white;padding:0">
   <div style="max-width:1400px;margin:0 auto">
-    <div class="pgrid pgrid-5 r">
+    <div class="pgrid pgrid-all r">
       <div class="pi" onclick="lbOpen(0)"><img src="fotos/IMG_1868.jpg" alt="Eethoek"/></div>
       <div class="pi" onclick="lbOpen(1)"><img src="fotos/IMG_1869.jpg" alt="Keuken en leefruimte"/></div>
       <div class="pi" onclick="lbOpen(2)"><img src="fotos/IMG_1829.jpg" alt="Terras"/></div>
       <div class="pi" onclick="lbOpen(3)"><img src="fotos/IMG_1864.jpg" alt="Living"/></div>
       <div class="pi" onclick="lbOpen(4)"><img src="fotos/IMG_1863.jpg" alt="Zithoek"/></div>
-    </div>
-    <div class="pgrid pgrid-5 r" style="transition-delay:.1s;margin-top:5px">
       <div class="pi" onclick="lbOpen(5)"><img src="fotos/IMG_1874.jpg" alt="Keuken"/></div>
       <div class="pi" onclick="lbOpen(6)"><img src="fotos/IMG_1876.jpg" alt="Kasten"/></div>
       <div class="pi" onclick="lbOpen(7)"><img src="fotos/IMG_1870.jpg" alt="Leefruimte"/></div>
       <div class="pi" onclick="lbOpen(8)"><img src="fotos/IMG_1852.jpg" alt="Slaapkamer"/></div>
       <div class="pi" onclick="lbOpen(9)"><img src="fotos/IMG_1853.jpg" alt="Bed detail"/></div>
-    </div>
-    <div class="pgrid pgrid-5 r" style="transition-delay:.2s;margin-top:5px">
       <div class="pi" onclick="lbOpen(10)"><img src="fotos/IMG_1849.jpg" alt="Slaapkamer 2"/></div>
       <div class="pi" onclick="lbOpen(11)"><img src="fotos/IMG_1840.jpg" alt="Kamer raam"/></div>
       <div class="pi" onclick="lbOpen(12)"><img src="fotos/IMG_1836.jpg" alt="Badkamer bad"/></div>
@@ -320,7 +357,7 @@
     <!-- Seizoensdefinities -->
     <div class="r" style="margin-bottom:2.5rem">
       <p class="tag" data-i18n="prijs_tag" style="margin-bottom:1.25rem">Seizoensdefinities</p>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem">
+      <div class="season-defs">
 
         <!-- Laagseizoen -->
         <div style="background:white;border:1px solid #e8e5de;border-radius:10px;padding:1.4rem">
@@ -361,21 +398,21 @@
           <tbody>
             <tr style="border-bottom:1px solid #e8e5de">
               <td style="padding:1.1rem 1.4rem;text-align:left"><span class="pp" data-i18n="pt_weekend">Weekend</span><span class="ps" data-i18n="pt_weekend_s">Vr–ma · 3 nachten</span></td>
-              <td style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€595</span><span class="pn" data-i18n="pn_w_l">€198/nacht</span></td>
-              <td style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€750</span><span class="pn" data-i18n="pn_w_t">€250/nacht</span></td>
-              <td style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.045</span><span class="pn" data-i18n="pn_w_h">€348/nacht</span></td>
+              <td data-label="Laagseizoen" data-label-key="th_laag" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€595</span><span class="pn" data-i18n="pn_w_l">€198/nacht</span></td>
+              <td data-label="Tussenseizoen" data-label-key="th_tussen" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€750</span><span class="pn" data-i18n="pn_w_t">€250/nacht</span></td>
+              <td data-label="Hoogseizoen" data-label-key="th_hoog" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.045</span><span class="pn" data-i18n="pn_w_h">€348/nacht</span></td>
             </tr>
             <tr style="border-bottom:1px solid #e8e5de">
               <td style="padding:1.1rem 1.4rem;text-align:left"><span class="pp" data-i18n="pt_week">Volledige week</span><span class="ps" data-i18n="pt_week_s">Vr–vr of za–za · 7 nachten</span></td>
-              <td style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.100</span><span class="pn" data-i18n="pn_wk_l">€157/nacht</span></td>
-              <td style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.400</span><span class="pn" data-i18n="pn_wk_t">€200/nacht</span></td>
-              <td style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.925</span><span class="pn" data-i18n="pn_wk_h">€275/nacht</span></td>
+              <td data-label="Laagseizoen" data-label-key="th_laag" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.100</span><span class="pn" data-i18n="pn_wk_l">€157/nacht</span></td>
+              <td data-label="Tussenseizoen" data-label-key="th_tussen" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.400</span><span class="pn" data-i18n="pn_wk_t">€200/nacht</span></td>
+              <td data-label="Hoogseizoen" data-label-key="th_hoog" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.925</span><span class="pn" data-i18n="pn_wk_h">€275/nacht</span></td>
             </tr>
             <tr style="border-bottom:1px solid #e8e5de">
               <td style="padding:1.1rem 1.4rem;text-align:left"><span class="pp" data-i18n="pt_mid">Midweek</span><span class="ps" data-i18n="pt_mid_s">Ma–vr · 4 nachten</span></td>
-              <td style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€695</span><span class="pn" data-i18n="pn_m_l">€174/nacht</span></td>
-              <td style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€875</span><span class="pn" data-i18n="pn_m_t">€219/nacht</span></td>
-              <td style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.155</span><span class="pn" data-i18n="pn_m_h">€289/nacht</span></td>
+              <td data-label="Laagseizoen" data-label-key="th_laag" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€695</span><span class="pn" data-i18n="pn_m_l">€174/nacht</span></td>
+              <td data-label="Tussenseizoen" data-label-key="th_tussen" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€875</span><span class="pn" data-i18n="pn_m_t">€219/nacht</span></td>
+              <td data-label="Hoogseizoen" data-label-key="th_hoog" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.155</span><span class="pn" data-i18n="pn_m_h">€289/nacht</span></td>
             </tr>
           </tbody>
         </table>
@@ -395,7 +432,7 @@
           <p style="font-size:.82rem;font-weight:400;color:#666" data-i18n="kerst_sub">Aparte tarieven · bij voorkeur min. 7 nachten</p>
         </div>
         <!-- Drie opties — compacter -->
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#e8e5de;border-radius:6px;overflow:hidden">
+        <div class="kerst-options">
           <div style="background:white;padding:.85rem 1.1rem">
             <p style="font-size:.68rem;font-weight:500;color:#888;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.08em" data-i18n="kerst_w1">Week 1</p>
             <p style="font-family:var(--serif);font-size:1.3rem;font-weight:700;color:#1a1a1a;margin-bottom:.15rem">€2.100</p>
@@ -454,7 +491,7 @@
       </div>
 
       <!-- Kalender grid — 3 maanden -->
-      <div id="kal-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem"></div>
+      <div id="kal-grid" class="kal-grid"></div>
 
       <!-- Boekingsnota -->
       <p style="font-size:.72rem;font-weight:300;color:#aaa;margin-top:.75rem;text-align:center" data-i18n="kal_nota">Klik op een dag voor meer info · Kalender is indicatief, contacteer ons voor definitieve beschikbaarheid</p>
@@ -1458,6 +1495,11 @@ document.getElementById('fb').addEventListener('submit', function(e) {
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+    // Update data-label attributen (gebruikt voor mobiele prijstabel-kaarten)
+    document.querySelectorAll('[data-label-key]').forEach(el => {
+      const key = el.getAttribute('data-label-key');
+      if (t[key] !== undefined) el.setAttribute('data-label', t[key]);
     });
     document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelectorAll('.lang-btn').forEach(btn => {
