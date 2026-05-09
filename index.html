@@ -28,7 +28,7 @@
     .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,.05) 30%, rgba(0,0,0,.48) 100%); }
     .hero-content { position: relative; z-index: 2; text-align: center; color: white; width: 100%; }
     .hero-content h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(3rem,8vw,6.5rem); text-transform: uppercase; letter-spacing: .05em; line-height: 1; margin-bottom: 2.75rem; }
-    .hero-nav { display: grid; grid-template-columns: repeat(6,1fr); list-style: none; width: 100%; padding: 0; }
+    .hero-nav { display: grid; grid-template-columns: repeat(7,1fr); list-style: none; width: 100%; padding: 0; }
     .hero-nav li { display: flex; justify-content: center; }
     .hero-nav a { font-size: .72rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.85); text-decoration: none; transition: color .2s; white-space: nowrap; padding: .3rem 0; position: relative; }
     .hero-nav a::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: rgba(255,255,255,.6); transform: scaleX(0); transition: transform .22s; }
@@ -68,14 +68,28 @@
     /* INTRO */
     .intro-logo { width: 90px; height: 90px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
 
-    /* FOTO GRID — 5 col × 3 rijen, alles vierkant */
+    /* FOTO GRID — 9 foto's in 3×3 grid, alles vierkant */
     .pgrid { display: grid; gap: 5px; }
     .pgrid-5 { grid-template-columns: repeat(5, 1fr); }
     .pgrid-5 + .pgrid-5 { margin-top: 5px; }
-    .pgrid-all { grid-template-columns: repeat(5, 1fr); }
+    .pgrid-all { grid-template-columns: repeat(3, 1fr); }
     .pi { overflow: hidden; aspect-ratio: 1; background: var(--light); cursor: pointer; }
     .pi img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .48s ease; }
     .pi:hover img { transform: scale(1.04); }
+
+    /* OMGEVING — editorial sfeerlay-out */
+    .omg-sec { padding: 5.5rem 2rem 6.5rem; background: var(--white); }
+    .omg-intro { max-width: 640px; margin: 0 auto 3.5rem; text-align: center; }
+    .omg-intro p.lead {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: 1.08rem; line-height: 1.85; color: #555;
+      margin-top: 1rem;
+    }
+    .omg-feature { width: 100%; max-width: 1200px; margin: 0 auto; }
+    .omg-feature .pi { aspect-ratio: 16/7; }
+    .omg-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; max-width: 1200px; margin: 5px auto 0; }
+    .omg-row .pi { aspect-ratio: 4/3; }
+    .omg-feature + .omg-row { margin-top: 5px; }
 
     /* Responsive grids voor seizoenen, kerstperiode en kalender */
     .season-defs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
@@ -163,13 +177,21 @@
       .season-defs { grid-template-columns: 1fr; }
       .kerst-options { grid-template-columns: 1fr; }
       .kal-grid { grid-template-columns: 1fr; }
+      .omg-feature .pi { aspect-ratio: 4/3; }
+      .omg-row { grid-template-columns: repeat(3, 1fr); }
     }
     @media (max-width: 560px) {
       .sec { padding: 4rem 1.1rem; }
+      .omg-sec { padding: 4rem 0 5rem; }
       .pgrid-5, .pgrid-all { grid-template-columns: repeat(3,1fr); }
       .amen { grid-template-columns: 1fr; }
       .pgrid-peak { grid-template-columns: 1fr; }
       .pcnote { grid-column: span 1; grid-template-columns: 1fr; }
+      .omg-intro { padding: 0 1.1rem; margin-bottom: 2.5rem; }
+      .omg-intro p.lead { font-size: .98rem; }
+      .omg-feature .pi { aspect-ratio: 4/3; }
+      .omg-row { grid-template-columns: repeat(3, 1fr); gap: 3px; }
+      .omg-row .pi { aspect-ratio: 1; }
 
       /* Prijstabel als kaarten op mobiel */
       .ptable, .ptable thead, .ptable tbody, .ptable tr, .ptable td { display: block; width: 100%; }
@@ -238,6 +260,7 @@
       <li><a href="#huis"      onclick="mnClose()" data-i18n="nav_huis">Het huis</a></li>
       <li><a href="#fotos"     onclick="mnClose()" data-i18n="nav_fotos">Foto's</a></li>
       <li><a href="#praktisch" onclick="mnClose()" data-i18n="nav_praktisch">Praktisch</a></li>
+      <li><a href="#omgeving"  onclick="mnClose()" data-i18n="nav_omgeving">Omgeving</a></li>
       <li><a href="#prijzen"   onclick="mnClose()" data-i18n="nav_prijzen">Prijzen</a></li>
       <li><a href="#boeking"   onclick="mnClose()" data-i18n="nav_boeking">Boeking</a></li>
       <li><a href="#contact"   onclick="mnClose()" data-i18n="nav_contact">Contact</a></li>
@@ -251,6 +274,7 @@
       <li><a href="#huis"      data-i18n="nav_huis">Het huis</a></li>
       <li><a href="#fotos"     data-i18n="nav_fotos">Foto's</a></li>
       <li><a href="#praktisch" data-i18n="nav_praktisch">Praktisch</a></li>
+      <li><a href="#omgeving"  data-i18n="nav_omgeving">Omgeving</a></li>
       <li><a href="#prijzen"   data-i18n="nav_prijzen">Prijzen</a></li>
       <li><a href="#boeking"   data-i18n="nav_boeking">Boeking</a></li>
       <li><a href="#contact"   data-i18n="nav_contact">Contact</a></li>
@@ -281,25 +305,19 @@
   </div>
 </section>
 
-<!-- FOTO GRID — 15 foto's in één doorlopend grid (5 col desktop, 3 col mobiel — altijd vol) -->
+<!-- FOTO GRID — 9 huisfoto's in 3×3 grid -->
 <section id="fotos" style="background:white;padding:0">
-  <div style="max-width:1400px;margin:0 auto">
+  <div style="max-width:1200px;margin:0 auto">
     <div class="pgrid pgrid-all r">
-      <div class="pi" onclick="lbOpen(0)"><img src="fotos/IMG_1868.jpg" alt="Eethoek"/></div>
-      <div class="pi" onclick="lbOpen(1)"><img src="fotos/IMG_1869.jpg" alt="Keuken en leefruimte"/></div>
-      <div class="pi" onclick="lbOpen(2)"><img src="fotos/IMG_1829.jpg" alt="Terras"/></div>
-      <div class="pi" onclick="lbOpen(3)"><img src="fotos/IMG_1864.jpg" alt="Living"/></div>
-      <div class="pi" onclick="lbOpen(4)"><img src="fotos/IMG_1863.jpg" alt="Zithoek"/></div>
-      <div class="pi" onclick="lbOpen(5)"><img src="fotos/IMG_1874.jpg" alt="Keuken"/></div>
-      <div class="pi" onclick="lbOpen(6)"><img src="fotos/IMG_1876.jpg" alt="Kasten"/></div>
-      <div class="pi" onclick="lbOpen(7)"><img src="fotos/IMG_1870.jpg" alt="Leefruimte"/></div>
-      <div class="pi" onclick="lbOpen(8)"><img src="fotos/IMG_1852.jpg" alt="Slaapkamer"/></div>
-      <div class="pi" onclick="lbOpen(9)"><img src="fotos/IMG_1853.jpg" alt="Bed detail"/></div>
-      <div class="pi" onclick="lbOpen(10)"><img src="fotos/IMG_1849.jpg" alt="Slaapkamer 2"/></div>
-      <div class="pi" onclick="lbOpen(11)"><img src="fotos/IMG_1840.jpg" alt="Kamer raam"/></div>
-      <div class="pi" onclick="lbOpen(12)"><img src="fotos/IMG_1836.jpg" alt="Badkamer bad"/></div>
-      <div class="pi" onclick="lbOpen(13)"><img src="fotos/IMG_1837.jpg" alt="Badkamer douche"/></div>
-      <div class="pi" onclick="lbOpen(14)"><img src="fotos/IMG_1839.jpg" alt="Hal trap"/></div>
+      <div class="pi" onclick="lbOpen(0)"><img src="fotos/IMG_1864.jpg" alt="Living met terrasdeuren"/></div>
+      <div class="pi" onclick="lbOpen(1)"><img src="fotos/IMG_1868.jpg" alt="Eethoek"/></div>
+      <div class="pi" onclick="lbOpen(2)"><img src="fotos/IMG_1874.jpg" alt="Keuken"/></div>
+      <div class="pi" onclick="lbOpen(3)"><img src="fotos/IMG_1876.jpg" alt="Kasten en oven"/></div>
+      <div class="pi" onclick="lbOpen(4)"><img src="fotos/IMG_1829.jpg" alt="Terras"/></div>
+      <div class="pi" onclick="lbOpen(5)"><img src="fotos/IMG_1849.jpg" alt="Slaapkamer"/></div>
+      <div class="pi" onclick="lbOpen(6)"><img src="fotos/IMG_1840.jpg" alt="Kamer met raam op natuur"/></div>
+      <div class="pi" onclick="lbOpen(7)"><img src="fotos/IMG_1852.jpg" alt="Slaapkamer met stapelbed"/></div>
+      <div class="pi" onclick="lbOpen(8)"><img src="fotos/IMG_1836.jpg" alt="Badkamer met bad"/></div>
     </div>
   </div>
 </section>
@@ -340,13 +358,46 @@
       </div>
       <div class="r" style="transition-delay:.15s">
         <div class="pcollage">
-          <div class="pi" onclick="lbOpen(0)"><img src="fotos/IMG_1868.jpg" alt="Eethoek"/></div>
-          <div class="pi" onclick="lbOpen(1)"><img src="fotos/IMG_1874.jpg" alt="Keuken"/></div>
-          <div class="pi" onclick="lbOpen(10)"><img src="fotos/IMG_1849.jpg" alt="Slaapkamer"/></div>
-          <div class="pi" onclick="lbOpen(12)"><img src="fotos/IMG_1836.jpg" alt="Badkamer"/></div>
+          <div class="pi" onclick="lbOpen(1)"><img src="fotos/IMG_1868.jpg" alt="Eethoek"/></div>
+          <div class="pi" onclick="lbOpen(2)"><img src="fotos/IMG_1874.jpg" alt="Keuken"/></div>
+          <div class="pi" onclick="lbOpen(5)"><img src="fotos/IMG_1849.jpg" alt="Slaapkamer"/></div>
+          <div class="pi" onclick="lbOpen(8)"><img src="fotos/IMG_1836.jpg" alt="Badkamer"/></div>
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- OMGEVING — sfeerfoto's van de Ardennen rond Coin Castor -->
+<section id="omgeving" class="omg-sec">
+  <div class="omg-intro r">
+    <p class="tag" data-i18n="omg_tag">De omgeving</p>
+    <h2 data-i18n="omg_h2">Vier seizoenen, één plek</h2>
+    <p class="lead" data-i18n="omg_lead">Vanuit Coin Castor stap je zo de natuur in. De vallei van de Salm, diepe dennenbossen, glooiende heuvels en stille uitzichtpunten — elk seizoen kleurt deze hoek van de Ardennen anders.</p>
+  </div>
+
+  <!-- Featured 1 -->
+  <div class="omg-feature r">
+    <div class="pi" onclick="lbOpen(9)"><img src="fotos/paarden_sneeuw.jpg" alt="Belgische trekpaarden in de sneeuw" loading="lazy"/></div>
+  </div>
+
+  <!-- Grid 1 -->
+  <div class="omg-row r" style="transition-delay:.08s">
+    <div class="pi" onclick="lbOpen(10)"><img src="fotos/dennen_zonlicht.jpg" alt="Gouden zonlicht door het dennenbos" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(11)"><img src="fotos/vingerhoedskruid.jpg" alt="Wandelpad met vingerhoedskruid" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(12)"><img src="fotos/salm.jpg" alt="De Salm-rivier" loading="lazy"/></div>
+  </div>
+
+  <!-- Featured 2 -->
+  <div class="omg-feature r" style="transition-delay:.12s;margin-top:5px">
+    <div class="pi" onclick="lbOpen(13)"><img src="fotos/coo.jpg" alt="Panoramisch zicht op het meer van Coo" loading="lazy"/></div>
+  </div>
+
+  <!-- Grid 2 -->
+  <div class="omg-row r" style="transition-delay:.16s">
+    <div class="pi" onclick="lbOpen(14)"><img src="fotos/bloemenweide.jpg" alt="Wilde bloemenweide" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(15)"><img src="fotos/herfstbos.jpg" alt="Herfstbos" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(16)"><img src="fotos/mist.jpg" alt="Mistige ochtend" loading="lazy"/></div>
   </div>
 </section>
 
@@ -1244,7 +1295,11 @@ document.getElementById('fb').addEventListener('submit', function(e) {
   const T = {
     nl: {
       nav_huis:'Het huis', nav_fotos:"Foto's", nav_praktisch:'Praktisch',
+      nav_omgeving:'Omgeving',
       nav_prijzen:'Prijzen', nav_boeking:'Boeking', nav_contact:'Contact',
+      omg_tag:'De omgeving',
+      omg_h2:'Vier seizoenen, één plek',
+      omg_lead:'Vanuit Coin Castor stap je zo de natuur in. De vallei van de Salm, diepe dennenbossen, glooiende heuvels en stille uitzichtpunten — elk seizoen kleurt deze hoek van de Ardennen anders.',
       intro_tag:'Coin Castor', intro_h2:'Je hebt ons gevonden!',
       intro_p1:'Dat wil zeggen dat je op zoek bent naar <strong>natuur, rust, of net avontuur</strong> in een prachtig stuk Ardennen. Coin Castor is een perfect uitvalsnest om te genieten, te rusten, te verkennen en te ontdekken.',
       intro_p2:'In het pittoreske Lavaux, in de vallei van de Salm, staat dit gloednieuwe huis midden in de natuur. Niet enkel vogels en reeën bevolken de omgeving — de wildcamera spotte al <strong>bevers, vossen, dassen en marters</strong> in de omringende bossen.',
@@ -1325,7 +1380,11 @@ document.getElementById('fb').addEventListener('submit', function(e) {
     },
     fr: {
       nav_huis:'La maison', nav_fotos:'Photos', nav_praktisch:'Infos pratiques',
+      nav_omgeving:'Les environs',
       nav_prijzen:'Tarifs', nav_boeking:'Réservation', nav_contact:'Contact',
+      omg_tag:'Les environs',
+      omg_h2:'Quatre saisons, un seul lieu',
+      omg_lead:'Depuis Coin Castor, vous êtes immédiatement plongés dans la nature. La vallée de la Salm, ses forêts profondes, ses collines vallonnées et ses points de vue silencieux — chaque saison colore ce coin des Ardennes autrement.',
       intro_tag:'Coin Castor', intro_h2:'Vous nous avez trouvés !',
       intro_p1:'Cela signifie que vous êtes à la recherche de <strong>nature, de calme, ou d\'aventure</strong> dans un magnifique coin des Ardennes. Coin Castor est l\'endroit idéal pour se ressourcer, se détendre, explorer et découvrir.',
       intro_p2:'Dans le pittoresque hameau de Lavaux, dans la vallée de la Salm, cette maison toute neuve se dresse au cœur de la nature. Oiseaux et chevreuils ne sont pas les seuls habitants — la caméra animalière a déjà repéré <strong>castors, renards, blaireaux et martres</strong> dans les bois environnants.',
@@ -1406,7 +1465,11 @@ document.getElementById('fb').addEventListener('submit', function(e) {
     },
     en: {
       nav_huis:'The house', nav_fotos:'Photos', nav_praktisch:'Info',
+      nav_omgeving:'Surroundings',
       nav_prijzen:'Prices', nav_boeking:'Booking', nav_contact:'Contact',
+      omg_tag:'The surroundings',
+      omg_h2:'Four seasons, one place',
+      omg_lead:'From Coin Castor you step straight into nature. The Salm valley, deep pine forests, rolling hills and quiet viewpoints — each season paints this corner of the Ardennes differently.',
       intro_tag:'Coin Castor', intro_h2:'You found us!',
       intro_p1:'Which means you\'re looking for <strong>nature, peace, or even adventure</strong> in a beautiful corner of the Ardennes. Coin Castor is the perfect base to relax, explore, and discover.',
       intro_p2:'In the picturesque hamlet of Lavaux, in the Salm valley, this brand-new house sits in the heart of nature. Birds and deer are not the only residents — the wildlife camera has already spotted <strong>beavers, foxes, badgers and pine martens</strong> in the surrounding forests.',
@@ -1519,21 +1582,23 @@ document.getElementById('fb').addEventListener('submit', function(e) {
 
   /* Lightbox */
   const PH = [
-    {s:'fotos/IMG_1868.jpg',c:'Eethoek met zicht op buiten'},
-    {s:'fotos/IMG_1869.jpg',c:'Keuken en leefruimte'},
-    {s:'fotos/IMG_1829.jpg',c:'Terras'},
     {s:'fotos/IMG_1864.jpg',c:'Living met terrasdeuren'},
-    {s:'fotos/IMG_1863.jpg',c:'Zithoek boven'},
+    {s:'fotos/IMG_1868.jpg',c:'Eethoek met zicht op buiten'},
     {s:'fotos/IMG_1874.jpg',c:'Keuken — RVS werkblad'},
     {s:'fotos/IMG_1876.jpg',c:'Ingebouwde kasten en oven'},
-    {s:'fotos/IMG_1870.jpg',c:'Leefruimte'},
-    {s:'fotos/IMG_1852.jpg',c:'Slaapkamer met stapelbed'},
-    {s:'fotos/IMG_1853.jpg',c:'Slaapkamer — bed detail'},
+    {s:'fotos/IMG_1829.jpg',c:'Terras'},
     {s:'fotos/IMG_1849.jpg',c:'Slaapkamer'},
     {s:'fotos/IMG_1840.jpg',c:'Kamer met raam op natuur'},
+    {s:'fotos/IMG_1852.jpg',c:'Slaapkamer met stapelbed'},
     {s:'fotos/IMG_1836.jpg',c:'Badkamer met bad'},
-    {s:'fotos/IMG_1837.jpg',c:'Badkamer met douche'},
-    {s:'fotos/IMG_1839.jpg',c:'Hal en trap'},
+    {s:'fotos/paarden_sneeuw.jpg',c:'Belgische trekpaarden in de sneeuw'},
+    {s:'fotos/dennen_zonlicht.jpg',c:'Gouden zonlicht door het dennenbos'},
+    {s:'fotos/vingerhoedskruid.jpg',c:'Wandelpad tussen het vingerhoedskruid'},
+    {s:'fotos/salm.jpg',c:'De Salm-rivier'},
+    {s:'fotos/coo.jpg',c:'Panoramisch zicht op het meer van Coo'},
+    {s:'fotos/bloemenweide.jpg',c:'Wilde bloemenweide met zicht op de heuvels'},
+    {s:'fotos/herfstbos.jpg',c:'Herfstbos in de Ardennen'},
+    {s:'fotos/mist.jpg',c:'Mistige ochtend in de vallei'},
   ];
   let lbC=0;
   function lbOpen(i){lbC=i;document.getElementById('lbi').src=PH[i].s;document.getElementById('lbc').textContent=PH[i].c;document.getElementById('lb').classList.add('on');document.body.style.overflow='hidden';}
