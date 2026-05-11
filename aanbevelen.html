@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aanbevelen — Coin Castor</title>
+  <meta name="description" content="Beveel Coin Castor aan bij vrienden en familie. Zij krijgen 5% korting, jij tot 10% op je volgende eigen verblijf."/>
+  <meta name="robots" content="noindex"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #1a1a1a;
+      --gray:  #888;
+      --light: #f4f2ed;
+      --white: #ffffff;
+      --border: #e2dfd8;
+      --accent: #3d8f3d;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Raleway', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--black); background: var(--light); -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* Header */
+    .topbar { display: flex; align-items: center; justify-content: space-between; padding: 1.3rem 2rem; background: white; border-bottom: 1px solid var(--border); }
+    .topbar-logo { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--black); text-decoration: none; display: flex; align-items: center; gap: .55rem; }
+    .topbar-logo::before { content: '←'; font-family: var(--sans); font-weight: 400; font-size: 1rem; color: var(--gray); transition: transform .18s; }
+    .topbar-logo:hover::before { transform: translateX(-3px); }
+    .lang-bar { display: flex; gap: .4rem; }
+    .lang-btn { font-family: var(--sans); font-size: .62rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--gray); background: none; border: 1px solid var(--border); padding: .32rem .6rem; cursor: pointer; transition: all .18s; }
+    .lang-btn:hover { color: var(--black); border-color: var(--black); }
+    .lang-btn.active { color: var(--black); border-color: var(--black); background: white; }
+
+    /* Main */
+    main { flex: 1; padding: 4rem 2rem 5rem; }
+    .wrap { max-width: 720px; margin: 0 auto; }
+
+    /* Intro */
+    .intro { text-align: center; margin-bottom: 4rem; }
+    .tag { font-size: .65rem; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--gray); margin-bottom: .8rem; }
+    h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; line-height: 1.1; margin-bottom: 1.4rem; }
+    .lead { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.05rem; line-height: 1.85; color: #555; max-width: 540px; margin: 0 auto; }
+
+    /* Stappen */
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 4rem; }
+    .step { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 1.6rem 1.4rem; text-align: center; }
+    .step-num { font-family: var(--serif); font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: .8rem; }
+    .step-title { font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin-bottom: .5rem; }
+    .step-body { font-size: .85rem; font-weight: 300; line-height: 1.7; color: #555; }
+
+    /* Korting overzicht */
+    .rewards { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 1.6rem 1.8rem; margin-bottom: 3rem; }
+    .rewards-title { font-size: .65rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gray); margin-bottom: 1rem; text-align: center; }
+    .rewards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .reward { text-align: center; }
+    .reward-val { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; color: var(--black); }
+    .reward-lbl { font-size: .72rem; font-weight: 400; color: #555; line-height: 1.5; margin-top: .35rem; }
+    .reward-sub { font-size: .66rem; color: var(--gray); margin-top: .15rem; }
+
+    /* Form */
+    .form-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 2.2rem; margin-bottom: 3rem; }
+    .form-card h2 { font-family: var(--serif); font-size: 1.35rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 1.6rem; text-align: center; }
+    .field { margin-bottom: 1.1rem; }
+    .field label { display: block; font-size: .65rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--gray); margin-bottom: .35rem; }
+    .field input { width: 100%; border: 1px solid var(--border); border-radius: 6px; padding: .7rem .9rem; font-family: var(--sans); font-size: .95rem; outline: none; transition: border .15s; }
+    .field input:focus { border-color: var(--black); }
+    .submit-btn { width: 100%; background: var(--black); color: white; border: none; border-radius: 6px; padding: .95rem 2rem; font-family: var(--sans); font-size: .78rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; transition: background .18s; margin-top: .5rem; }
+    .submit-btn:hover { background: #444; }
+    .submit-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+    /* Result */
+    .result { background: white; border: 2px solid var(--accent); border-radius: 10px; padding: 2.4rem 2rem; text-align: center; display: none; }
+    .result.on { display: block; }
+    .result-tag { font-size: .65rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-bottom: .8rem; }
+    .result-code { font-family: var(--serif); font-size: clamp(2.4rem, 7vw, 3.4rem); font-weight: 700; letter-spacing: .12em; color: var(--black); margin: .4rem 0 1.4rem; line-height: 1; word-break: break-all; }
+    .result-actions { display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.8rem; }
+    .action-btn { background: white; color: var(--black); border: 1px solid var(--border); border-radius: 6px; padding: .65rem 1.2rem; font-family: var(--sans); font-size: .75rem; font-weight: 500; letter-spacing: .08em; cursor: pointer; transition: all .15s; text-decoration: none; display: inline-flex; align-items: center; gap: .4rem; }
+    .action-btn:hover { background: var(--black); color: white; border-color: var(--black); }
+    .action-btn.copied { background: var(--accent); color: white; border-color: var(--accent); }
+    .share-block { background: var(--light); border-radius: 8px; padding: 1.1rem 1.2rem; text-align: left; }
+    .share-block-title { font-size: .62rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gray); margin-bottom: .55rem; }
+    .share-block p { font-size: .85rem; font-weight: 300; color: #333; line-height: 1.7; font-style: italic; }
+
+    /* Footer */
+    footer { background: var(--black); color: rgba(255,255,255,.4); text-align: center; padding: 1.6rem 2rem; font-size: .7rem; font-weight: 300; letter-spacing: .08em; }
+    footer a { color: rgba(255,255,255,.7); text-decoration: none; }
+    footer a:hover { color: white; }
+
+    /* Responsive */
+    @media (max-width: 720px) {
+      .topbar { padding: 1.1rem 1.2rem; }
+      .topbar-logo { font-size: .9rem; }
+      main { padding: 3rem 1.2rem 4rem; }
+      .intro { margin-bottom: 3rem; }
+      .steps { grid-template-columns: 1fr; gap: .8rem; margin-bottom: 3rem; }
+      .step { padding: 1.3rem 1.2rem; }
+      .step-num { font-size: 1.7rem; }
+      .rewards-grid { grid-template-columns: 1fr; gap: .8rem; }
+      .reward { padding: .6rem 0; border-bottom: 1px solid var(--border); }
+      .reward:last-child { border-bottom: none; }
+      .form-card { padding: 1.6rem 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <a href="index.html" class="topbar-logo">Coin Castor</a>
+    <div class="lang-bar">
+      <button class="lang-btn active" onclick="setLang('nl')">NL</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+
+      <div class="intro">
+        <p class="tag" data-i18n="tag">Aanbevelen</p>
+        <h1 data-i18n="h1">Aanbevelen loont</h1>
+        <p class="lead" data-i18n="lead">Heb je een fijn verblijf gehad bij Coin Castor? Beveel ons aan bij vrienden en familie en spaar voor je eigen volgende verblijf.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <p class="step-title" data-i18n="s1_t">Vraag je code aan</p>
+          <p class="step-body" data-i18n="s1_b">Vul je naam in en ontvang meteen je persoonlijke kortingscode.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <p class="step-title" data-i18n="s2_t">Deel met je netwerk</p>
+          <p class="step-body" data-i18n="s2_b">Stuur de code naar vrienden of familie die geïnteresseerd zijn in een verblijf.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <p class="step-title" data-i18n="s3_t">Ontvang je korting</p>
+          <p class="step-body" data-i18n="s3_b">Zij krijgen 5% korting. Bij bevestigde boeking ontvang jij per e-mail je eigen kortingscode.</p>
+        </div>
+      </div>
+
+      <div class="rewards">
+        <p class="rewards-title" data-i18n="rwd_title">De voordelen</p>
+        <div class="rewards-grid">
+          <div class="reward">
+            <div class="reward-val">5%</div>
+            <div class="reward-lbl" data-i18n="rwd_friend">Voor je vriend(in)</div>
+            <div class="reward-sub" data-i18n="rwd_friend_s">Op zijn/haar eerste boeking</div>
+          </div>
+          <div class="reward">
+            <div class="reward-val">7,5%</div>
+            <div class="reward-lbl" data-i18n="rwd_1">Voor jou na 1 boeking</div>
+            <div class="reward-sub" data-i18n="rwd_1_s">Via jouw code bevestigd</div>
+          </div>
+          <div class="reward">
+            <div class="reward-val">10%</div>
+            <div class="reward-lbl" data-i18n="rwd_2">Voor jou na 2 boekingen</div>
+            <div class="reward-sub" data-i18n="rwd_2_s">Via jouw code bevestigd</div>
+          </div>
+        </div>
+      </div>
+
+      <form class="form-card" id="form-code" onsubmit="return handleSubmit(event)">
+        <h2 data-i18n="form_title">Vraag je code aan</h2>
+        <div class="field">
+          <label data-i18n="f_voornaam">Voornaam</label>
+          <input id="in-voornaam" name="voornaam" required autocomplete="given-name" maxlength="40"/>
+        </div>
+        <div class="field">
+          <label data-i18n="f_naam">Familienaam</label>
+          <input id="in-familienaam" name="familienaam" required autocomplete="family-name" maxlength="40"/>
+        </div>
+        <button type="submit" class="submit-btn" data-i18n="f_submit">Vraag mijn code aan</button>
+      </form>
+
+      <div class="result" id="result">
+        <p class="result-tag" data-i18n="res_tag">Jouw persoonlijke code</p>
+        <div class="result-code" id="result-code">CC-XXXXX</div>
+        <div class="result-actions">
+          <button class="action-btn" id="copy-code-btn" onclick="copyCode()">
+            <span data-i18n="act_copy">Kopieer code</span>
+          </button>
+          <a class="action-btn" id="share-wa-btn" target="_blank" rel="noopener">
+            <span data-i18n="act_wa">Deel via WhatsApp</span>
+          </a>
+          <button class="action-btn" id="copy-msg-btn" onclick="copyMessage()">
+            <span data-i18n="act_copy_msg">Kopieer bericht</span>
+          </button>
+        </div>
+        <div class="share-block">
+          <p class="share-block-title" data-i18n="share_title">Voorbeeldbericht om te delen</p>
+          <p id="share-message">…</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="index.html">&copy; Coin Castor — terug naar website</a></p>
+  </footer>
+
+<script>
+/* ── DETERMINISTISCHE CODE GENERATIE ──
+   Zelfde naam = altijd dezelfde code (FNV-1a hash, base36, 5 chars).
+   Normalisatie: lowercase, trim, accenten verwijderen. */
+function normalizeName(first, last) {
+  return (first.trim() + ' ' + last.trim())
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(new RegExp('[\\u0300-\\u036f]', 'g'), '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function generateCode(first, last) {
+  const name = normalizeName(first, last);
+  if (!name || name.length < 2) return null;
+  let hash = 0x811c9dc5 >>> 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = (hash ^ name.charCodeAt(i)) >>> 0;
+    hash = Math.imul(hash, 0x01000193) >>> 0;
+  }
+  const padded = hash.toString(36).toUpperCase().padStart(7, '0');
+  return 'CC-' + padded.slice(-5);
+}
+
+/* ── FORMULIER ── */
+function handleSubmit(e) {
+  e.preventDefault();
+  const v = document.getElementById('in-voornaam').value;
+  const n = document.getElementById('in-familienaam').value;
+  const code = generateCode(v, n);
+  if (!code) return false;
+  showResult(code, v.trim());
+  return false;
+}
+
+function showResult(code, voornaam) {
+  document.getElementById('result-code').textContent = code;
+  const t = T[currentLang] || T.nl;
+  const message = t.share_msg.replace('{code}', code);
+  document.getElementById('share-message').textContent = message;
+  const waUrl = 'https://wa.me/?text=' + encodeURIComponent(message);
+  document.getElementById('share-wa-btn').href = waUrl;
+  const res = document.getElementById('result');
+  res.classList.add('on');
+  res.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function copyCode() {
+  const code = document.getElementById('result-code').textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.getElementById('copy-code-btn');
+    btn.classList.add('copied');
+    const t = T[currentLang] || T.nl;
+    btn.querySelector('span').textContent = t.act_copied;
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.querySelector('span').textContent = t.act_copy;
+    }, 2000);
+  });
+}
+
+function copyMessage() {
+  const msg = document.getElementById('share-message').textContent;
+  navigator.clipboard.writeText(msg).then(() => {
+    const btn = document.getElementById('copy-msg-btn');
+    btn.classList.add('copied');
+    const t = T[currentLang] || T.nl;
+    btn.querySelector('span').textContent = t.act_copied;
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.querySelector('span').textContent = t.act_copy_msg;
+    }, 2000);
+  });
+}
+
+/* ── VERTALINGEN ── */
+const T = {
+  nl: {
+    tag: 'Aanbevelen', h1: 'Aanbevelen loont',
+    lead: 'Heb je een fijn verblijf gehad bij Coin Castor? Beveel ons aan bij vrienden en familie en spaar voor je eigen volgende verblijf.',
+    s1_t: 'Vraag je code aan', s1_b: 'Vul je naam in en ontvang meteen je persoonlijke kortingscode.',
+    s2_t: 'Deel met je netwerk', s2_b: 'Stuur de code naar vrienden of familie die geïnteresseerd zijn in een verblijf.',
+    s3_t: 'Ontvang je korting', s3_b: 'Zij krijgen 5% korting. Bij bevestigde boeking ontvang jij per e-mail je eigen kortingscode.',
+    rwd_title: 'De voordelen',
+    rwd_friend: 'Voor je vriend(in)', rwd_friend_s: 'Op zijn/haar eerste boeking',
+    rwd_1: 'Voor jou na 1 boeking', rwd_1_s: 'Via jouw code bevestigd',
+    rwd_2: 'Voor jou na 2 boekingen', rwd_2_s: 'Via jouw code bevestigd',
+    form_title: 'Vraag je code aan',
+    f_voornaam: 'Voornaam', f_naam: 'Familienaam', f_submit: 'Vraag mijn code aan',
+    res_tag: 'Jouw persoonlijke code',
+    act_copy: 'Kopieer code', act_copied: 'Gekopieerd!', act_wa: 'Deel via WhatsApp', act_copy_msg: 'Kopieer bericht',
+    share_title: 'Voorbeeldbericht om te delen',
+    share_msg: 'Hé! Ik kan Coin Castor aanraden — een prachtig vakantiehuis in de Ardennen. Met deze code krijg je 5% korting op je boeking: {code}. Boek via coincastor.be.',
+    footer: '© Coin Castor — terug naar website',
+  },
+  fr: {
+    tag: 'Parrainage', h1: 'Recommander, c\'est gagner',
+    lead: 'Vous avez passé un beau séjour chez Coin Castor ? Recommandez-nous à vos proches et économisez sur votre prochain séjour.',
+    s1_t: 'Demandez votre code', s1_b: 'Entrez votre nom et recevez immédiatement votre code de réduction personnel.',
+    s2_t: 'Partagez avec vos proches', s2_b: 'Envoyez le code à vos amis ou votre famille intéressés par un séjour.',
+    s3_t: 'Recevez votre réduction', s3_b: 'Ils reçoivent 5%. À chaque réservation confirmée, vous recevez votre propre code de réduction par e-mail.',
+    rwd_title: 'Les avantages',
+    rwd_friend: 'Pour votre proche', rwd_friend_s: 'Sur sa première réservation',
+    rwd_1: 'Pour vous après 1 réservation', rwd_1_s: 'Confirmée via votre code',
+    rwd_2: 'Pour vous après 2 réservations', rwd_2_s: 'Confirmées via votre code',
+    form_title: 'Demandez votre code',
+    f_voornaam: 'Prénom', f_naam: 'Nom', f_submit: 'Demander mon code',
+    res_tag: 'Votre code personnel',
+    act_copy: 'Copier le code', act_copied: 'Copié !', act_wa: 'Partager via WhatsApp', act_copy_msg: 'Copier le message',
+    share_title: 'Message à partager',
+    share_msg: 'Salut ! Je peux recommander Coin Castor — une magnifique maison de vacances dans les Ardennes. Avec ce code tu obtiens 5% de réduction sur ta réservation : {code}. Réservez via coincastor.be.',
+    footer: '© Coin Castor — retour au site',
+  },
+  en: {
+    tag: 'Refer a friend', h1: 'Sharing pays off',
+    lead: 'Did you enjoy your stay at Coin Castor? Recommend us to friends and family and save on your next stay.',
+    s1_t: 'Request your code', s1_b: 'Enter your name and receive your personal discount code instantly.',
+    s2_t: 'Share with your network', s2_b: 'Send the code to friends or family who might be interested in a stay.',
+    s3_t: 'Earn your discount', s3_b: 'They get 5% off. For every confirmed booking, you receive your own discount code by email.',
+    rwd_title: 'The rewards',
+    rwd_friend: 'For your friend', rwd_friend_s: 'On their first booking',
+    rwd_1: 'For you after 1 booking', rwd_1_s: 'Confirmed via your code',
+    rwd_2: 'For you after 2 bookings', rwd_2_s: 'Confirmed via your code',
+    form_title: 'Request your code',
+    f_voornaam: 'First name', f_naam: 'Last name', f_submit: 'Request my code',
+    res_tag: 'Your personal code',
+    act_copy: 'Copy code', act_copied: 'Copied!', act_wa: 'Share on WhatsApp', act_copy_msg: 'Copy message',
+    share_title: 'Suggested message to share',
+    share_msg: 'Hi! I can recommend Coin Castor — a beautiful holiday home in the Ardennes. Use this code for 5% off your booking: {code}. Book at coincastor.be.',
+    footer: '© Coin Castor — back to website',
+  }
+};
+
+let currentLang = 'nl';
+
+function setLang(lang) {
+  currentLang = lang;
+  const t = T[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    if (btn.textContent === lang.toUpperCase()) btn.classList.add('active');
+  });
+  document.documentElement.lang = lang;
+  // Update share message if result is visible
+  const res = document.getElementById('result');
+  if (res.classList.contains('on')) {
+    const code = document.getElementById('result-code').textContent;
+    const msg = t.share_msg.replace('{code}', code);
+    document.getElementById('share-message').textContent = msg;
+    document.getElementById('share-wa-btn').href = 'https://wa.me/?text=' + encodeURIComponent(msg);
+  }
+}
+</script>
+</body>
+</html>
