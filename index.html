@@ -1102,6 +1102,13 @@ renderKal();
             <p id="pb-aanvraag" style="display:none;font-size:.72rem;font-weight:300;color:#888;margin-top:.6rem" data-i18n="f_aanvraag_nota">Prijs op aanvraag — we berekenen een offerte na ontvangst van jouw aanvraag.</p>
           </div>
 
+          <!-- Kortingscode (optioneel) -->
+          <div>
+            <label style="display:block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:.35rem" data-i18n="f_kortingscode">Kortingscode (optioneel)</label>
+            <input name="kortingscode" placeholder="CC-XXXXX" maxlength="12" autocapitalize="characters" style="width:100%;border:1px solid #e8e5de;border-radius:6px;padding:.6rem .8rem;font-family:var(--sans);font-size:.9rem;outline:none;transition:border .15s;text-transform:uppercase;letter-spacing:.05em" onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#e8e5de'"/>
+            <p style="font-size:.72rem;font-weight:300;color:#aaa;margin-top:.35rem" data-i18n="f_kortingscode_hint">Heb je een persoonlijke kortingscode ontvangen via een vriend(in)? Vul 'm hier in — wij verrekenen de korting bij bevestiging.</p>
+          </div>
+
           <!-- Bevestigingsnota -->
           <div style="background:#fefcf8;border:1px solid #f0ede6;border-radius:8px;padding:1rem 1.25rem">
             <p style="font-size:.78rem;font-weight:300;color:#888;line-height:1.7" data-i18n="f_voorwaarden">
@@ -1372,6 +1379,8 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       f_kerst_nota:'Kerstperiode: prijs op aanvraag — neem contact op voor exacte tarieven.',
       f_aanvraag_nota:'Prijs op aanvraag — we berekenen een offerte na ontvangst van jouw aanvraag.',
       f_voorwaarden:'ⓘ De boeking is pas <strong>definitief bevestigd</strong> na schriftelijke bevestiging door Greet & Michiel en betaling van het voorschot (30% van de huurprijs + borg €500). Het saldo is verschuldigd ten laatste 1 maand voor aankomst.',
+      f_kortingscode:'Kortingscode (optioneel)',
+      f_kortingscode_hint:"Heb je een persoonlijke kortingscode ontvangen via een vriend(in)? Vul 'm hier in — wij verrekenen de korting bij bevestiging.",
       f_wensen:'Vragen of specifieke wensen',
       f_verstuur:'Verstuur vraag', f_verstuur_boeking:'Stuur boekingsaanvraag',
       f_succes_contact:'Jouw vraag is verstuurd! We antwoorden zo snel mogelijk.',
@@ -1457,6 +1466,8 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       f_kerst_nota:'Période de Noël: prix sur demande — contactez-nous pour les tarifs exacts.',
       f_aanvraag_nota:'Prix sur demande — nous établirons un devis après réception de votre demande.',
       f_voorwaarden:'ⓘ La réservation n\'est <strong>définitivement confirmée</strong> qu\'après confirmation écrite de Greet & Michiel et paiement de l\'acompte (30% du loyer + caution €500). Le solde est dû au plus tard 1 mois avant l\'arrivée.',
+      f_kortingscode:'Code de réduction (facultatif)',
+      f_kortingscode_hint:'Avez-vous reçu un code de réduction personnel d\'un proche ? Indiquez-le ici — nous appliquerons la réduction lors de la confirmation.',
       f_wensen:'Questions ou souhaits particuliers',
       f_verstuur:'Envoyer la question', f_verstuur_boeking:'Envoyer la demande',
       f_succes_contact:'Votre question a été envoyée ! Nous répondrons dès que possible.',
@@ -1542,6 +1553,8 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       f_kerst_nota:'Christmas period: price on request — contact us for exact rates.',
       f_aanvraag_nota:'Price on request — we\'ll send a quote after receiving your request.',
       f_voorwaarden:'ⓘ The booking is only <strong>definitively confirmed</strong> after written confirmation by Greet & Michiel and payment of the deposit (30% of the rental fee + security deposit €500). The balance is due at least 1 month before arrival.',
+      f_kortingscode:'Discount code (optional)',
+      f_kortingscode_hint:'Did you receive a personal discount code from a friend? Enter it here — we\'ll apply the discount upon confirmation.',
       f_wensen:'Questions or special requests',
       f_verstuur:'Send question', f_verstuur_boeking:'Send booking request',
       f_succes_contact:'Your question has been sent! We\'ll reply as soon as possible.',

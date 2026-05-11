@@ -237,7 +237,33 @@ function handleSubmit(e) {
   const code = generateCode(v, n);
   if (!code) return false;
   showResult(code, v.trim());
+  notifyOwner(v, n, code);
   return false;
+}
+
+/* ── EIGENAAR INFORMEREN VIA FORMSPREE ──
+   Stuur stilzwijgend een mail met naam + code naar de eigenaar,
+   zodat hij weet wie welke code heeft. Skip als deze code al
+   eerder op dit toestel werd aangemaakt (anti-spam). */
+function notifyOwner(voornaam, familienaam, code) {
+  const key = 'cc_notified_' + code;
+  try { if (localStorage.getItem(key)) return; } catch(e) {}
+  const formData = new FormData();
+  formData.append('_subject', 'Coin Castor — Nieuwe referral code: ' + code);
+  formData.append('type', 'referral_code_aanvraag');
+  formData.append('code', code);
+  formData.append('voornaam', voornaam.trim());
+  formData.append('familienaam', familienaam.trim());
+  formData.append('tijdstip', new Date().toISOString());
+  fetch('https://formspree.io/f/xwvynbvb', {
+    method: 'POST',
+    body: formData,
+    headers: { 'Accept': 'application/json' },
+  }).then(res => {
+    if (res.ok) {
+      try { localStorage.setItem(key, '1'); } catch(e) {}
+    }
+  }).catch(() => { /* stille fout — UX niet blokkeren */ });
 }
 
 function showResult(code, voornaam) {
