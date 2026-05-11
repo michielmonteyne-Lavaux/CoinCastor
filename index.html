@@ -1591,6 +1591,25 @@ document.getElementById('fb').addEventListener('submit', function(e) {
   function lbMove(d){lbC=(lbC+d+PH.length)%PH.length;document.getElementById('lbi').src=PH[lbC].s;document.getElementById('lbc').textContent=PH[lbC].c;}
   document.getElementById('lb').addEventListener('click',e=>{if(e.target===e.currentTarget)lbClose();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')lbClose();if(e.key==='ArrowRight')lbMove(1);if(e.key==='ArrowLeft')lbMove(-1);});
+
+  /* Swipe-support voor lightbox op mobiel */
+  (function(){
+    const lbEl = document.getElementById('lb');
+    let touchStartX = 0, touchStartY = 0, touchEndX = 0, touchEndY = 0;
+    lbEl.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+    lbEl.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      touchEndY = e.changedTouches[0].screenY;
+      const dx = touchEndX - touchStartX;
+      const dy = touchEndY - touchStartY;
+      // Negeer als verticaal scrollen overheerst (zoom/pan) of beweging te klein is
+      if (Math.abs(dx) < 50 || Math.abs(dy) > Math.abs(dx)) return;
+      lbMove(dx < 0 ? 1 : -1); // links swipen = volgende, rechts swipen = vorige
+    }, { passive: true });
+  })();
 </script>
 </body>
 </html>
