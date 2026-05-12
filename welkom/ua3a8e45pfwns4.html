@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <meta name="referrer" content="no-referrer"/>
+  <title>Welkom in Coin Castor — Praktische gids</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #1a1a1a;
+      --gray:  #888;
+      --light: #f4f2ed;
+      --white: #ffffff;
+      --border: #e2dfd8;
+      --accent: #a8880e;
+      --warn-bg: #fff8e6;
+      --warn-border: #e8c969;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Raleway', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--black); background: var(--white); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+
+    /* HERO */
+    .hero { position: relative; height: 78vh; min-height: 480px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 3.2rem; overflow: hidden; }
+    .hero img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,.08) 30%, rgba(0,0,0,.55) 100%); }
+    .hero-content { position: relative; z-index: 2; text-align: center; color: white; width: 100%; padding: 0 1.2rem; }
+    .hero-content .eyebrow { font-size: .68rem; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.85); margin-bottom: 1rem; }
+    .hero-content h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(2.4rem,6.5vw,5rem); text-transform: uppercase; letter-spacing: .04em; line-height: 1; margin-bottom: 2rem; }
+    .hero-content .sub { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(1rem,1.7vw,1.25rem); color: rgba(255,255,255,.9); margin-bottom: 2.5rem; }
+    .hero-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.6rem 2.4rem; list-style: none; width: 100%; padding: 0; }
+    .hero-nav a { font-size: .7rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.85); text-decoration: none; padding: .3rem 0; position: relative; }
+    .hero-nav a::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: rgba(255,255,255,.7); transform: scaleX(0); transition: transform .22s; }
+    .hero-nav a:hover { color: white; }
+    .hero-nav a:hover::after { transform: scaleX(1); }
+
+    /* SECTIONS */
+    .sec { padding: 5rem 2rem; }
+    .wrap { max-width: 1000px; margin: 0 auto; }
+    .narrow { max-width: 640px; margin: 0 auto; }
+    .tag { font-size: .63rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gray); margin-bottom: .6rem; }
+    h2 { font-family: var(--serif); font-size: clamp(1.4rem,2.6vw,1.95rem); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; margin-bottom: 1.4rem; }
+    h3 { font-family: var(--serif); font-size: 1.08rem; font-weight: 700; letter-spacing: .02em; margin-bottom: .5rem; }
+    p { font-size: .95rem; font-weight: 300; color: #3a3a3a; line-height: 1.85; }
+    p + p { margin-top: .8rem; }
+    strong { font-weight: 600; color: var(--black); }
+    .hr { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+    .center { text-align: center; }
+    .lead { font-family: var(--serif); font-style: italic; font-size: 1.08rem; line-height: 1.85; color: #555; }
+
+    /* WELKOM */
+    .welkom-sec { background: var(--light); padding: 5rem 2rem; }
+
+    /* PRAKTISCH-BLOKKEN */
+    .blocks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 2rem; }
+    .block { background: white; padding: 1.8rem 1.6rem; }
+    .block .icon { font-size: 1.4rem; line-height: 1; margin-bottom: .8rem; display: block; }
+    .block h3 { margin-bottom: .4rem; }
+    .block p { font-size: .9rem; line-height: 1.7; }
+
+    /* WIFI */
+    .wifi-card { background: var(--black); color: white; padding: 2rem 1.8rem; margin: 2.5rem auto 0; max-width: 560px; }
+    .wifi-card .lbl { font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: .3rem; }
+    .wifi-card .val { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; word-break: break-all; }
+    .wifi-card .val + .lbl { margin-top: 1.4rem; }
+
+    /* WAARSCHUWING */
+    .warn { background: var(--warn-bg); border-left: 3px solid var(--warn-border); padding: 1.8rem 1.8rem; margin: 2.5rem 0; max-width: 760px; margin-left: auto; margin-right: auto; }
+    .warn .warn-head { font-size: .65rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: #8a6f0e; margin-bottom: .6rem; }
+    .warn h3 { font-size: 1.15rem; margin-bottom: 1rem; }
+    .warn ol { margin-left: 1.2rem; font-size: .92rem; line-height: 1.9; color: #3a3a3a; }
+    .warn ol li + li { margin-top: .25rem; }
+    .warn ol code { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-style: normal; background: rgba(168,136,14,.16); padding: 1px 6px; border-radius: 2px; }
+
+    /* RESTAURANTS */
+    .resto-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 2rem; }
+    .resto { background: white; padding: 1.8rem 1.6rem; }
+    .resto .icon { font-size: 1.4rem; display: block; margin-bottom: .6rem; }
+    .resto h3 { margin-bottom: .35rem; }
+    .resto .sub { font-size: .82rem; color: var(--gray); margin-bottom: .55rem; font-weight: 400; }
+    .resto p { font-size: .9rem; line-height: 1.65; margin-bottom: .8rem; }
+    .resto a.link { display: inline-block; font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--black); border-bottom: 1px solid var(--black); padding-bottom: 2px; text-decoration: none; }
+    .resto a.link:hover { opacity: .55; }
+    .resto.fav { background: #faf7ef; }
+
+    /* WINKELS */
+    .winkels-sec { background: var(--light); padding: 5rem 2rem; }
+    .winkels-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 2rem; }
+    .winkel { background: white; padding: 1.6rem 1.5rem; }
+    .winkel .winkel-type { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gray); margin-bottom: .4rem; }
+    .winkel h3 { font-size: 1.05rem; margin-bottom: .8rem; }
+    .winkel .uren { font-size: .85rem; line-height: 1.7; color: #444; }
+    .winkels-note { text-align: center; font-size: .78rem; color: var(--gray); margin-top: 1.6rem; letter-spacing: .04em; }
+    .booking-window { text-align: center; font-family: var(--serif); font-style: italic; color: var(--accent); font-size: 1rem; margin-bottom: 1rem; }
+
+    /* FIETSEN */
+    .fietsen-sec { padding: 5rem 2rem; }
+    .fietsen-intro { max-width: 640px; margin: 0 auto 2.5rem; text-align: center; }
+    .routes { max-width: 760px; margin: 0 auto; border-top: 1px solid var(--border); }
+    .route { display: grid; grid-template-columns: 1fr auto auto; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid var(--border); align-items: baseline; }
+    .route .name { font-family: var(--serif); font-size: 1rem; font-weight: 700; }
+    .route .km { font-family: var(--serif); font-size: .95rem; font-weight: 700; color: var(--black); min-width: 70px; text-align: right; }
+    .route .km small, .route .hm small { font-family: var(--sans); font-size: .68rem; font-weight: 400; color: var(--gray); letter-spacing: .12em; text-transform: uppercase; margin-left: .25rem; }
+    .route .hm { font-family: var(--serif); font-size: .95rem; font-weight: 700; color: #555; min-width: 90px; text-align: right; }
+
+    /* OUTRO */
+    .outro { background: var(--black); color: white; padding: 4rem 2rem; text-align: center; }
+    .outro h2 { color: white; margin-bottom: 1rem; }
+    .outro p { color: rgba(255,255,255,.7); font-size: 1rem; }
+    .outro .signature { font-family: var(--serif); font-style: italic; color: rgba(255,255,255,.55); margin-top: 1.6rem; font-size: .92rem; }
+
+    /* FOOTER */
+    footer { background: var(--black); color: rgba(255,255,255,.38); text-align: center; padding: 1.6rem 2rem; font-size: .7rem; font-weight: 300; letter-spacing: .08em; border-top: 1px solid rgba(255,255,255,.08); }
+    footer a { color: rgba(255,255,255,.55); text-decoration: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 720px) {
+      .hero { height: 70vh; min-height: 440px; padding-bottom: 2.4rem; }
+      .hero-nav { gap: 1rem 1.6rem; }
+      .sec, .welkom-sec, .winkels-sec, .fietsen-sec { padding: 3.6rem 1.2rem; }
+      .blocks, .resto-grid, .winkels-grid { grid-template-columns: 1fr; }
+      .route { grid-template-columns: 1fr auto; gap: .5rem 1rem; padding: .9rem 0; }
+      .route .name { grid-column: 1 / -1; margin-bottom: .15rem; }
+      .route .km, .route .hm { min-width: 0; text-align: left; font-size: .88rem; }
+      .route .hm { text-align: right; }
+      .wifi-card { padding: 1.6rem 1.4rem; }
+      .wifi-card .val { font-size: 1.1rem; }
+      .warn { padding: 1.4rem 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section id="top" class="hero">
+  <img class="bg" src="../fotos/mist.jpg" alt="Mistige ochtend in de Ardennen"/>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="eyebrow">Coin Castor · Lavaux</p>
+    <h1>Welkom 🏡</h1>
+    <p class="sub">Jullie thuis in de Ardennen</p>
+    <ul class="hero-nav">
+      <li><a href="#aankomst">Aankomst</a></li>
+      <li><a href="#inhuis">In huis</a></li>
+      <li><a href="#wifi">WiFi</a></li>
+      <li><a href="#eten">Uit eten</a></li>
+      <li><a href="#winkels">Winkels</a></li>
+      <li><a href="#fietsen">Fietsen</a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- WELKOM -->
+<section class="welkom-sec">
+  <div class="narrow center">
+    <p class="tag">🫶 Welkom</p>
+    <h2>Heel erg bedankt voor de boeking</h2>
+    <p class="lead">We hopen dat jullie even verliefd worden op de streek en ons huis als wij. Laat maar weten rond hoe laat jullie aankomen, dan zorgen we dat het gezellig warm is. Veel plezier!</p>
+  </div>
+</section>
+
+<!-- AANKOMST -->
+<section id="aankomst" class="sec">
+  <div class="wrap">
+    <div class="center">
+      <p class="tag">🔑 Aankomst</p>
+      <h2>Sleutels</h2>
+    </div>
+    <div class="narrow center">
+      <p>Witte trap naar de voordeur → om de hoek hangt een <strong>sleutelkastje</strong>. Dezelfde sleutel werkt boven en beneden.</p>
+    </div>
+  </div>
+</section>
+
+<!-- IN HUIS -->
+<section id="inhuis" class="sec" style="background:var(--light);padding-top:1rem">
+  <div class="wrap">
+    <div class="center">
+      <p class="tag">In huis</p>
+      <h2>Praktische info</h2>
+    </div>
+    <div class="blocks">
+      <div class="block">
+        <span class="icon">🛏</span>
+        <h3>Beddengoed &amp; handdoeken</h3>
+        <p>In de witte kast beneden in de gang. Nog niet opgemaakt — we verhuren voor het eerst!</p>
+      </div>
+      <div class="block">
+        <span class="icon">🌡️</span>
+        <h3>Verwarming</h3>
+        <p>Zwart schermpje naast de deur boven. Automatisch <strong>21°C overdag, 19°C 's nachts</strong>. Alles is al ingesteld.</p>
+      </div>
+      <div class="block">
+        <span class="icon">📺</span>
+        <h3>Entertainment</h3>
+        <p><strong>Google TV</strong> — cast vanuit je telefoon. <strong>Sonos</strong> — beschikbaar zodra je op de wifi zit.</p>
+      </div>
+      <div class="block">
+        <span class="icon">🗑️</span>
+        <h3>Afval</h3>
+        <p>Vuilnis- en PMD-zakken in de kast naast de koelkast. <strong>Zondag bij vertrek buiten zetten</strong>, ophaling maandag.</p>
+      </div>
+      <div class="block" style="grid-column: 1 / -1">
+        <span class="icon">🦝</span>
+        <h3>Wasberen!</h3>
+        <p>Geen etensresten op het terras a.u.b. — er zitten wasberen in het bos en we willen ze niet verwennen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WIFI -->
+<section id="wifi" class="sec">
+  <div class="wrap center">
+    <p class="tag">📡 Internet</p>
+    <h2>WiFi</h2>
+    <div class="wifi-card">
+      <div class="lbl">Netwerk</div>
+      <div class="val">Coincastor</div>
+      <div class="lbl">Wachtwoord</div>
+      <div class="val">Ditiseenvakantiehuisgekochtin22</div>
+    </div>
+
+    <div class="warn">
+      <p class="warn-head">⚠️ Belangrijk — Vaatwasmachine</p>
+      <h3>Werkt, maar met een extra stap</h3>
+      <p style="font-size:.88rem;color:#6b5a14;margin-bottom:1rem">(De technieker komt langs voor donderdag.)</p>
+      <ol>
+        <li>Vul en start — hij doorloopt het volledige programma.</li>
+        <li>Code <code>F11</code> na afloop? Alles is wel proper.</li>
+        <li>Leegmaken, maar <strong>open en aanstaan</strong> laten.</li>
+        <li>Hij pompt na verloop van tijd automatisch het water weg.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- UIT ETEN -->
+<section id="eten" class="sec" style="padding-top:1rem">
+  <div class="wrap">
+    <div class="center">
+      <p class="tag">🍽️ In de buurt</p>
+      <h2>Uit eten</h2>
+    </div>
+    <div class="resto-grid">
+      <div class="resto fav">
+        <span class="icon">⭐</span>
+        <h3>Le Gastromme</h3>
+        <p class="sub">Onze favoriet!</p>
+        <p>Intiem kamerrestaurant (Nederlands koppel) met Ardeense keuken in Grand-Halleux. <strong>Reserveren is absoluut noodzakelijk.</strong></p>
+        <a class="link" href="https://www.legastromme.be/" target="_blank" rel="noopener">legastromme.be →</a>
+      </div>
+      <div class="resto">
+        <span class="icon">🏔️</span>
+        <h3>Les Chalets de Loci</h3>
+        <p class="sub">Chalet aan de skipiste</p>
+        <p>Chalet-restaurant aan de skipiste met seizoensmenu. Alles met lokale producten.</p>
+        <a class="link" href="https://www.chalets-loci.com/nouveau-menu" target="_blank" rel="noopener">chalets-loci.com →</a>
+      </div>
+      <div class="resto">
+        <span class="icon">🐺</span>
+        <h3>Le Loup Gourmand</h3>
+        <p class="sub">Stavelot</p>
+        <p>Warm en eigentijds restaurant in Stavelot, vlakbij de abdij en Spa-Francorchamps.</p>
+        <a class="link" href="http://leloupgourmand.be/" target="_blank" rel="noopener">leloupgourmand.be →</a>
+      </div>
+      <div class="resto">
+        <span class="icon">🍟</span>
+        <h3>Friterie Sébastien</h3>
+        <p class="sub">Snel en lekker</p>
+        <p>De lokale frituur voor een lekkere snelle hap.</p>
+        <a class="link" href="http://www.friterie-sebastien.be/" target="_blank" rel="noopener">friterie-sebastien.be →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WINKELS -->
+<section id="winkels" class="winkels-sec">
+  <div class="wrap">
+    <div class="center">
+      <p class="tag">🛒 Boodschappen</p>
+      <h2>Winkels &amp; openingsuren</h2>
+      <p class="booking-window">Openingsuren <strong>do 15 t.e.m. zo 18 mei</strong></p>
+    </div>
+    <div class="winkels-grid">
+      <div class="winkel">
+        <p class="winkel-type">Bakker · Grand-Halleux</p>
+        <h3>🥐 Fred's Corner</h3>
+        <p class="uren">Do t.e.m. zo: <strong>8u – 15u</strong></p>
+      </div>
+      <div class="winkel">
+        <p class="winkel-type">Bakker · Trois-Ponts</p>
+        <h3>🥖 Lily Délices</h3>
+        <p class="uren">
+          Do t.e.m. za: <strong>vanaf 7u</strong><br/>
+          Zo: beperkte uren
+        </p>
+      </div>
+      <div class="winkel">
+        <p class="winkel-type">Slager · Grand-Halleux</p>
+        <h3>🥩 Boucherie Curnel-Remy</h3>
+        <p class="uren">
+          Do t.e.m. za: <strong>9u–12u30 &amp; 13u30–18u</strong><br/>
+          Zo: <strong>9u – 12u30</strong>
+        </p>
+      </div>
+      <div class="winkel">
+        <p class="winkel-type">Supermarkt · Trois-Ponts</p>
+        <h3>🛒 Proxy Delhaize</h3>
+        <p class="uren">
+          Do t.e.m. za: <strong>8u30–19u</strong><br/>
+          Zo: <strong>8u – 12u</strong>
+        </p>
+      </div>
+    </div>
+    <p class="winkels-note">Openingsuren kunnen wijzigen op feestdagen — check eventueel zelf voor zekerheid.</p>
+  </div>
+</section>
+
+<!-- FIETSEN -->
+<section id="fietsen" class="fietsen-sec">
+  <div class="wrap">
+    <div class="fietsen-intro">
+      <p class="tag">🚴 Voor de fietsers</p>
+      <h2>Vanuit Le Coffee Ride</h2>
+      <p>Alle routes vertrekken vanuit <strong>Le Coffee Ride HQ in Coo–Stavelot</strong>, op een kwartiertje rijden. GPX-bestanden downloaden kan op <a href="https://www.lecoffeeride.cc/road" target="_blank" rel="noopener" style="border-bottom:1px solid var(--border)">lecoffeeride.cc</a>.</p>
+    </div>
+    <div class="routes">
+      <div class="route"><span class="name">The Short Loop</span><span class="km">47<small>km</small></span><span class="hm">670<small>hm</small></span></div>
+      <div class="route"><span class="name">The Sweet Loop</span><span class="km">60<small>km</small></span><span class="hm">660<small>hm</small></span></div>
+      <div class="route"><span class="name">The Mellow Ride</span><span class="km">63<small>km</small></span><span class="hm">960<small>hm</small></span></div>
+      <div class="route"><span class="name">Outside is Free</span><span class="km">75<small>km</small></span><span class="hm">1230<small>hm</small></span></div>
+      <div class="route"><span class="name">La Belle Route</span><span class="km">79<small>km</small></span><span class="hm">1270<small>hm</small></span></div>
+      <div class="route"><span class="name">La Route des Sommets</span><span class="km">82<small>km</small></span><span class="hm">1600<small>hm</small></span></div>
+      <div class="route"><span class="name">Old is Gold</span><span class="km">85<small>km</small></span><span class="hm">910<small>hm</small></span></div>
+      <div class="route"><span class="name">Out of Office</span><span class="km">86<small>km</small></span><span class="hm">1490<small>hm</small></span></div>
+      <div class="route"><span class="name">The 2.0 Ride</span><span class="km">92<small>km</small></span><span class="hm">1500<small>hm</small></span></div>
+      <div class="route"><span class="name">La Martini</span><span class="km">90<small>km</small></span><span class="hm">1670<small>hm</small></span></div>
+      <div class="route"><span class="name">La Baraque Fraiture</span><span class="km">91<small>km</small></span><span class="hm">1360<small>hm</small></span></div>
+      <div class="route"><span class="name">The Switchback Ride</span><span class="km">92<small>km</small></span><span class="hm">1470<small>hm</small></span></div>
+      <div class="route"><span class="name">Eddy's Loop</span><span class="km">93<small>km</small></span><span class="hm">1720<small>hm</small></span></div>
+      <div class="route"><span class="name">The Ardenne Escape</span><span class="km">98<small>km</small></span><span class="hm">1700<small>hm</small></span></div>
+      <div class="route"><span class="name">La Magistrale</span><span class="km">100<small>km</small></span><span class="hm">1330<small>hm</small></span></div>
+      <div class="route"><span class="name">C'est la Fête</span><span class="km">102<small>km</small></span><span class="hm">1200<small>hm</small></span></div>
+      <div class="route"><span class="name">La Baraque Michel</span><span class="km">102<small>km</small></span><span class="hm">1660<small>hm</small></span></div>
+      <div class="route"><span class="name">Monschau ist Schön</span><span class="km">118<small>km</small></span><span class="hm">1750<small>hm</small></span></div>
+      <div class="route"><span class="name">The Perfect Day</span><span class="km">121<small>km</small></span><span class="hm">2280<small>hm</small></span></div>
+      <div class="route"><span class="name">Coffee in Huy</span><span class="km">137<small>km</small></span><span class="hm">2050<small>hm</small></span></div>
+      <div class="route"><span class="name">La Pas Normal</span><span class="km">140<small>km</small></span><span class="hm">2390<small>hm</small></span></div>
+      <div class="route"><span class="name">Coffee in Valkenburg</span><span class="km">142<small>km</small></span><span class="hm">1820<small>hm</small></span></div>
+      <div class="route"><span class="name">La Redoute and Back</span><span class="km">146<small>km</small></span><span class="hm">2660<small>hm</small></span></div>
+      <div class="route"><span class="name">Hello Eifel</span><span class="km">154<small>km</small></span><span class="hm">2170<small>hm</small></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTRO -->
+<section class="outro">
+  <h2>Geniet van jullie verblijf!</h2>
+  <p>Twijfel niet om berichtjes te sturen als er vragen zijn.</p>
+  <p class="signature">— Michiel</p>
+</section>
+
+<footer>
+  © Coin Castor · <a href="../index.html">coincastor.be</a>
+</footer>
+
+</body>
+</html>
