@@ -770,17 +770,20 @@ const MONTHS_SHORT = {
 let kalOffset = 0;
 
 // ── GEBOEKTE PERIODES ──────────────────────────────────────────────────
-// Pas deze lijst aan om boekingen bij te houden.
+// De geboekte periodes worden automatisch live opgehaald uit de gedeelde
+// Google Agenda (zie onderaan dit script-blok). Onderstaande lijst is een
+// HANDMATIGE AANVULLING + terugvalwaarde: ze wordt samengevoegd met de
+// agenda-gegevens, en blijft gelden als de agenda even niet bereikbaar is.
 // Formaat: ['YYYY-MM-DD', 'YYYY-MM-DD'] = van en t/m (beide inbegrepen)
 const BOOKED_PERIODS = [
   ['2026-05-14', '2026-05-17'],
   ['2026-10-23', '2026-10-25'],
 ];
 
-// Bouw een Set van geboekte datum-strings
-function buildBookedSet() {
+// Bouw een Set van geboekte datum-strings uit een lijst van periodes
+function buildBookedSet(periods = BOOKED_PERIODS) {
   const booked = new Set();
-  BOOKED_PERIODS.forEach(([from, to]) => {
+  periods.forEach(([from, to]) => {
     // Gebruik lokale tijdzone via split om UTC-verschuiving te vermijden
     const [fy,fm,fd] = from.split('-').map(Number);
     const [ty,tm,td] = to.split('-').map(Number);
@@ -793,7 +796,7 @@ function buildBookedSet() {
   });
   return booked;
 }
-const BOOKED = buildBookedSet();
+let BOOKED = buildBookedSet();
 
 // Tooltip
 let activeTooltip = null;
@@ -960,6 +963,25 @@ function renderKal() {
 
 function kalMove(dir) { kalOffset += (dir * 3); hideTooltip(); renderKal(); }
 renderKal();
+
+// ── LIVE GEBOEKTE PERIODES UIT GOOGLE AGENDA ───────────────────────────
+// Haalt de geboekte periodes op uit de gedeelde agenda via de Apps Script-
+// webapp. Enkel datums worden teruggegeven — geen namen of details.
+// LET OP: dezelfde URL staat ook in het boekingsformulier verderop in dit
+// bestand. Pas je hem ooit aan, doe dat dan op beide plaatsen.
+const CALENDAR_FEED_URL = 'https://script.google.com/macros/s/AKfycbyJ3wILAHrPl_emStVgd9Rnfgfhpm0u9_p3jZO009R8eJpUnTKBC1887Ghu14PsWSgd/exec';
+
+fetch(CALENDAR_FEED_URL)
+  .then(r => r.json())
+  .then(data => {
+    if (data && data.ok && Array.isArray(data.periods)) {
+      const live = data.periods.map(p => [p.from, p.to]);
+      // Agenda + handmatige lijst samenvoegen (de Set ontdubbelt vanzelf)
+      BOOKED = buildBookedSet([...BOOKED_PERIODS, ...live]);
+      renderKal();
+    }
+  })
+  .catch(() => { /* agenda niet bereikbaar — terugvallen op de handmatige lijst */ });
 </script>
 
 <!-- BOEKING -->

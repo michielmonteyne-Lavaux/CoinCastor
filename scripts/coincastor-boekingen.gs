@@ -13,20 +13,16 @@
  * Dit bestand is een referentiekopie. De code draait in werkelijkheid in
  * Google Apps Script (script.google.com), niet vanuit deze repo.
  *
- * INSTELLEN: vul hieronder bij CALENDAR_ID het ID van je gedeelde agenda in.
+ * LET OP: na elke wijziging in script.google.com moet je opnieuw publiceren
+ * (Implementeren > Implementaties beheren > potlood > Versie "Nieuwe versie"),
+ * anders blijft de website de oude versie aanspreken.
  */
 
-// ── INSTELLINGEN ─────────────────────────────────────────────
-// Plak hier het ID van de gedeelde agenda "Coin Castor — Boekingen".
-// Vinden via: Google Agenda > bij de agenda op "..." > Instellingen >
-// onderaan bij "Agenda integreren" > veld "Agenda-ID".
-// Ziet eruit als: abc123...@group.calendar.google.com
-const CALENDAR_ID = 'PLAK_HIER_HET_AGENDA_ID';
+// ── INSTELLINGEN ──
+const CALENDAR_ID = 'b16df7230206f1834b7d72a891b32a4b272912885f40d28268df3f84ac658484@group.calendar.google.com';
 
-// Aantal nachten per type verblijf (komt overeen met de website).
 const NIGHTS = { weekend: 3, midweek: 4, week: 7, verlengd: 4 };
 
-// Leesbare labels per type verblijf.
 const TYPE_LABEL = {
   weekend:  'Weekend (3 nachten)',
   midweek:  'Midweek (4 nachten)',
@@ -34,7 +30,29 @@ const TYPE_LABEL = {
   verlengd: 'Verlengd weekend (4 nachten)',
   aanvraag: 'Andere periode — duur op aanvraag',
 };
-// ─────────────────────────────────────────────────────────────
+// ──────────────────
+
+
+/**
+ * TESTFUNCTIE — selecteer "testAgenda" in de dropdown en klik Uitvoeren.
+ * Vertelt of de agenda gevonden wordt, en zo niet: welke wél zichtbaar zijn.
+ */
+function testAgenda() {
+  Logger.log('Gezocht CALENDAR_ID: ' + CALENDAR_ID);
+  const cal = CalendarApp.getCalendarById(CALENDAR_ID);
+  if (cal) {
+    Logger.log('✅ Agenda gevonden: "' + cal.getName() + '"');
+    const ev = cal.createAllDayEvent('TEST — mag verwijderd worden', new Date());
+    Logger.log('✅ Test-afspraak aangemaakt. Event-id: ' + ev.getId());
+    Logger.log('Kijk nu in Google Agenda of die TEST-afspraak van vandaag zichtbaar is.');
+  } else {
+    Logger.log('❌ Agenda NIET gevonden met dit ID.');
+    Logger.log('--- Agenda\'s die dit account WEL kan zien: ---');
+    CalendarApp.getAllCalendars().forEach(function(c) {
+      Logger.log('  "' + c.getName() + '"  →  ' + c.getId());
+    });
+  }
+}
 
 
 /**
@@ -73,7 +91,7 @@ function doPost(e) {
     // ── Agenda ophalen ──
     const cal = CalendarApp.getCalendarById(CALENDAR_ID);
     if (!cal) {
-      return _out({ ok: false, error: 'agenda niet gevonden — controleer CALENDAR_ID' });
+      throw new Error('Agenda niet gevonden met CALENDAR_ID: ' + CALENDAR_ID);
     }
 
     // ── Beschrijving samenstellen ──
@@ -101,19 +119,54 @@ function doPost(e) {
     });
     event.setColor(CalendarApp.EventColor.ORANGE);  // oranje = voorlopig
 
+    Logger.log('Afspraak aangemaakt: ' + event.getId());
     return _out({ ok: true, eventId: event.getId() });
 
   } catch (err) {
+    Logger.log('FOUT: ' + err);
     return _out({ ok: false, error: String(err) });
   }
 }
 
 
 /**
- * GET-verzoek: handig om in de browser te testen of de webapp leeft.
+ * GET-verzoek: geeft de geboekte periodes uit de gedeelde agenda terug als
+ * JSON, zodat de kalender op coincastor.be ze kan tonen als "geboekt".
+ * Alleen datums worden teruggegeven — geen namen, e-mails of details.
  */
 function doGet() {
-  return _out({ ok: true, status: 'Coin Castor boekings-webapp draait' });
+  try {
+    const cal = CalendarApp.getCalendarById(CALENDAR_ID);
+    if (!cal) {
+      return _out({ ok: false, error: 'agenda niet gevonden' });
+    }
+
+    const now = new Date();
+    const van = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const tot = new Date(van);
+    tot.setFullYear(tot.getFullYear() + 2);  // 2 jaar vooruit kijken
+
+    const periods = cal.getEvents(van, tot).map(function(ev) {
+      var fromStr, toStr;
+      if (ev.isAllDayEvent()) {
+        // All-day datums staan op middernacht GMT; einddatum is exclusief
+        // (= uitcheckdag), dus 1 dag terug voor de laatste overnachting.
+        var s = ev.getAllDayStartDate();
+        var e = ev.getAllDayEndDate();
+        var laatsteNacht = new Date(e.getTime() - 86400000);
+        fromStr = Utilities.formatDate(s, 'GMT', 'yyyy-MM-dd');
+        toStr   = Utilities.formatDate(laatsteNacht, 'GMT', 'yyyy-MM-dd');
+      } else {
+        fromStr = Utilities.formatDate(ev.getStartTime(), 'Europe/Brussels', 'yyyy-MM-dd');
+        toStr   = Utilities.formatDate(ev.getEndTime(), 'Europe/Brussels', 'yyyy-MM-dd');
+      }
+      return { from: fromStr, to: toStr };
+    });
+
+    return _out({ ok: true, periods: periods });
+  } catch (err) {
+    return _out({ ok: false, error: String(err) });
+  }
 }
 
 
