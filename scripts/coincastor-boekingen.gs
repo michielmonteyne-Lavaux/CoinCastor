@@ -149,13 +149,12 @@ function doGet() {
     const periods = cal.getEvents(van, tot).map(function(ev) {
       var fromStr, toStr;
       if (ev.isAllDayEvent()) {
-        // All-day datums staan op middernacht GMT; einddatum is exclusief
-        // (= uitcheckdag), dus 1 dag terug voor de laatste overnachting.
-        var s = ev.getAllDayStartDate();
-        var e = ev.getAllDayEndDate();
-        var laatsteNacht = new Date(e.getTime() - 86400000);
-        fromStr = Utilities.formatDate(s, 'GMT', 'yyyy-MM-dd');
-        toStr   = Utilities.formatDate(laatsteNacht, 'GMT', 'yyyy-MM-dd');
+        // All-day datums teruggeven in de tijdzone van de agenda (Brussel).
+        // De einddatum is exclusief (= uitcheckdag), dus 1 dag terug voor
+        // de laatste overnachting.
+        fromStr = Utilities.formatDate(ev.getAllDayStartDate(), 'Europe/Brussels', 'yyyy-MM-dd');
+        var endStr = Utilities.formatDate(ev.getAllDayEndDate(), 'Europe/Brussels', 'yyyy-MM-dd');
+        toStr = _minusOneDay(endStr);
       } else {
         fromStr = Utilities.formatDate(ev.getStartTime(), 'Europe/Brussels', 'yyyy-MM-dd');
         toStr   = Utilities.formatDate(ev.getEndTime(), 'Europe/Brussels', 'yyyy-MM-dd');
@@ -167,6 +166,16 @@ function doGet() {
   } catch (err) {
     return _out({ ok: false, error: String(err) });
   }
+}
+
+/**
+ * Trekt één dag af van een 'yyyy-MM-dd'-string (DST-veilig via UTC).
+ */
+function _minusOneDay(ymd) {
+  var p = ymd.split('-');
+  var d = new Date(Date.UTC(Number(p[0]), Number(p[1]) - 1, Number(p[2])));
+  d.setUTCDate(d.getUTCDate() - 1);
+  return Utilities.formatDate(d, 'GMT', 'yyyy-MM-dd');
 }
 
 

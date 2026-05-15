@@ -1124,15 +1124,32 @@ fetch(CALENDAR_FEED_URL)
               <span style="font-size:.85rem;font-weight:300;color:#555" id="pb-label"></span>
               <span style="font-family:var(--serif);font-size:1.3rem;font-weight:700;color:#1a1a1a" id="pb-total"></span>
             </div>
-            <div style="border-top:1px solid #e8e5de;margin:.6rem 0"></div>
-            <div style="display:flex;justify-content:space-between;font-size:.78rem;font-weight:300;color:#888;margin-bottom:.2rem">
-              <span data-i18n="f_voorschot">Voorschot (30% + borg €500)</span>
-              <span id="pb-voorschot" style="font-weight:500;color:#444"></span>
+
+            <!-- Betaalschema -->
+            <div id="pb-betaalblok">
+              <div style="border-top:1px solid #e8e5de;margin:.6rem 0"></div>
+              <p style="font-size:.72rem;font-weight:600;color:#1a1a1a;margin-bottom:.4rem" data-i18n="f_bij_bevestiging">Te betalen bij bevestiging</p>
+              <div style="display:flex;justify-content:space-between;font-size:.78rem;font-weight:300;color:#888;margin-bottom:.2rem;padding-left:.6rem">
+                <span data-i18n="f_voorschot30">30% voorschot</span>
+                <span id="pb-voorschot30" style="font-weight:500;color:#444"></span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:.78rem;font-weight:300;color:#888;margin-bottom:.25rem;padding-left:.6rem">
+                <span data-i18n="f_borg">Borg</span>
+                <span id="pb-borg" style="font-weight:500;color:#444"></span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:.78rem;color:#444;padding-left:.6rem;padding-top:.3rem;border-top:1px solid #ece9e2">
+                <span style="font-weight:500" data-i18n="f_totaal_bevestiging">Totaal</span>
+                <span id="pb-totaal-bevestiging" style="font-weight:700;color:#1a1a1a"></span>
+              </div>
+
+              <div style="border-top:1px solid #e8e5de;margin:.6rem 0"></div>
+              <p style="font-size:.72rem;font-weight:600;color:#1a1a1a;margin-bottom:.4rem" data-i18n="f_voor_aankomst">Te betalen ten laatste 1 maand voor aankomst</p>
+              <div style="display:flex;justify-content:space-between;font-size:.78rem;font-weight:300;color:#888;padding-left:.6rem">
+                <span data-i18n="f_restbedrag">70% restbedrag</span>
+                <span id="pb-saldo" style="font-weight:500;color:#444"></span>
+              </div>
             </div>
-            <div style="display:flex;justify-content:space-between;font-size:.78rem;font-weight:300;color:#888">
-              <span data-i18n="f_saldo">Saldo (ten laatste 1 maand voor aankomst)</span>
-              <span id="pb-saldo" style="font-weight:500;color:#444"></span>
-            </div>
+
             <p id="pb-kerst" style="display:none;font-size:.72rem;font-weight:300;color:#b91c1c;margin-top:.6rem" data-i18n="f_kerst_nota">Kerstperiode: prijs op aanvraag — neem contact op voor exacte tarieven.</p>
             <p id="pb-aanvraag" style="display:none;font-size:.72rem;font-weight:300;color:#888;margin-top:.6rem" data-i18n="f_aanvraag_nota">Prijs op aanvraag — we berekenen een offerte na ontvangst van jouw aanvraag.</p>
           </div>
@@ -1225,8 +1242,7 @@ function calcPrice() {
     box.style.display='block';
     document.getElementById('pb-label').textContent='';
     document.getElementById('pb-total').textContent='';
-    document.getElementById('pb-voorschot').textContent='';
-    document.getElementById('pb-saldo').textContent='';
+    document.getElementById('pb-betaalblok').style.display='none';
     document.getElementById('pb-kerst').style.display='none';
     document.getElementById('pb-aanvraag').style.display='block';
     document.getElementById('fb-prijs-hidden').value='Op aanvraag';
@@ -1248,8 +1264,7 @@ function calcPrice() {
   if (season === 'kerst') {
     document.getElementById('pb-total').textContent='';
     document.getElementById('pb-label').textContent='';
-    document.getElementById('pb-voorschot').textContent='';
-    document.getElementById('pb-saldo').textContent='';
+    document.getElementById('pb-betaalblok').style.display='none';
     document.getElementById('pb-kerst').style.display='block';
     document.getElementById('fb-prijs-hidden').value='Kerstperiode – op aanvraag';
     return;
@@ -1269,10 +1284,13 @@ function calcPrice() {
   document.getElementById('pb-total').textContent = `€${rate.toLocaleString('nl-BE')}`;
 
   const voorschot30 = Math.round(rate * 0.30);
-  const voorschot = voorschot30 + BORG;
+  const totaalBevestiging = voorschot30 + BORG;
   const saldo = rate - voorschot30;
 
-  document.getElementById('pb-voorschot').textContent = `€${voorschot.toLocaleString('nl-BE')}`;
+  document.getElementById('pb-betaalblok').style.display='block';
+  document.getElementById('pb-voorschot30').textContent = `€${voorschot30.toLocaleString('nl-BE')}`;
+  document.getElementById('pb-borg').textContent = `€${BORG.toLocaleString('nl-BE')}`;
+  document.getElementById('pb-totaal-bevestiging').textContent = `€${totaalBevestiging.toLocaleString('nl-BE')}`;
   document.getElementById('pb-saldo').textContent = `€${saldo.toLocaleString('nl-BE')}`;
   document.getElementById('fb-prijs-hidden').value = `€${rate} (${lbl}, ${arrStr} → ${depStr})`;
 }
@@ -1430,8 +1448,12 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       period_verlengd:'Verlengd weekend', period_verlengd_s:'Do/vr–ma · 4–5 nachten',
       period_aanvraag:'Andere periode', period_aanvraag_s:'Min. 2 nachten · prijs op aanvraag',
       f_prijsoverzicht:'Prijsoverzicht',
-      f_voorschot:'Voorschot (30% + borg €500)',
-      f_saldo:'Saldo (ten laatste 1 maand voor aankomst)',
+      f_bij_bevestiging:'Te betalen bij bevestiging',
+      f_voorschot30:'30% voorschot',
+      f_borg:'Borg',
+      f_totaal_bevestiging:'Totaal',
+      f_voor_aankomst:'Te betalen ten laatste 1 maand voor aankomst',
+      f_restbedrag:'70% restbedrag',
       f_kerst_nota:'Kerstperiode: prijs op aanvraag — neem contact op voor exacte tarieven.',
       f_aanvraag_nota:'Prijs op aanvraag — we berekenen een offerte na ontvangst van jouw aanvraag.',
       f_voorwaarden:'ⓘ De boeking is pas <strong>definitief bevestigd</strong> na schriftelijke bevestiging door Greet & Michiel en betaling van het voorschot (30% van de huurprijs + borg €500). Het saldo is verschuldigd ten laatste 1 maand voor aankomst.',
@@ -1517,8 +1539,12 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       period_verlengd:'Week-end prolongé', period_verlengd_s:'Jeu/ven–lun · 4–5 nuits',
       period_aanvraag:'Autre période', period_aanvraag_s:'Min. 2 nuits · prix sur demande',
       f_prijsoverzicht:'Aperçu des prix',
-      f_voorschot:'Acompte (30% + caution €500)',
-      f_saldo:'Solde (au plus tard 1 mois avant l\'arrivée)',
+      f_bij_bevestiging:'À payer à la confirmation',
+      f_voorschot30:'Acompte de 30%',
+      f_borg:'Caution',
+      f_totaal_bevestiging:'Total',
+      f_voor_aankomst:'À payer au plus tard 1 mois avant l\'arrivée',
+      f_restbedrag:'Solde de 70%',
       f_kerst_nota:'Période de Noël: prix sur demande — contactez-nous pour les tarifs exacts.',
       f_aanvraag_nota:'Prix sur demande — nous établirons un devis après réception de votre demande.',
       f_voorwaarden:'ⓘ La réservation n\'est <strong>définitivement confirmée</strong> qu\'après confirmation écrite de Greet & Michiel et paiement de l\'acompte (30% du loyer + caution €500). Le solde est dû au plus tard 1 mois avant l\'arrivée.',
@@ -1604,8 +1630,12 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       period_verlengd:'Extended weekend', period_verlengd_s:'Thu/Fri–Mon · 4–5 nights',
       period_aanvraag:'Other period', period_aanvraag_s:'Min. 2 nights · price on request',
       f_prijsoverzicht:'Price overview',
-      f_voorschot:'Deposit (30% + security deposit €500)',
-      f_saldo:'Balance (due at least 1 month before arrival)',
+      f_bij_bevestiging:'Due upon confirmation',
+      f_voorschot30:'30% deposit',
+      f_borg:'Security deposit',
+      f_totaal_bevestiging:'Total',
+      f_voor_aankomst:'Due at least 1 month before arrival',
+      f_restbedrag:'70% balance',
       f_kerst_nota:'Christmas period: price on request — contact us for exact rates.',
       f_aanvraag_nota:'Price on request — we\'ll send a quote after receiving your request.',
       f_voorwaarden:'ⓘ The booking is only <strong>definitively confirmed</strong> after written confirmation by Greet & Michiel and payment of the deposit (30% of the rental fee + security deposit €500). The balance is due at least 1 month before arrival.',
