@@ -1255,6 +1255,26 @@ function calcPrice() {
   document.getElementById('fb-prijs-hidden').value = `€${rate} (${lbl}, ${arrStr} → ${depStr})`;
 }
 
+/* ── BOEKINGSAANVRAAG → GOOGLE AGENDA (Apps Script webapp) ── */
+// Stuurt de aanvraag ook naar een Apps Script-webapp, die automatisch een
+// voorlopige afspraak aanmaakt in de gedeelde agenda. Werkt naast Formspree:
+// als dit faalt, blijft de Formspree-mail de back-up.
+const BOOKING_CAL_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyJ3wILAHrPl_emStVgd9Rnfgfhpm0u9_p3jZO009R8eJpUnTKBC1887Ghu14PsWSgd/exec';
+
+function notifyCalendar(formEl) {
+  if (!BOOKING_CAL_ENDPOINT) return;
+  try {
+    const payload = {};
+    new FormData(formEl).forEach((v, k) => { payload[k] = v; });
+    fetch(BOOKING_CAL_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload),
+    }).catch(() => { /* stil falen — de Formspree-mail is de back-up */ });
+  } catch (err) { /* verzending nooit blokkeren */ }
+}
+
 /* ── FORMSPREE SUBMIT (fetch, geen pagina-redirect) ── */
 async function fsSubmit(formEl, successEl) {
   const btn = formEl.querySelector('button[type=submit]');
@@ -1293,6 +1313,7 @@ document.getElementById('fb').addEventListener('submit', function(e) {
     alert('Kies eerst een type verblijf.');
     return;
   }
+  notifyCalendar(this);
   fsSubmit(this, document.getElementById('fb-success'));
 });
 </script>
