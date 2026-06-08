@@ -99,12 +99,6 @@
     .pi img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .48s ease; }
     .pi:hover img { transform: scale(1.04); }
 
-    /* GALERIJ TABS */
-    .foto-tabs { display:flex; gap:.75rem; padding:2.5rem 2rem 1.5rem; max-width:1200px; margin:0 auto; }
-    .foto-tab { font-family:var(--sans); font-size:.7rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; padding:.65rem 1.8rem; border:1px solid var(--border); background:transparent; cursor:pointer; color:var(--gray); transition:background .2s,color .2s,border-color .2s; }
-    .foto-tab.active { background:var(--black); color:var(--white); border-color:var(--black); }
-    .foto-panel { max-width:1200px; margin:0 auto; }
-
     /* OMGEVING — editorial sfeerlay-out */
     .omg-sec { padding: 5.5rem 2rem 6.5rem; background: var(--white); }
     .omg-intro { max-width: 640px; margin: 0 auto 3.5rem; text-align: center; }
@@ -292,7 +286,7 @@
       <li><a href="#huis"      onclick="mnClose()" data-i18n="nav_huis">Het huis</a></li>
       <li><a href="#fotos"     onclick="mnClose()" data-i18n="nav_fotos">Foto's</a></li>
       <li><a href="#praktisch" onclick="mnClose()" data-i18n="nav_praktisch">Praktisch</a></li>
-      <li><a href="#fotos" onclick="mnClose();setTimeout(()=>fotoTab('omgeving'),100)" data-i18n="nav_omgeving">Omgeving</a></li>
+      <li><a href="#omgeving"  onclick="mnClose()" data-i18n="nav_omgeving">Omgeving</a></li>
       <li><a href="#prijzen"   onclick="mnClose()" data-i18n="nav_prijzen">Prijzen</a></li>
       <li><a href="#boeking"   onclick="mnClose()" data-i18n="nav_boeking">Boeking</a></li>
       <li><a href="#contact"   onclick="mnClose()" data-i18n="nav_contact">Contact</a></li>
@@ -306,7 +300,7 @@
       <li><a href="#huis"      data-i18n="nav_huis">Het huis</a></li>
       <li><a href="#fotos"     data-i18n="nav_fotos">Foto's</a></li>
       <li><a href="#praktisch" data-i18n="nav_praktisch">Praktisch</a></li>
-      <li><a href="#fotos" onclick="setTimeout(()=>fotoTab('omgeving'),100)" data-i18n="nav_omgeving">Omgeving</a></li>
+      <li><a href="#omgeving"  data-i18n="nav_omgeving">Omgeving</a></li>
       <li><a href="#prijzen"   data-i18n="nav_prijzen">Prijzen</a></li>
       <li><a href="#boeking"   data-i18n="nav_boeking">Boeking</a></li>
       <li><a href="#contact"   data-i18n="nav_contact">Contact</a></li>
@@ -337,30 +331,21 @@
   </div>
 </section>
 
-<!-- GALERIJ — tabbladen Vakantiehuis / Omgeving -->
+<!-- FOTO GRID — 9 huisfoto's in 3×3 grid -->
 <section id="fotos" style="background:white;padding:0">
-  <div class="foto-tabs">
-    <button class="foto-tab active" data-tab="vakantiehuis" onclick="fotoTab('vakantiehuis')">Vakantiehuis</button>
-    <button class="foto-tab" data-tab="omgeving" onclick="fotoTab('omgeving')">Omgeving</button>
-  </div>
-  <div id="tab-vakantiehuis" class="foto-panel">
-    <div id="grid-vakantiehuis" class="pgrid pgrid-all r" style="gap:5px">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="pgrid pgrid-all r">
       <div class="pi" onclick="lbOpen(0)"><img src="fotos/IMG_1833.jpg" alt="Coin Castor buitenzicht"/></div>
       <div class="pi" onclick="lbOpen(1)"><img src="fotos/IMG_1829.jpg" alt="Terras"/></div>
       <div class="pi" onclick="lbOpen(2)"><img src="fotos/IMG_1836.jpg" alt="Badkamer met bad"/></div>
     </div>
   </div>
-  <div id="tab-omgeving" class="foto-panel" style="display:none">
-    <div id="grid-omgeving" class="pgrid pgrid-all r" style="gap:5px">
-      <div class="pi" onclick="lbOpen(3)"><img src="fotos/paarden_sneeuw.jpg" alt="Belgische trekpaarden in de sneeuw" loading="lazy"/></div>
-      <div class="pi" onclick="lbOpen(4)"><img src="fotos/dennen_zonlicht.jpg" alt="Gouden zonlicht door het dennenbos" loading="lazy"/></div>
-      <div class="pi" onclick="lbOpen(5)"><img src="fotos/vingerhoedskruid.jpg" alt="Wandelpad met vingerhoedskruid" loading="lazy"/></div>
-      <div class="pi" onclick="lbOpen(6)"><img src="fotos/salm.jpg" alt="De Salm-rivier" loading="lazy"/></div>
-      <div class="pi" onclick="lbOpen(7)"><img src="fotos/coo.jpg" alt="Panoramisch zicht op het meer van Coo" loading="lazy"/></div>
-      <div class="pi" onclick="lbOpen(8)"><img src="fotos/bloemenweide.jpg" alt="Wilde bloemenweide" loading="lazy"/></div>
-      <div class="pi" onclick="lbOpen(9)"><img src="fotos/herfstbos.jpg" alt="Herfstbos" loading="lazy"/></div>
-      <div class="pi" onclick="lbOpen(10)"><img src="fotos/mist.jpg" alt="Mistige ochtend" loading="lazy"/></div>
-    </div>
+</section>
+
+<!-- EXTRA FOTO'S — dynamisch geladen via fotos/manifest.json -->
+<section id="extra-fotos" style="display:none;background:white;padding:0">
+  <div style="max-width:1200px;margin:0 auto">
+    <div id="extra-fotos-grid" class="pgrid pgrid-all r" style="gap:5px"></div>
   </div>
 </section>
 
@@ -402,6 +387,39 @@
         <div class="pi" style="aspect-ratio:4/3" onclick="lbOpen(2)"><img src="fotos/IMG_1836.jpg" alt="Badkamer met bad"/></div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- OMGEVING — sfeerfoto's van de Ardennen rond Coin Castor -->
+<section id="omgeving" class="omg-sec">
+  <div class="omg-intro r">
+    <p class="tag" data-i18n="omg_tag">De omgeving</p>
+    <h2 data-i18n="omg_h2">Vier seizoenen, één plek</h2>
+    <p class="lead" data-i18n="omg_lead">Vanuit Coin Castor stap je zo de natuur in. De vallei van de Salm, diepe dennenbossen, glooiende heuvels en stille uitzichtpunten — elk seizoen kleurt deze hoek van de Ardennen anders.</p>
+  </div>
+
+  <!-- Featured 1 -->
+  <div class="omg-feature r">
+    <div class="pi" onclick="lbOpen(3)"><img src="fotos/paarden_sneeuw.jpg" alt="Belgische trekpaarden in de sneeuw" loading="lazy"/></div>
+  </div>
+
+  <!-- Grid 1 -->
+  <div class="omg-row r" style="transition-delay:.08s">
+    <div class="pi" onclick="lbOpen(4)"><img src="fotos/dennen_zonlicht.jpg" alt="Gouden zonlicht door het dennenbos" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(5)"><img src="fotos/vingerhoedskruid.jpg" alt="Wandelpad met vingerhoedskruid" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(6)"><img src="fotos/salm.jpg" alt="De Salm-rivier" loading="lazy"/></div>
+  </div>
+
+  <!-- Featured 2 -->
+  <div class="omg-feature r" style="transition-delay:.12s;margin-top:5px">
+    <div class="pi" onclick="lbOpen(7)"><img src="fotos/coo.jpg" alt="Panoramisch zicht op het meer van Coo" loading="lazy"/></div>
+  </div>
+
+  <!-- Grid 2 -->
+  <div class="omg-row r" style="transition-delay:.16s">
+    <div class="pi" onclick="lbOpen(8)"><img src="fotos/bloemenweide.jpg" alt="Wilde bloemenweide" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(9)"><img src="fotos/herfstbos.jpg" alt="Herfstbos" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(10)"><img src="fotos/mist.jpg" alt="Mistige ochtend" loading="lazy"/></div>
   </div>
 </section>
 
@@ -1679,13 +1697,6 @@ document.getElementById('fb').addEventListener('submit', function(e) {
   document.getElementById('lb').addEventListener('click',e=>{if(e.target===e.currentTarget)lbClose();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')lbClose();if(e.key==='ArrowRight')lbMove(1);if(e.key==='ArrowLeft')lbMove(-1);});
 
-  /* Galerij tabbladen */
-  function fotoTab(tab) {
-    document.querySelectorAll('.foto-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
-    document.getElementById('tab-vakantiehuis').style.display = tab === 'vakantiehuis' ? '' : 'none';
-    document.getElementById('tab-omgeving').style.display = tab === 'omgeving' ? '' : 'none';
-  }
-
   /* Extra foto's — dynamisch laden via manifest.json */
   fetch('fotos/manifest.json')
     .then(r => r.json())
@@ -1693,6 +1704,7 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       if (!photos || !photos.length) return;
       const startIdx = PH.length;
       photos.forEach(p => PH.push({s: p.file, c: p.caption}));
+      const grid = document.getElementById('extra-fotos-grid');
       photos.forEach((p, i) => {
         const div = document.createElement('div');
         div.className = 'pi';
@@ -1702,12 +1714,11 @@ document.getElementById('fb').addEventListener('submit', function(e) {
         img.alt = p.caption;
         img.loading = 'lazy';
         div.appendChild(img);
-        const cat = p.category || 'vakantiehuis';
-        const grid = document.getElementById('grid-' + cat);
-        if (grid) grid.appendChild(div);
+        grid.appendChild(div);
       });
+      document.getElementById('extra-fotos').style.display = '';
     })
-    .catch(() => {});
+    .catch(() => {}); // Geen manifest of leeg? Geen probleem.
 
   /* Swipe-support voor lightbox op mobiel */
   (function(){
