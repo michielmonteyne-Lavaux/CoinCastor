@@ -331,21 +331,14 @@
   </div>
 </section>
 
-<!-- FOTO GRID — 9 huisfoto's in 3×3 grid -->
+<!-- FOTO GRID — huisfoto's -->
 <section id="fotos" style="background:white;padding:0">
   <div style="max-width:1200px;margin:0 auto">
-    <div class="pgrid pgrid-all r">
+    <div id="extra-fotos-grid" class="pgrid pgrid-all r" style="gap:5px">
       <div class="pi" onclick="lbOpen(0)"><img src="fotos/IMG_1833.jpg" alt="Coin Castor buitenzicht"/></div>
       <div class="pi" onclick="lbOpen(1)"><img src="fotos/IMG_1829.jpg" alt="Terras"/></div>
       <div class="pi" onclick="lbOpen(2)"><img src="fotos/IMG_1836.jpg" alt="Badkamer met bad"/></div>
     </div>
-  </div>
-</section>
-
-<!-- EXTRA FOTO'S — dynamisch geladen via fotos/manifest.json -->
-<section id="extra-fotos" style="display:none;background:white;padding:0">
-  <div style="max-width:1200px;margin:0 auto">
-    <div id="extra-fotos-grid" class="pgrid pgrid-all r" style="gap:5px"></div>
   </div>
 </section>
 
@@ -1723,7 +1716,6 @@ document.getElementById('fb').addEventListener('submit', function(e) {
         div.appendChild(img);
         grid.appendChild(div);
       });
-      document.getElementById('extra-fotos').style.display = '';
     })
     .catch(() => {}); // Geen manifest of leeg? Geen probleem.
 
