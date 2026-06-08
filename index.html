@@ -336,14 +336,8 @@
   <div style="max-width:1200px;margin:0 auto">
     <div class="pgrid pgrid-all r">
       <div class="pi" onclick="lbOpen(0)"><img src="fotos/IMG_1833.jpg" alt="Coin Castor buitenzicht"/></div>
-      <div class="pi" onclick="lbOpen(1)"><img src="fotos/IMG_1864.jpg" alt="Living met terrasdeuren"/></div>
-      <div class="pi" onclick="lbOpen(2)"><img src="fotos/IMG_1868.jpg" alt="Eethoek"/></div>
-      <div class="pi" onclick="lbOpen(3)"><img src="fotos/IMG_1874.jpg" alt="Keuken"/></div>
-      <div class="pi" onclick="lbOpen(4)"><img src="fotos/IMG_1829.jpg" alt="Terras"/></div>
-      <div class="pi" onclick="lbOpen(5)"><img src="fotos/IMG_1849.jpg" alt="Slaapkamer"/></div>
-      <div class="pi" onclick="lbOpen(6)"><img src="fotos/IMG_1840.jpg" alt="Kamer met raam op natuur"/></div>
-      <div class="pi" onclick="lbOpen(7)"><img src="fotos/IMG_1852.jpg" alt="Slaapkamer met stapelbed"/></div>
-      <div class="pi" onclick="lbOpen(8)"><img src="fotos/IMG_1836.jpg" alt="Badkamer met bad"/></div>
+      <div class="pi" onclick="lbOpen(1)"><img src="fotos/IMG_1829.jpg" alt="Terras"/></div>
+      <div class="pi" onclick="lbOpen(2)"><img src="fotos/IMG_1836.jpg" alt="Badkamer met bad"/></div>
     </div>
   </div>
 </section>
@@ -383,12 +377,7 @@
         </div>
       </div>
       <div class="r" style="transition-delay:.15s">
-        <div class="pcollage">
-          <div class="pi" onclick="lbOpen(2)"><img src="fotos/IMG_1868.jpg" alt="Eethoek"/></div>
-          <div class="pi" onclick="lbOpen(3)"><img src="fotos/IMG_1874.jpg" alt="Keuken"/></div>
-          <div class="pi" onclick="lbOpen(5)"><img src="fotos/IMG_1849.jpg" alt="Slaapkamer"/></div>
-          <div class="pi" onclick="lbOpen(8)"><img src="fotos/IMG_1836.jpg" alt="Badkamer"/></div>
-        </div>
+        <div class="pi" style="aspect-ratio:4/3" onclick="lbOpen(2)"><img src="fotos/IMG_1836.jpg" alt="Badkamer met bad"/></div>
       </div>
     </div>
   </div>
@@ -404,26 +393,33 @@
 
   <!-- Featured 1 -->
   <div class="omg-feature r">
-    <div class="pi" onclick="lbOpen(9)"><img src="fotos/paarden_sneeuw.jpg" alt="Belgische trekpaarden in de sneeuw" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(3)"><img src="fotos/paarden_sneeuw.jpg" alt="Belgische trekpaarden in de sneeuw" loading="lazy"/></div>
   </div>
 
   <!-- Grid 1 -->
   <div class="omg-row r" style="transition-delay:.08s">
-    <div class="pi" onclick="lbOpen(10)"><img src="fotos/dennen_zonlicht.jpg" alt="Gouden zonlicht door het dennenbos" loading="lazy"/></div>
-    <div class="pi" onclick="lbOpen(11)"><img src="fotos/vingerhoedskruid.jpg" alt="Wandelpad met vingerhoedskruid" loading="lazy"/></div>
-    <div class="pi" onclick="lbOpen(12)"><img src="fotos/salm.jpg" alt="De Salm-rivier" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(4)"><img src="fotos/dennen_zonlicht.jpg" alt="Gouden zonlicht door het dennenbos" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(5)"><img src="fotos/vingerhoedskruid.jpg" alt="Wandelpad met vingerhoedskruid" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(6)"><img src="fotos/salm.jpg" alt="De Salm-rivier" loading="lazy"/></div>
   </div>
 
   <!-- Featured 2 -->
   <div class="omg-feature r" style="transition-delay:.12s;margin-top:5px">
-    <div class="pi" onclick="lbOpen(13)"><img src="fotos/coo.jpg" alt="Panoramisch zicht op het meer van Coo" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(7)"><img src="fotos/coo.jpg" alt="Panoramisch zicht op het meer van Coo" loading="lazy"/></div>
   </div>
 
   <!-- Grid 2 -->
   <div class="omg-row r" style="transition-delay:.16s">
-    <div class="pi" onclick="lbOpen(14)"><img src="fotos/bloemenweide.jpg" alt="Wilde bloemenweide" loading="lazy"/></div>
-    <div class="pi" onclick="lbOpen(15)"><img src="fotos/herfstbos.jpg" alt="Herfstbos" loading="lazy"/></div>
-    <div class="pi" onclick="lbOpen(16)"><img src="fotos/mist.jpg" alt="Mistige ochtend" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(8)"><img src="fotos/bloemenweide.jpg" alt="Wilde bloemenweide" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(9)"><img src="fotos/herfstbos.jpg" alt="Herfstbos" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(10)"><img src="fotos/mist.jpg" alt="Mistige ochtend" loading="lazy"/></div>
+  </div>
+</section>
+
+<!-- EXTRA FOTO'S — dynamisch geladen via fotos/manifest.json -->
+<section id="extra-fotos" style="display:none;background:white;padding:0">
+  <div style="max-width:1200px;margin:0 auto">
+    <div id="extra-fotos-grid" class="pgrid pgrid-all r" style="gap:5px"></div>
   </div>
 </section>
 
@@ -1681,15 +1677,9 @@ document.getElementById('fb').addEventListener('submit', function(e) {
   function mnClose() { document.getElementById('mnav').classList.remove('open'); }
 
   /* Lightbox */
-  const PH = [
+  let PH = [
     {s:'fotos/IMG_1833.jpg',c:'Coin Castor — buitenzicht'},
-    {s:'fotos/IMG_1864.jpg',c:'Living met terrasdeuren'},
-    {s:'fotos/IMG_1868.jpg',c:'Eethoek met zicht op buiten'},
-    {s:'fotos/IMG_1874.jpg',c:'Keuken — RVS werkblad'},
     {s:'fotos/IMG_1829.jpg',c:'Terras'},
-    {s:'fotos/IMG_1849.jpg',c:'Slaapkamer'},
-    {s:'fotos/IMG_1840.jpg',c:'Kamer met raam op natuur'},
-    {s:'fotos/IMG_1852.jpg',c:'Slaapkamer met stapelbed'},
     {s:'fotos/IMG_1836.jpg',c:'Badkamer met bad'},
     {s:'fotos/paarden_sneeuw.jpg',c:'Belgische trekpaarden in de sneeuw'},
     {s:'fotos/dennen_zonlicht.jpg',c:'Gouden zonlicht door het dennenbos'},
@@ -1706,6 +1696,29 @@ document.getElementById('fb').addEventListener('submit', function(e) {
   function lbMove(d){lbC=(lbC+d+PH.length)%PH.length;document.getElementById('lbi').src=PH[lbC].s;document.getElementById('lbc').textContent=PH[lbC].c;}
   document.getElementById('lb').addEventListener('click',e=>{if(e.target===e.currentTarget)lbClose();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')lbClose();if(e.key==='ArrowRight')lbMove(1);if(e.key==='ArrowLeft')lbMove(-1);});
+
+  /* Extra foto's — dynamisch laden via manifest.json */
+  fetch('fotos/manifest.json')
+    .then(r => r.json())
+    .then(photos => {
+      if (!photos || !photos.length) return;
+      const startIdx = PH.length;
+      photos.forEach(p => PH.push({s: p.file, c: p.caption}));
+      const grid = document.getElementById('extra-fotos-grid');
+      photos.forEach((p, i) => {
+        const div = document.createElement('div');
+        div.className = 'pi';
+        div.onclick = () => lbOpen(startIdx + i);
+        const img = document.createElement('img');
+        img.src = p.file;
+        img.alt = p.caption;
+        img.loading = 'lazy';
+        div.appendChild(img);
+        grid.appendChild(div);
+      });
+      document.getElementById('extra-fotos').style.display = '';
+    })
+    .catch(() => {}); // Geen manifest of leeg? Geen probleem.
 
   /* Swipe-support voor lightbox op mobiel */
   (function(){
