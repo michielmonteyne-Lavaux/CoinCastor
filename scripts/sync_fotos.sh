@@ -2,7 +2,7 @@
 # sync_fotos.sh — voeg nieuwe foto's toe aan coincastor.be
 #
 # Gebruik:
-#   1. Sleep foto's naar fotos/nieuw/vakantiehuis/ of fotos/nieuw/omgeving/
+#   1. Sleep foto's naar fotos/nieuw/
 #   2. Voer uit: bash scripts/sync_fotos.sh
 #   3. Klaar — foto's zijn live op coincastor.be na ~1 minuut
 
@@ -22,31 +22,24 @@ fi
 python3 - <<EOF
 import json, os
 
-base = "$NIEUW_DIR"
+nieuw_dir = "$NIEUW_DIR"
 manifest_path = "$MANIFEST"
 extensions = {'.jpg', '.jpeg', '.png', '.webp', '.gif'}
 
 photos = []
-for cat in ['vakantiehuis', 'omgeving']:
-    folder = os.path.join(base, cat)
-    if not os.path.isdir(folder):
+for fname in sorted(os.listdir(nieuw_dir)):
+    if fname.startswith('.'):
         continue
-    for fname in sorted(os.listdir(folder)):
-        if fname.startswith('.'):
-            continue
-        ext = os.path.splitext(fname)[1].lower()
-        if ext in extensions:
-            key = f"fotos/nieuw/{cat}/{fname}"
-            caption = os.path.splitext(fname)[0].replace('_', ' ').replace('-', ' ').title()
-            photos.append({"file": key, "caption": caption, "category": cat})
+    ext = os.path.splitext(fname)[1].lower()
+    if ext in extensions:
+        key = f"fotos/nieuw/{fname}"
+        caption = os.path.splitext(fname)[0]
+        photos.append({"file": key, "caption": caption})
 
 with open(manifest_path, 'w') as f:
     json.dump(photos, f, ensure_ascii=False, indent=2)
 
 print(f"✅ Manifest bijgewerkt: {len(photos)} foto('s)")
-vakantiehuis = sum(1 for p in photos if p['category'] == 'vakantiehuis')
-omgeving = sum(1 for p in photos if p['category'] == 'omgeving')
-print(f"   Vakantiehuis: {vakantiehuis}  |  Omgeving: {omgeving}")
 EOF
 
 if [ $? -ne 0 ]; then
@@ -67,4 +60,3 @@ git push
 
 echo ""
 echo "🚀 Klaar! Foto's zijn live op coincastor.be over ~1 minuut."
-echo "   Tip: captions aanpassen? Bewerk fotos/manifest.json en run dit script opnieuw."
