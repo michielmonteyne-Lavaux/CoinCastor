@@ -1678,22 +1678,29 @@ document.getElementById('fb').addEventListener('submit', function(e) {
 
   /* Lightbox */
   let PH = [
-    {s:'fotos/IMG_1833.jpg',c:'Coin Castor — buitenzicht'},
-    {s:'fotos/IMG_1829.jpg',c:'Terras'},
-    {s:'fotos/IMG_1836.jpg',c:'Badkamer met bad'},
-    {s:'fotos/paarden_sneeuw.jpg',c:'Belgische trekpaarden in de sneeuw'},
-    {s:'fotos/dennen_zonlicht.jpg',c:'Gouden zonlicht door het dennenbos'},
-    {s:'fotos/vingerhoedskruid.jpg',c:'Wandelpad tussen het vingerhoedskruid'},
-    {s:'fotos/salm.jpg',c:'De Salm-rivier'},
-    {s:'fotos/coo.jpg',c:'Panoramisch zicht op het meer van Coo'},
-    {s:'fotos/bloemenweide.jpg',c:'Wilde bloemenweide met zicht op de heuvels'},
-    {s:'fotos/herfstbos.jpg',c:'Herfstbos in de Ardennen'},
-    {s:'fotos/mist.jpg',c:'Mistige ochtend in de vallei'},
+    {s:'fotos/IMG_1833.jpg',c:'Coin Castor — buitenzicht',cat:'huis'},
+    {s:'fotos/IMG_1829.jpg',c:'Terras',cat:'huis'},
+    {s:'fotos/IMG_1836.jpg',c:'Badkamer met bad',cat:'huis'},
+    {s:'fotos/paarden_sneeuw.jpg',c:'Belgische trekpaarden in de sneeuw',cat:'omgeving'},
+    {s:'fotos/dennen_zonlicht.jpg',c:'Gouden zonlicht door het dennenbos',cat:'omgeving'},
+    {s:'fotos/vingerhoedskruid.jpg',c:'Wandelpad tussen het vingerhoedskruid',cat:'omgeving'},
+    {s:'fotos/salm.jpg',c:'De Salm-rivier',cat:'omgeving'},
+    {s:'fotos/coo.jpg',c:'Panoramisch zicht op het meer van Coo',cat:'omgeving'},
+    {s:'fotos/bloemenweide.jpg',c:'Wilde bloemenweide met zicht op de heuvels',cat:'omgeving'},
+    {s:'fotos/herfstbos.jpg',c:'Herfstbos in de Ardennen',cat:'omgeving'},
+    {s:'fotos/mist.jpg',c:'Mistige ochtend in de vallei',cat:'omgeving'},
   ];
   let lbC=0;
   function lbOpen(i){lbC=i;document.getElementById('lbi').src=PH[i].s;document.getElementById('lbc').textContent=PH[i].c;document.getElementById('lb').classList.add('on');document.body.style.overflow='hidden';}
   function lbClose(){document.getElementById('lb').classList.remove('on');document.body.style.overflow='';}
-  function lbMove(d){lbC=(lbC+d+PH.length)%PH.length;document.getElementById('lbi').src=PH[lbC].s;document.getElementById('lbc').textContent=PH[lbC].c;}
+  function lbMove(d){
+    const cat=PH[lbC].cat;
+    const idx=PH.map((p,i)=>p.cat===cat?i:-1).filter(i=>i>=0);
+    const pos=idx.indexOf(lbC);
+    lbC=idx[(pos+d+idx.length)%idx.length];
+    document.getElementById('lbi').src=PH[lbC].s;
+    document.getElementById('lbc').textContent=PH[lbC].c;
+  }
   document.getElementById('lb').addEventListener('click',e=>{if(e.target===e.currentTarget)lbClose();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')lbClose();if(e.key==='ArrowRight')lbMove(1);if(e.key==='ArrowLeft')lbMove(-1);});
 
@@ -1703,7 +1710,7 @@ document.getElementById('fb').addEventListener('submit', function(e) {
     .then(photos => {
       if (!photos || !photos.length) return;
       const startIdx = PH.length;
-      photos.forEach(p => PH.push({s: p.file, c: p.caption}));
+      photos.forEach(p => PH.push({s: p.file, c: p.caption, cat: 'huis'}));
       const grid = document.getElementById('extra-fotos-grid');
       photos.forEach((p, i) => {
         const div = document.createElement('div');
