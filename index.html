@@ -550,6 +550,14 @@
           </span>
           <span data-i18n="leg_geboekt">Geboekt</span>
         </span>
+        <!-- Halve dag: half beschikbaar / half geboekt -->
+        <span style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:#444;grid-column:span 2">
+          <span style="width:14px;height:14px;border-radius:3px;flex-shrink:0;display:inline-block;position:relative;overflow:hidden;border:1.5px solid #93c5fd">
+            <span style="position:absolute;inset:0;width:50%;background:#dbeafe"></span>
+            <span style="position:absolute;inset:0;left:50%;background:#e8e5de"><svg viewBox="0 0 7 14" style="position:absolute;inset:0;width:100%;height:100%"><line x1="0" y1="14" x2="7" y2="0" stroke="#aaa" stroke-width="1.5"/></svg></span>
+          </span>
+          <span data-i18n="leg_halve">Halve dag (aankomst- of vertrekdag — contacteer ons voor de mogelijkheden)</span>
+        </span>
       </div>
 
       <!-- Kalender grid — 3 maanden -->
@@ -786,6 +794,27 @@ function buildBookedSet(periods = BOOKED_PERIODS) {
 }
 let BOOKED = buildBookedSet();
 
+// Bouw sets van "halve dagen": de aankomstdag van een boeking is 's ochtends
+// nog vrij (vertrek mogelijk), de vertrekdag is 's namiddags weer vrij
+// (aankomst mogelijk). Enkel als die rand niet aansluit op een andere
+// geboekte periode (anders is de dag gewoon volledig bezet).
+function buildHalfDaySets(periods = BOOKED_PERIODS) {
+  const arrival = new Set();   // ochtend vrij, namiddag bezet (check-in dag)
+  const departure = new Set(); // ochtend bezet, namiddag vrij (check-out dag)
+  const fullyBooked = buildBookedSet(periods);
+  periods.forEach(([from, to]) => {
+    if (from === to) return; // 1-dagsperiode: hou simpel, volledig geboekt
+    const [fy,fm,fd] = from.split('-').map(Number);
+    const [ty,tm,td] = to.split('-').map(Number);
+    const start = new Date(fy, fm-1, fd);
+    const end = new Date(ty, tm-1, td);
+    if (!fullyBooked.has(dateKey(addDays(start,-1)))) arrival.add(dateKey(start));
+    if (!fullyBooked.has(dateKey(addDays(end,1)))) departure.add(dateKey(end));
+  });
+  return { arrival, departure };
+}
+let HALF_DAY = buildHalfDaySets();
+
 // Tooltip
 let activeTooltip = null;
 function showTooltip(cell, date, info) {
@@ -807,10 +836,24 @@ function showTooltip(cell, date, info) {
          <svg width="8" height="8" viewBox="0 0 8 8"><line x1="0" y1="8" x2="8" y2="0" stroke="#aaa" stroke-width="1.5"/><line x1="0" y1="4" x2="4" y2="0" stroke="#aaa" stroke-width="1.5"/><line x1="4" y1="8" x2="8" y2="4" stroke="#aaa" stroke-width="1.5"/></svg>
          <span style="font-size:.65rem;font-weight:600;color:#888;letter-spacing:.08em;text-transform:uppercase">${{nl:'Geboekt',fr:'Réservé',en:'Booked'}[lang]}</span>
        </div>`
+    : info.halfDay
+    ? `<div style="display:inline-flex;align-items:center;gap:.4rem;background:#fef3c7;border-radius:20px;padding:.25rem .65rem;margin-bottom:.55rem">
+         <span style="width:6px;height:6px;border-radius:50%;background:#b45309;display:inline-block"></span>
+         <span style="font-size:.65rem;font-weight:600;color:#b45309;letter-spacing:.08em;text-transform:uppercase">${{nl:'Halve dag',fr:'Demi-journée',en:'Half day'}[lang]}</span>
+       </div>`
     : `<div style="display:inline-flex;align-items:center;gap:.4rem;background:${SEASON_COLOR[info.season].bg};border-radius:20px;padding:.25rem .65rem;margin-bottom:.55rem">
          <span style="width:6px;height:6px;border-radius:50%;background:${SEASON_COLOR[info.season].text};display:inline-block"></span>
          <span style="font-size:.65rem;font-weight:600;color:${SEASON_COLOR[info.season].text};letter-spacing:.08em;text-transform:uppercase">${{nl:'Beschikbaar',fr:'Disponible',en:'Available'}[lang]}</span>
        </div>`;
+
+  // Extra uitleg bij halve dagen (aankomst-/vertrekdag)
+  const HALF_DAY_TEXT = {
+    arrival:   { nl:'Vrij in de voormiddag — vertrek mogelijk · bezet vanaf de namiddag (aankomst)', fr:'Libre en matinée — départ possible · occupé à partir de l\'après-midi (arrivée)', en:'Free in the morning — departure possible · occupied from the afternoon (arrival)' },
+    departure: { nl:'Bezet tot de voormiddag (vertrek) · vrij vanaf de namiddag — aankomst mogelijk', fr:'Occupé jusqu\'en matinée (départ) · libre à partir de l\'après-midi — arrivée possible', en:'Occupied until the morning (departure) · free from the afternoon — arrival possible' },
+  };
+  const halfDayHtml = info.halfDay
+    ? `<p style="font-size:.7rem;font-weight:300;color:#777;margin:0 0 .45rem;padding-top:.3rem;border-top:1px solid #f0ede6">${HALF_DAY_TEXT[info.halfDay][lang]}</p>`
+    : '';
 
   tip.innerHTML = `
     ${statusHtml}
@@ -818,7 +861,8 @@ function showTooltip(cell, date, info) {
     <p style="font-size:.78rem;font-weight:500;color:#333;margin-bottom:.45rem">${dateStr}</p>
     <ul style="list-style:none;padding:0;margin:0">
       ${reasons.map(r=>`<li style="font-size:.72rem;font-weight:300;color:#777;padding:.2rem 0;border-top:1px solid #f0ede6">${r}</li>`).join('')}
-    </ul>`;
+    </ul>
+    ${halfDayHtml}`;
 
   document.body.appendChild(tip);
   activeTooltip = tip;
@@ -885,7 +929,9 @@ function renderKal() {
       const info = getDayInfo(date);
       const sc = SEASON_COLOR[info.season];
       const isToday = date.getTime() === today.getTime();
-      const isBooked = BOOKED.has(dateKey(date));
+      const dk = dateKey(date);
+      const halfType = HALF_DAY.arrival.has(dk) ? 'arrival' : HALF_DAY.departure.has(dk) ? 'departure' : null;
+      const isBooked = BOOKED.has(dk) && !halfType;
       const isPast = date < today;
 
       const cell = document.createElement('div');
@@ -900,13 +946,39 @@ function renderKal() {
         ${isPast && !isBooked ? 'opacity:.55;' : ''}
       `;
 
+      // Halve dag: aankomst-/vertrekdag, voor- en namiddag apart inkleuren
+      if (halfType) {
+        // 'arrival'   = ochtend vrij (sc.bg), namiddag bezet (grijs/gearceerd)
+        // 'departure' = ochtend bezet (grijs/gearceerd), namiddag vrij (sc.bg)
+        const bookedSide = halfType === 'arrival' ? 'right' : 'left';
+        const half = document.createElement('div');
+        half.style.cssText = `position:absolute;top:0;bottom:0;${bookedSide}:0;width:50%;background:#ededea;overflow:hidden`;
+        const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+        svg.setAttribute('viewBox','0 0 10 20');
+        svg.setAttribute('preserveAspectRatio','none');
+        svg.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none';
+        [[0,20,10,0],[0,14,7,0],[0,8,4,0],[3,20,10,3],[6,20,10,6]].forEach(([x1,y1,x2,y2]) => {
+          const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+          line.setAttribute('x1',x1); line.setAttribute('y1',y1);
+          line.setAttribute('x2',x2); line.setAttribute('y2',y2);
+          line.setAttribute('stroke','#c8c4bb'); line.setAttribute('stroke-width','1');
+          svg.appendChild(line);
+        });
+        half.appendChild(svg);
+        cell.appendChild(half);
+        // dunne scheidingslijn tussen voor- en namiddag
+        const divider = document.createElement('div');
+        divider.style.cssText = 'position:absolute;top:0;bottom:0;left:50%;width:1px;background:rgba(255,255,255,.7)';
+        cell.appendChild(divider);
+      }
+
       // Dag-getal
       const num = document.createElement('span');
       num.textContent = d;
       num.style.cssText = 'position:relative;z-index:1';
       cell.appendChild(num);
 
-      // Gearceerde overlay voor geboekte dagen
+      // Gearceerde overlay voor volledig geboekte dagen
       if (isBooked) {
         const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
         svg.setAttribute('viewBox','0 0 20 20');
@@ -936,6 +1008,8 @@ function renderKal() {
             fr: ['Réservé'],
             en: ['Booked'],
           };
+        } else if (halfType) {
+          bookInfo.halfDay = halfType;
         }
         showTooltip(cell, date, bookInfo);
       });
@@ -965,7 +1039,9 @@ fetch(CALENDAR_FEED_URL)
     if (data && data.ok && Array.isArray(data.periods)) {
       const live = data.periods.map(p => [p.from, p.to]);
       // Agenda + handmatige lijst samenvoegen (de Set ontdubbelt vanzelf)
-      BOOKED = buildBookedSet([...BOOKED_PERIODS, ...live]);
+      const allPeriods = [...BOOKED_PERIODS, ...live];
+      BOOKED = buildBookedSet(allPeriods);
+      HALF_DAY = buildHalfDaySets(allPeriods);
       renderKal();
     }
   })
@@ -1422,6 +1498,7 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       kal_tag:'Seizoenskalender 2025–2026',
       leg_seizoen:'Seizoen', leg_beschik:'Beschikbaarheid',
       leg_vrij:'Beschikbaar', leg_geboekt:'Geboekt',
+      leg_halve:'Halve dag (aankomst- of vertrekdag — contacteer ons voor de mogelijkheden)',
       kal_nota:'Klik op een dag voor meer info · Kalender is indicatief, contacteer ons voor definitieve beschikbaarheid',
       boek_tag:'Boeking', boek_h2:'Contacteer ons',
       boek_intro:'Stel een vraag of dien een boekingsaanvraag in. We antwoorden binnen 24 uur.',
@@ -1513,6 +1590,7 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       kal_tag:'Calendrier des saisons 2025–2026',
       leg_seizoen:'Saison', leg_beschik:'Disponibilité',
       leg_vrij:'Disponible', leg_geboekt:'Réservé',
+      leg_halve:'Demi-journée (jour d\'arrivée ou de départ — contactez-nous pour les possibilités)',
       kal_nota:'Cliquez sur un jour pour plus d\'infos · Calendrier indicatif, contactez-nous pour disponibilité définitive',
       boek_tag:'Réservation', boek_h2:'Contactez-nous',
       boek_intro:'Posez une question ou faites une demande de réservation. Nous répondons dans les 24 heures.',
@@ -1604,6 +1682,7 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       kal_tag:'Season calendar 2025–2026',
       leg_seizoen:'Season', leg_beschik:'Availability',
       leg_vrij:'Available', leg_geboekt:'Booked',
+      leg_halve:'Half day (arrival or departure day — contact us for the options)',
       kal_nota:'Click any day for more info · Calendar is indicative, contact us for definitive availability',
       boek_tag:'Booking', boek_h2:'Contact us',
       boek_intro:'Ask a question or submit a booking request. We reply within 24 hours.',
