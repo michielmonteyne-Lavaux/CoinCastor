@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Welkom bij Coin Castor — Dione</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #1a1a1a;
+      --gray: #888;
+      --light: #f4f2ed;
+      --white: #ffffff;
+      --border: #e2dfd8;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Raleway', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--sans);
+      color: var(--black);
+      background: var(--white);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── HERO ─────────────────────────────────────── */
+    .hero {
+      background: var(--black);
+      color: var(--white);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+    }
+
+    .hero-label {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: .8rem;
+    }
+
+    .hero-sub {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: rgba(255,255,255,.65);
+      margin-bottom: 2rem;
+    }
+
+    .hero-dates {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,.25);
+      padding: .5rem 1.5rem;
+      font-size: .75rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.7);
+      font-weight: 500;
+    }
+
+    /* ── LAYOUT ───────────────────────────────────── */
+    .sec {
+      padding: 4rem 2rem;
+    }
+
+    .sec:nth-child(even) {
+      background: var(--light);
+    }
+
+    .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .sec-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: .8rem;
+    }
+
+    .sec h2 {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    p {
+      color: var(--black);
+      margin-bottom: 1rem;
+      font-weight: 300;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    /* ── INFO CARDS ───────────────────────────────── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 1.6rem 1.8rem;
+    }
+
+    .card-icon {
+      font-size: 1.4rem;
+      margin-bottom: .6rem;
+    }
+
+    .card h3 {
+      font-family: var(--sans);
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: .5rem;
+    }
+
+    .card p {
+      font-size: .95rem;
+      margin-bottom: 0;
+    }
+
+    .card code {
+      font-family: 'Courier New', monospace;
+      background: var(--light);
+      padding: .15em .4em;
+      font-size: .9em;
+    }
+
+    /* ── SHOPS TABLE ──────────────────────────────── */
+    .shop-list {
+      margin-top: 1.5rem;
+    }
+
+    .shop-item {
+      border-top: 1px solid var(--border);
+      padding: 1.2rem 0;
+      display: grid;
+      grid-template-columns: 1.8rem 1fr auto;
+      gap: .5rem 1rem;
+      align-items: start;
+    }
+
+    .shop-item:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .shop-emoji { font-size: 1.1rem; padding-top: .05rem; }
+
+    .shop-name {
+      font-weight: 500;
+      font-size: .95rem;
+    }
+
+    .shop-location {
+      font-size: .8rem;
+      color: var(--gray);
+      font-weight: 300;
+    }
+
+    .shop-hours {
+      font-size: .82rem;
+      color: var(--gray);
+      text-align: right;
+      white-space: nowrap;
+      font-weight: 400;
+      padding-top: .1rem;
+    }
+
+    .shop-hours span {
+      display: block;
+    }
+
+    /* ── RESTAURANTS ──────────────────────────────── */
+    .resto-list { margin-top: 1.5rem; }
+
+    .resto-item {
+      border-top: 1px solid var(--border);
+      padding: 1.4rem 0;
+      display: grid;
+      grid-template-columns: 1.8rem 1fr;
+      gap: .4rem 1rem;
+    }
+
+    .resto-item:last-child { border-bottom: 1px solid var(--border); }
+
+    .resto-emoji { font-size: 1.2rem; padding-top: .1rem; }
+
+    .resto-name {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: .1rem;
+    }
+
+    .resto-desc {
+      font-size: .88rem;
+      color: var(--gray);
+      font-weight: 300;
+      margin-bottom: .3rem;
+    }
+
+    .resto-link a {
+      font-size: .8rem;
+      color: var(--gray);
+      text-decoration: none;
+      letter-spacing: .05em;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1px;
+      transition: color .2s, border-color .2s;
+    }
+
+    .resto-link a:hover {
+      color: var(--black);
+      border-color: var(--black);
+    }
+
+    /* ── NOTE BOX ─────────────────────────────────── */
+    .note-box {
+      border-left: 3px solid var(--black);
+      padding: 1rem 1.4rem;
+      background: var(--white);
+      margin: 1.5rem 0;
+    }
+
+    .note-box p {
+      font-size: .9rem;
+      margin-bottom: .4rem;
+    }
+
+    .note-box p:last-child { margin-bottom: 0; }
+
+    .note-box strong {
+      font-weight: 600;
+    }
+
+    /* ── FOOTER ───────────────────────────────────── */
+    .footer {
+      background: var(--black);
+      color: rgba(255,255,255,.5);
+      text-align: center;
+      padding: 3rem 2rem;
+      font-size: .8rem;
+      letter-spacing: .06em;
+    }
+
+    .footer strong {
+      color: rgba(255,255,255,.85);
+      font-weight: 500;
+      display: block;
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      margin-bottom: .4rem;
+      letter-spacing: 0;
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────── */
+    @media (max-width: 600px) {
+      .shop-item {
+        grid-template-columns: 1.8rem 1fr;
+      }
+      .shop-hours {
+        grid-column: 2;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-label">Coin Castor · Lavaux, Ardennen</p>
+    <h1>Welkom, Dione, Max en Otis</h1>
+    <p class="hero-sub">Fijn dat je er bent — alles wat je nodig hebt, staat hieronder.</p>
+    <div class="hero-dates">20 juni – 22 juni 2026</div>
+  </div>
+
+  <!-- AANKOMST & SLEUTEL -->
+  <section class="sec">
+    <div class="wrap">
+      <p class="sec-label">Aankomst</p>
+      <h2>Sleutel & toegang</h2>
+      <p>Volg de witte trap naar de voordeur. Aan de rechterkant van de deur vind je een sleutelkastje om de hoek — code: <strong>5913</strong>. Dezelfde sleutel werkt zowel boven als beneden.</p>
+
+      <div class="cards" style="margin-top:2rem;">
+        <div class="card">
+          <div class="card-icon">📶</div>
+          <h3>WiFi</h3>
+          <p>Netwerk: <code>Coincastor</code><br>
+          Wachtwoord: <code>Ditiseenvakantiehuisgekochtin22</code></p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🛏</div>
+          <h3>Beddengoed & handdoeken</h3>
+          <p>In de witte kast beneden in de gang. Er zijn voldoende bedden opgemaakt.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌡</div>
+          <h3>Verwarming</h3>
+          <p>Zwart schermpje naast de deur boven. Automatisch ingesteld op 21°C overdag en 19°C 's nachts.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📺</div>
+          <h3>Entertainment</h3>
+          <p>Google TV (cast vanuit je telefoon) + Sonos, beschikbaar zodra je op de wifi zit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OTIS -->
+  <section class="sec">
+    <div class="wrap">
+      <p class="sec-label">Voor de viervoeters</p>
+      <h2>Otis</h2>
+      <p>Normaal gezien zijn er geen honden toegestaan in Coin Castor — maar voor jullie maken we graag een uitzondering. 🐾</p>
+      <div class="note-box" style="margin-top:1rem;">
+        <p>We vragen wel om Otis van de zetels en uit de bedden te houden. Bedankt!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VAATWASSER -->
+  <section class="sec">
+    <div class="wrap">
+      <p class="sec-label">Keuken</p>
+      <h2>Vaatwasser</h2>
+      <div class="note-box">
+        <p><strong>⚠️ Tijdelijk een kuur — technieker is op komst.</strong></p>
+        <p>1. Vul en start — hij doorloopt het volledige programma.</p>
+        <p>2. Code F11 na afloop? Alles is wél proper.</p>
+        <p>3. Leegmaken, maar open en aanstaan laten.</p>
+        <p>4. Hij pompt na verloop van tijd automatisch het water weg.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AFVAL -->
+  <section class="sec">
+    <div class="wrap">
+      <p class="sec-label">Vertrek</p>
+      <h2>Afval</h2>
+      <p>Vuilnis- en PMD-zakken vind je in de kast naast de koelkast. Zet zakken buiten op zondag voor vertrek — ophaling is maandagochtend.</p>
+      <div class="note-box" style="margin-top:1rem;">
+        <p><strong>🦝 Opgelet:</strong> laat geen etensresten op het terras liggen. Er zitten wasberen in het bos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WINKELS -->
+  <section class="sec">
+    <div class="wrap">
+      <p class="sec-label">Boodschappen</p>
+      <h2>Winkels in de buurt</h2>
+      <p>Openingsuren voor jouw verblijf (za 20 – ma 22 juni):</p>
+
+      <div class="shop-list">
+
+        <div class="shop-item">
+          <span class="shop-emoji">🥐</span>
+          <div>
+            <div class="shop-name">Fred's Corner</div>
+            <div class="shop-location">Bakker · Grand-Halleux</div>
+          </div>
+          <div class="shop-hours">
+            <span>Za: 8u – 15u</span>
+            <span>Zo: 8u – 15u</span>
+            <span>Ma: gesloten</span>
+          </div>
+        </div>
+
+        <div class="shop-item">
+          <span class="shop-emoji">🥖</span>
+          <div>
+            <div class="shop-name">Lily Délices</div>
+            <div class="shop-location">Bakker · Trois-Ponts</div>
+          </div>
+          <div class="shop-hours">
+            <span>Za: vanaf 7u</span>
+            <span>Zo: beperkte uren</span>
+            <span>Ma: gesloten</span>
+          </div>
+        </div>
+
+        <div class="shop-item">
+          <span class="shop-emoji">🥩</span>
+          <div>
+            <div class="shop-name">Boucherie Curnel-Remy</div>
+            <div class="shop-location">Slager · Grand-Halleux</div>
+          </div>
+          <div class="shop-hours">
+            <span>Za: 9u–12u30 & 13u30–18u</span>
+            <span>Zo: 9u – 12u30</span>
+            <span>Ma: gesloten</span>
+          </div>
+        </div>
+
+        <div class="shop-item">
+          <span class="shop-emoji">🛒</span>
+          <div>
+            <div class="shop-name">Proxy Delhaize</div>
+            <div class="shop-location">Supermarkt · Trois-Ponts</div>
+          </div>
+          <div class="shop-hours">
+            <span>Za: 8u30 – 19u</span>
+            <span>Zo: 8u – 12u</span>
+            <span>Ma: gesloten</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RESTAURANTS -->
+  <section class="sec">
+    <div class="wrap">
+      <p class="sec-label">Eten & drinken</p>
+      <h2>Onze favoriete restaurants</h2>
+
+      <div class="resto-list">
+
+        <div class="resto-item">
+          <span class="resto-emoji">⭐</span>
+          <div>
+            <div class="resto-name">Le Gastromme</div>
+            <div class="resto-desc">Kamerrestaurant in Grand-Halleux. Nederlands koppel, Ardeense keuken op zijn best. Reserveren is noodzakelijk.</div>
+            <div class="resto-link"><a href="https://legastromme.be" target="_blank">legastromme.be</a></div>
+          </div>
+        </div>
+
+        <div class="resto-item">
+          <span class="resto-emoji">🏔️</span>
+          <div>
+            <div class="resto-name">Les Chalets de Loci</div>
+            <div class="resto-desc">Chalet aan de skipiste met een seizoensmenu. Mooie setting.</div>
+            <div class="resto-link"><a href="https://chalets-loci.com" target="_blank">chalets-loci.com</a></div>
+          </div>
+        </div>
+
+        <div class="resto-item">
+          <span class="resto-emoji">🐺</span>
+          <div>
+            <div class="resto-name">Le Loup Gourmand</div>
+            <div class="resto-desc">Eigentijds restaurant in Stavelot.</div>
+            <div class="resto-link"><a href="https://leloupgourmand.be" target="_blank">leloupgourmand.be</a></div>
+          </div>
+        </div>
+
+        <div class="resto-item">
+          <span class="resto-emoji">🍟</span>
+          <div>
+            <div class="resto-name">Friterie Sébastien</div>
+            <div class="resto-desc">De lokale frituur. Meer moet dat niet zijn.</div>
+            <div class="resto-link"><a href="https://friterie-sebastien.be" target="_blank">friterie-sebastien.be</a></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <strong>Coin Castor</strong>
+    Lavaux · Trois-Ponts · Ardennen<br><br>
+    Vragen? Stuur een berichtje naar Michiel.<br>
+    <span style="margin-top:.6rem;display:block;">coincastor.be</span>
+  </div>
+
+</body>
+</html>
