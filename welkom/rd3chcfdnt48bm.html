@@ -279,6 +279,19 @@
       font-weight: 600;
     }
 
+    /* ── ADRES & ROUTE ────────────────────────────── */
+    .hero-addr { margin-top: 1.2rem; }
+    .hero-addr .addr-txt { font-size: .75rem; font-weight: 400; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: .85rem; }
+    .route-wrap { position: relative; display: inline-block; }
+    .route-btn { font-family: var(--sans); font-size: .65rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.9); background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.35); padding: .45rem 1.3rem; cursor: pointer; transition: all .2s; }
+    .route-btn:hover { background: rgba(255,255,255,.2); border-color: rgba(255,255,255,.7); }
+    .route-menu { display: none; position: absolute; top: calc(100% + .5rem); left: 50%; transform: translateX(-50%); background: var(--white); border: 1px solid var(--border); min-width: 172px; z-index: 30; box-shadow: 0 6px 24px rgba(0,0,0,.15); }
+    .route-menu.open { display: block; }
+    .route-menu a { display: flex; align-items: center; gap: .6rem; padding: .7rem 1.1rem; font-size: .72rem; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--border); transition: background .15s; white-space: nowrap; }
+    .route-menu a:last-child { border-bottom: none; }
+    .route-menu a:hover { background: var(--light); }
+    .ri { width: 15px; height: 15px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
     /* ── FOOTER ───────────────────────────────────── */
     .footer {
       background: var(--black);
@@ -319,6 +332,26 @@
     <h1>Welkom, Dione, Max en Otis</h1>
     <p class="hero-sub">Fijn dat je er bent — alles wat je nodig hebt, staat hieronder.</p>
     <div class="hero-dates">20 juni – 22 juni 2026</div>
+    <div class="hero-addr">
+      <p class="addr-txt">Lavaux 18 &mdash; 4980 Trois-Ponts</p>
+      <div class="route-wrap">
+        <button class="route-btn" onclick="toggleRoute(event)">Route ↓</button>
+        <div class="route-menu" id="routeMenu">
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Lavaux+18,+4980+Trois-Ponts,+Belgium" target="_blank" rel="noopener">
+            <svg class="ri" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Google Maps
+          </a>
+          <a href="https://waze.com/ul?q=Lavaux+18,+4980+Trois-Ponts&navigate=yes" target="_blank" rel="noopener">
+            <svg class="ri" viewBox="0 0 24 24"><circle cx="12" cy="9" r="7"/><path d="M9.5 9a2.5 2.5 0 0 0 5 0"/><path d="M12 16v3"/><path d="M9 19h6"/></svg>
+            Waze
+          </a>
+          <a href="http://maps.apple.com/?daddr=Lavaux+18,+4980+Trois-Ponts,+Belgium&dirflg=d" target="_blank" rel="noopener">
+            <svg class="ri" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Apple Maps
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- AANKOMST & SLEUTEL -->
@@ -518,5 +551,9 @@
     <span style="margin-top:.6rem;display:block;">coincastor.be</span>
   </div>
 
+  <script>
+    function toggleRoute(e) { e.stopPropagation(); document.getElementById('routeMenu').classList.toggle('open'); }
+    document.addEventListener('click', function() { var m = document.getElementById('routeMenu'); if(m) m.classList.remove('open'); });
+  </script>
 </body>
 </html>
