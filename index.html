@@ -116,7 +116,19 @@
     /* VAKANTIEHUIS — uitgelichte selectie + categorie-per-categorie galerij */
     .vh-sec { padding: 5.5rem 2rem 2rem; background: var(--white); }
     .vh-intro { max-width: 640px; margin: 0 auto 3.5rem; text-align: center; }
-    .vh-uitgelicht { max-width: 1200px; margin: 0 auto; }
+    .vh-hero { position: relative; max-width: 1200px; margin: 0 auto; }
+    .vh-hero .pi { aspect-ratio: 16/7; }
+    .vh-hero-nav {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+      width: 42px; height: 42px; border-radius: 50%; border: none; cursor: pointer;
+      background: rgba(255,255,255,.85); color: var(--black); font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .vh-hero-nav:hover { background: rgba(255,255,255,1); }
+    .vh-hero-prev { left: 14px; }
+    .vh-hero-next { right: 14px; }
+    .vh-hero-caption { text-align: center; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gray); margin: .9rem 0 0; }
     .vh-cat { max-width: 1200px; margin: 3.5rem auto 0; }
     .vh-cat h3 { font-family: var(--serif); font-weight: 700; font-size: 1rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .9rem; }
     .vh-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 5px; max-width: 1200px; margin: 0 auto; }
@@ -211,6 +223,7 @@
       .omg-feature .pi { aspect-ratio: 4/3; }
       .omg-row { grid-template-columns: repeat(3, 1fr); }
       .vh-row { grid-template-columns: repeat(3, 1fr); }
+      .vh-hero .pi { aspect-ratio: 4/3; }
     }
     @media (max-width: 560px) {
       .sec { padding: 4rem 1.1rem; }
@@ -229,7 +242,9 @@
       .omg-row .pi { aspect-ratio: 1; }
       .vh-sec { padding: 4rem 0 3rem; }
       .vh-intro { padding: 0 1.1rem; margin-bottom: 2.5rem; }
-      .vh-uitgelicht, .vh-cat { padding: 0 1.1rem; }
+      .vh-hero, .vh-cat { padding: 0 1.1rem; }
+      .vh-hero .pi { aspect-ratio: 4/3; }
+      .vh-hero-nav { width: 36px; height: 36px; }
       .vh-row { grid-template-columns: repeat(3, 1fr); gap: 3px; }
       .vh-row .pi { aspect-ratio: 1; }
 
@@ -352,7 +367,12 @@
     <p class="tag" data-i18n="vh_tag">Vakantiehuis</p>
     <h2 data-i18n="vh_h2">Elke hoek in beeld</h2>
   </div>
-  <div id="vh-uitgelicht" class="vh-uitgelicht r" style="transition-delay:.08s"></div>
+  <div id="vh-hero" class="vh-hero r" style="transition-delay:.08s; display:none">
+    <button class="vh-hero-nav vh-hero-prev" onclick="vhMove(-1)" aria-label="Vorige foto">&#8592;</button>
+    <div class="pi" onclick="vhOpenLightbox()"><img id="vh-hero-img" src="" alt=""/></div>
+    <button class="vh-hero-nav vh-hero-next" onclick="vhMove(1)" aria-label="Volgende foto">&#8594;</button>
+  </div>
+  <p id="vh-hero-caption" class="vh-hero-caption"></p>
   <div id="vh-categories"></div>
 </section>
 
@@ -1827,6 +1847,23 @@ document.getElementById('fb').addEventListener('submit', function(e) {
     div.appendChild(img);
     return div;
   }
+
+  /* Uitgelichte selectie — één grote foto, klik links/rechts om te bladeren */
+  let vhHeroList = [];
+  let vhHeroIdx = 0;
+  function vhRender() {
+    const p = vhHeroList[vhHeroIdx];
+    if (!p) return;
+    const img = document.getElementById('vh-hero-img');
+    img.src = p.s; img.alt = p.c;
+    document.getElementById('vh-hero-caption').textContent = p.c;
+  }
+  function vhMove(d) {
+    vhHeroIdx = (vhHeroIdx + d + vhHeroList.length) % vhHeroList.length;
+    vhRender();
+  }
+  function vhOpenLightbox() { lbOpen(vhHeroList[vhHeroIdx].phIdx); }
+
   fetch('fotos/manifest.json')
     .then(r => r.json())
     .then(data => {
@@ -1834,12 +1871,16 @@ document.getElementById('fb').addEventListener('submit', function(e) {
 
       // Uitgelichte selectie — bovenaan, eigen lightbox-groep
       const uitgelicht = data.uitgelicht || [];
-      const uitgelichtGrid = document.getElementById('vh-uitgelicht');
       uitgelicht.forEach(p => {
         const idx = PH.length;
         PH.push({ s: p.file, c: p.caption, cat: 'vh-uitgelicht' });
-        uitgelichtGrid.appendChild(makePi(p.file, p.caption, idx));
+        vhHeroList.push({ s: p.file, c: p.caption, phIdx: idx });
       });
+      if (vhHeroList.length) {
+        vhHeroIdx = 0;
+        vhRender();
+        document.getElementById('vh-hero').style.display = '';
+      }
 
       // Categorieën per ruimte — elk een eigen lightbox-groep
       const catContainer = document.getElementById('vh-categories');
