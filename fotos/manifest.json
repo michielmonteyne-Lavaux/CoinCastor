@@ -4,14 +4,14 @@
     { "file": "fotos/vakantiehuis/Selectie uitgelicht/Terras 2.jpg", "caption": "Terras" },
     { "file": "fotos/vakantiehuis/Selectie uitgelicht/Leefruimte 2.jpg", "caption": "Leefruimte" },
     { "file": "fotos/vakantiehuis/Selectie uitgelicht/Badkamer bad lavabo.jpg", "caption": "Badkamer met bad" },
-    { "file": "fotos/vakantiehuis/Selectie uitgelicht/Achterdeur.jpg", "caption": "Achterdeur" },
+    { "file": "fotos/vakantiehuis/Selectie uitgelicht/Buitenkant.jpg", "caption": "Buitenkant" },
     { "file": "fotos/vakantiehuis/Selectie uitgelicht/Slaapkamer 2 stapelbed 2.jpg", "caption": "Slaapkamer 2 met stapelbed" }
   ],
   "categories": [
     {
       "name": "Algemeen",
       "photos": [
-        { "file": "fotos/vakantiehuis/Selectie uitgelicht/Achterdeur.jpg", "caption": "Achterdeur" },
+        { "file": "fotos/vakantiehuis/Selectie uitgelicht/Buitenkant.jpg", "caption": "Buitenkant" },
         { "file": "fotos/vakantiehuis/Algemeen/Huis vooraan.jpg", "caption": "Huis vooraan" },
         { "file": "fotos/vakantiehuis/Algemeen/Voordeur.jpg", "caption": "Voordeur" },
         { "file": "fotos/vakantiehuis/Algemeen/Trampoline.jpg", "caption": "Trampoline" }
@@ -32,17 +32,16 @@
       ]
     },
     {
-      "name": "Eettafel",
+      "name": "Eetruimte",
       "photos": [
         { "file": "fotos/vakantiehuis/Selectie uitgelicht/Eetruimte.jpg", "caption": "Eetruimte" },
-        { "file": "fotos/vakantiehuis/Eettafel/Eettafel.jpg", "caption": "Eettafel" },
-        { "file": "fotos/vakantiehuis/Eettafel/Eettafel setup.jpg", "caption": "Eettafel gedekt" },
-        { "file": "fotos/vakantiehuis/Eettafel/Sfeer.jpg", "caption": "Sfeer aan tafel" },
-        { "file": "fotos/vakantiehuis/Eettafel/Eettafel detail.jpg", "caption": "Eettafel detail" },
-        { "file": "fotos/vakantiehuis/Eettafel/Eettafel detail 2.jpg", "caption": "Eettafel detail" },
-        { "file": "fotos/vakantiehuis/Eettafel/Eettafel detail 3.jpg", "caption": "Eettafel detail" },
-        { "file": "fotos/vakantiehuis/Eettafel/Eettafel detail 4.jpg", "caption": "Eettafel detail" },
-        { "file": "fotos/vakantiehuis/Eettafel/Sorteerhoekje.jpg", "caption": "Sorteerhoekje" }
+        { "file": "fotos/vakantiehuis/Eetruimte/Eettafel.jpg", "caption": "Eettafel" },
+        { "file": "fotos/vakantiehuis/Eetruimte/Eettafel setup.jpg", "caption": "Eettafel gedekt" },
+        { "file": "fotos/vakantiehuis/Eetruimte/Sfeer.jpg", "caption": "Sfeer aan tafel" },
+        { "file": "fotos/vakantiehuis/Eetruimte/Eettafel detail.jpg", "caption": "Eettafel detail" },
+        { "file": "fotos/vakantiehuis/Eetruimte/Eettafel detail 2.jpg", "caption": "Eettafel detail" },
+        { "file": "fotos/vakantiehuis/Eetruimte/Eettafel detail 3.jpg", "caption": "Eettafel detail" },
+        { "file": "fotos/vakantiehuis/Eetruimte/Eettafel detail 4.jpg", "caption": "Eettafel detail" }
       ]
     },
     {
@@ -68,8 +67,8 @@
         { "file": "fotos/vakantiehuis/Keuken/Koffiehoek 2.jpg", "caption": "Koffiehoek" },
         { "file": "fotos/vakantiehuis/Keuken/Koffiehoek breed.jpg", "caption": "Koffiehoek" },
         { "file": "fotos/vakantiehuis/Keuken/Koffiehoek ver.jpg", "caption": "Koffiehoek" },
-        { "file": "fotos/vakantiehuis/Keuken/Bloemen.jpg", "caption": "Bloemen op de bar" },
-        { "file": "fotos/vakantiehuis/Keuken/Croissant.jpg", "caption": "Ontbijt in de keuken" }
+        { "file": "fotos/vakantiehuis/Keuken/Croissant.jpg", "caption": "Ontbijt in de keuken" },
+        { "file": "fotos/vakantiehuis/Keuken/Sorteerhoekje.jpg", "caption": "Sorteerhoekje" }
       ]
     },
     {
@@ -80,7 +79,8 @@
         { "file": "fotos/vakantiehuis/Leefruimte/Zitruimte detail.jpg", "caption": "Zitruimte detail" },
         { "file": "fotos/vakantiehuis/Leefruimte/TV.jpg", "caption": "TV-hoek" },
         { "file": "fotos/vakantiehuis/Leefruimte/Boekenkast.jpg", "caption": "Boekenkast" },
-        { "file": "fotos/vakantiehuis/Leefruimte/Spelletjes.jpg", "caption": "Gezelschapsspelletjes" }
+        { "file": "fotos/vakantiehuis/Leefruimte/Spelletjes.jpg", "caption": "Gezelschapsspelletjes" },
+        { "file": "fotos/vakantiehuis/Leefruimte/Bloemen.jpg", "caption": "Bloemen in de leefruimte" }
       ]
     },
     {
