@@ -1,98 +1,139 @@
-[
-  {
-    "file": "fotos/nieuw/Keuken tafel.jpg",
-    "caption": "Keuken tafel"
-  },
-  {
-    "file": "fotos/nieuw/Zitruimte 2.jpg",
-    "caption": "Zitruimte 2"
-  },
-  {
-    "file": "fotos/nieuw/Eettafel.jpg",
-    "caption": "Eettafel"
-  },
-  {
-    "file": "fotos/nieuw/Terras 1.jpg",
-    "caption": "Terras 1"
-  },
-  {
-    "file": "fotos/IMG_1833.jpg",
-    "caption": "Coin Castor buitenzicht"
-  },
-  {
-    "file": "fotos/IMG_1829.jpg",
-    "caption": "Terras"
-  },
-  {
-    "file": "fotos/IMG_1836.jpg",
-    "caption": "Badkamer met bad"
-  },
-  {
-    "file": "fotos/nieuw/Badkamer-douche.jpg",
-    "caption": "Badkamer-douche"
-  },
-  {
-    "file": "fotos/nieuw/Eettafel 2.jpg",
-    "caption": "Eettafel 2"
-  },
-  {
-    "file": "fotos/nieuw/Eettafel 3.jpg",
-    "caption": "Eettafel 3"
-  },
-  {
-    "file": "fotos/nieuw/Hal beneden.jpg",
-    "caption": "Hal beneden"
-  },
-  {
-    "file": "fotos/nieuw/Inkom beneden.jpg",
-    "caption": "Inkom beneden"
-  },
-  {
-    "file": "fotos/nieuw/Keuken salon.jpg",
-    "caption": "Keuken salon"
-  },
-  {
-    "file": "fotos/nieuw/Onder trap.jpg",
-    "caption": "Onder trap"
-  },
-  {
-    "file": "fotos/nieuw/Slaapkamer 3 bed detail.jpg",
-    "caption": "Slaapkamer 3 bed detail"
-  },
-  {
-    "file": "fotos/nieuw/Slaapkamer 3 bed.jpg",
-    "caption": "Slaapkamer 3 bed"
-  },
-  {
-    "file": "fotos/nieuw/Slaapkamer 3.jpg",
-    "caption": "Slaapkamer 3"
-  },
-  {
-    "file": "fotos/nieuw/Slaapkamer detail.jpg",
-    "caption": "Slaapkamer detail"
-  },
-  {
-    "file": "fotos/nieuw/Slaapkamer stapelbed.jpg",
-    "caption": "Slaapkamer stapelbed"
-  },
-  {
-    "file": "fotos/nieuw/Slaapkamer.jpg",
-    "caption": "Slaapkamer"
-  },
-  {
-    "file": "fotos/nieuw/Tafel.jpg",
-    "caption": "Tafel"
-  },
-  {
-    "file": "fotos/nieuw/Terras 2.jpg",
-    "caption": "Terras 2"
-  },
-  {
-    "file": "fotos/nieuw/Tv-ruimte.jpg",
-    "caption": "Tv-ruimte"
-  },
-  {
-    "file": "fotos/nieuw/Zitruimte.jpg",
-    "caption": "Zitruimte"
-  }
-]
+{
+  "uitgelicht": [
+    { "file": "fotos/vakantiehuis/Selectie uitgelicht/Terras 2.jpg", "caption": "Terras" },
+    { "file": "fotos/vakantiehuis/Selectie uitgelicht/Leefruimte 2.jpg", "caption": "Leefruimte" },
+    { "file": "fotos/vakantiehuis/Selectie uitgelicht/Eetruimte.jpg", "caption": "Eetruimte" },
+    { "file": "fotos/vakantiehuis/Selectie uitgelicht/Badkamer bad lavabo.jpg", "caption": "Badkamer met bad" },
+    { "file": "fotos/vakantiehuis/Selectie uitgelicht/Achterdeur.jpg", "caption": "Achterdeur" },
+    { "file": "fotos/vakantiehuis/Selectie uitgelicht/Slaapkamer 2 stapelbed 2.jpg", "caption": "Slaapkamer 2 met stapelbed" },
+    { "file": "fotos/vakantiehuis/Selectie uitgelicht/vingerhoedskruid.jpg", "caption": "Vingerhoedskruid" }
+  ],
+  "categories": [
+    {
+      "name": "Algemeen",
+      "photos": [
+        { "file": "fotos/vakantiehuis/Selectie uitgelicht/Achterdeur.jpg", "caption": "Achterdeur" },
+        { "file": "fotos/vakantiehuis/Algemeen/Huis vooraan.jpg", "caption": "Huis vooraan" },
+        { "file": "fotos/vakantiehuis/Algemeen/Voordeur.jpg", "caption": "Voordeur" },
+        { "file": "fotos/vakantiehuis/Algemeen/Trampoline.jpg", "caption": "Trampoline" }
+      ]
+    },
+    {
+      "name": "Badkamer 1",
+      "photos": [
+        { "file": "fotos/vakantiehuis/Selectie uitgelicht/Badkamer bad lavabo.jpg", "caption": "Badkamer bad en lavabo" },
+        { "file": "fotos/vakantiehuis/Badkamer 1/Badkamer bad.jpg", "caption": "Badkamer bad" }
+      ]
+    },
+    {
+      "name": "Badkamer 2",
+      "photos": [
+        { "file": "fotos/vakantiehuis/Badkamer 2/Badkamer douche toilet.jpg", "caption": "Badkamer douche en toilet" },
+        { "file": "fotos/vakantiehuis/Badkamer 2/Badkamer lavabo.jpg", "caption": "Badkamer lavabo" }
+      ]
+    },
+    {
+      "name": "Eettafel",
+      "photos": [
+        { "file": "fotos/vakantiehuis/Selectie uitgelicht/Eetruimte.jpg", "caption": "Eetruimte" },
+        { "file": "fotos/vakantiehuis/Eettafel/Eettafel.jpg", "caption": "Eettafel" },
+        { "file": "fotos/vakantiehuis/Eettafel/Eettafel setup.jpg", "caption": "Eettafel gedekt" },
+        { "file": "fotos/vakantiehuis/Eettafel/Sfeer.jpg", "caption": "Sfeer aan tafel" },
+        { "file": "fotos/vakantiehuis/Eettafel/Eettafel detail.jpg", "caption": "Eettafel detail" },
+        { "file": "fotos/vakantiehuis/Eettafel/Eettafel detail 2.jpg", "caption": "Eettafel detail" },
+        { "file": "fotos/vakantiehuis/Eettafel/Eettafel detail 3.jpg", "caption": "Eettafel detail" },
+        { "file": "fotos/vakantiehuis/Eettafel/Eettafel detail 4.jpg", "caption": "Eettafel detail" },
+        { "file": "fotos/vakantiehuis/Eettafel/Sorteerhoekje.jpg", "caption": "Sorteerhoekje" }
+      ]
+    },
+    {
+      "name": "Inkom beneden",
+      "photos": [
+        { "file": "fotos/vakantiehuis/Inkom beneden/Inkom beneden.jpg", "caption": "Inkom beneden" },
+        { "file": "fotos/vakantiehuis/Inkom beneden/Inkom beneden inclusief hoed.jpg", "caption": "Inkom beneden" },
+        { "file": "fotos/vakantiehuis/Inkom beneden/Inkom beneden detail.jpg", "caption": "Inkom beneden detail" },
+        { "file": "fotos/vakantiehuis/Inkom beneden/Inkom beneden deur.jpg", "caption": "Inkom beneden deur" },
+        { "file": "fotos/vakantiehuis/Inkom beneden/Inkom beneden haakjes.jpg", "caption": "Kapstokhaakjes" }
+      ]
+    },
+    {
+      "name": "Keuken",
+      "photos": [
+        { "file": "fotos/vakantiehuis/Keuken/Keuken.jpg", "caption": "Keuken" },
+        { "file": "fotos/vakantiehuis/Keuken/Keuken 2.jpg", "caption": "Keuken" },
+        { "file": "fotos/vakantiehuis/Keuken/Keuken 3.jpg", "caption": "Keuken" },
+        { "file": "fotos/vakantiehuis/Keuken/Keuken + Koffiehoek.jpg", "caption": "Keuken en koffiehoek" },
+        { "file": "fotos/vakantiehuis/Keuken/Bar.jpg", "caption": "Bar" },
+        { "file": "fotos/vakantiehuis/Keuken/Barmeubel 2.jpg", "caption": "Barmeubel" },
+        { "file": "fotos/vakantiehuis/Keuken/Koffiehoek.jpg", "caption": "Koffiehoek" },
+        { "file": "fotos/vakantiehuis/Keuken/Koffiehoek 2.jpg", "caption": "Koffiehoek" },
+        { "file": "fotos/vakantiehuis/Keuken/Koffiehoek breed.jpg", "caption": "Koffiehoek" },
+        { "file": "fotos/vakantiehuis/Keuken/Koffiehoek ver.jpg", "caption": "Koffiehoek" },
+        { "file": "fotos/vakantiehuis/Keuken/Bloemen.jpg", "caption": "Bloemen op de bar" },
+        { "file": "fotos/vakantiehuis/Keuken/Croissant.jpg", "caption": "Ontbijt in de keuken" }
+      ]
+    },
+    {
+      "name": "Leefruimte",
+      "photos": [
+        { "file": "fotos/vakantiehuis/Selectie uitgelicht/Leefruimte 2.jpg", "caption": "Leefruimte" },
+        { "file": "fotos/vakantiehuis/Leefruimte/Zitruimte.jpg", "caption": "Zitruimte" },
+        { "file": "fotos/vakantiehuis/Leefruimte/Zitruimte detail.jpg", "caption": "Zitruimte detail" },
+        { "file": "fotos/vakantiehuis/Leefruimte/TV.jpg", "caption": "TV-hoek" },
+        { "file": "fotos/vakantiehuis/Leefruimte/Boekenkast.jpg", "caption": "Boekenkast" },
+        { "file": "fotos/vakantiehuis/Leefruimte/Spelletjes.jpg", "caption": "Gezelschapsspelletjes" }
+      ]
+    },
+    {
+      "name": "Slaapkamer 1",
+      "photos": [
+        { "file": "fotos/vakantiehuis/Slaapkamer 1/Slaapkamer 1.jpg", "caption": "Slaapkamer 1" },
+        { "file": "fotos/vakantiehuis/Slaapkamer 1/Slaapkamer detail.jpg", "caption": "Slaapkamer detail" },
+        { "file": "fotos/vakantiehuis/Slaapkamer 1/Nachtkastje.jpg", "caption": "Nachtkastje" },
+        { "file": "fotos/vakantiehuis/Slaapkamer 1/Stapelbed detail.jpg", "caption": "Stapelbed detail" }
+      ]
+    },
+    {
+      "name": "Slaapkamer 2",
+      "photos": [
+        { "file": "fotos/vakantiehuis/Selectie uitgelicht/Slaapkamer 2 stapelbed 2.jpg", "caption": "Slaapkamer 2 met stapelbed" },
+        { "file": "fotos/vakantiehuis/Slaapkamer 2/Slaapkamer 2.jpg", "caption": "Slaapkamer 2" },
+        { "file": "fotos/vakantiehuis/Slaapkamer 2/Slaapkamer 2 stapelbed.jpg", "caption": "Slaapkamer 2 stapelbed" },
+        { "file": "fotos/vakantiehuis/Slaapkamer 2/Stapelbed.jpg", "caption": "Stapelbed" }
+      ]
+    },
+    {
+      "name": "Slaapkamer 3",
+      "photos": [
+        { "file": "fotos/vakantiehuis/Slaapkamer 3/Slaapkamer 3.jpg", "caption": "Slaapkamer 3" },
+        { "file": "fotos/vakantiehuis/Slaapkamer 3/Slaapkamer 3 - douche.jpg", "caption": "Slaapkamer 3 met douche" }
+      ]
+    },
+    {
+      "name": "Speelhoekje",
+      "photos": [
+        { "file": "fotos/vakantiehuis/Speelhoekje/Speelhoekje.jpg", "caption": "Speelhoekje" },
+        { "file": "fotos/vakantiehuis/Speelhoekje/Speelhoekje 2.jpg", "caption": "Speelhoekje" },
+        { "file": "fotos/vakantiehuis/Speelhoekje/Speelhoekje 3.jpg", "caption": "Speelhoekje" },
+        { "file": "fotos/vakantiehuis/Speelhoekje/Kleurhoekje.jpg", "caption": "Kleurhoekje" },
+        { "file": "fotos/vakantiehuis/Speelhoekje/Kleurboek.jpg", "caption": "Kleurboek" },
+        { "file": "fotos/vakantiehuis/Speelhoekje/Trap.jpg", "caption": "Trap naar speelhoekje" }
+      ]
+    },
+    {
+      "name": "Terras",
+      "photos": [
+        { "file": "fotos/vakantiehuis/Selectie uitgelicht/Terras 2.jpg", "caption": "Terras" },
+        { "file": "fotos/vakantiehuis/Terras/Terras.jpg", "caption": "Terras" },
+        { "file": "fotos/vakantiehuis/Terras/Stoeltje terras.jpg", "caption": "Terras" }
+      ]
+    },
+    {
+      "name": "Toilet",
+      "photos": [
+        { "file": "fotos/vakantiehuis/Toilet/Toilet.jpg", "caption": "Toilet" },
+        { "file": "fotos/vakantiehuis/Toilet/Toilet detail.jpg", "caption": "Toilet detail" }
+      ]
+    }
+  ]
+}

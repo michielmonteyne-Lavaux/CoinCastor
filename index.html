@@ -113,6 +113,15 @@
     .omg-row .pi { aspect-ratio: 4/3; }
     .omg-feature + .omg-row { margin-top: 5px; }
 
+    /* VAKANTIEHUIS — uitgelichte selectie + categorie-per-categorie galerij */
+    .vh-sec { padding: 5.5rem 2rem 2rem; background: var(--white); }
+    .vh-intro { max-width: 640px; margin: 0 auto 3.5rem; text-align: center; }
+    .vh-uitgelicht { max-width: 1200px; margin: 0 auto; }
+    .vh-cat { max-width: 1200px; margin: 3.5rem auto 0; }
+    .vh-cat h3 { font-family: var(--serif); font-weight: 700; font-size: 1rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .9rem; }
+    .vh-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 5px; max-width: 1200px; margin: 0 auto; }
+    .vh-row .pi { aspect-ratio: 4/3; }
+
     /* Responsive grids voor seizoenen, kerstperiode en kalender */
     .season-defs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
     .kerst-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #e8e5de; border-radius: 6px; overflow: hidden; }
@@ -201,6 +210,7 @@
       .kal-grid { grid-template-columns: 1fr; }
       .omg-feature .pi { aspect-ratio: 4/3; }
       .omg-row { grid-template-columns: repeat(3, 1fr); }
+      .vh-row { grid-template-columns: repeat(3, 1fr); }
     }
     @media (max-width: 560px) {
       .sec { padding: 4rem 1.1rem; }
@@ -217,6 +227,11 @@
       .omg-feature .pi { aspect-ratio: 4/3; }
       .omg-row { grid-template-columns: repeat(3, 1fr); gap: 3px; }
       .omg-row .pi { aspect-ratio: 1; }
+      .vh-sec { padding: 4rem 0 3rem; }
+      .vh-intro { padding: 0 1.1rem; margin-bottom: 2.5rem; }
+      .vh-uitgelicht, .vh-cat { padding: 0 1.1rem; }
+      .vh-row { grid-template-columns: repeat(3, 1fr); gap: 3px; }
+      .vh-row .pi { aspect-ratio: 1; }
 
       /* Prijstabel als kaarten op mobiel */
       .ptable, .ptable thead, .ptable tbody, .ptable tr, .ptable td { display: block; width: 100%; }
@@ -266,7 +281,7 @@
 
 <!-- HERO — bevat ook de volledige navigatie -->
 <section id="top" class="hero">
-  <img class="bg" src="fotos/dennen_zonlicht.jpg" alt="Gouden zonlicht door het dennenbos van de Ardennen"/>
+  <img class="bg" src="fotos/omgeving/dennen_zonlicht.jpg" alt="Gouden zonlicht door het dennenbos van de Ardennen"/>
   <div class="hero-overlay"></div>
 
   <!-- Aanbevelen + taalknoppen -->
@@ -331,11 +346,14 @@
   </div>
 </section>
 
-<!-- FOTO GRID — huisfoto's -->
-<section id="fotos" style="background:white;padding:0">
-  <div style="max-width:1200px;margin:0 auto">
-    <div id="extra-fotos-grid" class="pgrid pgrid-all r" style="gap:5px"></div>
+<!-- FOTO GRID — Vakantiehuis: uitgelichte selectie + galerij per ruimte -->
+<section id="fotos" class="vh-sec">
+  <div class="vh-intro r">
+    <p class="tag" data-i18n="vh_tag">Vakantiehuis</p>
+    <h2 data-i18n="vh_h2">Elke hoek in beeld</h2>
   </div>
+  <div id="vh-uitgelicht" class="vh-uitgelicht r" style="transition-delay:.08s"></div>
+  <div id="vh-categories"></div>
 </section>
 
 <!-- PRAKTISCH -->
@@ -373,7 +391,7 @@
         </div>
       </div>
       <div class="r" style="transition-delay:.15s">
-        <div class="pi" style="aspect-ratio:4/3" onclick="lbOpen(2)"><img src="fotos/IMG_1836.jpg" alt="Badkamer met bad"/></div>
+        <div id="praktisch-photo" class="pi" style="aspect-ratio:4/3"><img src="fotos/vakantiehuis/Badkamer 1/Badkamer bad.jpg" alt="Badkamer met bad"/></div>
       </div>
     </div>
   </div>
@@ -389,26 +407,31 @@
 
   <!-- Featured 1 -->
   <div class="omg-feature r">
-    <div class="pi" onclick="lbOpen(0)"><img src="fotos/paarden_sneeuw.jpg" alt="Belgische trekpaarden in de sneeuw" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(0)"><img src="fotos/omgeving/paarden_sneeuw.jpg" alt="Belgische trekpaarden in de sneeuw" loading="lazy"/></div>
   </div>
 
   <!-- Grid 1 -->
   <div class="omg-row r" style="transition-delay:.08s">
-    <div class="pi" onclick="lbOpen(1)"><img src="fotos/dennen_zonlicht.jpg" alt="Gouden zonlicht door het dennenbos" loading="lazy"/></div>
-    <div class="pi" onclick="lbOpen(2)"><img src="fotos/vingerhoedskruid.jpg" alt="Wandelpad met vingerhoedskruid" loading="lazy"/></div>
-    <div class="pi" onclick="lbOpen(3)"><img src="fotos/salm.jpg" alt="De Salm-rivier" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(1)"><img src="fotos/omgeving/dennen_zonlicht.jpg" alt="Gouden zonlicht door het dennenbos" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(2)"><img src="fotos/omgeving/salm.jpg" alt="De Salm-rivier" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(3)"><img src="fotos/omgeving/bloemenweide.jpg" alt="Wilde bloemenweide" loading="lazy"/></div>
   </div>
 
   <!-- Featured 2 -->
   <div class="omg-feature r" style="transition-delay:.12s;margin-top:5px">
-    <div class="pi" onclick="lbOpen(4)"><img src="fotos/coo.jpg" alt="Panoramisch zicht op het meer van Coo" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(4)"><img src="fotos/vakantiehuis/Selectie uitgelicht/vingerhoedskruid.jpg" alt="Wandelpad met vingerhoedskruid" loading="lazy"/></div>
   </div>
 
   <!-- Grid 2 -->
   <div class="omg-row r" style="transition-delay:.16s">
-    <div class="pi" onclick="lbOpen(5)"><img src="fotos/bloemenweide.jpg" alt="Wilde bloemenweide" loading="lazy"/></div>
-    <div class="pi" onclick="lbOpen(6)"><img src="fotos/herfstbos.jpg" alt="Herfstbos" loading="lazy"/></div>
-    <div class="pi" onclick="lbOpen(7)"><img src="fotos/mist.jpg" alt="Mistige ochtend" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(5)"><img src="fotos/omgeving/coo.jpg" alt="Panoramisch zicht op het meer van Coo" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(6)"><img src="fotos/omgeving/herfstbos.jpg" alt="Herfstbos" loading="lazy"/></div>
+    <div class="pi" onclick="lbOpen(7)"><img src="fotos/omgeving/mist.jpg" alt="Mistige ochtend" loading="lazy"/></div>
+  </div>
+
+  <!-- Featured 3 -->
+  <div class="omg-feature r" style="transition-delay:.2s;margin-top:5px">
+    <div class="pi" onclick="lbOpen(8)"><img src="fotos/omgeving/Waterval Coo.jpg" alt="Waterval van Coo" loading="lazy"/></div>
   </div>
 </section>
 
@@ -1447,6 +1470,11 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       omg_tag:'De omgeving',
       omg_h2:'Vier seizoenen, één plek',
       omg_lead:'Vanuit Coin Castor stap je zo de natuur in. De vallei van de Salm, diepe dennenbossen, glooiende heuvels en stille uitzichtpunten — elk seizoen kleurt deze hoek van de Ardennen anders.',
+      vh_tag:'Vakantiehuis', vh_h2:'Elke hoek in beeld',
+      vh_cat_algemeen:'Algemeen', vh_cat_badkamer1:'Badkamer 1', vh_cat_badkamer2:'Badkamer 2',
+      vh_cat_eettafel:'Eettafel', vh_cat_inkom:'Inkom beneden', vh_cat_keuken:'Keuken',
+      vh_cat_leefruimte:'Leefruimte', vh_cat_slaap1:'Slaapkamer 1', vh_cat_slaap2:'Slaapkamer 2',
+      vh_cat_slaap3:'Slaapkamer 3', vh_cat_speelhoekje:'Speelhoekje', vh_cat_terras:'Terras', vh_cat_toilet:'Toilet',
       intro_tag:'Coin Castor', intro_h2:'Je hebt ons gevonden!',
       intro_p1:'Dat wil zeggen dat je op zoek bent naar <strong>natuur, rust, of net avontuur</strong> in een prachtig stuk Ardennen. Coin Castor is een perfect uitvalsnest om te genieten, te rusten, te verkennen en te ontdekken.',
       intro_p2:'In het pittoreske Lavaux, in de vallei van de Salm, staat dit gloednieuwe huis midden in de natuur. Niet enkel vogels en reeën bevolken de omgeving — de wildcamera spotte al <strong>bevers, vossen, dassen en marters</strong> in de omringende bossen.',
@@ -1539,6 +1567,11 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       omg_tag:'Les environs',
       omg_h2:'Quatre saisons, un seul lieu',
       omg_lead:'Depuis Coin Castor, vous êtes immédiatement plongés dans la nature. La vallée de la Salm, ses forêts profondes, ses collines vallonnées et ses points de vue silencieux — chaque saison colore ce coin des Ardennes autrement.',
+      vh_tag:'La maison de vacances', vh_h2:'Chaque coin en image',
+      vh_cat_algemeen:'Général', vh_cat_badkamer1:'Salle de bain 1', vh_cat_badkamer2:'Salle de bain 2',
+      vh_cat_eettafel:'Salle à manger', vh_cat_inkom:'Entrée (rez-de-chaussée)', vh_cat_keuken:'Cuisine',
+      vh_cat_leefruimte:'Séjour', vh_cat_slaap1:'Chambre 1', vh_cat_slaap2:'Chambre 2',
+      vh_cat_slaap3:'Chambre 3', vh_cat_speelhoekje:'Coin jeux', vh_cat_terras:'Terrasse', vh_cat_toilet:'Toilettes',
       intro_tag:'Coin Castor', intro_h2:'Vous nous avez trouvés !',
       intro_p1:'Cela signifie que vous êtes à la recherche de <strong>nature, de calme, ou d\'aventure</strong> dans un magnifique coin des Ardennes. Coin Castor est l\'endroit idéal pour se ressourcer, se détendre, explorer et découvrir.',
       intro_p2:'Dans le pittoresque hameau de Lavaux, dans la vallée de la Salm, cette maison toute neuve se dresse au cœur de la nature. Oiseaux et chevreuils ne sont pas les seuls habitants — la caméra animalière a déjà repéré <strong>castors, renards, blaireaux et martres</strong> dans les bois environnants.',
@@ -1631,6 +1664,11 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       omg_tag:'The surroundings',
       omg_h2:'Four seasons, one place',
       omg_lead:'From Coin Castor you step straight into nature. The Salm valley, deep pine forests, rolling hills and quiet viewpoints — each season paints this corner of the Ardennes differently.',
+      vh_tag:'The house', vh_h2:'Every corner in view',
+      vh_cat_algemeen:'General', vh_cat_badkamer1:'Bathroom 1', vh_cat_badkamer2:'Bathroom 2',
+      vh_cat_eettafel:'Dining area', vh_cat_inkom:'Downstairs entrance', vh_cat_keuken:'Kitchen',
+      vh_cat_leefruimte:'Living room', vh_cat_slaap1:'Bedroom 1', vh_cat_slaap2:'Bedroom 2',
+      vh_cat_slaap3:'Bedroom 3', vh_cat_speelhoekje:'Play corner', vh_cat_terras:'Terrace', vh_cat_toilet:'Toilet',
       intro_tag:'Coin Castor', intro_h2:'You found us!',
       intro_p1:'Which means you\'re looking for <strong>nature, peace, or even adventure</strong> in a beautiful corner of the Ardennes. Coin Castor is the perfect base to relax, explore, and discover.',
       intro_p2:'In the picturesque hamlet of Lavaux, in the Salm valley, this brand-new house sits in the heart of nature. Birds and deer are not the only residents — the wildlife camera has already spotted <strong>beavers, foxes, badgers and pine martens</strong> in the surrounding forests.',
@@ -1749,14 +1787,15 @@ document.getElementById('fb').addEventListener('submit', function(e) {
 
   /* Lightbox */
   let PH = [
-    {s:'fotos/paarden_sneeuw.jpg',c:'Belgische trekpaarden in de sneeuw',cat:'omgeving'},
-    {s:'fotos/dennen_zonlicht.jpg',c:'Gouden zonlicht door het dennenbos',cat:'omgeving'},
-    {s:'fotos/vingerhoedskruid.jpg',c:'Wandelpad tussen het vingerhoedskruid',cat:'omgeving'},
-    {s:'fotos/salm.jpg',c:'De Salm-rivier',cat:'omgeving'},
-    {s:'fotos/coo.jpg',c:'Panoramisch zicht op het meer van Coo',cat:'omgeving'},
-    {s:'fotos/bloemenweide.jpg',c:'Wilde bloemenweide met zicht op de heuvels',cat:'omgeving'},
-    {s:'fotos/herfstbos.jpg',c:'Herfstbos in de Ardennen',cat:'omgeving'},
-    {s:'fotos/mist.jpg',c:'Mistige ochtend in de vallei',cat:'omgeving'},
+    {s:'fotos/omgeving/paarden_sneeuw.jpg',c:'Belgische trekpaarden in de sneeuw',cat:'omgeving'},
+    {s:'fotos/omgeving/dennen_zonlicht.jpg',c:'Gouden zonlicht door het dennenbos',cat:'omgeving'},
+    {s:'fotos/omgeving/salm.jpg',c:'De Salm-rivier',cat:'omgeving'},
+    {s:'fotos/omgeving/bloemenweide.jpg',c:'Wilde bloemenweide met zicht op de heuvels',cat:'omgeving'},
+    {s:'fotos/vakantiehuis/Selectie uitgelicht/vingerhoedskruid.jpg',c:'Wandelpad tussen het vingerhoedskruid',cat:'omgeving'},
+    {s:'fotos/omgeving/coo.jpg',c:'Panoramisch zicht op het meer van Coo',cat:'omgeving'},
+    {s:'fotos/omgeving/herfstbos.jpg',c:'Herfstbos in de Ardennen',cat:'omgeving'},
+    {s:'fotos/omgeving/mist.jpg',c:'Mistige ochtend in de vallei',cat:'omgeving'},
+    {s:'fotos/omgeving/Waterval Coo.jpg',c:'Waterval van Coo',cat:'omgeving'},
   ];
   let lbC=0;
   function lbOpen(i){lbC=i;document.getElementById('lbi').src=PH[i].s;document.getElementById('lbc').textContent=PH[i].c;document.getElementById('lb').classList.add('on');document.body.style.overflow='hidden';}
@@ -1772,25 +1811,66 @@ document.getElementById('fb').addEventListener('submit', function(e) {
   document.getElementById('lb').addEventListener('click',e=>{if(e.target===e.currentTarget)lbClose();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')lbClose();if(e.key==='ArrowRight')lbMove(1);if(e.key==='ArrowLeft')lbMove(-1);});
 
-  /* Extra foto's — dynamisch laden via manifest.json */
+  /* Vakantiehuis-galerij — uitgelichte selectie + categorieën, dynamisch via manifest.json */
+  const vhCatI18n = {
+    'Algemeen':'vh_cat_algemeen', 'Badkamer 1':'vh_cat_badkamer1', 'Badkamer 2':'vh_cat_badkamer2',
+    'Eettafel':'vh_cat_eettafel', 'Inkom beneden':'vh_cat_inkom', 'Keuken':'vh_cat_keuken',
+    'Leefruimte':'vh_cat_leefruimte', 'Slaapkamer 1':'vh_cat_slaap1', 'Slaapkamer 2':'vh_cat_slaap2',
+    'Slaapkamer 3':'vh_cat_slaap3', 'Speelhoekje':'vh_cat_speelhoekje', 'Terras':'vh_cat_terras', 'Toilet':'vh_cat_toilet'
+  };
+  function makePi(file, caption, idx) {
+    const div = document.createElement('div');
+    div.className = 'pi';
+    div.onclick = () => lbOpen(idx);
+    const img = document.createElement('img');
+    img.src = file; img.alt = caption; img.loading = 'lazy';
+    div.appendChild(img);
+    return div;
+  }
   fetch('fotos/manifest.json')
     .then(r => r.json())
-    .then(photos => {
-      if (!photos || !photos.length) return;
-      const startIdx = PH.length;
-      photos.forEach(p => PH.push({s: p.file, c: p.caption, cat: 'huis'}));
-      const grid = document.getElementById('extra-fotos-grid');
-      photos.forEach((p, i) => {
-        const div = document.createElement('div');
-        div.className = 'pi';
-        div.onclick = () => lbOpen(startIdx + i);
-        const img = document.createElement('img');
-        img.src = p.file;
-        img.alt = p.caption;
-        img.loading = 'lazy';
-        div.appendChild(img);
-        grid.appendChild(div);
+    .then(data => {
+      if (!data) return;
+
+      // Uitgelichte selectie — bovenaan, eigen lightbox-groep
+      const uitgelicht = data.uitgelicht || [];
+      const uitgelichtGrid = document.getElementById('vh-uitgelicht');
+      uitgelicht.forEach(p => {
+        const idx = PH.length;
+        PH.push({ s: p.file, c: p.caption, cat: 'vh-uitgelicht' });
+        uitgelichtGrid.appendChild(makePi(p.file, p.caption, idx));
       });
+
+      // Categorieën per ruimte — elk een eigen lightbox-groep
+      const catContainer = document.getElementById('vh-categories');
+      (data.categories || []).forEach(cat => {
+        const wrap = document.createElement('div');
+        wrap.className = 'vh-cat r';
+        const h3 = document.createElement('h3');
+        const i18nKey = vhCatI18n[cat.name];
+        if (i18nKey) h3.setAttribute('data-i18n', i18nKey);
+        h3.textContent = cat.name;
+        wrap.appendChild(h3);
+        const row = document.createElement('div');
+        row.className = 'vh-row';
+        cat.photos.forEach(p => {
+          const idx = PH.length;
+          PH.push({ s: p.file, c: p.caption, cat: 'vh-' + cat.name });
+          row.appendChild(makePi(p.file, p.caption, idx));
+        });
+        wrap.appendChild(row);
+        catContainer.appendChild(wrap);
+        obs.observe(wrap);
+      });
+
+      // Nieuw ingeladen elementen (met data-i18n) meteen naar de huidige taal vertalen
+      setLang(currentLang);
+
+      // Praktisch-sectie: badkamerfoto linken aan de juiste plek in de lightbox
+      const bkIdx = PH.findIndex(p => p.s === 'fotos/vakantiehuis/Badkamer 1/Badkamer bad.jpg');
+      if (bkIdx >= 0) {
+        document.getElementById('praktisch-photo').onclick = () => lbOpen(bkIdx);
+      }
     })
     .catch(() => {}); // Geen manifest of leeg? Geen probleem.
 
