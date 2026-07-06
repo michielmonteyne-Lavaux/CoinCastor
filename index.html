@@ -129,6 +129,13 @@
     .vh-hero-prev { left: 14px; }
     .vh-hero-next { right: 14px; }
     .vh-hero-caption { text-align: center; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gray); margin: .9rem 0 0; }
+    .vh-toggle-wrap { text-align: center; margin: 2.5rem auto 0; }
+    .vh-toggle-btn {
+      font-family: var(--sans); font-size: .7rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--black); background: transparent; border: 1px solid var(--black);
+      padding: .8rem 2.2rem; cursor: pointer; transition: all .2s;
+    }
+    .vh-toggle-btn:hover { background: var(--black); color: white; }
     .vh-cat { max-width: 1200px; margin: 3.5rem auto 0; }
     .vh-cat h3 { font-family: var(--serif); font-weight: 700; font-size: 1rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .9rem; }
     .vh-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 5px; max-width: 1200px; margin: 0 auto; }
@@ -373,7 +380,10 @@
     <button class="vh-hero-nav vh-hero-next" onclick="vhMove(1)" aria-label="Volgende foto">&#8594;</button>
   </div>
   <p id="vh-hero-caption" class="vh-hero-caption"></p>
-  <div id="vh-categories"></div>
+  <div class="vh-toggle-wrap">
+    <button id="vh-toggle-btn" class="vh-toggle-btn" onclick="vhToggleCategories()" data-i18n="vh_toggle_show">Bekijk alle foto's</button>
+  </div>
+  <div id="vh-categories" style="display:none"></div>
 </section>
 
 <!-- PRAKTISCH -->
@@ -1491,6 +1501,7 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       omg_h2:'Vier seizoenen, één plek',
       omg_lead:'Vanuit Coin Castor stap je zo de natuur in. De vallei van de Salm, diepe dennenbossen, glooiende heuvels en stille uitzichtpunten — elk seizoen kleurt deze hoek van de Ardennen anders.',
       vh_tag:'Vakantiehuis', vh_h2:'Elke hoek in beeld',
+      vh_toggle_show:"Bekijk alle foto's", vh_toggle_hide:"Verberg foto's",
       vh_cat_algemeen:'Algemeen', vh_cat_badkamer1:'Badkamer 1', vh_cat_badkamer2:'Badkamer 2',
       vh_cat_eettafel:'Eettafel', vh_cat_inkom:'Inkom beneden', vh_cat_keuken:'Keuken',
       vh_cat_leefruimte:'Leefruimte', vh_cat_slaap1:'Slaapkamer 1', vh_cat_slaap2:'Slaapkamer 2',
@@ -1588,6 +1599,7 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       omg_h2:'Quatre saisons, un seul lieu',
       omg_lead:'Depuis Coin Castor, vous êtes immédiatement plongés dans la nature. La vallée de la Salm, ses forêts profondes, ses collines vallonnées et ses points de vue silencieux — chaque saison colore ce coin des Ardennes autrement.',
       vh_tag:'La maison de vacances', vh_h2:'Chaque coin en image',
+      vh_toggle_show:'Voir toutes les photos', vh_toggle_hide:'Masquer les photos',
       vh_cat_algemeen:'Général', vh_cat_badkamer1:'Salle de bain 1', vh_cat_badkamer2:'Salle de bain 2',
       vh_cat_eettafel:'Salle à manger', vh_cat_inkom:'Entrée (rez-de-chaussée)', vh_cat_keuken:'Cuisine',
       vh_cat_leefruimte:'Séjour', vh_cat_slaap1:'Chambre 1', vh_cat_slaap2:'Chambre 2',
@@ -1685,6 +1697,7 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       omg_h2:'Four seasons, one place',
       omg_lead:'From Coin Castor you step straight into nature. The Salm valley, deep pine forests, rolling hills and quiet viewpoints — each season paints this corner of the Ardennes differently.',
       vh_tag:'The house', vh_h2:'Every corner in view',
+      vh_toggle_show:'View all photos', vh_toggle_hide:'Hide photos',
       vh_cat_algemeen:'General', vh_cat_badkamer1:'Bathroom 1', vh_cat_badkamer2:'Bathroom 2',
       vh_cat_eettafel:'Dining area', vh_cat_inkom:'Downstairs entrance', vh_cat_keuken:'Kitchen',
       vh_cat_leefruimte:'Living room', vh_cat_slaap1:'Bedroom 1', vh_cat_slaap2:'Bedroom 2',
@@ -1863,6 +1876,23 @@ document.getElementById('fb').addEventListener('submit', function(e) {
     vhRender();
   }
   function vhOpenLightbox() { lbOpen(vhHeroList[vhHeroIdx].phIdx); }
+
+  /* Toon/verberg alle kamers onder de hero — standaard verborgen */
+  let vhCategoriesOpen = false;
+  function vhToggleCategories() {
+    vhCategoriesOpen = !vhCategoriesOpen;
+    const el = document.getElementById('vh-categories');
+    const btn = document.getElementById('vh-toggle-btn');
+    if (vhCategoriesOpen) {
+      el.style.display = '';
+      requestAnimationFrame(() => el.querySelectorAll('.vh-cat').forEach(w => w.classList.add('in')));
+    } else {
+      el.style.display = 'none';
+    }
+    const key = vhCategoriesOpen ? 'vh_toggle_hide' : 'vh_toggle_show';
+    btn.setAttribute('data-i18n', key);
+    btn.textContent = T[currentLang][key];
+  }
 
   fetch('fotos/manifest.json')
     .then(r => r.json())
