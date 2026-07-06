@@ -137,6 +137,21 @@
     }
     .vh-toggle-btn:hover { background: var(--black); color: white; }
     .vh-cat { max-width: 1200px; margin: 3.5rem auto 0; }
+
+    /* COOKIE CONSENT */
+    .cookie-banner {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 600;
+      background: var(--black); color: white;
+      padding: 1.1rem 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .cookie-banner p { color: rgba(255,255,255,.85); font-size: .82rem; font-weight: 300; margin: 0; flex: 1 1 260px; line-height: 1.6; }
+    .cookie-actions { display: flex; gap: .6rem; flex-shrink: 0; }
+    .cookie-btn {
+      font-family: var(--sans); font-size: .68rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      padding: .6rem 1.3rem; cursor: pointer; border: 1px solid white; background: transparent; color: white; transition: all .2s;
+    }
+    .cookie-btn.cookie-accept { background: white; color: var(--black); }
+    .cookie-btn:hover { opacity: .8; }
     .vh-cat h3 { font-family: var(--serif); font-weight: 700; font-size: 1rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .9rem; }
     .vh-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 5px; max-width: 1200px; margin: 0 auto; }
     .vh-row .pi { aspect-ratio: 4/3; }
@@ -252,6 +267,8 @@
       .vh-hero, .vh-cat { padding: 0 1.1rem; }
       .vh-hero .pi { aspect-ratio: 4/3; }
       .vh-hero-nav { width: 36px; height: 36px; }
+      .cookie-banner { flex-direction: column; align-items: stretch; text-align: center; padding: 1rem; }
+      .cookie-actions { justify-content: center; }
       .vh-row { grid-template-columns: repeat(3, 1fr); gap: 3px; }
       .vh-row .pi { aspect-ratio: 1; }
 
@@ -291,6 +308,15 @@
   </style>
 </head>
 <body>
+
+<!-- COOKIE CONSENT -->
+<div id="cookie-banner" class="cookie-banner" style="display:none">
+  <p data-i18n="cookie_text">We gebruiken cookies om het aantal bezoekers van deze site te meten. Ga je akkoord?</p>
+  <div class="cookie-actions">
+    <button class="cookie-btn cookie-decline" onclick="declineCookies()" data-i18n="cookie_decline">Weigeren</button>
+    <button class="cookie-btn cookie-accept" onclick="acceptCookies()" data-i18n="cookie_accept">Accepteren</button>
+  </div>
+</div>
 
 <!-- LIGHTBOX -->
 <div id="lb">
@@ -1505,6 +1531,8 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       omg_lead:'Vanuit Coin Castor stap je zo de natuur in. De vallei van de Salm, diepe dennenbossen, glooiende heuvels en stille uitzichtpunten: elk seizoen kleurt deze hoek van de Ardennen anders.',
       vh_tag:'Vakantiehuis', vh_h2:'Elke hoek in beeld',
       vh_toggle_show:"Bekijk alle foto's", vh_toggle_hide:"Verberg foto's",
+      cookie_text:'We gebruiken cookies om het aantal bezoekers van deze site te meten. Ga je akkoord?',
+      cookie_accept:'Accepteren', cookie_decline:'Weigeren',
       vh_cat_algemeen:'Algemeen', vh_cat_badkamer1:'Badkamer 1', vh_cat_badkamer2:'Badkamer 2',
       vh_cat_eettafel:'Eettafel', vh_cat_inkom:'Inkom beneden', vh_cat_keuken:'Keuken',
       vh_cat_leefruimte:'Leefruimte', vh_cat_slaap1:'Slaapkamer 1', vh_cat_slaap2:'Slaapkamer 2',
@@ -1606,6 +1634,8 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       omg_lead:'Depuis Coin Castor, vous êtes immédiatement plongés dans la nature. La vallée de la Salm, ses forêts profondes, ses collines vallonnées et ses points de vue silencieux — chaque saison colore ce coin des Ardennes autrement.',
       vh_tag:'La maison de vacances', vh_h2:'Chaque coin en image',
       vh_toggle_show:'Voir toutes les photos', vh_toggle_hide:'Masquer les photos',
+      cookie_text:'Nous utilisons des cookies pour mesurer le nombre de visiteurs de ce site. Êtes-vous d’accord ?',
+      cookie_accept:'Accepter', cookie_decline:'Refuser',
       vh_cat_algemeen:'Général', vh_cat_badkamer1:'Salle de bain 1', vh_cat_badkamer2:'Salle de bain 2',
       vh_cat_eettafel:'Salle à manger', vh_cat_inkom:'Entrée (rez-de-chaussée)', vh_cat_keuken:'Cuisine',
       vh_cat_leefruimte:'Séjour', vh_cat_slaap1:'Chambre 1', vh_cat_slaap2:'Chambre 2',
@@ -1704,6 +1734,8 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       omg_lead:'From Coin Castor you step straight into nature. The Salm valley, deep pine forests, rolling hills and quiet viewpoints — each season paints this corner of the Ardennes differently.',
       vh_tag:'The house', vh_h2:'Every corner in view',
       vh_toggle_show:'View all photos', vh_toggle_hide:'Hide photos',
+      cookie_text:'We use cookies to measure how many people visit this site. Do you agree?',
+      cookie_accept:'Accept', cookie_decline:'Decline',
       vh_cat_algemeen:'General', vh_cat_badkamer1:'Bathroom 1', vh_cat_badkamer2:'Bathroom 2',
       vh_cat_eettafel:'Dining area', vh_cat_inkom:'Downstairs entrance', vh_cat_keuken:'Kitchen',
       vh_cat_leefruimte:'Living room', vh_cat_slaap1:'Bedroom 1', vh_cat_slaap2:'Bedroom 2',
@@ -1823,6 +1855,36 @@ document.getElementById('fb').addEventListener('submit', function(e) {
   /* Mobile nav */
   document.getElementById('hbtn').addEventListener('click', () => document.getElementById('mnav').classList.toggle('open'));
   function mnClose() { document.getElementById('mnav').classList.remove('open'); }
+
+  /* Cookie consent — Google Analytics wordt pas geladen na toestemming */
+  const GA_ID = 'G-C1PBX4PCL4';
+  function loadGA() {
+    if (window.gaLoaded) return;
+    window.gaLoaded = true;
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+  }
+  function acceptCookies() {
+    localStorage.setItem('cc_consent', 'granted');
+    document.getElementById('cookie-banner').style.display = 'none';
+    loadGA();
+  }
+  function declineCookies() {
+    localStorage.setItem('cc_consent', 'denied');
+    document.getElementById('cookie-banner').style.display = 'none';
+  }
+  (function initCookieConsent() {
+    const choice = localStorage.getItem('cc_consent');
+    if (choice === 'granted') { loadGA(); return; }
+    if (choice === 'denied') return;
+    document.getElementById('cookie-banner').style.display = '';
+  })();
 
   /* Lightbox */
   let PH = [
