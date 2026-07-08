@@ -573,25 +573,25 @@
       <div style="background:white;border:1px solid #e8e5de;border-radius:10px;padding:1rem 1.25rem">
         <!-- Header balk -->
         <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;padding-bottom:.85rem;border-bottom:1px solid #e8e5de">
-          <span style="background:#fee2e2;color:#b91c1c;font-size:.6rem;font-weight:600;padding:.2rem .6rem;border-radius:20px;white-space:nowrap" data-i18n="kerst_badge">23 dec – 5 jan</span>
-          <p style="font-size:.82rem;font-weight:400;color:#666" data-i18n="kerst_sub">Aparte tarieven · bij voorkeur min. 7 nachten</p>
+          <span style="background:#fee2e2;color:#b91c1c;font-size:.6rem;font-weight:600;padding:.2rem .6rem;border-radius:20px;white-space:nowrap" data-i18n="kerst_badge">19 dec – 3 jan</span>
+          <p style="font-size:.82rem;font-weight:400;color:#666" data-i18n="kerst_sub">Aparte tarieven · aankomst flexibel op vr, za of zo · bij voorkeur min. 7 nachten</p>
         </div>
         <!-- Drie opties — compacter -->
         <div class="kerst-options">
           <div style="background:white;padding:.85rem 1.1rem">
             <p style="font-size:.68rem;font-weight:500;color:#888;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.08em" data-i18n="kerst_w1">Week 1</p>
             <p style="font-family:var(--serif);font-size:1.3rem;font-weight:700;color:#1a1a1a;margin-bottom:.15rem">€2.100</p>
-            <p style="font-size:.7rem;font-weight:300;color:#aaa" data-i18n="kerst_w1_s">23–29 dec · 7 nachten</p>
+            <p style="font-size:.7rem;font-weight:300;color:#aaa" data-i18n="kerst_w1_s">19–25 dec · 7 nachten</p>
           </div>
           <div style="background:white;padding:.85rem 1.1rem">
             <p style="font-size:.68rem;font-weight:500;color:#888;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.08em" data-i18n="kerst_w2">Week 2</p>
             <p style="font-family:var(--serif);font-size:1.3rem;font-weight:700;color:#1a1a1a;margin-bottom:.15rem">€2.100</p>
-            <p style="font-size:.7rem;font-weight:300;color:#aaa" data-i18n="kerst_w2_s">30 dec–5 jan · 7 nachten</p>
+            <p style="font-size:.7rem;font-weight:300;color:#aaa" data-i18n="kerst_w2_s">26 dec–1 jan · 7 nachten</p>
           </div>
           <div style="background:white;padding:.85rem 1.1rem">
             <p style="font-size:.68rem;font-weight:500;color:#888;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.08em" data-i18n="kerst_vol">Volle periode</p>
             <p style="font-family:var(--serif);font-size:1.3rem;font-weight:700;color:#1a1a1a;margin-bottom:.15rem">€4.000</p>
-            <p style="font-size:.7rem;font-weight:300;color:#aaa" data-i18n="kerst_vol_s">23 dec–5 jan · 14 nachten</p>
+            <p style="font-size:.7rem;font-weight:300;color:#aaa" data-i18n="kerst_vol_s">19 dec–3 jan · 15 nachten</p>
           </div>
         </div>
       </div>
@@ -715,10 +715,10 @@ function buildDayMap(year) {
   const easter = easterSunday(year);
 
   // Kerstperiode
-  markRange(new Date(year-1,11,23), new Date(year,0,5), 'kerst', {
+  markRange(new Date(year-1,11,19), new Date(year,0,3), 'kerst', {
     nl:['Kerstperiode'], fr:['Période de Noël'], en:['Christmas period']
   });
-  markRange(new Date(year,11,23), new Date(year+1,0,5), 'kerst', {
+  markRange(new Date(year,11,19), new Date(year+1,0,3), 'kerst', {
     nl:['Kerstperiode'], fr:['Période de Noël'], en:['Christmas period']
   });
 
@@ -1581,12 +1581,12 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       pn_n_lbl:'per nacht', pn_n_lbl2:'per nacht', pn_n_lbl3:'per nacht',
       prijs_footer:'Alle prijzen zijn inclusief schoonmaak en linnen · Andere periodes op aanvraag (min. 2 nachten)',
       kerst_tag_title:'Kerstperiode',
-      kerst_badge:'23 dec – 5 jan',
-      kerst_tag:'Kerstperiode — 23 dec – 5 jan',
-      kerst_sub:'Aparte tarieven · bij voorkeur min. 7 nachten',
-      kerst_w1:'Week 1', kerst_w1_s:'23–29 dec · 7 nachten',
-      kerst_w2:'Week 2', kerst_w2_s:'30 dec–5 jan · 7 nachten',
-      kerst_vol:'Volle periode', kerst_vol_s:'23 dec–5 jan · 14 nachten',
+      kerst_badge:'19 dec – 3 jan',
+      kerst_tag:'Kerstperiode — 19 dec – 3 jan',
+      kerst_sub:'Aparte tarieven · aankomst flexibel op vr, za of zo · bij voorkeur min. 7 nachten',
+      kerst_w1:'Week 1', kerst_w1_s:'19–25 dec · 7 nachten',
+      kerst_w2:'Week 2', kerst_w2_s:'26 dec–1 jan · 7 nachten',
+      kerst_vol:'Volle periode', kerst_vol_s:'19 dec–3 jan · 15 nachten',
       kerst_nacht:'Per nacht', kerst_nacht_s:'Op aanvraag · min. 2 nachten',
       kal_tag:'Seizoenskalender 2025–2026',
       leg_seizoen:'Seizoen', leg_beschik:'Beschikbaarheid',
@@ -1681,12 +1681,12 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       pn_n_lbl:'par nuit', pn_n_lbl2:'par nuit', pn_n_lbl3:'par nuit',
       prijs_footer:'Tous les prix incluent le ménage et le linge · Autres périodes sur demande (min. 2 nuits) · *Décembre = basse saison, sauf Noël',
       kerst_tag_title:'Période de Noël',
-      kerst_badge:'23 déc – 5 jan',
-      kerst_tag:'Période de Noël — 23 déc – 5 jan',
-      kerst_sub:'Tarifs spéciaux · de préférence min. 7 nuits',
-      kerst_w1:'Semaine 1', kerst_w1_s:'23–29 déc · 7 nuits',
-      kerst_w2:'Semaine 2', kerst_w2_s:'30 déc–5 jan · 7 nuits',
-      kerst_vol:'Période complète', kerst_vol_s:'23 déc–5 jan · 14 nuits',
+      kerst_badge:'19 déc – 3 jan',
+      kerst_tag:'Période de Noël — 19 déc – 3 jan',
+      kerst_sub:'Tarifs spéciaux · arrivée flexible ve, sa ou di · de préférence min. 7 nuits',
+      kerst_w1:'Semaine 1', kerst_w1_s:'19–25 déc · 7 nuits',
+      kerst_w2:'Semaine 2', kerst_w2_s:'26 déc–1 jan · 7 nuits',
+      kerst_vol:'Période complète', kerst_vol_s:'19 déc–3 jan · 15 nuits',
       kerst_nacht:'Par nuit', kerst_nacht_s:'Sur demande · min. 2 nuits',
       kal_tag:'Calendrier des saisons 2025–2026',
       leg_seizoen:'Saison', leg_beschik:'Disponibilité',
@@ -1781,12 +1781,12 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       pn_n_lbl:'per night', pn_n_lbl2:'per night', pn_n_lbl3:'per night',
       prijs_footer:'All prices include cleaning and linen · Other periods on request (min. 2 nights) · *December = low season, unless Christmas',
       kerst_tag_title:'Christmas period',
-      kerst_badge:'23 Dec – 5 Jan',
-      kerst_tag:'Christmas period — 23 Dec – 5 Jan',
-      kerst_sub:'Special rates · preferably min. 7 nights',
-      kerst_w1:'Week 1', kerst_w1_s:'23–29 Dec · 7 nights',
-      kerst_w2:'Week 2', kerst_w2_s:'30 Dec–5 Jan · 7 nights',
-      kerst_vol:'Full period', kerst_vol_s:'23 Dec–5 Jan · 14 nights',
+      kerst_badge:'19 Dec – 3 Jan',
+      kerst_tag:'Christmas period — 19 Dec – 3 Jan',
+      kerst_sub:'Special rates · flexible arrival on Fri, Sat or Sun · preferably min. 7 nights',
+      kerst_w1:'Week 1', kerst_w1_s:'19–25 Dec · 7 nights',
+      kerst_w2:'Week 2', kerst_w2_s:'26 Dec–1 Jan · 7 nights',
+      kerst_vol:'Full period', kerst_vol_s:'19 Dec–3 Jan · 15 nights',
       kerst_nacht:'Per night', kerst_nacht_s:'On request · min. 2 nights',
       kal_tag:'Season calendar 2025–2026',
       leg_seizoen:'Season', leg_beschik:'Availability',
