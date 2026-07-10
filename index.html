@@ -672,6 +672,8 @@ function dateKey(d) {
 }
 
 function addDays(date, n) { const d=new Date(date); d.setDate(d.getDate()+n); return d; }
+function parseDateInput(v) { const [y,m,d] = v.split('-').map(Number); return new Date(y, m-1, d); }
+function fmtDateNl(d) { return `${d.getDate()} ${['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'][d.getMonth()]} ${d.getFullYear()}`; }
 
 // Bouw een map: dateKey -> { season, reasons: {nl,fr,en}[] }
 function buildDayMap(year) {
@@ -1260,8 +1262,26 @@ fetch(CALENDAR_FEED_URL)
             <input name="aankomstdatum" id="fb-arrival" type="date" required
               style="width:100%;border:1px solid #e8e5de;border-radius:6px;padding:.6rem .8rem;font-family:var(--sans);font-size:.9rem;outline:none;transition:border .15s"
               onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#e8e5de'"
-              onchange="calcPrice()"/>
+              onchange="onArrivalChange()"/>
             <p id="fb-datehelp" style="font-size:.72rem;color:#aaa;margin-top:.3rem"></p>
+          </div>
+
+          <!-- Vertrekdatum + aantal nachten (enkel bij 'Andere periode') -->
+          <div id="date-row-extra" style="display:none;grid-template-columns:1fr 1fr;gap:.75rem">
+            <div>
+              <label style="display:block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:.35rem" data-i18n="f_vertrek">Vertrekdatum</label>
+              <input name="vertrekdatum" id="fb-departure" type="date"
+                style="width:100%;border:1px solid #e8e5de;border-radius:6px;padding:.6rem .8rem;font-family:var(--sans);font-size:.9rem;outline:none;transition:border .15s"
+                onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#e8e5de'"
+                onchange="onDepartureChange()"/>
+            </div>
+            <div>
+              <label style="display:block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:.35rem" data-i18n="f_nachten">Aantal nachten</label>
+              <input name="aantal_nachten" id="fb-nights" type="number" min="2" step="1"
+                style="width:100%;border:1px solid #e8e5de;border-radius:6px;padding:.6rem .8rem;font-family:var(--sans);font-size:.9rem;outline:none;transition:border .15s"
+                onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#e8e5de'"
+                oninput="onNightsChange()"/>
+            </div>
           </div>
 
           <!-- Prijsberekening -->
@@ -1368,7 +1388,70 @@ function selectPeriod(p) {
     aanvraag: 'Kies de gewenste aankomstdatum',
   };
   document.getElementById('fb-datehelp').textContent = hints[p] || '';
+
+  // Vertrekdatum + aantal nachten enkel tonen bij 'Andere periode'
+  const extraRow = document.getElementById('date-row-extra');
+  if (p === 'aanvraag') {
+    extraRow.style.display = 'grid';
+  } else {
+    extraRow.style.display = 'none';
+    document.getElementById('fb-departure').value = '';
+    document.getElementById('fb-nights').value = '';
+  }
   calcPrice();
+}
+
+/* ── VERTREKDATUM ⇄ AANTAL NACHTEN (enkel bij 'Andere periode') ── */
+function onArrivalChange() {
+  // Als er al een vertrekdatum staat, nachten herberekenen op basis van de nieuwe aankomstdatum.
+  // Anders, als er al nachten staan, de vertrekdatum herberekenen.
+  const arrivalInput = document.getElementById('fb-arrival');
+  const depInput = document.getElementById('fb-departure');
+  const nightsInput = document.getElementById('fb-nights');
+  if (selectedPeriod === 'aanvraag' && arrivalInput.value) {
+    if (depInput.value) {
+      syncNightsFromDates();
+    } else if (nightsInput.value) {
+      syncDepartureFromNights();
+    }
+  }
+  calcPrice();
+}
+
+function onDepartureChange() {
+  syncNightsFromDates();
+  calcPrice();
+}
+
+function onNightsChange() {
+  syncDepartureFromNights();
+  calcPrice();
+}
+
+function syncNightsFromDates() {
+  const arrivalInput = document.getElementById('fb-arrival');
+  const depInput = document.getElementById('fb-departure');
+  const nightsInput = document.getElementById('fb-nights');
+  if (!arrivalInput.value || !depInput.value) return;
+  const arrival = parseDateInput(arrivalInput.value);
+  const departure = parseDateInput(depInput.value);
+  const diff = Math.round((departure - arrival) / 86400000);
+  if (diff > 0) {
+    nightsInput.value = diff;
+  } else {
+    nightsInput.value = '';
+  }
+}
+
+function syncDepartureFromNights() {
+  const arrivalInput = document.getElementById('fb-arrival');
+  const depInput = document.getElementById('fb-departure');
+  const nightsInput = document.getElementById('fb-nights');
+  const nights = parseInt(nightsInput.value, 10);
+  if (!arrivalInput.value || !nights || nights < 1) return;
+  const arrival = parseDateInput(arrivalInput.value);
+  const departure = addDays(arrival, nights);
+  depInput.value = dateKey(departure);
 }
 
 /* ── PRIJSBEREKENING ── */
@@ -1387,12 +1470,23 @@ function calcPrice() {
   if (!selectedPeriod || !arrivalInput.value) { box.style.display='none'; return; }
   if (selectedPeriod === 'aanvraag') {
     box.style.display='block';
-    document.getElementById('pb-label').textContent='';
+    const depInput = document.getElementById('fb-departure');
+    const nightsInput = document.getElementById('fb-nights');
+    if (depInput.value && nightsInput.value) {
+      const arrival = parseDateInput(arrivalInput.value);
+      const departure = parseDateInput(depInput.value);
+      const arrStr = fmtDateNl(arrival);
+      const depStr = fmtDateNl(departure);
+      document.getElementById('pb-label').textContent = `${nightsInput.value} nachten · ${arrStr} → ${depStr}`;
+      document.getElementById('fb-prijs-hidden').value = `Op aanvraag (${nightsInput.value} nachten, ${arrStr} → ${depStr})`;
+    } else {
+      document.getElementById('pb-label').textContent='';
+      document.getElementById('fb-prijs-hidden').value='Op aanvraag';
+    }
     document.getElementById('pb-total').textContent='';
     document.getElementById('pb-betaalblok').style.display='none';
     document.getElementById('pb-kerst').style.display='none';
     document.getElementById('pb-aanvraag').style.display='block';
-    document.getElementById('fb-prijs-hidden').value='Op aanvraag';
     return;
   }
 
@@ -1600,6 +1694,7 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       f_titel:'Onderwerp', f_vraag:'Vraag of opmerking',
       f_gezelschap:'Gezelschap', f_periodesoort:'Type verblijf',
       f_aankomst:'Aankomstdatum',
+      f_vertrek:'Vertrekdatum', f_nachten:'Aantal nachten',
       period_weekend:'Weekend', period_weekend_s:'Vr–ma · 3 nachten',
       period_midweek:'Midweek', period_midweek_s:'Ma–vr · 4 nachten',
       period_week:'Volledige week', period_week_s:'Vr–vr of za–za · 7 nachten',
@@ -1700,6 +1795,7 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       f_titel:'Sujet', f_vraag:'Question ou remarque',
       f_gezelschap:'Groupe', f_periodesoort:'Type de séjour',
       f_aankomst:'Date d\'arrivée',
+      f_vertrek:'Date de départ', f_nachten:'Nombre de nuits',
       period_weekend:'Week-end', period_weekend_s:'Ven–lun · 3 nuits',
       period_midweek:'Milieu de semaine', period_midweek_s:'Lun–ven · 4 nuits',
       period_week:'Semaine complète', period_week_s:'Ven–ven ou sam–sam · 7 nuits',
@@ -1800,6 +1896,7 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       f_titel:'Subject', f_vraag:'Question or comment',
       f_gezelschap:'Group', f_periodesoort:'Type of stay',
       f_aankomst:'Arrival date',
+      f_vertrek:'Departure date', f_nachten:'Number of nights',
       period_weekend:'Weekend', period_weekend_s:'Fri–Mon · 3 nights',
       period_midweek:'Midweek', period_midweek_s:'Mon–Fri · 4 nights',
       period_week:'Full week', period_week_s:'Fri–Fri or Sat–Sat · 7 nights',
