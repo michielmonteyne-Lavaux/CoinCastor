@@ -145,6 +145,12 @@
         <span class="tile-title-static">TV &amp; muziek</span>
       </button>
 
+      <button class="guide-tile text-tile" onclick="openGuide('keuken')" type="button">
+        <span class="big-icon">🍳</span>
+        <span class="tile-eyebrow-static">Uitleg</span>
+        <span class="tile-title-static">Keuken</span>
+      </button>
+
     </div>
   </div>
 </section>
@@ -187,6 +193,14 @@
         { id: 'googletv', label: 'Google TV', img: '../fotos/Welkomstpagina/Handleidingen/TV%20%26%20Muziek/Televisie/Google%20TV.JPG' },
         { id: 'sonos', label: 'Sonos', img: '../fotos/Welkomstpagina/Handleidingen/TV%20%26%20Muziek/Sonos/Sonos.JPG' }
       ]
+    },
+    keuken: {
+      title: 'Keuken',
+      tag: '🍳 Kies een onderdeel',
+      menu: [
+        { id: 'dampkap', label: 'Dampkap', img: '../fotos/Welkomstpagina/Handleidingen/Keuken/Dampkap/Dampkap.JPG' },
+        { id: 'microgolf', label: 'Microgolf', img: '../fotos/Welkomstpagina/Handleidingen/Keuken/Microgolf.JPG' }
+      ]
     }
   };
 
@@ -194,14 +208,30 @@
     googletv: {
       title: 'Google TV',
       tag: '📺 Uitleg',
+      parent: 'tvmuziek',
       media: '<img src="../fotos/Welkomstpagina/Handleidingen/TV%20%26%20Muziek/Televisie/Google%20TV.JPG" alt="Google TV"/>',
       body: '<p>Cast eenvoudig vanuit je telefoon (YouTube, Netflix, Spotify, …) zodra je op de wifi zit — kies in je app voor <strong>"Woonkamer TV"</strong>.</p>'
     },
     sonos: {
       title: 'Sonos',
       tag: '🎵 Uitleg',
+      parent: 'tvmuziek',
       media: '<img src="../fotos/Welkomstpagina/Handleidingen/TV%20%26%20Muziek/Sonos/Sonos.JPG" alt="Sonos"/>',
       body: '<p>De Sonos speakers zijn beschikbaar zodra je verbonden bent met de wifi — kies in Spotify voor <strong>"Eetkamer"</strong>.</p>'
+    },
+    dampkap: {
+      title: 'Dampkap',
+      tag: '💨 Uitleg',
+      parent: 'keuken',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/Keuken/Dampkap/Dampkap%20afstandsbediening.JPG" alt="Afstandsbediening van de dampkap"/>',
+      body: '<p>Richt de afstandsbediening op de lichten aan de <strong>rechterzijkant</strong> van de dampkap om deze in te schakelen.</p>'
+    },
+    microgolf: {
+      title: 'Microgolf',
+      tag: '📖 Uitleg',
+      parent: 'keuken',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/Keuken/Microgolf.JPG" alt="Microgolf"/>',
+      body: '<p>Onder <a href="https://www.pelgrim.be/wp-content/uploads/sites/3/2024/09/839466-V2-IFU-Pelgrim-MAC214-OM140-NL_FR_DE_EN-nc.pdf" target="_blank" rel="noopener">deze link</a> kan je de handleiding van de microgolf terugvinden, wanneer dit niet duidelijk is.</p>'
     }
   };
 
@@ -241,7 +271,7 @@
     mediaEl.innerHTML = g.media;
     mediaEl.style.display = g.media ? 'block' : 'none';
     document.getElementById('modalBody').innerHTML =
-      '<a href="#" class="back-link" onclick="event.preventDefault(); openGuide(\'tvmuziek\');">← Terug</a>' + g.body;
+      '<a href="#" class="back-link" onclick="event.preventDefault(); openGuide(\'' + g.parent + '\');">← Terug</a>' + g.body;
   }
 
   function closeGuide() {
