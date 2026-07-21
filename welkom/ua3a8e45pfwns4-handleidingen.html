@@ -72,6 +72,15 @@
     .modal-body ul.modal-list li { font-size: .95rem; font-weight: 300; color: #3a3a3a; line-height: 1.7; margin-bottom: .55rem; }
     .modal-body ul.modal-list li:last-child { margin-bottom: 0; }
 
+    /* SUBMENU (within modal) */
+    .submenu { display: grid; grid-template-columns: repeat(2, 1fr); gap: .9rem; margin-top: .3rem; }
+    .submenu-item { position: relative; aspect-ratio: 4 / 3; overflow: hidden; cursor: pointer; border: none; padding: 0; display: block; width: 100%; background: var(--black); font-family: inherit; }
+    .submenu-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s ease; }
+    .submenu-item:hover img { transform: scale(1.05); }
+    .submenu-label { position: absolute; left: 0; right: 0; bottom: 0; padding: .55rem .7rem; background: linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,0) 100%); color: white; font-family: var(--serif); font-weight: 700; font-size: .82rem; text-align: left; }
+    .back-link { display: inline-block; font-size: .78rem; font-weight: 600; letter-spacing: .06em; color: var(--gray); text-decoration: none; margin-bottom: .8rem; }
+    .back-link:hover { color: var(--black); }
+
     .light-sec { background: var(--light); }
 
     footer { background: var(--black); color: rgba(255,255,255,.38); text-align: center; padding: 1.6rem 2rem; font-size: .7rem; font-weight: 300; letter-spacing: .08em; border-top: 1px solid rgba(255,255,255,.08); }
@@ -130,22 +139,10 @@
         </span>
       </button>
 
-      <button class="guide-tile" onclick="openGuide('googletv')" type="button">
-        <img src="../fotos/Welkomstpagina/Handleidingen/TV%20%26%20Muziek/Televisie/Google%20TV.JPG" alt="Google TV"/>
-        <div class="tile-overlay"></div>
-        <span class="tile-label">
-          <span class="tile-eyebrow">Foto</span>
-          <span class="tile-title">Google TV</span>
-        </span>
-      </button>
-
-      <button class="guide-tile" onclick="openGuide('sonos')" type="button">
-        <img src="../fotos/Welkomstpagina/Handleidingen/TV%20%26%20Muziek/Sonos/Sonos.JPG" alt="Sonos"/>
-        <div class="tile-overlay"></div>
-        <span class="tile-label">
-          <span class="tile-eyebrow">Foto</span>
-          <span class="tile-title">Sonos</span>
-        </span>
+      <button class="guide-tile text-tile" onclick="openGuide('tvmuziek')" type="button">
+        <span class="big-icon">📺</span>
+        <span class="tile-eyebrow-static">Uitleg</span>
+        <span class="tile-title-static">TV &amp; muziek</span>
       </button>
 
     </div>
@@ -183,6 +180,17 @@
       media: '<img src="../fotos/Welkomstpagina/Handleidingen/Domotica/Digital%20Black.JPG" alt="Domotica-paneel voor verwarming en verlichting"/>',
       body: '<p>Op het schermpje kies je uit vier opties:</p><ul class="modal-list"><li><strong>Heat</strong> (linksboven) — warmt elke kamer automatisch op tot 21°C.</li><li><strong>Cool</strong> (rechtsboven) — koelt elke kamer automatisch af tot 24°C.</li><li><strong>Ventilatie</strong> (linksonder) — staat altijd aan en houdt de badkamers voldoende geventileerd, zodat de vochtigheidsgraad aanvaardbaar blijft.</li><li><strong>Standaard alles uit</strong> (rechtsonder) — druk hierop vóór je vertrekt: alle lichten in het huis gaan automatisch uit, behalve die met een lichtsensor, die na verloop van tijd vanzelf uitschakelen.</li></ul>'
     },
+    tvmuziek: {
+      title: 'TV & Muziek',
+      tag: '📺 Kies een onderdeel',
+      menu: [
+        { id: 'googletv', label: 'Google TV', img: '../fotos/Welkomstpagina/Handleidingen/TV%20%26%20Muziek/Televisie/Google%20TV.JPG' },
+        { id: 'sonos', label: 'Sonos', img: '../fotos/Welkomstpagina/Handleidingen/TV%20%26%20Muziek/Sonos/Sonos.JPG' }
+      ]
+    }
+  };
+
+  var subguides = {
     googletv: {
       title: 'Google TV',
       tag: '📺 Uitleg',
@@ -202,11 +210,38 @@
     if (!g) return;
     document.getElementById('modalTag').textContent = g.tag;
     document.getElementById('modalTitle').textContent = g.title;
-    document.getElementById('modalBody').innerHTML = g.body;
+    var mediaEl = document.getElementById('modalMedia');
+    var bodyEl = document.getElementById('modalBody');
+    if (g.menu) {
+      mediaEl.innerHTML = '';
+      mediaEl.style.display = 'none';
+      var html = '<div class="submenu">';
+      g.menu.forEach(function (item) {
+        html += '<button class="submenu-item" onclick="openSubGuide(\'' + item.id + '\')" type="button">' +
+                  '<img src="' + item.img + '" alt="' + item.label + '"/>' +
+                  '<span class="submenu-label">' + item.label + '</span>' +
+                '</button>';
+      });
+      html += '</div>';
+      bodyEl.innerHTML = html;
+    } else {
+      bodyEl.innerHTML = g.body;
+      mediaEl.innerHTML = g.media;
+      mediaEl.style.display = g.media ? 'block' : 'none';
+    }
+    document.getElementById('modalBackdrop').classList.add('open');
+  }
+
+  function openSubGuide(id) {
+    var g = subguides[id];
+    if (!g) return;
+    document.getElementById('modalTag').textContent = g.tag;
+    document.getElementById('modalTitle').textContent = g.title;
     var mediaEl = document.getElementById('modalMedia');
     mediaEl.innerHTML = g.media;
     mediaEl.style.display = g.media ? 'block' : 'none';
-    document.getElementById('modalBackdrop').classList.add('open');
+    document.getElementById('modalBody').innerHTML =
+      '<a href="#" class="back-link" onclick="event.preventDefault(); openGuide(\'tvmuziek\');">← Terug</a>' + g.body;
   }
 
   function closeGuide() {
