@@ -68,6 +68,10 @@
     .modal-body .tag { margin-bottom: .5rem; }
     .modal-body h3 { margin-bottom: .8rem; }
 
+    .modal-body ul.modal-list { margin-top: .4rem; padding-left: 1.1rem; }
+    .modal-body ul.modal-list li { font-size: .95rem; font-weight: 300; color: #3a3a3a; line-height: 1.7; margin-bottom: .55rem; }
+    .modal-body ul.modal-list li:last-child { margin-bottom: 0; }
+
     .light-sec { background: var(--light); }
 
     footer { background: var(--black); color: rgba(255,255,255,.38); text-align: center; padding: 1.6rem 2rem; font-size: .7rem; font-weight: 300; letter-spacing: .08em; border-top: 1px solid rgba(255,255,255,.08); }
@@ -117,10 +121,13 @@
         </span>
       </button>
 
-      <button class="guide-tile text-tile" onclick="openGuide('verwarming')" type="button">
-        <span class="big-icon">🌡️</span>
-        <span class="tile-eyebrow-static">Uitleg</span>
-        <span class="tile-title-static">Verwarming</span>
+      <button class="guide-tile" onclick="openGuide('verwarming')" type="button">
+        <img src="../fotos/Welkomstpagina/Handleidingen/Domotica/Digital%20Black.JPG" alt="Domotica-paneel voor verwarming en verlichting"/>
+        <div class="tile-overlay"></div>
+        <span class="tile-label">
+          <span class="tile-eyebrow">Foto</span>
+          <span class="tile-title">Verwarming</span>
+        </span>
       </button>
 
       <button class="guide-tile text-tile" onclick="openGuide('tv')" type="button">
@@ -161,8 +168,8 @@
     verwarming: {
       title: 'Verwarming',
       tag: '🌡️ Uitleg',
-      media: '',
-      body: '<p>Het zwarte schermpje naast de deur boven bedient de verwarming. Alles staat automatisch ingesteld op <strong>21°C overdag</strong> en <strong>19°C \'s nachts</strong> — je hoeft dus niets aan te passen.</p><p>Wil je toch bijsturen? <strong>Heat</strong> verwarmt actief tot 21°C, <strong>Cooling</strong> koelt wanneer het te warm wordt.</p>'
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/Domotica/Digital%20Black.JPG" alt="Domotica-paneel voor verwarming en verlichting"/>',
+      body: '<p>Op het schermpje kies je uit vier opties:</p><ul class="modal-list"><li><strong>Heat</strong> (linksboven) — warmt elke kamer automatisch op tot 21°C.</li><li><strong>Cool</strong> (rechtsboven) — koelt elke kamer automatisch af tot 24°C.</li><li><strong>Ventilatie</strong> (linksonder) — staat altijd aan en houdt de badkamers voldoende geventileerd, zodat de vochtigheidsgraad aanvaardbaar blijft.</li><li><strong>Standaard alles uit</strong> (rechtsonder) — druk hierop vóór je vertrekt: alle lichten in het huis gaan automatisch uit, behalve die met een lichtsensor, die na verloop van tijd vanzelf uitschakelen.</li></ul>'
     },
     tv: {
       title: 'TV & muziek',
