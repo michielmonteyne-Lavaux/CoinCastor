@@ -130,10 +130,22 @@
         </span>
       </button>
 
-      <button class="guide-tile text-tile" onclick="openGuide('tv')" type="button">
-        <span class="big-icon">📺</span>
-        <span class="tile-eyebrow-static">Uitleg</span>
-        <span class="tile-title-static">TV &amp; muziek</span>
+      <button class="guide-tile" onclick="openGuide('googletv')" type="button">
+        <img src="../fotos/Welkomstpagina/Handleidingen/TV%20%26%20Muziek/Televisie/Google%20TV.JPG" alt="Google TV"/>
+        <div class="tile-overlay"></div>
+        <span class="tile-label">
+          <span class="tile-eyebrow">Foto</span>
+          <span class="tile-title">Google TV</span>
+        </span>
+      </button>
+
+      <button class="guide-tile" onclick="openGuide('sonos')" type="button">
+        <img src="../fotos/Welkomstpagina/Handleidingen/TV%20%26%20Muziek/Sonos/Sonos.JPG" alt="Sonos"/>
+        <div class="tile-overlay"></div>
+        <span class="tile-label">
+          <span class="tile-eyebrow">Foto</span>
+          <span class="tile-title">Sonos</span>
+        </span>
       </button>
 
     </div>
@@ -171,11 +183,17 @@
       media: '<img src="../fotos/Welkomstpagina/Handleidingen/Domotica/Digital%20Black.JPG" alt="Domotica-paneel voor verwarming en verlichting"/>',
       body: '<p>Op het schermpje kies je uit vier opties:</p><ul class="modal-list"><li><strong>Heat</strong> (linksboven) — warmt elke kamer automatisch op tot 21°C.</li><li><strong>Cool</strong> (rechtsboven) — koelt elke kamer automatisch af tot 24°C.</li><li><strong>Ventilatie</strong> (linksonder) — staat altijd aan en houdt de badkamers voldoende geventileerd, zodat de vochtigheidsgraad aanvaardbaar blijft.</li><li><strong>Standaard alles uit</strong> (rechtsonder) — druk hierop vóór je vertrekt: alle lichten in het huis gaan automatisch uit, behalve die met een lichtsensor, die na verloop van tijd vanzelf uitschakelen.</li></ul>'
     },
-    tv: {
-      title: 'TV & muziek',
+    googletv: {
+      title: 'Google TV',
       tag: '📺 Uitleg',
-      media: '',
-      body: '<p><strong>Google TV</strong> — cast eenvoudig vanuit je telefoon (YouTube, Netflix, Spotify, …) zodra je op de wifi zit.</p><p><strong>Sonos</strong> speakers zijn ook beschikbaar zodra je verbonden bent met de wifi — zoek "Sonos" in je muziek-app.</p>'
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/TV%20%26%20Muziek/Televisie/Google%20TV.JPG" alt="Google TV"/>',
+      body: '<p>Cast eenvoudig vanuit je telefoon (YouTube, Netflix, Spotify, …) zodra je op de wifi zit.</p>'
+    },
+    sonos: {
+      title: 'Sonos',
+      tag: '🎵 Uitleg',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/TV%20%26%20Muziek/Sonos/Sonos.JPG" alt="Sonos"/>',
+      body: '<p>De Sonos speakers zijn beschikbaar zodra je verbonden bent met de wifi — zoek "Sonos" in je muziek-app.</p>'
     }
   };
 
