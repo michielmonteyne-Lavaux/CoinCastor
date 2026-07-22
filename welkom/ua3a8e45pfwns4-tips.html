@@ -67,6 +67,10 @@
     .swim-tile .tile-label { position: absolute; left: 0; right: 0; bottom: 0; padding: 1.1rem 1.2rem; text-align: left; color: white; }
     .swim-tile .tile-eyebrow { font-size: .58rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: .3rem; }
     .swim-tile .tile-title { font-family: var(--serif); font-weight: 700; font-size: 1.05rem; color: white; line-height: 1.2; }
+    .swim-tile.text-tile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .6rem; background: var(--black); padding: 1.2rem; text-align: center; }
+    .swim-tile.text-tile .tile-eyebrow-static { font-size: .58rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+    .swim-tile.text-tile .tile-title-static { font-family: var(--serif); font-weight: 700; font-size: 1.05rem; text-transform: uppercase; letter-spacing: .02em; color: white; }
+    .swim-tile.text-tile .tile-sub-static { font-size: .76rem; font-weight: 300; color: rgba(255,255,255,.65); line-height: 1.5; }
 
     footer { background: var(--black); color: rgba(255,255,255,.38); text-align: center; padding: 1.6rem 2rem; font-size: .7rem; font-weight: 300; letter-spacing: .08em; border-top: 1px solid rgba(255,255,255,.08); }
     footer a { color: rgba(255,255,255,.55); text-decoration: none; }
@@ -92,8 +96,21 @@
     <a href="ua3a8e45pfwns4-algemeen.html">Algemene informatie</a>
     <a class="active" href="ua3a8e45pfwns4-tips.html">Tips voor de omgeving</a>
     <a href="ua3a8e45pfwns4-handleidingen.html">Handleidingen</a>
+    <a href="ua3a8e45pfwns4-vertrek.html">Bij vertrek</a>
   </nav>
 </div>
+
+<!-- MONSCHAU -->
+<section class="sec">
+  <div class="wrap">
+    <div class="fietsen-intro">
+      <p class="tag">🇩🇪 Uitstapje over de grens</p>
+      <h2>Monschau</h2>
+      <p>Een persoonlijke aanrader van ons: als jullie route het toelaat, leg dan onderweg naar Coin Castor een tussenstop in bij het pittoreske vakwerkdorpje Monschau, net over de grens in de Duitse Eifel — nauwelijks een omweg, maar meer dan de moeite waard. Wandel langs de rivier de Rur tussen eeuwenoude vakwerkhuizen, en geniet van een koffie of de beroemde Monschauer mosterd op een van de terrasjes. Vanaf Monschau is het nog ongeveer drie kwartier rijden tot aan Coin Castor.</p>
+      <a class="link-btn" href="https://maps.app.goo.gl/DyVk5tsoJTpHmZ9M8" target="_blank" rel="noopener">Route naar de parking →</a>
+    </div>
+  </div>
+</section>
 
 <!-- UIT ETEN -->
 <section class="sec">
@@ -132,6 +149,13 @@
         <p>De lokale frituur voor een lekkere snelle hap.</p>
         <a class="link" href="http://www.friterie-sebastien.be/" target="_blank" rel="noopener">friterie-sebastien.be →</a>
       </div>
+      <div class="resto" style="grid-column: 1 / -1">
+        <span class="icon">☕</span>
+        <h3>Le Coffee Ride Café</h3>
+        <p class="sub">Coo–Stavelot</p>
+        <p>Vooral een leuke plek voor wie houdt van een lekkere koffie met een stuk taart — en een paradijsje voor de liefhebbers van het wielrennen.</p>
+        <a class="link" href="https://www.lecoffeeride.cc/cafe" target="_blank" rel="noopener">lecoffeeride.cc →</a>
+      </div>
     </div>
   </div>
 </section>
@@ -166,7 +190,7 @@
     <div class="swim-intro">
       <p class="tag">🏊 Verfrissing</p>
       <h2>Leuke plekken om te zwemmen</h2>
-      <p>Onze favoriete zwemplekjes in de Amblève, op wandelafstand — tik op een foto voor de route op Komoot.</p>
+      <p>Onze favoriete zwemplekjes in de buurt — tik voor meer informatie of de locatie op Komoot.</p>
     </div>
     <div class="swim-grid">
       <a class="swim-tile" href="https://www.komoot.com/nl-nl/tour/3111044351" target="_blank" rel="noopener">
@@ -185,6 +209,44 @@
           <span class="tile-title">Amblève</span>
         </span>
       </a>
+      <a class="swim-tile text-tile" href="https://www.robertville.be/index.php?rub=activites&amp;activite=lesBains" target="_blank" rel="noopener">
+        <span class="tile-eyebrow-static">Zwembad · Robertville</span>
+        <span class="tile-title-static">Les Bains de Robertville</span>
+        <span class="tile-sub-static">Buitenzwembad met strandje &amp; kano's — ca. 25 min. rijden</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITEITEN -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center">
+      <p class="tag">🎡 Voor een dagje uit</p>
+      <h2>Activiteiten in de buurt</h2>
+    </div>
+    <div class="resto-grid">
+      <div class="resto">
+        <span class="icon">🎢</span>
+        <h3>Plopsaland Ardennes</h3>
+        <p class="sub">Studio 100-pretpark · Coo</p>
+        <p>Themapark vlak bij de Watervallen van Coo, met attracties voor jong en oud — van De Smurfer tot Maya Splash. Zo'n 10 minuten rijden vanaf het huis.</p>
+        <a class="link" href="https://www.plopsa.com/nl/plopsaland-ardennes" target="_blank" rel="noopener">plopsa.com →</a>
+      </div>
+      <div class="resto">
+        <span class="icon">🛞</span>
+        <h3>Val de Wanne</h3>
+        <p class="sub">Activity center · Trois-Ponts</p>
+        <p>Devalkart, trike, een reuzendoolhof en nog veel meer, met een panoramaterras om nadien iets te drinken. Nog geen 10 minuten rijden vanaf het huis.</p>
+        <a class="link" href="https://www.levaldewanne.com/" target="_blank" rel="noopener">levaldewanne.com →</a>
+      </div>
+      <div class="resto" style="grid-column: 1 / -1">
+        <span class="icon">🏛️</span>
+        <h3>Abbaye de Stavelot</h3>
+        <p class="sub">Musea &amp; kloostertuin · Stavelot</p>
+        <p>Eeuwenoude abdij met een prachtige kloostertuin en drie musea, waaronder het Circuit Spa-Francorchamps museum. Zo'n 15 minuten rijden vanaf het huis.</p>
+        <a class="link" href="https://abbayedestavelot.be/nl/" target="_blank" rel="noopener">abbayedestavelot.be →</a>
+      </div>
     </div>
   </div>
 </section>
