@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <meta name="referrer" content="no-referrer"/>
+  <title>Algemene informatie — Coin Castor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #1a1a1a; --gray: #888; --light: #f4f2ed; --white: #ffffff; --border: #e2dfd8;
+      --warn-bg: #fff8e6; --warn-border: #e8c969;
+      --serif: 'Playfair Display', Georgia, serif; --sans: 'Raleway', sans-serif;
+    }
+    body { font-family: var(--sans); color: var(--black); background: var(--white); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+
+    /* SUBHERO */
+    .subhero { background: var(--black); color: white; padding: 4rem 1.5rem 2.4rem; text-align: center; }
+    .subhero .eyebrow { font-size: .66rem; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: .9rem; }
+    .subhero h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(1.9rem,5vw,2.8rem); text-transform: uppercase; letter-spacing: .04em; line-height: 1.1; margin-bottom: 1.8rem; }
+    .subnav { display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem; }
+    .subnav a { font-size: .64rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; color: rgba(255,255,255,.75); text-decoration: none; padding: .55rem 1.2rem; border: 1px solid rgba(255,255,255,.32); transition: all .2s; }
+    .subnav a:hover { border-color: rgba(255,255,255,.7); color: white; }
+    .subnav a.active { background: white; color: var(--black); border-color: white; }
+    .subnav a.back { color: rgba(255,255,255,.5); border-color: transparent; padding-left: .4rem; padding-right: .4rem; }
+    .subnav a.back:hover { color: white; }
+
+    /* SECTIONS */
+    .sec { padding: 4.5rem 2rem; }
+    .wrap { max-width: 1000px; margin: 0 auto; }
+    .narrow { max-width: 640px; margin: 0 auto; }
+    .tag { font-size: .63rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gray); margin-bottom: .6rem; }
+    h2 { font-family: var(--serif); font-size: clamp(1.4rem,2.6vw,1.95rem); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; margin-bottom: 1.4rem; }
+    h3 { font-family: var(--serif); font-size: 1.08rem; font-weight: 700; letter-spacing: .02em; margin-bottom: .5rem; }
+    p { font-size: .95rem; font-weight: 300; color: #3a3a3a; line-height: 1.85; }
+    p + p { margin-top: .8rem; }
+    strong { font-weight: 600; color: var(--black); }
+    .center { text-align: center; }
+
+    /* KEY PHOTO */
+    .key-photo { margin: 2rem auto 0; max-width: 480px; }
+    .key-photo img { width: 100%; display: block; border: 1px solid var(--border); }
+    .key-photo figcaption { font-size: .74rem; font-weight: 400; letter-spacing: .06em; color: var(--gray); margin-top: .8rem; font-style: italic; font-family: var(--serif); }
+
+    /* PRAKTISCH-BLOKKEN */
+    .blocks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 2rem; }
+    .block { background: white; padding: 1.8rem 1.6rem; }
+    .block .icon { font-size: 1.4rem; line-height: 1; margin-bottom: .8rem; display: block; }
+    .block h3 { margin-bottom: .4rem; }
+    .block p { font-size: .9rem; line-height: 1.7; }
+
+    /* WIFI */
+    .wifi-card { background: var(--black); color: white; padding: 2rem 1.8rem; margin: 2.5rem auto 0; max-width: 560px; display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+    .wifi-qr { flex-shrink: 0; text-align: center; }
+    .wifi-qr img { width: 132px; height: 132px; background: white; padding: 8px; display: block; }
+    .wifi-qr-cap { font-size: .6rem; letter-spacing: .06em; color: rgba(255,255,255,.5); margin-top: .7rem; max-width: 140px; line-height: 1.5; }
+    .wifi-details { text-align: left; }
+    .wifi-card .lbl { font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: .3rem; }
+    .wifi-card .val { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; word-break: break-all; }
+    .wifi-card .val + .lbl { margin-top: 1.4rem; }
+
+    /* WAARSCHUWING */
+    .warn { background: var(--warn-bg); border-left: 3px solid var(--warn-border); padding: 1.4rem 1.6rem; margin-top: 1.2rem; }
+    .warn .warn-head { font-size: .65rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: #8a6f0e; margin-bottom: .5rem; }
+    .warn p { font-size: .9rem; }
+
+    .light-sec { background: var(--light); }
+
+    /* WINKELS */
+    .winkels-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 2rem; }
+    .winkel { background: white; padding: 1.6rem 1.5rem; }
+    .winkel .winkel-type { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gray); margin-bottom: .4rem; }
+    .winkel h3 { font-size: 1.05rem; margin-bottom: .8rem; }
+    .winkel .uren { font-size: .85rem; line-height: 1.7; color: #444; }
+    .winkel-alert { margin-top: .9rem; background: var(--warn-bg); border-left: 3px solid var(--warn-border); padding: .6rem .8rem; font-size: .78rem; line-height: 1.5; color: #6b5610; }
+    .winkel .check { display: inline-block; margin-top: .8rem; font-size: .66rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--gray); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 1px; }
+    .winkel .check:hover { color: var(--black); border-color: var(--black); }
+    .winkels-note { text-align: center; font-size: .78rem; color: var(--gray); margin-top: 1.6rem; letter-spacing: .04em; }
+
+    footer { background: var(--black); color: rgba(255,255,255,.38); text-align: center; padding: 1.6rem 2rem; font-size: .7rem; font-weight: 300; letter-spacing: .08em; border-top: 1px solid rgba(255,255,255,.08); }
+    footer a { color: rgba(255,255,255,.55); text-decoration: none; }
+
+    @media (max-width: 720px) {
+      .sec { padding: 3.4rem 1.2rem; }
+      .blocks { grid-template-columns: 1fr; }
+      .wifi-card { flex-direction: column; }
+      .wifi-details { text-align: center; }
+      .winkels-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SUBHERO -->
+<div class="subhero">
+  <p class="eyebrow">Coin Castor · Lavaux</p>
+  <h1>Algemene informatie</h1>
+  <nav class="subnav">
+    <a class="back" href="3qn4uar7ffskst.html">← Overzicht</a>
+    <a class="active" href="3qn4uar7ffskst-algemeen.html">Algemene informatie</a>
+    <a href="3qn4uar7ffskst-tips.html">Tips voor de omgeving</a>
+    <a href="3qn4uar7ffskst-handleidingen.html">Handleidingen</a>
+    <a href="3qn4uar7ffskst-vertrek.html">Bij vertrek</a>
+  </nav>
+</div>
+
+<!-- SLEUTELS -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center">
+      <p class="tag">🔑 Aankomst</p>
+      <h2>Sleutels &amp; toegang</h2>
+    </div>
+    <div class="narrow center">
+      <p>Witte trap naar de voordeur → om de hoek hangt een <strong>sleutelkastje</strong>. Dezelfde sleutel werkt boven en beneden.</p>
+      <p>Michiel stuurt je de dag voor aankomst een <strong>WhatsApp-bericht</strong> met jullie persoonlijke code voor het sleutelkastje.</p>
+      <figure class="key-photo">
+        <img src="../fotos/Welkomstpagina/Algemene%20informatie/Voordeur.jpg" alt="De voordeur met witte trap — het sleutelkastje hangt om de hoek rechts"/>
+        <figcaption>Volg de pijl om de hoek naar het sleutelkastje</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT NOOD -->
+<section class="sec light-sec">
+  <div class="wrap">
+    <div class="center">
+      <p class="tag">🆘 Bereikbaarheid</p>
+      <h2>Contact in geval van nood</h2>
+    </div>
+    <div class="blocks">
+      <div class="block">
+        <span class="icon">📱</span>
+        <h3>Michiel</h3>
+        <p>Primair contactpersoon<br/><a href="https://wa.me/32485153740" target="_blank" rel="noopener"><strong>+32 485 15 37 40</strong></a></p>
+      </div>
+      <div class="block">
+        <span class="icon">📱</span>
+        <h3>Greet</h3>
+        <p><a href="https://wa.me/32497853625" target="_blank" rel="noopener"><strong>+32 497 85 36 25</strong></a></p>
+      </div>
+    </div>
+    <p class="winkels-note">Stuur bij voorkeur een WhatsApp-bericht.</p>
+  </div>
+</section>
+
+<!-- WIFI -->
+<section class="sec light-sec">
+  <div class="wrap center">
+    <p class="tag">📡 Internet</p>
+    <h2>WiFi</h2>
+    <div class="wifi-card">
+      <div class="wifi-qr">
+        <img src="assets/wifi-qr.png" alt="QR-code om automatisch te verbinden met de wifi" width="132" height="132"/>
+        <p class="wifi-qr-cap">Scan met je camera om automatisch te verbinden</p>
+      </div>
+      <div class="wifi-details">
+        <div class="lbl">Netwerk</div>
+        <div class="val">Coincastor</div>
+        <div class="lbl">Wachtwoord</div>
+        <div class="val">Ditiseenvakantiehuisgekochtin22</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IN HUIS -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center">
+      <p class="tag">🏡 In huis</p>
+      <h2>Praktische info</h2>
+    </div>
+    <div class="blocks">
+      <div class="block">
+        <span class="icon">🛏</span>
+        <h3>Beddengoed &amp; handdoeken</h3>
+        <p>Liggen al klaar op de bedden. Extra exemplaren vind je in de witte kast beneden in de gang.</p>
+      </div>
+      <div class="block">
+        <span class="icon">🗑️</span>
+        <h3>Afval</h3>
+        <p>Vuilnis- en PMD-zakken in de kast naast de koelkast. Ophaling van <strong>restafval op maandag</strong>, ophaling van <strong>PMD op dinsdag</strong> — behalve op feestdagen.</p>
+      </div>
+      <div class="block" style="grid-column: 1 / -1">
+        <span class="icon">🔌</span>
+        <h3>Laadpaal</h3>
+        <p>De laadpas vind je in de kast naast de koelkast. Verbruik wordt op afstand opgevolgd en verrekend via de waarborg aan <strong>€0,35/kWh</strong>.</p>
+      </div>
+      <div class="block" style="grid-column: 1 / -1">
+        <span class="icon">🦝</span>
+        <h3>Wasberen!</h3>
+        <div class="warn">
+          <p class="warn-head">Let op</p>
+          <p>Geen etensresten op het terras a.u.b. — er zitten wasberen in het bos en we willen ze niet verwennen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WINKELS -->
+<section class="sec light-sec">
+  <div class="wrap">
+    <div class="center">
+      <p class="tag">🛒 Boodschappen</p>
+      <h2>Winkels &amp; openingsuren</h2>
+    </div>
+    <div class="winkels-grid">
+      <div class="winkel">
+        <p class="winkel-type">Bakker · Grand-Halleux</p>
+        <h3>🥐 Fred's Corner</h3>
+        <p class="uren">Do–zo: <strong>8u – 15u</strong><br/>Ma–wo: gesloten</p>
+        <p class="winkel-alert" data-hide-after="2026-08-05">🏖️ Gesloten wegens jaarlijks verlof t.e.m. <strong>5 augustus 2026</strong></p>
+        <a class="check" href="https://www.google.com/maps/search/?api=1&query=Fred%27s+Corner+Grand-Halleux" target="_blank" rel="noopener">Actuele uren →</a>
+      </div>
+      <div class="winkel">
+        <p class="winkel-type">Bakker · Trois-Ponts</p>
+        <h3>🥖 Lily Délices</h3>
+        <p class="uren">Ma–za: <strong>vanaf 7u</strong><br/>Zo: beperkte uren</p>
+        <a class="check" href="https://www.google.com/maps/search/?api=1&query=Lily+D%C3%A9lices+Trois-Ponts" target="_blank" rel="noopener">Actuele uren →</a>
+      </div>
+      <div class="winkel">
+        <p class="winkel-type">Slager · Grand-Halleux</p>
+        <h3>🥩 Boucherie Curnel-Remy</h3>
+        <p class="uren">Di–za: <strong>9u–12u30 &amp; 13u30–18u30</strong><br/>Zo: <strong>9u – 12u30</strong><br/>Ma: gesloten (behalve juli–aug.)</p>
+        <a class="check" href="https://www.google.com/maps/search/?api=1&query=Boucherie+Curnel-Remy+Grand-Halleux" target="_blank" rel="noopener">Actuele uren →</a>
+      </div>
+      <div class="winkel">
+        <p class="winkel-type">Supermarkt · Trois-Ponts</p>
+        <h3>🛒 Proxy Delhaize</h3>
+        <p class="uren">Ma–za: <strong>8u30–19u</strong><br/>Zo: <strong>8u – 12u</strong></p>
+        <a class="check" href="https://www.google.com/maps/search/?api=1&query=Proxy+Delhaize+Trois-Ponts" target="_blank" rel="noopener">Actuele uren →</a>
+      </div>
+      <div class="winkel" style="grid-column: 1 / -1">
+        <p class="winkel-type">Supermarkt · Stavelot</p>
+        <h3>🛒 OKay Stavelot</h3>
+        <p class="uren">Ma–za: <strong>8u – 19u30</strong><br/>Zo: <strong>8u – 12u30</strong></p>
+        <a class="check" href="https://www.google.com/maps/search/?api=1&query=OKay+Stavelot+Route+de+Malm%C3%A9dy+18B" target="_blank" rel="noopener">Actuele uren →</a>
+      </div>
+    </div>
+    <p class="winkels-note">Openingsuren kunnen wijzigen op feestdagen — tik op "Actuele uren" voor de meest recente info.</p>
+  </div>
+</section>
+
+<footer>
+  © Coin Castor · <a href="../index.html">coincastor.be</a>
+</footer>
+
+<script>
+  document.querySelectorAll('[data-hide-after]').forEach(function (el) {
+    var deadline = new Date(el.getAttribute('data-hide-after') + 'T23:59:59');
+    if (new Date() > deadline) el.style.display = 'none';
+  });
+</script>
+
+</body>
+</html>

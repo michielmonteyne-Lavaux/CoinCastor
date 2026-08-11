@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <meta name="referrer" content="no-referrer"/>
+  <title>Tips voor de omgeving — Coin Castor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #1a1a1a; --gray: #888; --light: #f4f2ed; --white: #ffffff; --border: #e2dfd8;
+      --serif: 'Playfair Display', Georgia, serif; --sans: 'Raleway', sans-serif;
+    }
+    body { font-family: var(--sans); color: var(--black); background: var(--white); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+
+    /* SUBHERO */
+    .subhero { background: var(--black); color: white; padding: 4rem 1.5rem 2.4rem; text-align: center; }
+    .subhero .eyebrow { font-size: .66rem; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: .9rem; }
+    .subhero h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(1.9rem,5vw,2.8rem); text-transform: uppercase; letter-spacing: .04em; line-height: 1.1; margin-bottom: 1.8rem; }
+    .subnav { display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem; }
+    .subnav a { font-size: .64rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; color: rgba(255,255,255,.75); text-decoration: none; padding: .55rem 1.2rem; border: 1px solid rgba(255,255,255,.32); transition: all .2s; }
+    .subnav a:hover { border-color: rgba(255,255,255,.7); color: white; }
+    .subnav a.active { background: white; color: var(--black); border-color: white; }
+    .subnav a.back { color: rgba(255,255,255,.5); border-color: transparent; padding-left: .4rem; padding-right: .4rem; }
+    .subnav a.back:hover { color: white; }
+
+    /* SECTIONS */
+    .sec { padding: 4.5rem 2rem; }
+    .wrap { max-width: 1000px; margin: 0 auto; }
+    .tag { font-size: .63rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gray); margin-bottom: .6rem; }
+    h2 { font-family: var(--serif); font-size: clamp(1.4rem,2.6vw,1.95rem); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; margin-bottom: 1.4rem; }
+    h3 { font-family: var(--serif); font-size: 1.08rem; font-weight: 700; letter-spacing: .02em; margin-bottom: .5rem; }
+    p { font-size: .95rem; font-weight: 300; color: #3a3a3a; line-height: 1.85; }
+    strong { font-weight: 600; color: var(--black); }
+    .center { text-align: center; }
+    .light-sec { background: var(--light); }
+
+    /* RESTAURANTS */
+    .resto-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 2rem; }
+    .resto { background: white; padding: 1.8rem 1.6rem; }
+    .resto .icon { font-size: 1.4rem; display: block; margin-bottom: .6rem; }
+    .resto h3 { margin-bottom: .35rem; }
+    .resto .sub { font-size: .82rem; color: var(--gray); margin-bottom: .55rem; font-weight: 400; }
+    .resto p { font-size: .9rem; line-height: 1.65; margin-bottom: .8rem; }
+    .resto a.link { display: inline-block; font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--black); border-bottom: 1px solid var(--black); padding-bottom: 2px; text-decoration: none; }
+    .resto a.link:hover { opacity: .55; }
+    .resto.fav { background: #faf7ef; }
+    .closed-note { margin-top: .8rem; font-size: .78rem; font-weight: 500; color: #a8620e; background: #fff4e6; border-left: 3px solid #e0a355; padding: .55rem .75rem; line-height: 1.5; }
+
+    /* WANDELINGEN & FIETSEN */
+    .fietsen-intro { max-width: 640px; margin: 0 auto; text-align: center; }
+    .link-btn { display: inline-block; margin-top: 1.6rem; font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--black); text-decoration: none; background: transparent; border: 1px solid var(--black); padding: .9rem 2rem; transition: all .2s; }
+    .link-btn:hover { background: var(--black); color: white; }
+
+    /* ZWEMMEN (klikbare foto-tegels) */
+    .swim-intro { max-width: 640px; margin: 0 auto 2.2rem; text-align: center; }
+    .swim-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.4rem; }
+    .swim-tile { position: relative; aspect-ratio: 4 / 3; overflow: hidden; display: block; text-decoration: none; background: var(--black); }
+    .swim-tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s ease; }
+    .swim-tile:hover img { transform: scale(1.05); }
+    .swim-tile .tile-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.05) 60%); }
+    .swim-tile .tile-label { position: absolute; left: 0; right: 0; bottom: 0; padding: 1.1rem 1.2rem; text-align: left; color: white; }
+    .swim-tile .tile-eyebrow { font-size: .58rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: .3rem; }
+    .swim-tile .tile-title { font-family: var(--serif); font-weight: 700; font-size: 1.05rem; color: white; line-height: 1.2; }
+    .swim-tile.text-tile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .6rem; background: var(--black); padding: 1.2rem; text-align: center; }
+    .swim-tile.text-tile .tile-eyebrow-static { font-size: .58rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+    .swim-tile.text-tile .tile-title-static { font-family: var(--serif); font-weight: 700; font-size: 1.05rem; text-transform: uppercase; letter-spacing: .02em; color: white; }
+    .swim-tile.text-tile .tile-sub-static { font-size: .76rem; font-weight: 300; color: rgba(255,255,255,.65); line-height: 1.5; }
+
+    footer { background: var(--black); color: rgba(255,255,255,.38); text-align: center; padding: 1.6rem 2rem; font-size: .7rem; font-weight: 300; letter-spacing: .08em; border-top: 1px solid rgba(255,255,255,.08); }
+    footer a { color: rgba(255,255,255,.55); text-decoration: none; }
+
+    @media (max-width: 720px) {
+      .sec { padding: 3.4rem 1.2rem; }
+      .resto-grid { grid-template-columns: 1fr; }
+      .swim-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .swim-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SUBHERO -->
+<div class="subhero">
+  <p class="eyebrow">Coin Castor · Lavaux</p>
+  <h1>Tips voor de omgeving</h1>
+  <nav class="subnav">
+    <a class="back" href="3qn4uar7ffskst.html">← Overzicht</a>
+    <a href="3qn4uar7ffskst-algemeen.html">Algemene informatie</a>
+    <a class="active" href="3qn4uar7ffskst-tips.html">Tips voor de omgeving</a>
+    <a href="3qn4uar7ffskst-handleidingen.html">Handleidingen</a>
+    <a href="3qn4uar7ffskst-vertrek.html">Bij vertrek</a>
+  </nav>
+</div>
+
+<!-- MONSCHAU -->
+<section class="sec">
+  <div class="wrap">
+    <div class="fietsen-intro">
+      <p class="tag">🇩🇪 Uitstapje over de grens</p>
+      <h2>Monschau</h2>
+      <p>Een persoonlijke aanrader van ons: als jullie route het toelaat, leg dan onderweg naar Coin Castor een tussenstop in bij het pittoreske vakwerkdorpje Monschau, net over de grens in de Duitse Eifel — nauwelijks een omweg, maar meer dan de moeite waard. Wandel langs de rivier de Rur tussen eeuwenoude vakwerkhuizen, en geniet van een koffie of de beroemde Monschauer mosterd op een van de terrasjes. Vanaf Monschau is het nog ongeveer drie kwartier rijden tot aan Coin Castor.</p>
+      <a class="link-btn" href="https://maps.app.goo.gl/DyVk5tsoJTpHmZ9M8" target="_blank" rel="noopener">Route naar de parking →</a>
+    </div>
+  </div>
+</section>
+
+<!-- UIT ETEN -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center">
+      <p class="tag">🍽️ In de buurt</p>
+      <h2>Uit eten</h2>
+    </div>
+    <div class="resto-grid">
+      <div class="resto fav">
+        <span class="icon">⭐</span>
+        <h3>Le Gastromme</h3>
+        <p class="sub">Onze favoriet!</p>
+        <p>Intiem kamerrestaurant (Nederlands koppel) met Ardeense keuken in Grand-Halleux. <strong>Reserveren is absoluut noodzakelijk.</strong></p>
+        <a class="link" href="https://www.legastromme.be/" target="_blank" rel="noopener">legastromme.be →</a>
+        <p class="closed-note" data-hide-after="2026-09-30">⚠️ Gesloten van 1 april t.e.m. 30 september — bewaar dit adresje voor je volgende bezoek!</p>
+      </div>
+      <div class="resto">
+        <span class="icon">🏔️</span>
+        <h3>Les Chalets de Loci</h3>
+        <p class="sub">Chalet aan de skipiste</p>
+        <p>Chalet-restaurant aan de skipiste met seizoensmenu. Alles met lokale producten.</p>
+        <a class="link" href="https://www.chalets-loci.com/nouveau-menu" target="_blank" rel="noopener">chalets-loci.com →</a>
+      </div>
+      <div class="resto">
+        <span class="icon">🐺</span>
+        <h3>Le Loup Gourmand</h3>
+        <p class="sub">Stavelot</p>
+        <p>Warm en eigentijds restaurant in Stavelot, vlakbij de abdij en Spa-Francorchamps.</p>
+        <a class="link" href="http://leloupgourmand.be/" target="_blank" rel="noopener">leloupgourmand.be →</a>
+      </div>
+      <div class="resto">
+        <span class="icon">🍟</span>
+        <h3>Friterie Sébastien</h3>
+        <p class="sub">Snel en lekker</p>
+        <p>De lokale frituur voor een lekkere snelle hap.</p>
+        <a class="link" href="http://www.friterie-sebastien.be/" target="_blank" rel="noopener">friterie-sebastien.be →</a>
+      </div>
+      <div class="resto" style="grid-column: 1 / -1">
+        <span class="icon">☕</span>
+        <h3>Le Coffee Ride Café</h3>
+        <p class="sub">Coo–Stavelot</p>
+        <p>Vooral een leuke plek voor wie houdt van een lekkere koffie met een stuk taart — en een paradijsje voor de liefhebbers van het wielrennen.</p>
+        <a class="link" href="https://www.lecoffeeride.cc/cafe" target="_blank" rel="noopener">lecoffeeride.cc →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WANDELINGEN -->
+<section class="sec light-sec">
+  <div class="wrap">
+    <div class="fietsen-intro">
+      <p class="tag">🥾 Voor de wandelaars</p>
+      <h2>Wandelroutes</h2>
+      <p>Onze favoriete wandelingen in de omgeving, zelf uitgestippeld en opgenomen op Komoot.</p>
+      <a class="link-btn" href="https://www.komoot.com/nl-nl/user/1688708408150/activities?type=recorded&location=50.355732,5.921397,30r" target="_blank" rel="noopener">Bekijk alle wandelroutes →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FIETSEN -->
+<section class="sec">
+  <div class="wrap">
+    <div class="fietsen-intro">
+      <p class="tag">🚴 Voor de fietsers</p>
+      <h2>Fietsroutes</h2>
+      <p>Alle routes vertrekken vanuit <strong>Le Coffee Ride HQ in Coo–Stavelot</strong>, op een kwartiertje rijden. Bekijk het volledige overzicht en download de GPX-bestanden via de link hieronder.</p>
+      <a class="link-btn" href="https://www.lecoffeeride.cc/road" target="_blank" rel="noopener">Bekijk alle fietsroutes →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ZWEMMEN -->
+<section class="sec light-sec">
+  <div class="wrap">
+    <div class="swim-intro">
+      <p class="tag">🏊 Verfrissing</p>
+      <h2>Leuke plekken om te zwemmen</h2>
+      <p>Onze favoriete zwemplekjes in de buurt — tik voor meer informatie of de locatie op Komoot.</p>
+    </div>
+    <div class="swim-grid">
+      <a class="swim-tile" href="https://www.komoot.com/nl-nl/tour/3111044351" target="_blank" rel="noopener">
+        <img src="../fotos/Welkomstpagina/Tips%20voor%20de%20omgeving/Zwemmen/Recht.JPG" alt="Zwemplek Recht"/>
+        <div class="tile-overlay"></div>
+        <span class="tile-label">
+          <span class="tile-eyebrow">Route · Komoot</span>
+          <span class="tile-title">Recht</span>
+        </span>
+      </a>
+      <a class="swim-tile" href="https://www.komoot.com/nl-nl/tour/3106175894" target="_blank" rel="noopener">
+        <img src="../fotos/Welkomstpagina/Tips%20voor%20de%20omgeving/Zwemmen/Ambl%C3%A8ve.jpg" alt="Zwemplek Amblève"/>
+        <div class="tile-overlay"></div>
+        <span class="tile-label">
+          <span class="tile-eyebrow">Route · Komoot</span>
+          <span class="tile-title">Amblève</span>
+        </span>
+      </a>
+      <a class="swim-tile text-tile" href="https://www.robertville.be/index.php?rub=activites&amp;activite=lesBains" target="_blank" rel="noopener">
+        <span class="tile-eyebrow-static">Zwembad · Robertville</span>
+        <span class="tile-title-static">Les Bains de Robertville</span>
+        <span class="tile-sub-static">Buitenzwembad met strandje &amp; kano's — ca. 25 min. rijden</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITEITEN -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center">
+      <p class="tag">🎡 Voor een dagje uit</p>
+      <h2>Activiteiten in de buurt</h2>
+    </div>
+    <div class="resto-grid">
+      <div class="resto">
+        <span class="icon">🎢</span>
+        <h3>Plopsaland Ardennes</h3>
+        <p class="sub">Studio 100-pretpark · Coo</p>
+        <p>Themapark vlak bij de Watervallen van Coo, met attracties voor jong en oud — van De Smurfer tot Maya Splash. Zo'n 10 minuten rijden vanaf het huis.</p>
+        <a class="link" href="https://www.plopsa.com/nl/plopsaland-ardennes" target="_blank" rel="noopener">plopsa.com →</a>
+      </div>
+      <div class="resto">
+        <span class="icon">🛞</span>
+        <h3>Val de Wanne</h3>
+        <p class="sub">Activity center · Trois-Ponts</p>
+        <p>Devalkart, trike, een reuzendoolhof en nog veel meer, met een panoramaterras om nadien iets te drinken. Nog geen 10 minuten rijden vanaf het huis.</p>
+        <a class="link" href="https://www.levaldewanne.com/" target="_blank" rel="noopener">levaldewanne.com →</a>
+      </div>
+      <div class="resto" style="grid-column: 1 / -1">
+        <span class="icon">🏛️</span>
+        <h3>Abbaye de Stavelot</h3>
+        <p class="sub">Musea &amp; kloostertuin · Stavelot</p>
+        <p>Eeuwenoude abdij met een prachtige kloostertuin en drie musea, waaronder het Circuit Spa-Francorchamps museum. Zo'n 15 minuten rijden vanaf het huis.</p>
+        <a class="link" href="https://abbayedestavelot.be/nl/" target="_blank" rel="noopener">abbayedestavelot.be →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © Coin Castor · <a href="../index.html">coincastor.be</a>
+</footer>
+
+<script>
+  document.querySelectorAll('[data-hide-after]').forEach(function (el) {
+    var deadline = new Date(el.getAttribute('data-hide-after') + 'T23:59:59');
+    if (new Date() > deadline) el.style.display = 'none';
+  });
+</script>
+
+</body>
+</html>

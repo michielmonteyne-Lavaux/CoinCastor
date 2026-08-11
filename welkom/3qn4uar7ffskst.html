@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <meta name="referrer" content="no-referrer"/>
+  <title>Welkom in Coin Castor — Praktische gids</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #1a1a1a;
+      --gray:  #888;
+      --light: #f4f2ed;
+      --white: #ffffff;
+      --border: #e2dfd8;
+      --accent: #a8880e;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Raleway', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--black); background: var(--white); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+
+    /* HERO */
+    .hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 7rem 1.2rem 4rem; overflow: hidden; }
+    .hero img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,.35) 0%, rgba(0,0,0,.15) 35%, rgba(0,0,0,.55) 100%); }
+    .hero-content { position: relative; z-index: 2; text-align: center; color: white; width: 100%; max-width: 640px; }
+    .hero-content .eyebrow { font-size: .68rem; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.85); margin-bottom: 1rem; }
+    .hero-content h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(2.4rem,7vw,4.4rem); text-transform: uppercase; letter-spacing: .04em; line-height: 1; margin-bottom: 1.4rem; }
+    .hero-content .sub { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(1rem,1.7vw,1.25rem); color: rgba(255,255,255,.9); margin-bottom: 2rem; }
+
+    .hero-meta { margin-bottom: 2.6rem; }
+    .hero-dates { display: inline-block; border: 1px solid rgba(255,255,255,.4); padding: .55rem 1.6rem; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.9); font-weight: 500; margin-bottom: 1rem; }
+    .hero-addr { font-size: .72rem; font-weight: 400; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: .9rem; }
+    .route-wrap { position: relative; display: inline-block; }
+    .route-btn { font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: white; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.55); padding: 1.1rem 1.4rem; cursor: pointer; transition: all .22s; }
+    .route-btn:hover { background: rgba(255,255,255,.95); color: var(--black); border-color: white; }
+    .route-menu { display: none; position: absolute; top: calc(100% + .5rem); left: 50%; transform: translateX(-50%); background: var(--white); border: 1px solid var(--border); min-width: 172px; z-index: 30; box-shadow: 0 6px 24px rgba(0,0,0,.15); }
+    .route-menu.open { display: block; }
+    .route-menu a { display: flex; align-items: center; gap: .6rem; padding: .7rem 1.1rem; font-size: .72rem; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--border); transition: background .15s; white-space: nowrap; }
+    .route-menu a:last-child { border-bottom: none; }
+    .route-menu a:hover { background: var(--light); }
+    .ri { width: 15px; height: 15px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* HERO BUTTONS */
+    .hero-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; width: 100%; }
+    .hero-btn { display: block; flex: 1 1 180px; max-width: 240px; font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: white; text-decoration: none; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.55); padding: 1.1rem 1.4rem; transition: all .22s; }
+    .hero-btn:hover { background: rgba(255,255,255,.95); color: var(--black); border-color: white; }
+
+    /* SECTIONS */
+    .sec { padding: 5rem 2rem; }
+    .wrap { max-width: 1000px; margin: 0 auto; }
+    .narrow { max-width: 640px; margin: 0 auto; }
+    .tag { font-size: .63rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gray); margin-bottom: .6rem; }
+    h2 { font-family: var(--serif); font-size: clamp(1.4rem,2.6vw,1.95rem); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; margin-bottom: 1.4rem; }
+    p { font-size: .95rem; font-weight: 300; color: #3a3a3a; line-height: 1.85; }
+    p + p { margin-top: .8rem; }
+    strong { font-weight: 600; color: var(--black); }
+    .center { text-align: center; }
+    .lead { font-family: var(--serif); font-style: italic; font-size: 1.08rem; line-height: 1.85; color: #555; }
+
+    /* WELKOM */
+    .welkom-sec { background: var(--light); padding: 5rem 2rem; }
+
+    /* OUTRO */
+    .outro { background: var(--black); color: white; padding: 4rem 2rem; text-align: center; }
+    .outro h2 { color: white; margin-bottom: 1rem; }
+    .outro p { color: rgba(255,255,255,.7); font-size: 1rem; }
+    .outro .signature { font-family: var(--serif); font-style: italic; color: rgba(255,255,255,.55); margin-top: 1.6rem; font-size: .92rem; }
+
+    /* FOOTER */
+    footer { background: var(--black); color: rgba(255,255,255,.38); text-align: center; padding: 1.6rem 2rem; font-size: .7rem; font-weight: 300; letter-spacing: .08em; border-top: 1px solid rgba(255,255,255,.08); }
+    footer a { color: rgba(255,255,255,.55); text-decoration: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 720px) {
+      .hero { padding: 6rem 1.2rem 3rem; }
+      .hero-btn { flex: 1 1 100%; max-width: 320px; }
+      .sec, .welkom-sec { padding: 3.6rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section id="top" class="hero">
+  <img class="bg" src="../fotos/vakantiehuis/Algemeen/Trampoline.jpg" alt="Trampoline in de tuin van Coin Castor"/>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="eyebrow">Coin Castor · Lavaux</p>
+    <h1>Welkom, Roy 🏡</h1>
+    <p class="sub">Jullie thuis in de Ardennen</p>
+
+    <div class="hero-meta">
+      <div class="hero-dates">14 augustus – 17 augustus 2026</div>
+      <p class="hero-addr">Lavaux 18 — 4980 Trois-Ponts</p>
+      <div class="route-wrap">
+        <button class="route-btn" onclick="toggleRoute(event)">Route ↓</button>
+        <div class="route-menu" id="routeMenu">
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Lavaux+18,+4980+Trois-Ponts,+Belgium" target="_blank" rel="noopener">
+            <svg class="ri" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Google Maps
+          </a>
+          <a href="https://waze.com/ul?q=Lavaux+18,+4980+Trois-Ponts&navigate=yes" target="_blank" rel="noopener">
+            <svg class="ri" viewBox="0 0 24 24"><circle cx="12" cy="9" r="7"/><path d="M9.5 9a2.5 2.5 0 0 0 5 0"/><path d="M12 16v3"/><path d="M9 19h6"/></svg>
+            Waze
+          </a>
+          <a href="http://maps.apple.com/?daddr=Lavaux+18,+4980+Trois-Ponts,+Belgium&dirflg=d" target="_blank" rel="noopener">
+            <svg class="ri" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Apple Maps
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-btns">
+      <a class="hero-btn" href="3qn4uar7ffskst-algemeen.html">Algemene informatie</a>
+      <a class="hero-btn" href="3qn4uar7ffskst-tips.html">Tips voor de omgeving</a>
+      <a class="hero-btn" href="3qn4uar7ffskst-handleidingen.html">Handleidingen</a>
+      <a class="hero-btn" href="3qn4uar7ffskst-vertrek.html">Bij vertrek</a>
+    </div>
+  </div>
+</section>
+
+<!-- WELKOM -->
+<section class="welkom-sec">
+  <div class="narrow center">
+    <p class="tag">🫶 Welkom</p>
+    <h2>Welkom in ons huis!</h2>
+    <p class="lead">We hopen dat jullie even verliefd worden op de streek en ons huis als wij. Laat maar weten rond hoe laat jullie aankomen, dan zorgen we dat het de perfecte temperatuur is. Hierboven vind je alles wat je nodig hebt — van sleutels tot fietsroutes. Veel plezier!</p>
+  </div>
+</section>
+
+<!-- OUTRO -->
+<section class="outro">
+  <h2>Geniet van jullie verblijf!</h2>
+  <p>Twijfel niet om berichtjes te sturen als er vragen zijn.</p>
+  <p class="signature">— Greet en Michiel · Anna en Lena</p>
+</section>
+
+<footer>
+  © Coin Castor · <a href="../index.html">coincastor.be</a>
+</footer>
+
+<script>
+  function toggleRoute(e) { e.stopPropagation(); document.getElementById('routeMenu').classList.toggle('open'); }
+  document.addEventListener('click', function() { var m = document.getElementById('routeMenu'); if (m) m.classList.remove('open'); });
+</script>
+
+</body>
+</html>
