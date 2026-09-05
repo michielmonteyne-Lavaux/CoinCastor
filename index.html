@@ -1142,6 +1142,7 @@ fetch(CALENDAR_FEED_URL)
       <p class="tag" style="text-align:center;margin-bottom:.5rem" data-i18n="boek_tag">Boeking</p>
       <h2 style="text-align:center;margin-bottom:.4rem" data-i18n="boek_h2">Contacteer ons</h2>
       <p style="text-align:center;margin-bottom:2rem;font-size:.9rem" data-i18n="boek_intro">Stel een vraag of dien een boekingsaanvraag in. We antwoorden binnen de 24 uur.</p>
+      <p style="text-align:center;margin:-1.4rem auto 2rem;max-width:520px;font-size:.8rem;font-weight:300;color:#888;line-height:1.6" data-i18n="boek_voorwie">Coin Castor is een rustig huis voor gezinnen en (vrienden)groepen die tot rust willen komen in de natuur. We verhuren niet voor feesten, evenementen of vrijgezellenfeesten.</p>
 
       <!-- Tab-knoppen -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#e8e5de;border-radius:10px;padding:4px;margin-bottom:1.75rem">
@@ -1224,6 +1225,12 @@ fetch(CALENDAR_FEED_URL)
           <div>
             <label style="display:block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:.35rem" data-i18n="f_gezelschap">Gezelschap</label>
             <input name="gezelschap" required placeholder="Bv. 2 volwassenen + 3 kinderen" style="width:100%;border:1px solid #e8e5de;border-radius:6px;padding:.6rem .8rem;font-family:var(--sans);font-size:.9rem;outline:none;transition:border .15s" onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#e8e5de'"/>
+          </div>
+
+          <!-- Gelegenheid -->
+          <div>
+            <label style="display:block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:.35rem" data-i18n="f_gelegenheid">Gelegenheid</label>
+            <input name="gelegenheid" placeholder="Bv. familieweekend, verjaardag, teambuilding..." style="width:100%;border:1px solid #e8e5de;border-radius:6px;padding:.6rem .8rem;font-family:var(--sans);font-size:.9rem;outline:none;transition:border .15s" onfocus="this.style.borderColor='#1a1a1a'" onblur="this.style.borderColor='#e8e5de'"/>
           </div>
 
           <!-- Periodesoort -->
@@ -1691,10 +1698,11 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       kal_nota:'Klik op een dag voor meer info · Kalender is indicatief, contacteer ons voor definitieve beschikbaarheid',
       boek_tag:'Boeking', boek_h2:'Contacteer ons',
       boek_intro:'Stel een vraag of dien een boekingsaanvraag in. We antwoorden binnen de 24 uur.',
+      boek_voorwie:'Coin Castor is een rustig huis voor gezinnen en (vrienden)groepen die tot rust willen komen in de natuur. We verhuren niet voor feesten, evenementen of vrijgezellenfeesten.',
       tab_contact:'Contactformulier', tab_boeking:'Boekingsaanvraag',
       f_voornaam:'Voornaam', f_naam:'Familienaam', f_email:'E-mailadres',
       f_titel:'Onderwerp', f_vraag:'Vraag of opmerking',
-      f_gezelschap:'Gezelschap', f_periodesoort:'Type verblijf',
+      f_gezelschap:'Gezelschap', f_gelegenheid:'Gelegenheid', f_periodesoort:'Type verblijf',
       f_aankomst:'Aankomstdatum',
       f_vertrek:'Vertrekdatum', f_nachten:'Aantal nachten',
       period_weekend:'Weekend', period_weekend_s:'Vr–ma · 3 nachten',
@@ -1792,10 +1800,11 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       kal_nota:'Cliquez sur un jour pour plus d\'infos · Calendrier indicatif, contactez-nous pour disponibilité définitive',
       boek_tag:'Réservation', boek_h2:'Contactez-nous',
       boek_intro:'Posez une question ou faites une demande de réservation. Nous répondons dans les 24 heures.',
+      boek_voorwie:'Coin Castor est une maison calme pour les familles et groupes d\'amis en quête de nature et de repos. Nous ne louons pas pour des fêtes, événements ou enterrements de vie de garçon/jeune fille.',
       tab_contact:'Formulaire de contact', tab_boeking:'Demande de réservation',
       f_voornaam:'Prénom', f_naam:'Nom', f_email:'Adresse e-mail',
       f_titel:'Sujet', f_vraag:'Question ou remarque',
-      f_gezelschap:'Groupe', f_periodesoort:'Type de séjour',
+      f_gezelschap:'Groupe', f_gelegenheid:'Occasion du séjour', f_periodesoort:'Type de séjour',
       f_aankomst:'Date d\'arrivée',
       f_vertrek:'Date de départ', f_nachten:'Nombre de nuits',
       period_weekend:'Week-end', period_weekend_s:'Ven–lun · 3 nuits',
@@ -1893,10 +1902,11 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       kal_nota:'Click any day for more info · Calendar is indicative, contact us for definitive availability',
       boek_tag:'Booking', boek_h2:'Contact us',
       boek_intro:'Ask a question or submit a booking request. We reply within 24 hours.',
+      boek_voorwie:'Coin Castor is a quiet house for families and groups of friends looking to unwind in nature. We don\'t rent out for parties, events, or stag/hen dos.',
       tab_contact:'Contact form', tab_boeking:'Booking request',
       f_voornaam:'First name', f_naam:'Last name', f_email:'Email address',
       f_titel:'Subject', f_vraag:'Question or comment',
-      f_gezelschap:'Group', f_periodesoort:'Type of stay',
+      f_gezelschap:'Group', f_gelegenheid:'Occasion', f_periodesoort:'Type of stay',
       f_aankomst:'Arrival date',
       f_vertrek:'Departure date', f_nachten:'Number of nights',
       period_weekend:'Weekend', period_weekend_s:'Fri–Mon · 3 nights',
