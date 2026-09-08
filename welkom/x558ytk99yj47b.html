@@ -88,6 +88,46 @@
     .warn .warn-head { font-size: .65rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: #8a6f0e; margin-bottom: .5rem; }
     .warn p { font-size: .9rem; }
 
+    /* GUIDE GRID (tuiles cliquables) */
+    .hint { font-size: .78rem; color: var(--gray); margin-top: .6rem; }
+    .guide-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.4rem; margin-top: 2.2rem; }
+    .guide-tile { position: relative; aspect-ratio: 4 / 3; overflow: hidden; cursor: pointer; border: none; padding: 0; display: block; width: 100%; background: var(--black); font-family: inherit; }
+    .guide-tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s ease; }
+    .guide-tile:hover img { transform: scale(1.05); }
+    .guide-tile .tile-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.05) 60%); }
+    .guide-tile .tile-label { position: absolute; left: 0; right: 0; bottom: 0; padding: 1.1rem 1.2rem; text-align: left; color: white; }
+    .guide-tile .tile-eyebrow { font-size: .58rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: .3rem; }
+    .guide-tile .tile-title { font-family: var(--serif); font-weight: 700; font-size: 1.05rem; color: white; line-height: 1.2; }
+    .guide-tile .play-badge { position: absolute; top: .8rem; right: .8rem; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,.92); display: flex; align-items: center; justify-content: center; font-size: .7rem; }
+    .guide-tile.text-tile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .7rem; }
+    .guide-tile.text-tile .big-icon { font-size: 2.2rem; }
+    .guide-tile.text-tile .tile-title-static { font-family: var(--serif); font-weight: 700; font-size: .98rem; text-transform: uppercase; letter-spacing: .04em; color: white; text-align: center; padding: 0 1rem; }
+    .guide-tile.text-tile .tile-eyebrow-static { font-size: .58rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+
+    /* MODAL */
+    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(15,15,15,.86); z-index: 200; align-items: center; justify-content: center; padding: 1.5rem; }
+    .modal-backdrop.open { display: flex; }
+    .modal-box { background: white; max-width: 480px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,.4); }
+    .modal-close { position: absolute; top: .7rem; right: .7rem; width: 34px; height: 34px; border-radius: 50%; background: rgba(0,0,0,.55); color: white; border: none; font-size: 1.1rem; cursor: pointer; z-index: 2; display: flex; align-items: center; justify-content: center; line-height: 1; }
+    .modal-close:hover { background: rgba(0,0,0,.8); }
+    .modal-media { width: 100%; display: block; background: var(--black); }
+    .modal-media img { width: 100%; display: block; }
+    .modal-body { padding: 1.6rem 1.8rem 1.9rem; }
+    .modal-body .tag { margin-bottom: .5rem; }
+    .modal-body h3 { margin-bottom: .8rem; }
+    .modal-body ul.modal-list { margin-top: .4rem; padding-left: 1.1rem; }
+    .modal-body ul.modal-list li { font-size: .95rem; font-weight: 300; color: #3a3a3a; line-height: 1.7; margin-bottom: .55rem; }
+    .modal-body ul.modal-list li:last-child { margin-bottom: 0; }
+
+    /* SUBMENU (dans modal) */
+    .submenu { display: grid; grid-template-columns: repeat(2, 1fr); gap: .9rem; margin-top: .3rem; }
+    .submenu-item { position: relative; aspect-ratio: 4 / 3; overflow: hidden; cursor: pointer; border: none; padding: 0; display: block; width: 100%; background: var(--black); font-family: inherit; }
+    .submenu-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s ease; }
+    .submenu-item:hover img { transform: scale(1.05); }
+    .submenu-label { position: absolute; left: 0; right: 0; bottom: 0; padding: .55rem .7rem; background: linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,0) 100%); color: white; font-family: var(--serif); font-weight: 700; font-size: .82rem; text-align: left; }
+    .back-link { display: inline-block; font-size: .78rem; font-weight: 600; letter-spacing: .06em; color: var(--gray); text-decoration: none; margin-bottom: .8rem; }
+    .back-link:hover { color: var(--black); }
+
     /* OUTRO */
     .outro { background: var(--black); color: white; padding: 4rem 2rem; text-align: center; }
     .outro h2 { color: white; margin-bottom: 1rem; }
@@ -103,6 +143,10 @@
       .blocks { grid-template-columns: 1fr; }
       .wifi-card { flex-direction: column; }
       .wifi-details { text-align: center; }
+      .guide-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .guide-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -150,7 +194,7 @@
     </div>
     <div class="narrow center">
       <p>L'escalier blanc mène à la porte d'entrée → juste au coin se trouve une <strong>boîte à clés</strong>. La même clé ouvre les portes du haut et du bas.</p>
-      <p>Le code d'accès personnel vous sera envoyé par SMS peu avant votre visite.</p>
+      <p>Code de la boîte à clés : <strong>5913</strong></p>
       <figure class="key-photo">
         <img src="../fotos/Welkomstpagina/Algemene%20informatie/Voordeur.jpg" alt="La porte d'entrée avec l'escalier blanc — la boîte à clés se trouve juste au coin"/>
         <figcaption>Suivez le coin pour trouver la boîte à clés</figcaption>
@@ -181,34 +225,66 @@
   </div>
 </section>
 
-<!-- MANUELS -->
+<!-- HANDLEIDINGEN -->
 <section class="sec">
   <div class="wrap">
     <div class="center">
       <p class="tag">📖 Comment ça marche</p>
-      <h2>Quelques instructions utiles</h2>
+      <h2>Petits guides pratiques</h2>
+      <p class="hint">Touchez une photo pour une courte explication ou démo.</p>
     </div>
-    <div class="blocks">
-      <div class="block">
-        <span class="icon">📺</span>
-        <h3>Google TV</h3>
-        <p>Castez facilement depuis votre téléphone (YouTube, Netflix, Spotify, …) dès que vous êtes sur le wifi — choisissez <strong>« Woonkamer TV »</strong> dans l'application.</p>
-      </div>
-      <div class="block">
-        <span class="icon">🎵</span>
-        <h3>Sonos</h3>
-        <p>Les enceintes sont disponibles dès que vous êtes connecté au wifi — choisissez <strong>« Eetkamer »</strong> dans Spotify.</p>
-      </div>
-      <div class="block">
-        <span class="icon">🌡️</span>
-        <h3>Chauffage &amp; lumières</h3>
-        <p>Petit écran noir près de la porte à l'étage. <strong>Heat</strong> chauffe automatiquement à 21°C, <strong>Cool</strong> climatise à 24°C. Le bouton en bas à droite éteint automatiquement toutes les lumières avant de partir.</p>
-      </div>
-      <div class="block">
-        <span class="icon">🚿</span>
-        <h3>Robinets salle de bain</h3>
-        <p>Ils ne fonctionnent pas de façon intuitive — <strong>inclinez le bouton</strong> plutôt que de le tourner pour obtenir de l'eau.</p>
-      </div>
+
+    <div class="guide-grid">
+
+      <button class="guide-tile" onclick="openGuide('babybedje')" type="button">
+        <img src="../fotos/Welkomstpagina/Handleidingen/Babybedje/Babybedje.JPG" alt="Lit de bébé"/>
+        <div class="tile-overlay"></div>
+        <span class="tile-label">
+          <span class="tile-eyebrow">Photo</span>
+          <span class="tile-title">Lit de bébé</span>
+        </span>
+      </button>
+
+      <button class="guide-tile text-tile" onclick="openGuide('keuken')" type="button">
+        <span class="big-icon">🍳</span>
+        <span class="tile-eyebrow-static">Explication</span>
+        <span class="tile-title-static">Cuisine</span>
+      </button>
+
+      <button class="guide-tile" onclick="openGuide('kranen')" type="button">
+        <img src="../fotos/Welkomstpagina/Handleidingen/Kranen%20Badkamer/Kranen.jpg" alt="Robinet de la salle de bain"/>
+        <div class="tile-overlay"></div>
+        <span class="play-badge">▶</span>
+        <span class="tile-label">
+          <span class="tile-eyebrow">Vidéo</span>
+          <span class="tile-title">Robinets des salles de bain</span>
+        </span>
+      </button>
+
+      <button class="guide-tile" onclick="openGuide('terrasstoeltje')" type="button">
+        <img src="../fotos/Welkomstpagina/Handleidingen/Terrasstoeltje/Terrasstoeltje.JPG" alt="Chaise de terrasse"/>
+        <div class="tile-overlay"></div>
+        <span class="tile-label">
+          <span class="tile-eyebrow">Photo</span>
+          <span class="tile-title">Chaise de terrasse</span>
+        </span>
+      </button>
+
+      <button class="guide-tile text-tile" onclick="openGuide('tvmuziek')" type="button">
+        <span class="big-icon">📺</span>
+        <span class="tile-eyebrow-static">Explication</span>
+        <span class="tile-title-static">TV &amp; musique</span>
+      </button>
+
+      <button class="guide-tile" onclick="openGuide('verwarming')" type="button">
+        <img src="../fotos/Welkomstpagina/Handleidingen/Domotica/Digital%20Black.JPG" alt="Panneau domotique pour le chauffage et l'éclairage"/>
+        <div class="tile-overlay"></div>
+        <span class="tile-label">
+          <span class="tile-eyebrow">Photo</span>
+          <span class="tile-title">Chauffage</span>
+        </span>
+      </button>
+
     </div>
   </div>
 </section>
@@ -280,9 +356,160 @@
   © Coin Castor · <a href="../index.html">coincastor.be</a>
 </footer>
 
+<!-- MODAL -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="if(event.target===this) closeGuide()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeGuide()" aria-label="Fermer">✕</button>
+    <div class="modal-media" id="modalMedia"></div>
+    <div class="modal-body">
+      <p class="tag" id="modalTag">Explication</p>
+      <h3 id="modalTitle"></h3>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+</div>
+
 <script>
   function toggleRoute(e) { e.stopPropagation(); document.getElementById('routeMenu').classList.toggle('open'); }
   document.addEventListener('click', function() { var m = document.getElementById('routeMenu'); if (m) m.classList.remove('open'); });
+
+  var guides = {
+    kranen: {
+      title: 'Robinets des salles de bain',
+      tag: '🚿 Vidéo',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/Kranen%20Badkamer/Kranen.gif" alt="Démo : utiliser le robinet"/>',
+      body: '<p>Les robinets ne fonctionnent pas de façon très intuitive — ils ne tournent pas comme on pourrait s\'y attendre. <strong>Inclinez simplement le bouton</strong> comme dans la vidéo, et l\'eau coule.</p>'
+    },
+    verwarming: {
+      title: 'Chauffage',
+      tag: '🌡️ Explication',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/Domotica/Digital%20Black.JPG" alt="Panneau domotique pour le chauffage et l\'éclairage"/>',
+      body: '<p>Sur le petit écran, vous avez le choix entre quatre options :</p><ul class="modal-list"><li><strong>Heat</strong> (en haut à gauche) — chauffe automatiquement chaque pièce jusqu\'à 21°C.</li><li><strong>Cool</strong> (en haut à droite) — refroidit automatiquement chaque pièce jusqu\'à 24°C.</li><li><strong>Ventilation</strong> (en bas à gauche) — toujours active, maintient un taux d\'humidité acceptable dans les salles de bain.</li><li><strong>Tout éteindre par défaut</strong> (en bas à droite) — appuyez ici avant de partir : toutes les lumières de la maison s\'éteignent automatiquement, sauf celles équipées d\'un capteur de lumière, qui s\'éteignent d\'elles-mêmes après un moment.</li></ul>'
+    },
+    tvmuziek: {
+      title: 'TV &amp; Musique',
+      tag: '📺 Choisissez une rubrique',
+      menu: [
+        { id: 'googletv', label: 'Google TV', img: '../fotos/Welkomstpagina/Handleidingen/TV%20%26%20Muziek/Televisie/Google%20TV.JPG' },
+        { id: 'sonos', label: 'Sonos', img: '../fotos/Welkomstpagina/Handleidingen/TV%20%26%20Muziek/Sonos/Sonos.JPG' }
+      ]
+    },
+    keuken: {
+      title: 'Cuisine',
+      tag: '🍳 Choisissez une rubrique',
+      menu: [
+        { id: 'dampkap', label: 'Hotte', img: '../fotos/Welkomstpagina/Handleidingen/Keuken/Dampkap/Dampkap.JPG' },
+        { id: 'microgolf', label: 'Micro-ondes', img: '../fotos/Welkomstpagina/Handleidingen/Keuken/Microgolf.JPG' },
+        { id: 'oven', label: 'Four', img: '../fotos/Welkomstpagina/Handleidingen/Keuken/Oven.JPG' },
+        { id: 'vuilnisbakken', label: 'Poubelles', img: '../fotos/Welkomstpagina/Handleidingen/Keuken/Vuilnisbakken.JPG' }
+      ]
+    },
+    terrasstoeltje: {
+      title: 'Chaise de terrasse',
+      tag: '🪑 Explication',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/Terrasstoeltje/Terrasstoeltje.JPG" alt="Chaise de terrasse"/>',
+      body: '<p>Le coussin de cette chaise se trouve dans le <strong>placard à côté du réfrigérateur</strong>.</p>'
+    },
+    babybedje: {
+      title: 'Lit de bébé',
+      tag: '🍼 Explication',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/Babybedje/Babybedje.JPG" alt="Lit de bébé"/>',
+      body: '<p>Il s\'agit d\'un <strong>lit de voyage</strong> avec un matelas de voyage plutôt fin. Pour un matelas plus épais, prévoyez-le vous-même.</p>'
+    }
+  };
+
+  var subguides = {
+    googletv: {
+      title: 'Google TV',
+      tag: '📺 Explication',
+      parent: 'tvmuziek',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/TV%20%26%20Muziek/Televisie/Google%20TV.JPG" alt="Google TV"/>',
+      body: '<p>Castez facilement depuis votre téléphone (YouTube, Netflix, Spotify, …) dès que vous êtes sur le wifi — choisissez <strong>« Woonkamer TV »</strong> dans l\'application.</p>'
+    },
+    sonos: {
+      title: 'Sonos',
+      tag: '🎵 Explication',
+      parent: 'tvmuziek',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/TV%20%26%20Muziek/Sonos/Sonos.JPG" alt="Sonos"/>',
+      body: '<p>Les enceintes Sonos sont disponibles dès que vous êtes connecté au wifi — choisissez <strong>« Eetkamer »</strong> dans Spotify.</p>'
+    },
+    dampkap: {
+      title: 'Hotte',
+      tag: '💨 Explication',
+      parent: 'keuken',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/Keuken/Dampkap/Dampkap%20afstandsbediening.JPG" alt="Télécommande de la hotte"/>',
+      body: '<p>Dirigez la télécommande vers les lumières situées sur le <strong>côté droit</strong> de la hotte pour l\'allumer.</p>'
+    },
+    microgolf: {
+      title: 'Micro-ondes',
+      tag: '📖 Explication',
+      parent: 'keuken',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/Keuken/Microgolf.JPG" alt="Micro-ondes"/>',
+      body: '<p>Choisissez d\'abord la fonction en haut : <strong>micro-ondes</strong>, <strong>four</strong> ou <strong>combi</strong> (micro-ondes + four). Réglez la puissance (micro-ondes) ou la température (four) avec la touche de réglage, définissez le temps avec les flèches, et appuyez en bas à droite sur <strong>start</strong> pour commencer. La touche stop met en pause ou annule.</p><p>Sous le four à micro-ondes se trouve un tiroir avec toutes les plaques et grilles correspondant aux deux fours.</p><p>Vous trouverez le manuel complet du micro-ondes via <a href="https://www.pelgrim.be/wp-content/uploads/sites/3/2024/09/839466-V2-IFU-Pelgrim-MAC214-OM140-NL_FR_DE_EN-nc.pdf" target="_blank" rel="noopener">ce lien</a> (disponible en français).</p>'
+    },
+    oven: {
+      title: 'Four',
+      tag: '🔥 Explication',
+      parent: 'keuken',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/Keuken/Oven.JPG" alt="Four"/>',
+      body: '<p>Appuyez longuement sur le <strong>bouton marche/arrêt</strong> pour allumer le four. Tournez le <strong>bouton central</strong> pour choisir un mode de cuisson (par ex. chaleur tournante) et appuyez pour confirmer. Tournez à nouveau pour régler la température et confirmez. Enfin, appuyez sur la <strong>touche start/stop</strong> à droite pour commencer la cuisson.</p><p>Vous trouverez le manuel complet du four via <a href="https://www.pelgrim.be/wp-content/uploads/sites/3/2022/07/OP560ZWA_handleiding_nl-fr-de-en.pdf" target="_blank" rel="noopener">ce lien</a> (disponible en français).</p>'
+    },
+    vuilnisbakken: {
+      title: 'Poubelles',
+      tag: '🗑️ Explication',
+      parent: 'keuken',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/Keuken/Vuilnisbakken.JPG" alt="Poubelles"/>',
+      body: '<p>Le bac de <strong>gauche</strong> est pour les déchets résiduels, le bac de <strong>droite</strong> pour le PMD (emballages). Des sacs supplémentaires se trouvent dans le placard à côté du réfrigérateur.</p>'
+    }
+  };
+
+  function openGuide(id) {
+    var g = guides[id];
+    if (!g) return;
+    document.getElementById('modalTag').textContent = g.tag;
+    document.getElementById('modalTitle').textContent = g.title;
+    var mediaEl = document.getElementById('modalMedia');
+    var bodyEl = document.getElementById('modalBody');
+    if (g.menu) {
+      mediaEl.innerHTML = '';
+      mediaEl.style.display = 'none';
+      var html = '<div class="submenu">';
+      g.menu.forEach(function (item) {
+        html += '<button class="submenu-item" onclick="openSubGuide(\'' + item.id + '\')" type="button">' +
+                  '<img src="' + item.img + '" alt="' + item.label + '"/>' +
+                  '<span class="submenu-label">' + item.label + '</span>' +
+                '</button>';
+      });
+      html += '</div>';
+      bodyEl.innerHTML = html;
+    } else {
+      bodyEl.innerHTML = g.body;
+      mediaEl.innerHTML = g.media;
+      mediaEl.style.display = g.media ? 'block' : 'none';
+    }
+    document.getElementById('modalBackdrop').classList.add('open');
+  }
+
+  function openSubGuide(id) {
+    var g = subguides[id];
+    if (!g) return;
+    document.getElementById('modalTag').textContent = g.tag;
+    document.getElementById('modalTitle').textContent = g.title;
+    var mediaEl = document.getElementById('modalMedia');
+    mediaEl.innerHTML = g.media;
+    mediaEl.style.display = g.media ? 'block' : 'none';
+    document.getElementById('modalBody').innerHTML =
+      '<a href="#" class="back-link" onclick="event.preventDefault(); openGuide(\'' + g.parent + '\');">← Retour</a>' + g.body;
+  }
+
+  function closeGuide() {
+    document.getElementById('modalBackdrop').classList.remove('open');
+    document.getElementById('modalMedia').innerHTML = '';
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeGuide();
+  });
 </script>
 
 </body>
