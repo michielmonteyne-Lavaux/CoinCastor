@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <meta name="referrer" content="no-referrer"/>
+  <title>Bienvenue à Coin Castor — Informations pratiques</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #1a1a1a;
+      --gray:  #888;
+      --light: #f4f2ed;
+      --white: #ffffff;
+      --border: #e2dfd8;
+      --warn-bg: #fff8e6;
+      --warn-border: #e8c969;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Raleway', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--black); background: var(--white); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+
+    /* HERO */
+    .hero { position: relative; min-height: 92vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 7rem 1.2rem 4rem; overflow: hidden; }
+    .hero img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,.35) 0%, rgba(0,0,0,.15) 35%, rgba(0,0,0,.55) 100%); }
+    .hero-content { position: relative; z-index: 2; text-align: center; color: white; width: 100%; max-width: 640px; }
+    .hero-content .eyebrow { font-size: .68rem; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.85); margin-bottom: 1rem; }
+    .hero-content h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(2rem,6vw,3.6rem); text-transform: uppercase; letter-spacing: .03em; line-height: 1.15; margin-bottom: 1.4rem; }
+    .hero-content .sub { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(1rem,1.7vw,1.25rem); color: rgba(255,255,255,.9); margin-bottom: 2rem; }
+
+    .hero-meta { margin-bottom: 0; }
+    .hero-dates { display: inline-block; border: 1px solid rgba(255,255,255,.4); padding: .55rem 1.6rem; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.9); font-weight: 500; margin-bottom: 1rem; }
+    .hero-addr { font-size: .72rem; font-weight: 400; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: .9rem; }
+    .route-wrap { position: relative; display: inline-block; }
+    .route-btn { font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: white; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.55); padding: 1.1rem 1.4rem; cursor: pointer; transition: all .22s; }
+    .route-btn:hover { background: rgba(255,255,255,.95); color: var(--black); border-color: white; }
+    .route-menu { display: none; position: absolute; top: calc(100% + .5rem); left: 50%; transform: translateX(-50%); background: var(--white); border: 1px solid var(--border); min-width: 172px; z-index: 30; box-shadow: 0 6px 24px rgba(0,0,0,.15); }
+    .route-menu.open { display: block; }
+    .route-menu a { display: flex; align-items: center; gap: .6rem; padding: .7rem 1.1rem; font-size: .72rem; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--border); transition: background .15s; white-space: nowrap; }
+    .route-menu a:last-child { border-bottom: none; }
+    .route-menu a:hover { background: var(--light); }
+    .ri { width: 15px; height: 15px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* SECTIONS */
+    .sec { padding: 5rem 2rem; }
+    .wrap { max-width: 1000px; margin: 0 auto; }
+    .narrow { max-width: 640px; margin: 0 auto; }
+    .tag { font-size: .63rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gray); margin-bottom: .6rem; }
+    h2 { font-family: var(--serif); font-size: clamp(1.4rem,2.6vw,1.95rem); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; margin-bottom: 1.4rem; }
+    h3 { font-family: var(--serif); font-size: 1.08rem; font-weight: 700; letter-spacing: .02em; margin-bottom: .5rem; }
+    p { font-size: .95rem; font-weight: 300; color: #3a3a3a; line-height: 1.85; }
+    p + p { margin-top: .8rem; }
+    strong { font-weight: 600; color: var(--black); }
+    .center { text-align: center; }
+    .light-sec { background: var(--light); }
+
+    /* KEY PHOTO */
+    .key-photo { margin: 2rem auto 0; max-width: 480px; }
+    .key-photo img { width: 100%; display: block; border: 1px solid var(--border); }
+    .key-photo figcaption { font-size: .74rem; font-weight: 400; letter-spacing: .06em; color: var(--gray); margin-top: .8rem; font-style: italic; font-family: var(--serif); }
+
+    /* BLOCKS */
+    .blocks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 2rem; }
+    .block { background: white; padding: 1.8rem 1.6rem; }
+    .block .icon { font-size: 1.4rem; line-height: 1; margin-bottom: .8rem; display: block; }
+    .block h3 { margin-bottom: .4rem; }
+    .block p { font-size: .9rem; line-height: 1.7; }
+
+    /* WIFI */
+    .wifi-card { background: var(--black); color: white; padding: 2rem 1.8rem; margin: 2.5rem auto 0; max-width: 560px; display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+    .wifi-qr { flex-shrink: 0; text-align: center; }
+    .wifi-qr img { width: 132px; height: 132px; background: white; padding: 8px; display: block; }
+    .wifi-qr-cap { font-size: .6rem; letter-spacing: .06em; color: rgba(255,255,255,.5); margin-top: .7rem; max-width: 140px; line-height: 1.5; }
+    .wifi-details { text-align: left; }
+    .wifi-card .lbl { font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: .3rem; }
+    .wifi-card .val { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; word-break: break-all; }
+    .wifi-card .val + .lbl { margin-top: 1.4rem; }
+
+    /* WAARSCHUWING */
+    .warn { background: var(--warn-bg); border-left: 3px solid var(--warn-border); padding: 1.4rem 1.6rem; margin-top: 1.2rem; }
+    .warn .warn-head { font-size: .65rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: #8a6f0e; margin-bottom: .5rem; }
+    .warn p { font-size: .9rem; }
+
+    /* OUTRO */
+    .outro { background: var(--black); color: white; padding: 4rem 2rem; text-align: center; }
+    .outro h2 { color: white; margin-bottom: 1rem; }
+    .outro p { color: rgba(255,255,255,.7); font-size: 1rem; }
+    .outro .signature { font-family: var(--serif); font-style: italic; color: rgba(255,255,255,.55); margin-top: 1.6rem; font-size: .92rem; }
+
+    footer { background: var(--black); color: rgba(255,255,255,.38); text-align: center; padding: 1.6rem 2rem; font-size: .7rem; font-weight: 300; letter-spacing: .08em; border-top: 1px solid rgba(255,255,255,.08); }
+    footer a { color: rgba(255,255,255,.55); text-decoration: none; }
+
+    @media (max-width: 720px) {
+      .hero { padding: 6rem 1.2rem 3rem; }
+      .sec, .light-sec { padding: 3.6rem 1.2rem; }
+      .blocks { grid-template-columns: 1fr; }
+      .wifi-card { flex-direction: column; }
+      .wifi-details { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section id="top" class="hero">
+  <img class="bg" src="../fotos/vakantiehuis/Algemeen/Trampoline.jpg" alt="Coin Castor, la maison de vacances"/>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="eyebrow">Coin Castor · Lavaux</p>
+    <h1>Bienvenue, photographe d'Ardennes Résidences 📷</h1>
+    <p class="sub">Toutes les informations pratiques pour votre visite</p>
+
+    <div class="hero-meta">
+      <div class="hero-dates">Mercredi 9 septembre 2026</div>
+      <p class="hero-addr">Lavaux 18 — 4980 Trois-Ponts</p>
+      <div class="route-wrap">
+        <button class="route-btn" onclick="toggleRoute(event)">Itinéraire ↓</button>
+        <div class="route-menu" id="routeMenu">
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Lavaux+18,+4980+Trois-Ponts,+Belgium" target="_blank" rel="noopener">
+            <svg class="ri" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Google Maps
+          </a>
+          <a href="https://waze.com/ul?q=Lavaux+18,+4980+Trois-Ponts&navigate=yes" target="_blank" rel="noopener">
+            <svg class="ri" viewBox="0 0 24 24"><circle cx="12" cy="9" r="7"/><path d="M9.5 9a2.5 2.5 0 0 0 5 0"/><path d="M12 16v3"/><path d="M9 19h6"/></svg>
+            Waze
+          </a>
+          <a href="http://maps.apple.com/?daddr=Lavaux+18,+4980+Trois-Ponts,+Belgium&dirflg=d" target="_blank" rel="noopener">
+            <svg class="ri" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Apple Maps
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCES -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center">
+      <p class="tag">🔑 Accès</p>
+      <h2>Clés &amp; entrée</h2>
+    </div>
+    <div class="narrow center">
+      <p>L'escalier blanc mène à la porte d'entrée → juste au coin se trouve une <strong>boîte à clés</strong>. La même clé ouvre les portes du haut et du bas.</p>
+      <p>Le code d'accès personnel vous sera envoyé par SMS peu avant votre visite.</p>
+      <figure class="key-photo">
+        <img src="../fotos/Welkomstpagina/Algemene%20informatie/Voordeur.jpg" alt="La porte d'entrée avec l'escalier blanc — la boîte à clés se trouve juste au coin"/>
+        <figcaption>Suivez le coin pour trouver la boîte à clés</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- STYLING -->
+<section class="sec light-sec">
+  <div class="wrap">
+    <div class="center">
+      <p class="tag">📷 Pour le shooting</p>
+      <h2>Linge &amp; mise en scène</h2>
+    </div>
+    <div class="blocks">
+      <div class="block">
+        <span class="icon">🛏</span>
+        <h3>Linge de lit &amp; de bain</h3>
+        <p>Dans l'armoire du hall, au rez-de-chaussée.</p>
+      </div>
+      <div class="block">
+        <span class="icon">🍽️</span>
+        <h3>Vaisselle &amp; vase</h3>
+        <p>La vaisselle se trouve dans les armoires de la cuisine. Un joli vase pour des fleurs se trouve dans le séjour.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center">
+      <p class="tag">🆘 Contact</p>
+      <h2>En cas de question</h2>
+    </div>
+    <div class="blocks">
+      <div class="block">
+        <span class="icon">📱</span>
+        <h3>Michiel</h3>
+        <p>Propriétaire<br/><a href="https://wa.me/32485153740" target="_blank" rel="noopener"><strong>+32 485 15 37 40</strong></a></p>
+      </div>
+      <div class="block">
+        <span class="icon">📱</span>
+        <h3>Greet</h3>
+        <p><a href="https://wa.me/32497853625" target="_blank" rel="noopener"><strong>+32 497 85 36 25</strong></a></p>
+      </div>
+    </div>
+    <p class="center" style="margin-top:1.6rem; font-size:.78rem; color: var(--gray); letter-spacing:.04em;">De préférence par WhatsApp.</p>
+  </div>
+</section>
+
+<!-- WIFI -->
+<section class="sec light-sec">
+  <div class="wrap center">
+    <p class="tag">📡 Internet</p>
+    <h2>WiFi</h2>
+    <div class="wifi-card">
+      <div class="wifi-qr">
+        <img src="assets/wifi-qr.png" alt="Code QR pour se connecter automatiquement au wifi" width="132" height="132"/>
+        <p class="wifi-qr-cap">Scannez avec votre appareil photo pour vous connecter automatiquement</p>
+      </div>
+      <div class="wifi-details">
+        <div class="lbl">Réseau</div>
+        <div class="val">Coincastor</div>
+        <div class="lbl">Mot de passe</div>
+        <div class="val">Ditiseenvakantiehuisgekochtin22</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EN QUITTANT -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center">
+      <p class="tag">🚪 En partant</p>
+      <h2>À votre départ</h2>
+    </div>
+    <div class="narrow center">
+      <p>Merci de bien fermer la porte à clé et de replacer la clé dans la boîte à clés en partant.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OUTRO -->
+<section class="outro">
+  <h2>Merci pour votre visite !</h2>
+  <p>N'hésitez pas à envoyer un message si vous avez des questions.</p>
+  <p class="signature">— Michiel</p>
+</section>
+
+<footer>
+  © Coin Castor · <a href="../index.html">coincastor.be</a>
+</footer>
+
+<script>
+  function toggleRoute(e) { e.stopPropagation(); document.getElementById('routeMenu').classList.toggle('open'); }
+  document.addEventListener('click', function() { var m = document.getElementById('routeMenu'); if (m) m.classList.remove('open'); });
+</script>
+
+</body>
+</html>
