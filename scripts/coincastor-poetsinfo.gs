@@ -1,11 +1,12 @@
 /**
- * Coin Castor — Poetsinfo feedback + live vertaling
- * ---------------------------------------------------
+ * Coin Castor — Poetsinfo feedback + live vertaling + poetstijd
+ * ----------------------------------------------------------------
  * Backend voor de poetsinfo-pagina (poets/3574ejwrhdsdw.html). Laat Irina
  * (en Michiel) een bericht opslaan in hun eigen taal; dit script vertaalt
- * het automatisch naar de twee andere talen (gratis, via LanguageApp) en
- * bewaart alles in een Google Sheet die het bij het eerste gebruik zelf
- * aanmaakt.
+ * het automatisch naar de twee andere talen (gratis, via LanguageApp).
+ * Laat Irina ook per boeking registreren hoe lang ze heeft gepoetst.
+ * Bewaart alles in een Google Sheet (tabbladen "feedback" en "cleantime")
+ * die het bij het eerste gebruik zelf aanmaakt.
  *
  * Dit bestand is een referentiekopie. De code draait in werkelijkheid in
  * Google Apps Script (script.google.com), niet vanuit deze repo — het is
@@ -43,8 +44,14 @@ function doGet(e) {
     if (action === 'delete') {
       return _handleDelete(e.parameter);
     }
+    if (action === 'savecleantime') {
+      return _handleSaveCleanTime(e.parameter);
+    }
+    if (action === 'deletecleantime') {
+      return _handleDeleteCleanTime(e.parameter);
+    }
 
-    // default: 'list'
+    // default: 'list' — geeft feedback EN poetstijd in één keer terug
     const sheet = getSheet_();
     const rows = sheet.getDataRange().getValues();
     rows.shift(); // kopregel weg
@@ -54,7 +61,15 @@ function doGet(e) {
         id: r[0], bookingId: r[1], at: r[2], sourceLang: r[3],
         nl: r[4], fr: r[5], ru: r[6],
       }));
-    return _out({ ok: true, feedback: feedback });
+
+    const ctSheet = getCleanTimeSheet_();
+    const ctRows = ctSheet.getDataRange().getValues();
+    ctRows.shift();
+    const cleantime = ctRows
+      .filter(r => r[0])
+      .map(r => ({ id: r[0], bookingId: r[1], at: r[2], minutes: r[3] }));
+
+    return _out({ ok: true, feedback: feedback, cleantime: cleantime });
   } catch (err) {
     return _out({ ok: false, error: String(err) });
   }
@@ -112,6 +127,42 @@ function _handleDelete(params) {
   return _out({ ok: false, error: 'niet gevonden' });
 }
 
+function _handleSaveCleanTime(params) {
+  const bookingId = (params.bookingId || '').toString().trim();
+  const minutes = parseInt(params.minutes, 10);
+
+  if (!bookingId || !minutes || minutes <= 0) {
+    return _out({ ok: false, error: 'bookingId en minutes (>0) zijn verplicht' });
+  }
+
+  const id = Utilities.getUuid();
+  const at = new Date().toISOString();
+  const sheet = getCleanTimeSheet_();
+  sheet.appendRow([id, bookingId, at, minutes]);
+
+  return _out({
+    ok: true,
+    entry: { id: id, bookingId: bookingId, at: at, minutes: minutes },
+  });
+}
+
+function _handleDeleteCleanTime(params) {
+  const id = (params.id || '').toString().trim();
+  if (!id) {
+    return _out({ ok: false, error: 'id is verplicht' });
+  }
+
+  const sheet = getCleanTimeSheet_();
+  const values = sheet.getDataRange().getValues();
+  for (let i = 1; i < values.length; i++) { // rij 0 = kopregel
+    if (values[i][0] === id) {
+      sheet.deleteRow(i + 1); // Sheets is 1-based
+      return _out({ ok: true });
+    }
+  }
+  return _out({ ok: false, error: 'niet gevonden' });
+}
+
 /**
  * Geeft het Sheet-tabblad "feedback" terug, en maakt bij het allereerste
  * gebruik automatisch een nieuwe spreadsheet "Coin Castor — Poetsinfo
@@ -134,6 +185,29 @@ function getSheet_() {
     sheet.appendRow(['id', 'bookingId', 'at', 'sourceLang', 'nl', 'fr', 'ru']);
     const def = ss.getSheetByName('Sheet1');
     if (def && ss.getSheets().length > 1) ss.deleteSheet(def);
+  }
+  return sheet;
+}
+
+/**
+ * Geeft het Sheet-tabblad "cleantime" terug (poetstijd per boeking), in
+ * dezelfde spreadsheet als "feedback" — maakt het tabblad aan indien nodig.
+ */
+function getCleanTimeSheet_() {
+  const props = PropertiesService.getScriptProperties();
+  let id = props.getProperty('SHEET_ID');
+  let ss = null;
+  if (id) {
+    try { ss = SpreadsheetApp.openById(id); } catch (e) { id = null; }
+  }
+  if (!ss) {
+    ss = SpreadsheetApp.create('Coin Castor — Poetsinfo feedback');
+    props.setProperty('SHEET_ID', ss.getId());
+  }
+  let sheet = ss.getSheetByName('cleantime');
+  if (!sheet) {
+    sheet = ss.insertSheet('cleantime');
+    sheet.appendRow(['id', 'bookingId', 'at', 'minutes']);
   }
   return sheet;
 }

@@ -127,6 +127,13 @@
     border:1px solid var(--good-border); border-radius:20px; padding:.4rem .85rem; cursor:pointer;
   }
 
+  .cthead{font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-top:1.1rem}
+  input.ctinput{
+    font-family:var(--sans); font-size:.85rem; padding:.55rem .7rem; border-radius:10px; width:7rem;
+    border:1px solid var(--border); background:var(--bg); color:var(--ink);
+  }
+  input.ctinput:focus-visible{outline:2px solid var(--accent); outline-offset:1px}
+
   .foot{display:flex; flex-direction:column; gap:.3rem; text-align:center; font-size:.72rem; color:var(--muted); margin-top:.3rem}
   .foot a{color:var(--accent-ink); text-decoration:none; font-weight:600}
   .foot a:hover{text-decoration:underline}
@@ -218,6 +225,7 @@ const WHATSAPP_GROUP_LINK = 'https://chat.whatsapp.com/CvtlAqxMSXdCkodf1FTc2C?mo
 const POETSINFO_API_URL = 'https://script.google.com/macros/s/AKfycbx7iycQTvMKKL5BP8UrQWq02mF7A9B5sREeyH_U1WHQOOBqy6W7b-ZcBineoPmWAeU2Nw/exec';
 
 let FEEDBACK = {}; // bookingId -> [{id,bookingId,at,sourceLang,nl,fr,ru}, ...]
+let CLEANTIME = {}; // bookingId -> [{id,bookingId,at,minutes}, ...]
 
 const MONTHS = {
   nl:['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'],
@@ -248,6 +256,13 @@ const STR = {
     feedbackSave:'Opslaan', feedbackSaving:'Bezig met opslaan…', feedbackCancel:'Annuleren',
     feedbackNote:'Wordt automatisch vertaald — zichtbaar voor iedereen die deze pagina bekijkt.',
     feedbackSaveError:'Opslaan lukte niet — controleer je internetverbinding en probeer opnieuw.',
+    cleanHeading:'Poetstijd', cleanEmpty:'Nog geen poetstijd geregistreerd.',
+    cleanDelete:'Verwijderen', cleanDeleteConfirm:'Deze poetstijd verwijderen? Dit kan niet ongedaan gemaakt worden.',
+    cleanDeleteError:'Verwijderen lukte niet — probeer opnieuw.',
+    cleanAdd:'Poetstijd toevoegen', cleanPlaceholder:'Aantal uur (bv. 2.5)',
+    cleanSave:'Opslaan', cleanSaving:'Bezig met opslaan…', cleanCancel:'Annuleren',
+    cleanSaveError:'Opslaan lukte niet — controleer je internetverbinding en probeer opnieuw.',
+    cleanUnit:'u',
     contact:'Vragen? WhatsApp',
   },
   fr:{
@@ -267,6 +282,13 @@ const STR = {
     feedbackSave:'Enregistrer', feedbackSaving:'Enregistrement…', feedbackCancel:'Annuler',
     feedbackNote:'Traduit automatiquement — visible par tous ceux qui consultent cette page.',
     feedbackSaveError:'Échec de l’enregistrement — vérifiez votre connexion et réessayez.',
+    cleanHeading:'Temps de ménage', cleanEmpty:'Aucun temps de ménage enregistré pour cette réservation.',
+    cleanDelete:'Supprimer', cleanDeleteConfirm:'Supprimer ce temps de ménage ? Cette action est irréversible.',
+    cleanDeleteError:'Échec de la suppression — réessayez.',
+    cleanAdd:'Ajouter un temps de ménage', cleanPlaceholder:'Nombre d’heures (ex. 2.5)',
+    cleanSave:'Enregistrer', cleanSaving:'Enregistrement…', cleanCancel:'Annuler',
+    cleanSaveError:'Échec de l’enregistrement — vérifiez votre connexion et réessayez.',
+    cleanUnit:'h',
     contact:'Des questions ? WhatsApp',
   },
   ru:{
@@ -286,6 +308,13 @@ const STR = {
     feedbackSave:'Сохранить', feedbackSaving:'Сохранение…', feedbackCancel:'Отмена',
     feedbackNote:'Переводится автоматически — видно всем, кто открывает эту страницу.',
     feedbackSaveError:'Не удалось сохранить — проверьте интернет-соединение и попробуйте снова.',
+    cleanHeading:'Время уборки', cleanEmpty:'Время уборки ещё не указано для этого бронирования.',
+    cleanDelete:'Удалить', cleanDeleteConfirm:'Удалить это время уборки? Это действие необратимо.',
+    cleanDeleteError:'Не удалось удалить — попробуйте снова.',
+    cleanAdd:'Добавить время уборки', cleanPlaceholder:'Количество часов (напр. 2.5)',
+    cleanSave:'Сохранить', cleanSaving:'Сохранение…', cleanCancel:'Отмена',
+    cleanSaveError:'Не удалось сохранить — проверьте интернет-соединение и попробуйте снова.',
+    cleanUnit:'ч',
     contact:'Вопросы? WhatsApp',
   },
 };
@@ -296,6 +325,7 @@ try { const saved = localStorage.getItem('poetsinfo_lang'); if (saved && LANGS.i
 
 let openId = null;
 let formOpenId = null;
+let cleanFormOpenId = null;
 
 function todayISO(){
   const d = new Date();
@@ -396,6 +426,37 @@ function renderFeedback(b, s){
     </div>`;
 }
 
+function formatDuration(minutes, s){
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  return m > 0 ? `${h}${s.cleanUnit}${String(m).padStart(2,'0')}` : `${h}${s.cleanUnit}`;
+}
+
+function renderCleanTime(b, s){
+  const list = CLEANTIME[b.id] || [];
+  const items = list.length
+    ? list.map(t => `<div class="fbitem">${formatDuration(t.minutes, s)}<div class="fbmeta"><span class="fbdate">${fmtDateLong((t.at||'').slice(0,10) || todayISO(), lang)}</span><button class="fbdel" data-deleteclean="${t.id}" data-booking="${b.id}">${s.cleanDelete}</button></div></div>`).join('')
+    : `<p class="fbempty">${s.cleanEmpty}</p>`;
+
+  const formOpen = cleanFormOpenId === b.id;
+
+  const formHtml = formOpen ? `
+    <div class="fbform">
+      <input class="ctinput" type="number" step="0.25" min="0" id="cttext-${b.id}" placeholder="${s.cleanPlaceholder}" />
+      <div class="btnrow">
+        <button class="btn primary" data-saveclean="${b.id}">${s.cleanSave}</button>
+        <button class="btn" data-cancelclean="${b.id}">${s.cleanCancel}</button>
+      </div>
+    </div>` : `<button class="addbtn" data-addclean="${b.id}">${s.cleanAdd}</button>`;
+
+  return `
+    <div>
+      <p class="cthead" style="margin-bottom:.5rem">${s.cleanHeading}</p>
+      <div style="display:flex;flex-direction:column;gap:.5rem">${items}</div>
+      <div style="margin-top:.65rem">${formHtml}</div>
+    </div>`;
+}
+
 function renderDetail(b, s){
   return `
     <div class="detail-inner">
@@ -415,6 +476,7 @@ function renderDetail(b, s){
       ${renderGuests(b, s)}
       ${renderLinen(b, s)}
       ${renderFeedback(b, s)}
+      ${renderCleanTime(b, s)}
     </div>`;
 }
 
@@ -454,6 +516,7 @@ function bind(){
       const id = row.dataset.id;
       openId = (openId === id) ? null : id;
       formOpenId = null;
+      cleanFormOpenId = null;
       render();
     });
   });
@@ -470,6 +533,22 @@ function bind(){
     btn.addEventListener('click', (e)=>{
       e.stopPropagation();
       formOpenId = null;
+      render();
+    });
+  });
+  document.querySelectorAll('[data-addclean]').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      cleanFormOpenId = btn.dataset.addclean;
+      render();
+      const inp = document.getElementById('cttext-'+cleanFormOpenId);
+      if (inp) inp.focus();
+    });
+  });
+  document.querySelectorAll('[data-cancelclean]').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      cleanFormOpenId = null;
       render();
     });
   });
@@ -544,6 +623,77 @@ function bind(){
       }
     });
   });
+  document.querySelectorAll('[data-saveclean]').forEach(btn=>{
+    btn.addEventListener('click', async (e)=>{
+      e.stopPropagation();
+      const id = btn.dataset.saveclean;
+      const inp = document.getElementById('cttext-'+id);
+      const hours = parseFloat(inp && inp.value);
+      const s = STR[lang];
+      if (!inp || isNaN(hours) || hours <= 0) { if (inp) inp.focus(); return; }
+      const minutes = Math.round(hours * 60);
+
+      if (!POETSINFO_API_URL || POETSINFO_API_URL.indexOf('PLAK_HIER') === 0) {
+        alert(s.cleanSaveError);
+        return;
+      }
+
+      const cancelBtn = document.querySelector(`[data-cancelclean="${id}"]`);
+      btn.disabled = true; if (cancelBtn) cancelBtn.disabled = true;
+      const prevLabel = btn.textContent;
+      btn.textContent = s.cleanSaving;
+
+      try {
+        const url = POETSINFO_API_URL + '?action=savecleantime'
+          + '&bookingId=' + encodeURIComponent(id)
+          + '&minutes=' + encodeURIComponent(minutes);
+        const res = await fetch(url, { cache: 'no-store' });
+        const data = await res.json();
+        if (!data || !data.ok || !data.entry) throw new Error((data && data.error) || 'onbekende fout');
+        if (!CLEANTIME[id]) CLEANTIME[id] = [];
+        CLEANTIME[id].push(data.entry);
+        cleanFormOpenId = null;
+        render();
+      } catch(err) {
+        alert(s.cleanSaveError);
+        btn.disabled = false; if (cancelBtn) cancelBtn.disabled = false;
+        btn.textContent = prevLabel;
+      }
+    });
+  });
+  document.querySelectorAll('[data-deleteclean]').forEach(btn=>{
+    btn.addEventListener('click', async (e)=>{
+      e.stopPropagation();
+      const id = btn.dataset.deleteclean;
+      const bookingId = btn.dataset.booking;
+      const s = STR[lang];
+
+      if (!POETSINFO_API_URL || POETSINFO_API_URL.indexOf('PLAK_HIER') === 0) {
+        alert(s.cleanDeleteError);
+        return;
+      }
+      if (!confirm(s.cleanDeleteConfirm)) return;
+
+      btn.disabled = true;
+      const prevLabel = btn.textContent;
+
+      try {
+        const url = POETSINFO_API_URL + '?action=deletecleantime'
+          + '&id=' + encodeURIComponent(id);
+        const res = await fetch(url, { cache: 'no-store' });
+        const data = await res.json();
+        if (!data || !data.ok) throw new Error((data && data.error) || 'onbekende fout');
+        if (CLEANTIME[bookingId]) {
+          CLEANTIME[bookingId] = CLEANTIME[bookingId].filter(t => t.id !== id);
+        }
+        render();
+      } catch(err) {
+        alert(s.cleanDeleteError);
+        btn.disabled = false;
+        btn.textContent = prevLabel;
+      }
+    });
+  });
 }
 
 function loadFeedback(){
@@ -559,8 +709,17 @@ function loadFeedback(){
         });
         Object.keys(grouped).forEach(k => grouped[k].sort((a,b)=> (a.at||'').localeCompare(b.at||'')));
         FEEDBACK = grouped;
-        render();
       }
+      if (data && data.ok && Array.isArray(data.cleantime)) {
+        const groupedCt = {};
+        data.cleantime.forEach(t => {
+          if (!groupedCt[t.bookingId]) groupedCt[t.bookingId] = [];
+          groupedCt[t.bookingId].push(t);
+        });
+        Object.keys(groupedCt).forEach(k => groupedCt[k].sort((a,b)=> (a.at||'').localeCompare(b.at||'')));
+        CLEANTIME = groupedCt;
+      }
+      render();
     })
     .catch(()=>{ /* feedback-server niet bereikbaar — pagina werkt verder zonder */ });
 }
