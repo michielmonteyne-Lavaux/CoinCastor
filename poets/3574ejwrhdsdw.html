@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Coin Castor — Poetsinfo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    color-scheme: light;
+    --bg:#f6f4ef; --surface:#ffffff; --ink:#211f1a; --muted:#8a8374; --border:#e3ddcf;
+    --accent:#3f5a41; --accent-ink:#2c4030; --accent-bg:#e9efe6;
+    --good-bg:#e7f0e1; --good-text:#2f6b3c; --good-border:#c3dcc0;
+    --warn-bg:#fbeed9; --warn-text:#9a5b1f; --warn-border:#f0d9ad;
+    --neutral-bg:#eeece5; --neutral-text:#7a7565; --neutral-border:#dcd7c9;
+    --serif:'Playfair Display',Georgia,serif; --sans:'Raleway',system-ui,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      color-scheme: dark;
+      --bg:#14140f; --surface:#1c1b16; --ink:#f1eee5; --muted:#9b9484; --border:#33312a;
+      --accent:#8fc192; --accent-ink:#bfe0c1; --accent-bg:#20281f;
+      --good-bg:#1e3524; --good-text:#8fd39a; --good-border:#33502f;
+      --warn-bg:#3a2a15; --warn-text:#e3a75c; --warn-border:#5a4324;
+      --neutral-bg:#242219; --neutral-text:#a39d8c; --neutral-border:#3a362a;
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans);
+    padding:2rem 1.1rem 3rem; min-height:100vh; display:flex; justify-content:center;
+  }
+  .wrap{width:100%; max-width:460px; display:flex; flex-direction:column; gap:1rem}
+
+  .topbar{display:flex; justify-content:space-between; align-items:center; gap:.6rem}
+  .brand{font-family:var(--serif); font-weight:700; font-size:1.05rem; margin:0}
+  .langrow{display:flex; gap:.4rem}
+  .langbtn{
+    font-family:var(--sans); font-size:.66rem; font-weight:600; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--muted); background:var(--surface);
+    border:1px solid var(--border); border-radius:20px; padding:.3rem .7rem;
+    cursor:pointer; transition:.15s;
+  }
+  .langbtn:hover{border-color:var(--accent); color:var(--ink)}
+  .langbtn.active{background:var(--accent); color:var(--bg); border-color:var(--accent)}
+  .langbtn:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+  h1{font-family:var(--serif); font-weight:700; font-size:1.3rem; margin:0}
+  .sub{font-size:.78rem; color:var(--muted); margin:.2rem 0 0}
+
+  .list{display:flex; flex-direction:column; gap:.65rem}
+  .booking{
+    background:var(--surface); border:1px solid var(--border); border-radius:16px;
+    overflow:hidden; transition:border-color .15s;
+  }
+  .booking.open{border-color:var(--accent)}
+  .row{
+    display:flex; align-items:center; gap:.85rem; padding:1rem 1.15rem; cursor:pointer;
+    background:none; border:none; width:100%; text-align:left; font-family:var(--sans); color:var(--ink);
+  }
+  .row:focus-visible{outline:2px solid var(--accent); outline-offset:-2px}
+  .row .datecol{flex:none; width:4.6rem}
+  .row .datecol .d1{font-family:var(--serif); font-weight:700; font-size:1.05rem; font-variant-numeric:tabular-nums; line-height:1.1}
+  .row .datecol .d2{font-size:.66rem; color:var(--muted); margin-top:.1rem}
+  .row .namecol{flex:1; min-width:0}
+  .row .namecol .nm{font-size:.92rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .row .namecol .meta{font-size:.72rem; color:var(--muted); margin-top:.1rem}
+  .row .dot{width:.6rem; height:.6rem; border-radius:50%; flex:none}
+  .dot.good{background:var(--good-text)}
+  .dot.warn{background:var(--warn-text)}
+  .dot.neutral{background:var(--neutral-text)}
+  .row .chev{flex:none; color:var(--muted); font-size:.8rem; transition:transform .15s}
+  .booking.open .chev{transform:rotate(90deg)}
+
+  .detail{padding:0 1.15rem 1.2rem; display:flex; flex-direction:column; gap:1.1rem; border-top:1px solid var(--border); margin-top:0}
+  .detail-inner{padding-top:1.1rem; display:flex; flex-direction:column; gap:1.1rem}
+
+  .dates{display:flex; gap:.9rem; align-items:stretch}
+  .datebox{flex:1; min-width:0}
+  .datebox .lbl{font-size:.64rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:.25rem}
+  .datebox .val{font-family:var(--serif); font-size:1.25rem; font-weight:700; line-height:1.15; font-variant-numeric:tabular-nums}
+  .datebox .time{font-size:.74rem; color:var(--muted); margin-top:.1rem}
+  .arrow{align-self:center; color:var(--border); font-size:1.1rem; padding-top:.9rem}
+
+  .guests{display:flex; gap:.5rem; flex-wrap:wrap}
+  .gtile{flex:1; min-width:72px; background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:.55rem .4rem; text-align:center}
+  .gtile .n{font-family:var(--serif); font-size:1.2rem; font-weight:700; font-variant-numeric:tabular-nums}
+  .gtile .l{font-size:.6rem; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin-top:.1rem}
+  .gtotal{font-size:.74rem; color:var(--muted)}
+  .placeholder{font-size:.8rem; color:var(--neutral-text); background:var(--neutral-bg); border:1px solid var(--neutral-border); border-radius:10px; padding:.6rem .8rem}
+
+  .pill{display:flex; align-items:center; gap:.65rem; border-radius:12px; padding:.75rem .9rem; border:1px solid var(--good-border); background:var(--good-bg); color:var(--good-text)}
+  .pill.no{border-color:var(--warn-border); background:var(--warn-bg); color:var(--warn-text)}
+  .pill.unknown{border-color:var(--neutral-border); background:var(--neutral-bg); color:var(--neutral-text)}
+  .pill .dot2{width:.55rem; height:.55rem; border-radius:50%; background:currentColor; flex:none}
+  .pill .txt{font-size:.82rem; font-weight:600; line-height:1.3}
+  .pill .txt span{display:block; font-size:.7rem; font-weight:400; opacity:.85; margin-top:.1rem}
+
+  .fbhead{font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
+  .fbitem{background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:.6rem .75rem; font-size:.82rem; line-height:1.45}
+  .fbitem .fbdate{display:block; font-size:.66rem; color:var(--muted); margin-top:.3rem}
+  .fbempty{font-size:.8rem; color:var(--muted); font-style:italic}
+
+  .fbform{display:flex; flex-direction:column; gap:.5rem}
+  textarea.fbinput{
+    font-family:var(--sans); font-size:.85rem; padding:.6rem .7rem; border-radius:10px;
+    border:1px solid var(--border); background:var(--bg); color:var(--ink); resize:vertical; min-height:4.2rem;
+  }
+  textarea.fbinput:focus-visible{outline:2px solid var(--accent); outline-offset:1px}
+  .fbnote{font-size:.68rem; color:var(--muted)}
+  .btnrow{display:flex; gap:.5rem}
+  .btn{
+    font-family:var(--sans); font-size:.78rem; font-weight:600; border-radius:20px; padding:.55rem 1rem;
+    cursor:pointer; border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  }
+  .btn.primary{background:var(--accent); border-color:var(--accent); color:var(--bg)}
+  .btn:disabled{opacity:.6; cursor:default}
+  .btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+  .addbtn{
+    align-self:flex-start; font-size:.76rem; font-weight:600; color:var(--accent-ink); background:var(--accent-bg);
+    border:1px solid var(--good-border); border-radius:20px; padding:.4rem .85rem; cursor:pointer;
+  }
+
+  .foot{display:flex; flex-direction:column; gap:.3rem; text-align:center; font-size:.72rem; color:var(--muted); margin-top:.3rem}
+  .foot a{color:var(--accent-ink); text-decoration:none; font-weight:600}
+  .foot a:hover{text-decoration:underline}
+
+  @media (max-width:400px){
+    .row{padding:.85rem .9rem}
+    .row .datecol{width:3.9rem}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="topbar">
+    <p class="brand">Coin Castor</p>
+    <div class="langrow" id="langrow"></div>
+  </div>
+  <div>
+    <h1 id="heading"></h1>
+    <p class="sub" id="subheading"></p>
+  </div>
+
+  <div class="list" id="list"></div>
+
+  <div class="foot">
+    <div id="contact"></div>
+  </div>
+</div>
+
+<script>
+// ── Boekingen — wordt bijgewerkt telkens er een nieuwe boeking bijkomt ──
+// type: 'guest' (via Natuurhuisje of ander) of 'private' (Greet en/of Michiel zelf, evt. met vrienden).
+// guestName: gewone string (naam, blijft ongewijzigd in elke taal) OF {nl,fr,ru}
+// voor een beschrijvende label die wél vertaald moet worden (bv. "Greet met vriendinnen").
+// adults/children/baby/linenProvided op null laten zolang nog niet bevestigd.
+// linenProvided wordt niet getoond bij type 'private' (is niet van toepassing).
+// Feedback wordt NIET hier bewaard — die komt live uit de Apps Script-backend
+// (zie POETSINFO_API_URL hieronder), zodat Irina en Michiel elkaars berichten
+// meteen zien, automatisch vertaald.
+const BOOKINGS = [
+  {
+    id: 'sep18', type: 'private',
+    arrival: '2026-09-18', arrivalTime: null,
+    departure: '2026-09-22', departureTime: null,
+    guestName: null,
+    adults: null, children: null, baby: null,
+    linenProvided: null,
+  },
+  {
+    id: 'sep25', type: 'guest',
+    arrival: '2026-09-25', arrivalTime: '15:00',
+    departure: '2026-09-28', departureTime: '11:00',
+    guestName: 'Sara, Stijn, Otje & Flootje',
+    adults: 8, children: 3, baby: 0,
+    linenProvided: true,
+  },
+  {
+    id: 'oct23', type: 'private',
+    arrival: '2026-10-23', arrivalTime: '15:00',
+    departure: '2026-10-25', departureTime: '11:00',
+    guestName: { nl: 'Greet met vriendinnen', fr: 'Greet entre amies', ru: 'Грет с подругами' },
+    adults: 4, children: 0, baby: 0,
+    linenProvided: null,
+  },
+  {
+    id: 'eline', type: 'guest',
+    arrival: '2026-10-30', arrivalTime: '15:00',
+    departure: '2026-11-02', departureTime: '11:00',
+    guestName: 'Eline Klaps',
+    adults: 6, children: 3, baby: 1,
+    linenProvided: true,
+  },
+  {
+    id: 'dorissen', type: 'guest',
+    arrival: '2026-12-26', arrivalTime: '15:00',
+    departure: '2027-01-03', departureTime: '11:00',
+    guestName: 'Dorissen Kim',
+    adults: 7, children: 1, baby: 1,
+    linenProvided: true,
+  },
+];
+
+const WHATSAPP_NUMBER = '32485153740';
+
+// LET OP: vul dit in nadat scripts/coincastor-poetsinfo.gs is gedeployed als
+// Apps Script-webapp (zie de instructies bovenaan dat bestand) — plak hier de
+// /exec-URL die Apps Script je geeft. Zolang dit niet is ingevuld, werkt de
+// pagina nog wel (data/linnen/gasten), maar blijft feedback leeg.
+const POETSINFO_API_URL = 'PLAK_HIER_JE_APPS_SCRIPT_URL';
+
+let FEEDBACK = {}; // bookingId -> [{id,bookingId,at,sourceLang,nl,fr,ru}, ...]
+
+const MONTHS = {
+  nl:['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'],
+  fr:['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'],
+  ru:['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'],
+};
+const MONTHS_SHORT = {
+  nl:['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'],
+  fr:['jan','fév','mars','avr','mai','juin','juil','août','sep','oct','nov','déc'],
+  ru:['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'],
+};
+
+const STR = {
+  nl:{
+    heading:'Boekingen', sub:'Tik op een boeking voor meer info',
+    arrival:'Aankomst', departure:'Vertrek',
+    adults:'volwassenen', children:'kinderen', baby:'baby',
+    total:(n)=>`${n} personen in totaal`,
+    unknownGuests:'Aantal gasten nog te bevestigen',
+    privateLabel:'Greet & Michiel — eigen gebruik',
+    linenYes:'Bed- en badlinnen: voorzien', linenYesSub:'Niets extra nodig.',
+    linenNo:'Bed- en badlinnen: niet voorzien', linenNoSub:'Gasten brengen dit zelf mee.',
+    linenUnknown:'Bed- en badlinnen: nog te bevestigen',
+    feedbackHeading:'Feedback', feedbackEmpty:'Nog geen feedback bij deze boeking.',
+    feedbackAdd:'Feedback toevoegen', feedbackPlaceholder:'Schrijf hier je bericht (bv. over schade)...',
+    feedbackSave:'Opslaan', feedbackSaving:'Bezig met opslaan…', feedbackCancel:'Annuleren',
+    feedbackNote:'Wordt automatisch vertaald — zichtbaar voor iedereen die deze pagina bekijkt.',
+    feedbackSaveError:'Opslaan lukte niet — controleer je internetverbinding en probeer opnieuw.',
+    contact:'Vragen? WhatsApp Michiel',
+  },
+  fr:{
+    heading:'Réservations', sub:'Touchez une réservation pour plus d’infos',
+    arrival:'Arrivée', departure:'Départ',
+    adults:'adultes', children:'enfants', baby:'bébé',
+    total:(n)=>`${n} personnes au total`,
+    unknownGuests:'Nombre d’invités à confirmer',
+    privateLabel:'Greet et Michiel — usage privé',
+    linenYes:'Linge de lit et de bain : fourni', linenYesSub:'Rien à prévoir.',
+    linenNo:'Linge de lit et de bain : non fourni', linenNoSub:'Les invités l’apportent eux-mêmes.',
+    linenUnknown:'Linge de lit et de bain : à confirmer',
+    feedbackHeading:'Retour', feedbackEmpty:'Pas encore de retour pour cette réservation.',
+    feedbackAdd:'Ajouter un retour', feedbackPlaceholder:'Écrivez votre message ici (par ex. des dégâts)...',
+    feedbackSave:'Enregistrer', feedbackSaving:'Enregistrement…', feedbackCancel:'Annuler',
+    feedbackNote:'Traduit automatiquement — visible par tous ceux qui consultent cette page.',
+    feedbackSaveError:'Échec de l’enregistrement — vérifiez votre connexion et réessayez.',
+    contact:'Des questions ? WhatsApp Michiel',
+  },
+  ru:{
+    heading:'Бронирования', sub:'Нажмите на бронирование, чтобы узнать больше',
+    arrival:'Заезд', departure:'Выезд',
+    adults:'взрослых', children:'детей', baby:'младенец',
+    total:(n)=>`${n} человек всего`,
+    unknownGuests:'Количество гостей уточняется',
+    privateLabel:'Грет и Михиль — личное проживание',
+    linenYes:'Постельное и банное бельё: предоставлено', linenYesSub:'Готовить ничего не нужно.',
+    linenNo:'Постельное и банное бельё: не предоставлено', linenNoSub:'Гости привозят его сами.',
+    linenUnknown:'Постельное и банное бельё: уточняется',
+    feedbackHeading:'Отзыв', feedbackEmpty:'Пока нет отзывов по этому бронированию.',
+    feedbackAdd:'Добавить отзыв', feedbackPlaceholder:'Напишите сообщение здесь (например, о повреждениях)...',
+    feedbackSave:'Сохранить', feedbackSaving:'Сохранение…', feedbackCancel:'Отмена',
+    feedbackNote:'Переводится автоматически — видно всем, кто открывает эту страницу.',
+    feedbackSaveError:'Не удалось сохранить — проверьте интернет-соединение и попробуйте снова.',
+    contact:'Вопросы? WhatsApp Михилю',
+  },
+};
+
+const LANGS = ['nl','fr','ru'];
+let lang = 'nl';
+try { const saved = localStorage.getItem('poetsinfo_lang'); if (saved && LANGS.includes(saved)) lang = saved; } catch(e) {}
+
+let openId = null;
+let formOpenId = null;
+
+function todayISO(){
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function fmtDateShort(iso, lg){ const [y,m,d]=iso.split('-').map(Number); return `${d} ${MONTHS_SHORT[lg][m-1]}`; }
+function fmtDateLong(iso, lg){ const [y,m,d]=iso.split('-').map(Number); return `${d} ${MONTHS[lg][m-1]}`; }
+function fmtYear(iso){ return iso.split('-')[0]; }
+function fmtRange(a, b, lg){
+  const sameYear = fmtYear(a) === fmtYear(b);
+  return `${fmtDateShort(a,lg)}${sameYear?'':' '+fmtYear(a)} – ${fmtDateShort(b,lg)} ${fmtYear(b)}`;
+}
+function futureBookings(){
+  const t = todayISO();
+  return BOOKINGS.filter(b => b.departure >= t).sort((a,b)=> a.arrival.localeCompare(b.arrival));
+}
+
+function guestTotal(b){ return (b.adults||0)+(b.children||0)+(b.baby||0); }
+
+function bookingName(b, s){
+  if (b.guestName && typeof b.guestName === 'object') return b.guestName[lang] || b.guestName.nl;
+  return b.guestName || (b.type === 'private' ? s.privateLabel : '—');
+}
+
+function linenState(b){
+  if (b.linenProvided === true) return 'good';
+  if (b.linenProvided === false) return 'warn';
+  return 'neutral';
+}
+
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function renderRow(b, s){
+  const isPrivate = b.type === 'private';
+  const name = bookingName(b, s);
+  const meta = guestTotal(b) ? s.total(guestTotal(b)) : s.unknownGuests;
+  const dotClass = isPrivate ? '' : `dot ${linenState(b)}`;
+  return `
+    <button class="row" data-id="${b.id}" aria-expanded="${openId===b.id}">
+      <div class="datecol">
+        <div class="d1">${fmtDateShort(b.arrival, lang)}</div>
+        <div class="d2">→ ${fmtDateShort(b.departure, lang)}</div>
+      </div>
+      <div class="namecol">
+        <div class="nm">${escapeHtml(name)}</div>
+        ${meta ? `<div class="meta">${meta}</div>` : ''}
+      </div>
+      ${isPrivate ? '' : `<span class="${dotClass}"></span>`}
+      <span class="chev">▸</span>
+    </button>`;
+}
+
+function renderGuests(b, s){
+  const tiles = [];
+  if (b.adults) tiles.push([b.adults, s.adults]);
+  if (b.children) tiles.push([b.children, s.children]);
+  if (b.baby) tiles.push([b.baby, s.baby]);
+  if (!tiles.length) return `<div class="placeholder">${s.unknownGuests}</div>`;
+  return `
+    <div>
+      <div class="guests">${tiles.map(([n,l])=>`<div class="gtile"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('')}</div>
+      <p class="gtotal" style="margin-top:.5rem">${s.total(guestTotal(b))}</p>
+    </div>`;
+}
+
+function renderLinen(b, s){
+  if (b.type === 'private') return '';
+  if (b.linenProvided === true) return `<div class="pill"><span class="dot2"></span><span class="txt">${s.linenYes}<span>${s.linenYesSub}</span></span></div>`;
+  if (b.linenProvided === false) return `<div class="pill no"><span class="dot2"></span><span class="txt">${s.linenNo}<span>${s.linenNoSub}</span></span></div>`;
+  return `<div class="pill unknown"><span class="dot2"></span><span class="txt">${s.linenUnknown}</span></div>`;
+}
+
+function renderFeedback(b, s){
+  const list = FEEDBACK[b.id] || [];
+  const items = list.length
+    ? list.map(f => `<div class="fbitem">${escapeHtml(f[lang]||f.ru||f.nl||f.fr||'')}<span class="fbdate">${fmtDateLong((f.at||'').slice(0,10) || todayISO(), lang)}</span></div>`).join('')
+    : `<p class="fbempty">${s.feedbackEmpty}</p>`;
+
+  const formOpen = formOpenId === b.id;
+
+  const formHtml = formOpen ? `
+    <div class="fbform">
+      <textarea class="fbinput" id="fbtext-${b.id}" placeholder="${s.feedbackPlaceholder}"></textarea>
+      <p class="fbnote">${s.feedbackNote}</p>
+      <div class="btnrow">
+        <button class="btn primary" data-save="${b.id}">${s.feedbackSave}</button>
+        <button class="btn" data-cancel="${b.id}">${s.feedbackCancel}</button>
+      </div>
+    </div>` : `<button class="addbtn" data-addfb="${b.id}">${s.feedbackAdd}</button>`;
+
+  return `
+    <div>
+      <p class="fbhead" style="margin-bottom:.5rem">${s.feedbackHeading}</p>
+      <div style="display:flex;flex-direction:column;gap:.5rem">${items}</div>
+      <div style="margin-top:.65rem">${formHtml}</div>
+    </div>`;
+}
+
+function renderDetail(b, s){
+  return `
+    <div class="detail-inner">
+      <div class="dates">
+        <div class="datebox">
+          <div class="lbl">${s.arrival}</div>
+          <div class="val">${fmtDateLong(b.arrival, lang)} ${fmtYear(b.arrival)}</div>
+          ${b.arrivalTime ? `<div class="time">${b.arrivalTime}</div>` : ''}
+        </div>
+        <div class="arrow">→</div>
+        <div class="datebox">
+          <div class="lbl">${s.departure}</div>
+          <div class="val">${fmtDateLong(b.departure, lang)} ${fmtYear(b.departure)}</div>
+          ${b.departureTime ? `<div class="time">${b.departureTime}</div>` : ''}
+        </div>
+      </div>
+      ${renderGuests(b, s)}
+      ${renderLinen(b, s)}
+      ${renderFeedback(b, s)}
+    </div>`;
+}
+
+function render(){
+  const s = STR[lang];
+  document.documentElement.lang = lang;
+
+  document.getElementById('langrow').innerHTML = LANGS.map(l =>
+    `<button class="langbtn${l===lang?' active':''}" data-l="${l}">${l}</button>`
+  ).join('');
+
+  document.getElementById('heading').textContent = s.heading;
+  document.getElementById('subheading').textContent = s.sub;
+  document.getElementById('contact').innerHTML = `<a href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noopener">${s.contact}</a>`;
+
+  const list = futureBookings();
+  document.getElementById('list').innerHTML = list.map(b => `
+    <div class="booking${openId===b.id?' open':''}">
+      ${renderRow(b, s)}
+      ${openId===b.id ? `<div class="detail">${renderDetail(b, s)}</div>` : ''}
+    </div>
+  `).join('');
+
+  bind();
+}
+
+function bind(){
+  document.querySelectorAll('.langbtn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      lang = btn.dataset.l;
+      try{ localStorage.setItem('poetsinfo_lang', lang); }catch(e){}
+      render();
+    });
+  });
+  document.querySelectorAll('.row').forEach(row=>{
+    row.addEventListener('click', ()=>{
+      const id = row.dataset.id;
+      openId = (openId === id) ? null : id;
+      formOpenId = null;
+      render();
+    });
+  });
+  document.querySelectorAll('[data-addfb]').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      formOpenId = btn.dataset.addfb;
+      render();
+      const ta = document.getElementById('fbtext-'+formOpenId);
+      if (ta) ta.focus();
+    });
+  });
+  document.querySelectorAll('[data-cancel]').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      formOpenId = null;
+      render();
+    });
+  });
+  document.querySelectorAll('[data-save]').forEach(btn=>{
+    btn.addEventListener('click', async (e)=>{
+      e.stopPropagation();
+      const id = btn.dataset.save;
+      const ta = document.getElementById('fbtext-'+id);
+      const text = (ta && ta.value || '').trim();
+      if (!text) { if (ta) ta.focus(); return; }
+      const s = STR[lang];
+
+      if (!POETSINFO_API_URL || POETSINFO_API_URL.indexOf('PLAK_HIER') === 0) {
+        alert(s.feedbackSaveError);
+        return;
+      }
+
+      const cancelBtn = document.querySelector(`[data-cancel="${id}"]`);
+      btn.disabled = true; if (cancelBtn) cancelBtn.disabled = true;
+      const prevLabel = btn.textContent;
+      btn.textContent = s.feedbackSaving;
+
+      try {
+        const url = POETSINFO_API_URL + '?action=save'
+          + '&bookingId=' + encodeURIComponent(id)
+          + '&lang=' + encodeURIComponent(lang)
+          + '&text=' + encodeURIComponent(text);
+        const res = await fetch(url, { cache: 'no-store' });
+        const data = await res.json();
+        if (!data || !data.ok || !data.entry) throw new Error((data && data.error) || 'onbekende fout');
+        if (!FEEDBACK[id]) FEEDBACK[id] = [];
+        FEEDBACK[id].push(data.entry);
+        formOpenId = null;
+        render();
+      } catch(err) {
+        alert(s.feedbackSaveError);
+        btn.disabled = false; if (cancelBtn) cancelBtn.disabled = false;
+        btn.textContent = prevLabel;
+      }
+    });
+  });
+}
+
+function loadFeedback(){
+  if (!POETSINFO_API_URL || POETSINFO_API_URL.indexOf('PLAK_HIER') === 0) return;
+  fetch(POETSINFO_API_URL + '?action=list&_=' + Date.now(), { cache: 'no-store' })
+    .then(r => r.json())
+    .then(data => {
+      if (data && data.ok && Array.isArray(data.feedback)) {
+        const grouped = {};
+        data.feedback.forEach(f => {
+          if (!grouped[f.bookingId]) grouped[f.bookingId] = [];
+          grouped[f.bookingId].push(f);
+        });
+        Object.keys(grouped).forEach(k => grouped[k].sort((a,b)=> (a.at||'').localeCompare(b.at||'')));
+        FEEDBACK = grouped;
+        render();
+      }
+    })
+    .catch(()=>{ /* feedback-server niet bereikbaar — pagina werkt verder zonder */ });
+}
+
+render();
+loadFeedback();
+</script>
+</body>
+</html>
