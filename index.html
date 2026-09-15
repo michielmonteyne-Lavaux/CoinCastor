@@ -188,9 +188,6 @@
     .ps { font-size: .73rem; font-weight: 300; color: var(--gray); display: block; margin-top: .1rem; }
     .pv { font-family: var(--serif); font-size: 1rem; font-weight: 700; display: block; }
     .pn { font-size: .7rem; font-weight: 300; color: var(--gray); display: block; }
-    .ptable thead th:nth-child(2) { color: #3d8f3d; }
-    .ptable thead th:nth-child(3) { color: #a8880e; }
-    .ptable thead th:nth-child(4) { color: #b85c12; }
     .pgrid-peak { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); margin-top: 2rem; }
     .pc { background: white; padding: 1.4rem 1.25rem; }
     .pck { font-weight: 500; font-size: .9rem; }
@@ -504,25 +501,46 @@
       <p class="tag" data-i18n="prijs_tag" style="margin-bottom:1.25rem">Seizoensdefinities</p>
       <div class="season-defs">
 
+        <!-- Extra laagseizoen -->
+        <div style="background:white;border:1px solid #e8e5de;border-radius:10px;padding:1.4rem">
+          <span style="display:inline-block;background:#eef7ec;color:#33691e;font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .65rem;border-radius:20px;margin-bottom:.9rem" data-i18n="badge_extralaag">Extra laagseizoen</span>
+          <p style="font-size:.9rem;font-weight:500;color:#1a1a1a;margin-bottom:.4rem" data-i18n="s_extralaag_maand">Jan · Feb</p>
+          <p style="font-size:.8rem;font-weight:300;color:#888;line-height:1.6" data-i18n="s_extralaag_info">Excl. krokusvakantie (zie Diverse verlofdagen)</p>
+        </div>
+
         <!-- Laagseizoen -->
         <div style="background:white;border:1px solid #e8e5de;border-radius:10px;padding:1.4rem">
           <span style="display:inline-block;background:#edf7ed;color:#2e7d32;font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .65rem;border-radius:20px;margin-bottom:.9rem" data-i18n="badge_laag">Laagseizoen</span>
-          <p style="font-size:.9rem;font-weight:500;color:#1a1a1a;margin-bottom:.4rem" data-i18n="s_laag_maand">Jan · Feb · Nov · Dec</p>
-          <p style="font-size:.8rem;font-weight:300;color:#888;line-height:1.6" data-i18n="s_laag_info">Excl. kerstvakantie (zie aparte prijstabel) en krokusvakantie</p>
+          <p style="font-size:.9rem;font-weight:500;color:#1a1a1a;margin-bottom:.4rem" data-i18n="s_laag_maand">Nov · Dec</p>
+          <p style="font-size:.8rem;font-weight:300;color:#888;line-height:1.6" data-i18n="s_laag_info">Excl. kerstperiode (aparte tarieven) en verlengde weekends rond Allerheiligen en Wapenstilstand</p>
         </div>
 
         <!-- Tussenseizoen -->
         <div style="background:white;border:1px solid #e8e5de;border-radius:10px;padding:1.4rem">
           <span style="display:inline-block;background:#fff8e1;color:#b45309;font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .65rem;border-radius:20px;margin-bottom:.9rem" data-i18n="badge_tussen">Tussenseizoen</span>
           <p style="font-size:.9rem;font-weight:500;color:#1a1a1a;margin-bottom:.4rem" data-i18n="s_tussen_maand">Mrt · Apr · Mei · Jun · Sep · Okt</p>
-          <p style="font-size:.8rem;font-weight:300;color:#888;line-height:1.6" data-i18n="s_tussen_info">Incl. krokusvakantie BE, voorjaarsvakantie NL, herfstvakantie BE/NL en verlengde weekends</p>
+          <p style="font-size:.8rem;font-weight:300;color:#888;line-height:1.6" data-i18n="s_tussen_info">Excl. paas- en meivakantie, krokus- en herfstvakantie en de speciale langeweekends (zie hieronder)</p>
+        </div>
+
+        <!-- Diverse verlofdagen -->
+        <div style="background:white;border:1px solid #e8e5de;border-radius:10px;padding:1.4rem">
+          <span style="display:inline-block;background:#ede7f6;color:#4527a0;font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .65rem;border-radius:20px;margin-bottom:.9rem" data-i18n="badge_verlofdagen">Diverse verlofdagen</span>
+          <p style="font-size:.9rem;font-weight:500;color:#1a1a1a;margin-bottom:.4rem" data-i18n="s_verlofdagen_maand">Krokus, Pasen, mei, herfst en verlengde weekends</p>
+          <p style="font-size:.8rem;font-weight:300;color:#888;line-height:1.6" data-i18n="s_verlofdagen_info">Krokus- en paasvakantie (excl. paasweekend), meivakantie NL, herfstvakantie en de verlengde weekends rond 1 mei, Koningsdag, Bevrijdingsdag, Allerheiligen en Wapenstilstand</p>
         </div>
 
         <!-- Hoogseizoen -->
         <div style="background:white;border:1px solid #e8e5de;border-radius:10px;padding:1.4rem">
           <span style="display:inline-block;background:#e8f0fe;color:#1a56b0;font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .65rem;border-radius:20px;margin-bottom:.9rem" data-i18n="badge_hoog">Hoogseizoen</span>
           <p style="font-size:.9rem;font-weight:500;color:#1a1a1a;margin-bottom:.4rem" data-i18n="s_hoog_maand">Juli · Augustus</p>
-          <p style="font-size:.8rem;font-weight:300;color:#888;line-height:1.6" data-i18n="s_hoog_info">Incl. paasvakantie BE, meivakantie NL en zomervakantie BE/NL</p>
+          <p style="font-size:.8rem;font-weight:300;color:#888;line-height:1.6" data-i18n="s_hoog_info">Incl. nationale feestdagen in juli en O.L.V. Hemelvaart (15 augustus)</p>
+        </div>
+
+        <!-- Speciale weekends -->
+        <div style="background:white;border:1px solid #e8e5de;border-radius:10px;padding:1.4rem">
+          <span style="display:inline-block;background:#fce4ec;color:#ad1457;font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .65rem;border-radius:20px;margin-bottom:.9rem" data-i18n="badge_specialeweekend">Speciale weekends</span>
+          <p style="font-size:.9rem;font-weight:500;color:#1a1a1a;margin-bottom:.4rem" data-i18n="s_specialeweekend_maand">Paasweekend · Hemelvaart · Pinksteren</p>
+          <p style="font-size:.8rem;font-weight:300;color:#888;line-height:1.6" data-i18n="s_specialeweekend_info">De langeweekends rond Pasen, Hemelvaart en Pinksteren</p>
         </div>
       </div>
     </div>
@@ -534,30 +552,62 @@
         <table class="ptable" style="border-radius:0">
           <thead>
             <tr style="background:white">
-              <th style="text-align:left;color:#888;padding:1rem 1.4rem;border-bottom:1px solid #e8e5de" data-i18n="th_periode">Periode</th>
-              <th style="color:#2e7d32;padding:1rem 1.4rem;border-bottom:1px solid #e8e5de;text-align:right" data-i18n="th_laag">Laagseizoen</th>
-              <th style="color:#b45309;padding:1rem 1.4rem;border-bottom:1px solid #e8e5de;text-align:right" data-i18n="th_tussen">Tussenseizoen</th>
-              <th style="color:#1a56b0;padding:1rem 1.4rem;border-bottom:1px solid #e8e5de;text-align:right" data-i18n="th_hoog">Hoogseizoen</th>
+              <th style="text-align:left;color:#888;padding:1rem 1.4rem;border-bottom:1px solid #e8e5de" data-i18n="th_periode">Seizoen</th>
+              <th style="color:#888;padding:1rem 1.1rem;border-bottom:1px solid #e8e5de;text-align:right" data-i18n="th_weekend2">Weekend (2n)</th>
+              <th style="color:#888;padding:1rem 1.1rem;border-bottom:1px solid #e8e5de;text-align:right" data-i18n="th_weekend">Weekend (3n)</th>
+              <th style="color:#888;padding:1rem 1.1rem;border-bottom:1px solid #e8e5de;text-align:right" data-i18n="th_midweek">Midweek (4n)</th>
+              <th style="color:#888;padding:1rem 1.1rem;border-bottom:1px solid #e8e5de;text-align:right" data-i18n="th_verlengd">Verlengd (4–5n)</th>
+              <th style="color:#888;padding:1rem 1.4rem;border-bottom:1px solid #e8e5de;text-align:right" data-i18n="th_week">Week (7n)</th>
             </tr>
           </thead>
           <tbody>
             <tr style="border-bottom:1px solid #e8e5de">
-              <td style="padding:1.1rem 1.4rem;text-align:left"><span class="pp" data-i18n="pt_weekend">Weekend</span><span class="ps" data-i18n="pt_weekend_s">Vr–ma · 3 nachten</span></td>
-              <td data-label="Laagseizoen" data-label-key="th_laag" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€650</span><span class="pn" data-i18n="pn_w_l">€217/nacht</span></td>
-              <td data-label="Tussenseizoen" data-label-key="th_tussen" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€720</span><span class="pn" data-i18n="pn_w_t">€240/nacht</span></td>
-              <td data-label="Hoogseizoen" data-label-key="th_hoog" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€865</span><span class="pn" data-i18n="pn_w_h">€288/nacht</span></td>
+              <td style="padding:1.1rem 1.4rem;text-align:left"><span style="display:inline-flex;align-items:center;gap:.5rem"><span style="width:10px;height:10px;border-radius:3px;background:#eef7ec;border:1px solid #c5e1a5;flex-shrink:0;display:inline-block"></span><span class="pp" data-i18n="badge_extralaag">Extra laagseizoen</span></span></td>
+              <td data-label="Weekend (2n)" data-label-key="th_weekend2" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€540</span></td>
+              <td data-label="Weekend (3n)" data-label-key="th_weekend" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€620</span></td>
+              <td data-label="Midweek (4n)" data-label-key="th_midweek" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€620</span></td>
+              <td data-label="Verlengd (4–5n)" data-label-key="th_verlengd" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€620</span></td>
+              <td data-label="Week (7n)" data-label-key="th_week" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€860</span></td>
             </tr>
             <tr style="border-bottom:1px solid #e8e5de">
-              <td style="padding:1.1rem 1.4rem;text-align:left"><span class="pp" data-i18n="pt_week">Volledige week</span><span class="ps" data-i18n="pt_week_s">Vr–vr of za–za · 7 nachten</span></td>
-              <td data-label="Laagseizoen" data-label-key="th_laag" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€920</span><span class="pn" data-i18n="pn_wk_l">€131/nacht</span></td>
-              <td data-label="Tussenseizoen" data-label-key="th_tussen" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.050</span><span class="pn" data-i18n="pn_wk_t">€150/nacht</span></td>
-              <td data-label="Hoogseizoen" data-label-key="th_hoog" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.275</span><span class="pn" data-i18n="pn_wk_h">€182/nacht</span></td>
+              <td style="padding:1.1rem 1.4rem;text-align:left"><span style="display:inline-flex;align-items:center;gap:.5rem"><span style="width:10px;height:10px;border-radius:3px;background:#d1ebd1;border:1px solid #a8d5a8;flex-shrink:0;display:inline-block"></span><span class="pp" data-i18n="badge_laag">Laagseizoen</span></span></td>
+              <td data-label="Weekend (2n)" data-label-key="th_weekend2" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€570</span></td>
+              <td data-label="Weekend (3n)" data-label-key="th_weekend" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€650</span></td>
+              <td data-label="Midweek (4n)" data-label-key="th_midweek" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€650</span></td>
+              <td data-label="Verlengd (4–5n)" data-label-key="th_verlengd" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€785</span></td>
+              <td data-label="Week (7n)" data-label-key="th_week" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€920</span></td>
             </tr>
             <tr style="border-bottom:1px solid #e8e5de">
-              <td style="padding:1.1rem 1.4rem;text-align:left"><span class="pp" data-i18n="pt_mid">Midweek</span><span class="ps" data-i18n="pt_mid_s">Ma–vr · 4 nachten</span></td>
-              <td data-label="Laagseizoen" data-label-key="th_laag" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€650</span><span class="pn" data-i18n="pn_m_l">€163/nacht</span></td>
-              <td data-label="Tussenseizoen" data-label-key="th_tussen" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€720</span><span class="pn" data-i18n="pn_m_t">€180/nacht</span></td>
-              <td data-label="Hoogseizoen" data-label-key="th_hoog" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€865</span><span class="pn" data-i18n="pn_m_h">€216/nacht</span></td>
+              <td style="padding:1.1rem 1.4rem;text-align:left"><span style="display:inline-flex;align-items:center;gap:.5rem"><span style="width:10px;height:10px;border-radius:3px;background:#fef3c7;border:1px solid #f0d96e;flex-shrink:0;display:inline-block"></span><span class="pp" data-i18n="badge_tussen">Tussenseizoen</span></span></td>
+              <td data-label="Weekend (2n)" data-label-key="th_weekend2" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€620</span></td>
+              <td data-label="Weekend (3n)" data-label-key="th_weekend" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€720</span></td>
+              <td data-label="Midweek (4n)" data-label-key="th_midweek" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€720</span></td>
+              <td data-label="Verlengd (4–5n)" data-label-key="th_verlengd" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€885</span></td>
+              <td data-label="Week (7n)" data-label-key="th_week" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.050</span></td>
+            </tr>
+            <tr style="border-bottom:1px solid #e8e5de">
+              <td style="padding:1.1rem 1.4rem;text-align:left"><span style="display:inline-flex;align-items:center;gap:.5rem"><span style="width:10px;height:10px;border-radius:3px;background:#ede7f6;border:1px solid #b39ddb;flex-shrink:0;display:inline-block"></span><span class="pp" data-i18n="badge_verlofdagen">Diverse verlofdagen</span></span></td>
+              <td data-label="Weekend (2n)" data-label-key="th_weekend2" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€660</span></td>
+              <td data-label="Weekend (3n)" data-label-key="th_weekend" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€760</span></td>
+              <td data-label="Midweek (4n)" data-label-key="th_midweek" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€760</span></td>
+              <td data-label="Verlengd (4–5n)" data-label-key="th_verlengd" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€965</span></td>
+              <td data-label="Week (7n)" data-label-key="th_week" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.170</span></td>
+            </tr>
+            <tr style="border-bottom:1px solid #e8e5de">
+              <td style="padding:1.1rem 1.4rem;text-align:left"><span style="display:inline-flex;align-items:center;gap:.5rem"><span style="width:10px;height:10px;border-radius:3px;background:#dbeafe;border:1px solid #93c5fd;flex-shrink:0;display:inline-block"></span><span class="pp" data-i18n="badge_hoog">Hoogseizoen</span></span></td>
+              <td data-label="Weekend (2n)" data-label-key="th_weekend2" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€725</span></td>
+              <td data-label="Weekend (3n)" data-label-key="th_weekend" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€865</span></td>
+              <td data-label="Midweek (4n)" data-label-key="th_midweek" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€865</span></td>
+              <td data-label="Verlengd (4–5n)" data-label-key="th_verlengd" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€865</span></td>
+              <td data-label="Week (7n)" data-label-key="th_week" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.275</span></td>
+            </tr>
+            <tr style="border-bottom:1px solid #e8e5de">
+              <td style="padding:1.1rem 1.4rem;text-align:left"><span style="display:inline-flex;align-items:center;gap:.5rem"><span style="width:10px;height:10px;border-radius:3px;background:#fce4ec;border:1px solid #f48fb1;flex-shrink:0;display:inline-block"></span><span class="pp" data-i18n="badge_specialeweekend">Speciale weekends</span></span></td>
+              <td data-label="Weekend (2n)" data-label-key="th_weekend2" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€885</span></td>
+              <td data-label="Weekend (3n)" data-label-key="th_weekend" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€965</span></td>
+              <td data-label="Midweek (4n)" data-label-key="th_midweek" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€965</span></td>
+              <td data-label="Verlengd (4–5n)" data-label-key="th_verlengd" style="padding:1.1rem 1.1rem;text-align:right"><span class="pv">€1.045</span></td>
+              <td data-label="Week (7n)" data-label-key="th_week" style="padding:1.1rem 1.4rem;text-align:right"><span class="pv">€1.275</span></td>
             </tr>
           </tbody>
         </table>
@@ -611,9 +661,12 @@
       <div style="background:white;border:1px solid #e8e5de;border-radius:10px;padding:.85rem 1.1rem;margin-bottom:1rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem .75rem">
         <!-- Seizoenen -->
         <div style="grid-column:span 2;font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#bbb;margin-bottom:.2rem" data-i18n="leg_seizoen">Seizoen</div>
+        <span style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:#444"><span style="width:14px;height:14px;border-radius:3px;background:#eef7ec;flex-shrink:0;display:inline-block"></span><span data-i18n="badge_extralaag">Extra laagseizoen</span></span>
         <span style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:#444"><span style="width:14px;height:14px;border-radius:3px;background:#d1ebd1;flex-shrink:0;display:inline-block"></span><span data-i18n="badge_laag">Laagseizoen</span></span>
         <span style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:#444"><span style="width:14px;height:14px;border-radius:3px;background:#fef3c7;flex-shrink:0;display:inline-block"></span><span data-i18n="badge_tussen">Tussenseizoen</span></span>
+        <span style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:#444"><span style="width:14px;height:14px;border-radius:3px;background:#ede7f6;flex-shrink:0;display:inline-block"></span><span data-i18n="badge_verlofdagen">Diverse verlofdagen</span></span>
         <span style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:#444"><span style="width:14px;height:14px;border-radius:3px;background:#dbeafe;flex-shrink:0;display:inline-block"></span><span data-i18n="badge_hoog">Hoogseizoen</span></span>
+        <span style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:#444"><span style="width:14px;height:14px;border-radius:3px;background:#fce4ec;flex-shrink:0;display:inline-block"></span><span data-i18n="badge_specialeweekend">Speciale weekends</span></span>
         <span style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:#444"><span style="width:14px;height:14px;border-radius:3px;background:#fee2e2;flex-shrink:0;display:inline-block"></span><span data-i18n="kerst_tag_title">Kerstperiode</span></span>
 
         <!-- Scheidingslijn -->
@@ -684,7 +737,7 @@ function buildDayMap(year) {
     if (!map[k]) map[k] = { season, reasons };
     else {
       // Hogere prioriteit wint: kerst > hoog > tussen > laag
-      const prio = { kerst:4, hoog:3, tussen:2, laag:1 };
+      const prio = { kerst:7, specialeweekend:6, hoog:5, verlofdagen:4, tussen:3, laag:2, extralaag:1 };
       if (prio[season] > prio[map[k].season]) map[k] = { season, reasons };
       else if (prio[season] === prio[map[k].season]) {
         // Zelfde prioriteit: voeg reden toe
@@ -700,7 +753,7 @@ function buildDayMap(year) {
     while (d <= end) { markDay(d, season, reasons); d.setDate(d.getDate()+1); }
   }
 
-  function weekendAround(date, reasons) {
+  function weekendAround(date, reasons, season) {
     // Bepaal vr–ma rond de feestdag
     const dow = date.getDay(); // 0=zo
     let fri, mon;
@@ -711,7 +764,7 @@ function buildDayMap(year) {
     else if (dow===1) { fri=addDays(date,-3); mon=new Date(date);  }
     else if (dow===2) { fri=addDays(date,3);  mon=addDays(date,6); }
     else              { fri=addDays(date,2);  mon=addDays(date,5); }
-    markRange(fri, mon, 'hoog', reasons);
+    markRange(fri, mon, season || 'hoog', reasons);
   }
 
   const easter = easterSunday(year);
@@ -730,39 +783,39 @@ function buildDayMap(year) {
   });
 
   // Paasweekend
-  markRange(addDays(easter,-2), addDays(easter,1), 'hoog', {
+  markRange(addDays(easter,-2), addDays(easter,1), 'specialeweekend', {
     nl:['Paasweekend'], fr:['Week-end de Pâques'], en:['Easter weekend']
   });
   // Paasvakantie BE (Pasen + hele week)
-  markRange(addDays(easter,-3), addDays(easter,13), 'hoog', {
+  markRange(addDays(easter,-3), addDays(easter,13), 'verlofdagen', {
     nl:['Paasvakantie BE'], fr:['Vacances de Pâques BE'], en:['Easter holidays BE']
   });
 
   // Meivakantie NL (~25 apr – 11 mei)
-  markRange(new Date(year,3,25), new Date(year,4,11), 'hoog', {
+  markRange(new Date(year,3,25), new Date(year,4,11), 'verlofdagen', {
     nl:['Meivakantie NL'], fr:['Vacances de mai NL'], en:['May holidays NL']
   });
 
   // Koningsdag NL — 27 april (26 apr als 27 is zondag)
   const koningsdag = new Date(year,3,27).getDay()===0 ? new Date(year,3,26) : new Date(year,3,27);
-  weekendAround(koningsdag, { nl:['Koningsdag Nederland'], fr:['Fête du Roi NL'], en:['King\'s Day Netherlands'] });
+  weekendAround(koningsdag, { nl:['Koningsdag Nederland'], fr:['Fête du Roi NL'], en:['King\'s Day Netherlands'] }, 'verlofdagen');
 
   // Bevrijdingsdag NL — 5 mei
-  weekendAround(new Date(year,4,5), { nl:['Bevrijdingsdag Nederland'], fr:['Jour de la Libération NL'], en:['Liberation Day Netherlands'] });
+  weekendAround(new Date(year,4,5), { nl:['Bevrijdingsdag Nederland'], fr:['Jour de la Libération NL'], en:['Liberation Day Netherlands'] }, 'verlofdagen');
 
   // 1 mei — Dag van de Arbeid
-  weekendAround(new Date(year,4,1), { nl:['Verlengd weekend 1 mei (Dag van de Arbeid)'], fr:['Week-end prolongé 1er mai (Fête du Travail)'], en:['Extended weekend May 1st (Labour Day)'] });
+  weekendAround(new Date(year,4,1), { nl:['Verlengd weekend 1 mei (Dag van de Arbeid)'], fr:['Week-end prolongé 1er mai (Fête du Travail)'], en:['Extended weekend May 1st (Labour Day)'] }, 'verlofdagen');
 
   // Hemelvaart
   const ascension = addDays(easter, 39);
-  weekendAround(ascension, { nl:['Verlengd weekend Hemelvaart'], fr:['Week-end prolongé Ascension'], en:['Extended weekend Ascension'] });
+  weekendAround(ascension, { nl:['Verlengd weekend Hemelvaart'], fr:['Week-end prolongé Ascension'], en:['Extended weekend Ascension'] }, 'specialeweekend');
 
   // Pinksteren
   const pentecost = addDays(easter, 49);
-  markRange(pentecost, addDays(pentecost,1), 'hoog', {
+  markRange(pentecost, addDays(pentecost,1), 'specialeweekend', {
     nl:['Pinksterweekend'], fr:['Week-end de Pentecôte'], en:['Pentecost weekend']
   });
-  weekendAround(pentecost, { nl:['Verlengd weekend Pinksteren'], fr:['Week-end prolongé Pentecôte'], en:['Extended weekend Pentecost'] });
+  weekendAround(pentecost, { nl:['Verlengd weekend Pinksteren'], fr:['Week-end prolongé Pentecôte'], en:['Extended weekend Pentecost'] }, 'specialeweekend');
 
   // 11 juli — Vlaamse feestdag
   weekendAround(new Date(year,6,11), { nl:['Verlengd weekend Vlaamse feestdag'], fr:['Week-end prolongé Fête flamande'], en:['Extended weekend Flemish holiday'] });
@@ -774,20 +827,20 @@ function buildDayMap(year) {
   weekendAround(new Date(year,7,15), { nl:['Verlengd weekend OLV Hemelvaart'], fr:['Week-end prolongé Assomption'], en:['Extended weekend Assumption Day'] });
 
   // 1 november — Allerheiligen
-  weekendAround(new Date(year,10,1), { nl:['Verlengd weekend Allerheiligen'], fr:['Week-end prolongé Toussaint'], en:['Extended weekend All Saints\' Day'] });
+  weekendAround(new Date(year,10,1), { nl:['Verlengd weekend Allerheiligen'], fr:['Week-end prolongé Toussaint'], en:['Extended weekend All Saints\' Day'] }, 'verlofdagen');
 
   // 11 november — Wapenstilstand
-  weekendAround(new Date(year,10,11), { nl:['Verlengd weekend Wapenstilstand'], fr:['Week-end prolongé Armistice'], en:['Extended weekend Armistice Day'] });
+  weekendAround(new Date(year,10,11), { nl:['Verlengd weekend Wapenstilstand'], fr:['Week-end prolongé Armistice'], en:['Extended weekend Armistice Day'] }, 'verlofdagen');
 
   // Krokusvakantie BE (~7 dagen voor Pasen -49 dagen, altijd in feb)
   const krokusEnd = addDays(easter,-42);
   const krokusStart = addDays(krokusEnd,-6);
-  markRange(krokusStart, krokusEnd, 'tussen', {
+  markRange(krokusStart, krokusEnd, 'verlofdagen', {
     nl:['Krokusvakantie BE'], fr:['Vacances de carnaval BE'], en:['Carnival holidays BE']
   });
 
   // Herfstvakantie BE/NL (~25 okt – 3 nov)
-  markRange(new Date(year,9,25), new Date(year,10,3), 'tussen', {
+  markRange(new Date(year,9,25), new Date(year,10,3), 'verlofdagen', {
     nl:['Herfstvakantie BE/NL'], fr:['Vacances d\'automne BE/NL'], en:['Autumn break BE/NL']
   });
 
@@ -813,20 +866,24 @@ function getDayInfo(date) {
   if (m===7||m===8) return { season:'hoog', reasons:{nl:['Zomervakantie'],fr:['Vacances d\'été'],en:['Summer holidays']} };
   if (m===6||m===9) return { season:'tussen', reasons:{nl:['Tussenseizoen'],fr:['Moyenne saison'],en:['Mid season']} };
   if (m===3||m===4||m===5||m===10) return { season:'tussen', reasons:{nl:['Tussenseizoen'],fr:['Moyenne saison'],en:['Mid season']} };
+  if (m===1||m===2) return { season:'extralaag', reasons:{nl:['Extra laagseizoen'],fr:['Basse saison additionnelle'],en:['Extra low season']} };
   return { season:'laag', reasons:{nl:['Laagseizoen'],fr:['Basse saison'],en:['Low season']} };
 }
 
 const SEASON_COLOR = {
-  laag:  { bg:'#d1ebd1', text:'#1a4d1a', border:'#a8d5a8' },
-  tussen:{ bg:'#fef3c7', text:'#7c5c00', border:'#f0d96e' },
-  hoog:  { bg:'#dbeafe', text:'#1e3a8a', border:'#93c5fd' },
-  kerst: { bg:'#fee2e2', text:'#991b1b', border:'#fca5a5' },
+  extralaag:       { bg:'#eef7ec', text:'#33691e', border:'#c5e1a5' },
+  laag:            { bg:'#d1ebd1', text:'#1a4d1a', border:'#a8d5a8' },
+  tussen:          { bg:'#fef3c7', text:'#7c5c00', border:'#f0d96e' },
+  verlofdagen:     { bg:'#ede7f6', text:'#4527a0', border:'#b39ddb' },
+  hoog:            { bg:'#dbeafe', text:'#1e3a8a', border:'#93c5fd' },
+  specialeweekend: { bg:'#fce4ec', text:'#ad1457', border:'#f48fb1' },
+  kerst:           { bg:'#fee2e2', text:'#991b1b', border:'#fca5a5' },
 };
 
 const SEASON_LABEL = {
-  nl:{ laag:'Laagseizoen', tussen:'Tussenseizoen', hoog:'Hoogseizoen', kerst:'Kerstperiode' },
-  fr:{ laag:'Basse saison', tussen:'Moyenne saison', hoog:'Haute saison', kerst:'Période de Noël' },
-  en:{ laag:'Low season', tussen:'Mid season', hoog:'High season', kerst:'Christmas period' },
+  nl:{ extralaag:'Extra laagseizoen', laag:'Laagseizoen', tussen:'Tussenseizoen', verlofdagen:'Diverse verlofdagen', hoog:'Hoogseizoen', specialeweekend:'Speciale weekends', kerst:'Kerstperiode' },
+  fr:{ extralaag:'Basse saison additionnelle', laag:'Basse saison', tussen:'Moyenne saison', verlofdagen:'Jours de congé divers', hoog:'Haute saison', specialeweekend:'Week-ends spéciaux', kerst:'Période de Noël' },
+  en:{ extralaag:'Extra low season', laag:'Low season', tussen:'Mid season', verlofdagen:'Various holiday periods', hoog:'High season', specialeweekend:'Special weekends', kerst:'Christmas period' },
 };
 
 const MONTHS = {
@@ -1240,6 +1297,11 @@ fetch(CALENDAR_FEED_URL)
           <div>
             <label style="display:block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:.6rem" data-i18n="f_periodesoort">Type verblijf</label>
             <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem" id="period-btns">
+              <button type="button" onclick="selectPeriod('weekend2')" data-period="weekend2"
+                style="border:1.5px solid #e8e5de;border-radius:7px;padding:.65rem .9rem;font-family:var(--sans);font-size:.78rem;font-weight:500;cursor:pointer;text-align:left;background:white;transition:all .15s">
+                <span style="display:block;font-weight:600;margin-bottom:.1rem" data-i18n="period_weekend2">Weekend (2n)</span>
+                <span style="font-size:.68rem;font-weight:300;color:#888" data-i18n="period_weekend2_s">Vr–zo of za–ma · 2 nachten</span>
+              </button>
               <button type="button" onclick="selectPeriod('weekend')" data-period="weekend"
                 style="border:1.5px solid #e8e5de;border-radius:7px;padding:.65rem .9rem;font-family:var(--sans);font-size:.78rem;font-weight:500;cursor:pointer;text-align:left;background:white;transition:all .15s">
                 <span style="display:block;font-weight:600;margin-bottom:.1rem" data-i18n="period_weekend">Weekend</span>
@@ -1250,18 +1312,18 @@ fetch(CALENDAR_FEED_URL)
                 <span style="display:block;font-weight:600;margin-bottom:.1rem" data-i18n="period_midweek">Midweek</span>
                 <span style="font-size:.68rem;font-weight:300;color:#888" data-i18n="period_midweek_s">Ma–vr · 4 nachten</span>
               </button>
+              <button type="button" onclick="selectPeriod('verlengd')" data-period="verlengd"
+                style="border:1.5px solid #e8e5de;border-radius:7px;padding:.65rem .9rem;font-family:var(--sans);font-size:.78rem;font-weight:500;cursor:pointer;text-align:left;background:white;transition:all .15s">
+                <span style="display:block;font-weight:600;margin-bottom:.1rem" data-i18n="period_verlengd">Verlengd weekend</span>
+                <span style="font-size:.68rem;font-weight:300;color:#888" data-i18n="period_verlengd_s">Do/vr–zo/ma · 4–5 nachten</span>
+              </button>
               <button type="button" onclick="selectPeriod('week')" data-period="week"
                 style="border:1.5px solid #e8e5de;border-radius:7px;padding:.65rem .9rem;font-family:var(--sans);font-size:.78rem;font-weight:500;cursor:pointer;text-align:left;background:white;transition:all .15s">
                 <span style="display:block;font-weight:600;margin-bottom:.1rem" data-i18n="period_week">Volledige week</span>
                 <span style="font-size:.68rem;font-weight:300;color:#888" data-i18n="period_week_s">Vr–vr of za–za · 7 nachten</span>
               </button>
-              <button type="button" onclick="selectPeriod('verlengd')" data-period="verlengd"
-                style="border:1.5px solid #e8e5de;border-radius:7px;padding:.65rem .9rem;font-family:var(--sans);font-size:.78rem;font-weight:500;cursor:pointer;text-align:left;background:white;transition:all .15s">
-                <span style="display:block;font-weight:600;margin-bottom:.1rem" data-i18n="period_verlengd">Verlengd weekend</span>
-                <span style="font-size:.68rem;font-weight:300;color:#888" data-i18n="period_verlengd_s">Do/vr–zo/ma · 3–4 nachten</span>
-              </button>
               <button type="button" onclick="selectPeriod('aanvraag')" data-period="aanvraag"
-                style="border:1.5px solid #e8e5de;border-radius:7px;padding:.65rem .9rem;font-family:var(--sans);font-size:.78rem;font-weight:500;cursor:pointer;text-align:left;background:white;grid-column:span 2;transition:all .15s">
+                style="border:1.5px solid #e8e5de;border-radius:7px;padding:.65rem .9rem;font-family:var(--sans);font-size:.78rem;font-weight:500;cursor:pointer;text-align:left;background:white;transition:all .15s">
                 <span style="display:block;font-weight:600;margin-bottom:.1rem" data-i18n="period_aanvraag">Andere periode</span>
                 <span style="font-size:.68rem;font-weight:300;color:#888" data-i18n="period_aanvraag_s">Min. 2 nachten · prijs op aanvraag</span>
               </button>
@@ -1393,6 +1455,7 @@ function selectPeriod(p) {
   document.getElementById('fb-type-hidden').value = p;
   // Datumhint aanpassen
   const hints = {
+    weekend2: 'Kies de aankomstdatum (vrijdag of zaterdag)',
     weekend: 'Kies de aankomstdatum (vrijdag)',
     midweek: 'Kies de aankomstdatum (maandag)',
     week: 'Kies de aankomstdatum (vrijdag of zaterdag)',
@@ -1469,10 +1532,13 @@ function syncDepartureFromNights() {
 /* ── PRIJSBEREKENING ── */
 // Tarieven per seizoen
 const RATES = {
-  laag:   { weekend:650, week:920, midweek:650, verlengd:785, nacht:225 },
-  tussen: { weekend:720, week:1050, midweek:720, verlengd:885, nacht:275 },
-  hoog:   { weekend:865, week:1275, midweek:865, verlengd:865, nacht:385 },
-  kerst:  { weekend:null, week:null, midweek:null, verlengd:null, nacht:425 },
+  extralaag:       { weekend2:540, weekend:620, week:860,  midweek:620, verlengd:620,  nacht:195 },
+  laag:            { weekend2:570, weekend:650, week:920,  midweek:650, verlengd:785,  nacht:225 },
+  tussen:          { weekend2:620, weekend:720, week:1050, midweek:720, verlengd:885,  nacht:275 },
+  verlofdagen:     { weekend2:660, weekend:760, week:1170, midweek:760, verlengd:965,  nacht:295 },
+  hoog:            { weekend2:725, weekend:865, week:1275, midweek:865, verlengd:865,  nacht:385 },
+  specialeweekend: { weekend2:885, weekend:965, week:1275, midweek:965, verlengd:1045, nacht:385 },
+  kerst:           { weekend2:null, weekend:null, week:null, midweek:null, verlengd:null, nacht:425 },
 };
 const BORG = 500;
 
@@ -1506,7 +1572,7 @@ function calcPrice() {
   const arrival = new Date(ay, am-1, ad);
   const season = getDayInfo(arrival).season;
 
-  const periodNights = { weekend:3, midweek:4, week:7, verlengd:4 };
+  const periodNights = { weekend2:2, weekend:3, midweek:4, week:7, verlengd:4 };
   const nights = periodNights[selectedPeriod];
   const departure = new Date(arrival); departure.setDate(arrival.getDate()+nights);
 
@@ -1528,7 +1594,9 @@ function calcPrice() {
   const arrStr = `${arrival.getDate()} ${['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'][arrival.getMonth()]} ${arrival.getFullYear()}`;
 
   const periodLabels = {
-    nl:{ weekend:'Weekend',midweek:'Midweek',week:'Volledige week',verlengd:'Verlengd weekend' },
+    nl:{ weekend2:'Weekend (2n)', weekend:'Weekend',midweek:'Midweek',week:'Volledige week',verlengd:'Verlengd weekend' },
+    fr:{ weekend2:'Week-end (2n)', weekend:'Week-end',midweek:'Milieu de semaine',week:'Semaine complète',verlengd:'Week-end prolongé' },
+    en:{ weekend2:'Weekend (2n)', weekend:'Weekend',midweek:'Midweek',week:'Full week',verlengd:'Extended weekend' },
   };
   const lang = typeof currentLang !== 'undefined' ? currentLang : 'nl';
   const lbl = (periodLabels[lang]||periodLabels.nl)[selectedPeriod];
@@ -1669,21 +1737,22 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       prijs_tag:'Seizoensdefinities', prijs_h2:'Eerlijke prijzen',
       prijs_sub:'Inclusief schoonmaak. Bed- en badlinnen op aanvraag. *December = laagseizoen, tenzij kerstperiode.',
       badge_laag:'Laagseizoen', badge_tussen:'Tussenseizoen', badge_hoog:'Hoogseizoen',
-      s_laag_maand:'Jan · Feb · Nov · Dec',
-      s_laag_info:'Excl. kerstvakantie (zie aparte prijstabel) en krokusvakantie',
+      badge_extralaag:'Extra laagseizoen', badge_verlofdagen:'Diverse verlofdagen', badge_specialeweekend:'Speciale weekends',
+      s_extralaag_maand:'Jan · Feb',
+      s_extralaag_info:'Excl. krokusvakantie (zie Diverse verlofdagen)',
+      s_laag_maand:'Nov · Dec',
+      s_laag_info:'Excl. kerstperiode (aparte tarieven) en verlengde weekends rond Allerheiligen en Wapenstilstand',
       s_tussen_maand:'Mrt · Apr · Mei · Jun · Sep · Okt',
-      s_tussen_info:'Incl. krokusvakantie BE, voorjaarsvakantie NL, herfstvakantie BE/NL en verlengde weekends',
+      s_tussen_info:'Excl. paas- en meivakantie, krokus- en herfstvakantie en de speciale langeweekends (zie hieronder)',
+      s_verlofdagen_maand:'Krokus, Pasen, mei, herfst en verlengde weekends',
+      s_verlofdagen_info:'Krokus- en paasvakantie (excl. paasweekend), meivakantie NL, herfstvakantie en de verlengde weekends rond 1 mei, Koningsdag, Bevrijdingsdag, Allerheiligen en Wapenstilstand',
       s_hoog_maand:'Juli · Augustus',
-      s_hoog_info:'Incl. paasvakantie BE, meivakantie NL en zomervakantie BE/NL',
+      s_hoog_info:'Incl. nationale feestdagen in juli en O.L.V. Hemelvaart (15 augustus)',
+      s_specialeweekend_maand:'Paasweekend · Hemelvaart · Pinksteren',
+      s_specialeweekend_info:'De langeweekends rond Pasen, Hemelvaart en Pinksteren',
       tabel_tag:'Prijstabel',
-      th_periode:'Periode', th_laag:'Laagseizoen', th_tussen:'Tussenseizoen', th_hoog:'Hoogseizoen',
-      pt_weekend:'Weekend', pt_weekend_s:'Vr–ma · 3 nachten',
-      pt_week:'Volledige week', pt_week_s:'Vr–vr of za–za · 7 nachten',
-      pt_mid:'Midweek', pt_mid_s:'Ma–vr · 4 nachten',
+      th_periode:'Seizoen', th_weekend2:'Weekend (2n)', th_weekend:'Weekend (3n)', th_midweek:'Midweek (4n)', th_verlengd:'Verlengd (4–5n)', th_week:'Week (7n)',
       pt_nacht:'Per nacht', pt_nacht_s:'Op aanvraag · min. 2 nachten',
-      pn_w_l:'€217/nacht', pn_w_t:'€240/nacht', pn_w_h:'€288/nacht',
-      pn_wk_l:'€131/nacht', pn_wk_t:'€150/nacht', pn_wk_h:'€182/nacht',
-      pn_m_l:'€163/nacht', pn_m_t:'€180/nacht', pn_m_h:'€216/nacht',
       pn_n_lbl:'per nacht', pn_n_lbl2:'per nacht', pn_n_lbl3:'per nacht',
       prijs_footer:'Alle prijzen zijn inclusief schoonmaak · Bed- en badlinnen op aanvraag · Andere periodes op aanvraag (min. 2 nachten)',
       kerst_tag_title:'Kerstperiode',
@@ -1708,10 +1777,11 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       f_gezelschap:'Gezelschap', f_gelegenheid:'Gelegenheid', f_periodesoort:'Type verblijf',
       f_aankomst:'Aankomstdatum',
       f_vertrek:'Vertrekdatum', f_nachten:'Aantal nachten',
+      period_weekend2:'Weekend (2n)', period_weekend2_s:'Vr–zo of za–ma · 2 nachten',
       period_weekend:'Weekend', period_weekend_s:'Vr–ma · 3 nachten',
       period_midweek:'Midweek', period_midweek_s:'Ma–vr · 4 nachten',
       period_week:'Volledige week', period_week_s:'Vr–vr of za–za · 7 nachten',
-      period_verlengd:'Verlengd weekend', period_verlengd_s:'Do/vr–zo/ma · 3–4 nachten',
+      period_verlengd:'Verlengd weekend', period_verlengd_s:'Do/vr–zo/ma · 4–5 nachten',
       period_aanvraag:'Andere periode', period_aanvraag_s:'Min. 2 nachten · prijs op aanvraag',
       f_prijsoverzicht:'Prijsoverzicht',
       f_bij_bevestiging:'Te betalen bij bevestiging',
@@ -1771,21 +1841,22 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       prijs_tag:'Définitions des saisons', prijs_h2:'Des prix transparents',
       prijs_sub:'Nettoyage final inclus. Linge de lit et de bain sur demande. *Décembre = basse saison, sauf période de Noël.',
       badge_laag:'Basse saison', badge_tussen:'Moyenne saison', badge_hoog:'Haute saison',
-      s_laag_maand:'Jan · Fév · Nov · Déc*',
-      s_laag_info:'Excl. période de Noël · Excl. vacances de carnaval',
-      s_tussen_maand:'Mars · Avr · Juin · Sep · Oct',
-      s_tussen_info:'+ carnaval BE · + printemps NL · + Toussaint BE/NL · + longs week-ends',
+      badge_extralaag:'Basse saison additionnelle', badge_verlofdagen:'Jours de congé divers', badge_specialeweekend:'Week-ends spéciaux',
+      s_extralaag_maand:'Jan · Fév',
+      s_extralaag_info:'Excl. vacances de carnaval (voir Jours de congé divers)',
+      s_laag_maand:'Nov · Déc*',
+      s_laag_info:'Excl. période de Noël (tarifs séparés) et week-ends prolongés autour de la Toussaint et de l\'Armistice',
+      s_tussen_maand:'Mars · Avr · Mai · Juin · Sep · Oct',
+      s_tussen_info:'Excl. vacances de Pâques et de mai, carnaval et Toussaint, ainsi que les longs week-ends spéciaux (voir ci-dessous)',
+      s_verlofdagen_maand:'Carnaval, Pâques, mai, Toussaint et week-ends prolongés',
+      s_verlofdagen_info:'Vacances de carnaval et de Pâques (hors week-end pascal), vacances de mai NL, vacances de la Toussaint et les week-ends prolongés autour du 1er mai, de la Fête du Roi, du Jour de la Libération, de la Toussaint et de l\'Armistice',
       s_hoog_maand:'Juillet · Août',
-      s_hoog_info:'+ Pâques BE · + mai NL · + grandes vacances BE/NL',
+      s_hoog_info:'Incl. les jours fériés nationaux de juillet et l\'Assomption (15 août)',
+      s_specialeweekend_maand:'Week-end de Pâques · Ascension · Pentecôte',
+      s_specialeweekend_info:'Les longs week-ends autour de Pâques, de l\'Ascension et de la Pentecôte',
       tabel_tag:'Grille tarifaire',
-      th_periode:'Période', th_laag:'Basse saison', th_tussen:'Moyenne saison', th_hoog:'Haute saison',
-      pt_weekend:'Week-end', pt_weekend_s:'Ven–lun · 3 nuits',
-      pt_week:'Semaine complète', pt_week_s:'Ven–ven ou sam–sam · 7 nuits',
-      pt_mid:'Milieu de semaine', pt_mid_s:'Lun–ven · 4 nuits',
+      th_periode:'Saison', th_weekend2:'Week-end (2n)', th_weekend:'Week-end (3n)', th_midweek:'Milieu de semaine (4n)', th_verlengd:'Prolongé (4–5n)', th_week:'Semaine (7n)',
       pt_nacht:'Par nuit', pt_nacht_s:'Sur demande · min. 2 nuits',
-      pn_w_l:'€217/nuit', pn_w_t:'€240/nuit', pn_w_h:'€288/nuit',
-      pn_wk_l:'€131/nuit', pn_wk_t:'€150/nuit', pn_wk_h:'€182/nuit',
-      pn_m_l:'€163/nuit', pn_m_t:'€180/nuit', pn_m_h:'€216/nuit',
       pn_n_lbl:'par nuit', pn_n_lbl2:'par nuit', pn_n_lbl3:'par nuit',
       prijs_footer:'Tous les prix incluent le ménage · Linge de lit et de bain sur demande · Autres périodes sur demande (min. 2 nuits) · *Décembre = basse saison, sauf Noël',
       kerst_tag_title:'Période de Noël',
@@ -1810,10 +1881,11 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       f_gezelschap:'Groupe', f_gelegenheid:'Occasion du séjour', f_periodesoort:'Type de séjour',
       f_aankomst:'Date d\'arrivée',
       f_vertrek:'Date de départ', f_nachten:'Nombre de nuits',
+      period_weekend2:'Week-end (2n)', period_weekend2_s:'Ven–dim ou sam–lun · 2 nuits',
       period_weekend:'Week-end', period_weekend_s:'Ven–lun · 3 nuits',
       period_midweek:'Milieu de semaine', period_midweek_s:'Lun–ven · 4 nuits',
       period_week:'Semaine complète', period_week_s:'Ven–ven ou sam–sam · 7 nuits',
-      period_verlengd:'Week-end prolongé', period_verlengd_s:'Jeu/ven–lun · 3–4 nuits',
+      period_verlengd:'Week-end prolongé', period_verlengd_s:'Jeu/ven–lun · 4–5 nuits',
       period_aanvraag:'Autre période', period_aanvraag_s:'Min. 2 nuits · prix sur demande',
       f_prijsoverzicht:'Aperçu des prix',
       f_bij_bevestiging:'À payer à la confirmation',
@@ -1873,21 +1945,22 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       prijs_tag:'Season definitions', prijs_h2:'Honest pricing',
       prijs_sub:'Cleaning included. Bed and bath linen on request. *December = low season, unless Christmas period.',
       badge_laag:'Low season', badge_tussen:'Mid season', badge_hoog:'High season',
-      s_laag_maand:'Jan · Feb · Nov · Dec*',
-      s_laag_info:'Excl. Christmas period · Excl. carnival holidays',
-      s_tussen_maand:'Mar · Apr · Jun · Sep · Oct',
-      s_tussen_info:'+ carnival BE · + spring break NL · + autumn break BE/NL · + long weekends',
+      badge_extralaag:'Extra low season', badge_verlofdagen:'Various holiday periods', badge_specialeweekend:'Special weekends',
+      s_extralaag_maand:'Jan · Feb',
+      s_extralaag_info:'Excl. carnival holidays (see Various holiday periods)',
+      s_laag_maand:'Nov · Dec*',
+      s_laag_info:'Excl. Christmas period (separate rates) and extended weekends around All Saints\' Day and Armistice Day',
+      s_tussen_maand:'Mar · Apr · May · Jun · Sep · Oct',
+      s_tussen_info:'Excl. Easter and May holidays, carnival and autumn break, and the special long weekends below',
+      s_verlofdagen_maand:'Carnival, Easter, May, autumn and extended weekends',
+      s_verlofdagen_info:'Carnival and Easter holidays (excl. Easter weekend), May holidays NL, autumn break, and the extended weekends around May 1st, King\'s Day, Liberation Day, All Saints\' Day and Armistice Day',
       s_hoog_maand:'July · August',
-      s_hoog_info:'+ Easter BE · + May holidays NL · + summer holidays BE/NL',
+      s_hoog_info:'Incl. national holidays in July and Assumption Day (15 August)',
+      s_specialeweekend_maand:'Easter weekend · Ascension · Pentecost',
+      s_specialeweekend_info:'The long weekends around Easter, Ascension and Pentecost',
       tabel_tag:'Price table',
-      th_periode:'Period', th_laag:'Low season', th_tussen:'Mid season', th_hoog:'High season',
-      pt_weekend:'Weekend', pt_weekend_s:'Fri–Mon · 3 nights',
-      pt_week:'Full week', pt_week_s:'Fri–Fri or Sat–Sat · 7 nights',
-      pt_mid:'Midweek', pt_mid_s:'Mon–Fri · 4 nights',
+      th_periode:'Season', th_weekend2:'Weekend (2n)', th_weekend:'Weekend (3n)', th_midweek:'Midweek (4n)', th_verlengd:'Extended (4–5n)', th_week:'Week (7n)',
       pt_nacht:'Per night', pt_nacht_s:'On request · min. 2 nights',
-      pn_w_l:'€217/night', pn_w_t:'€240/night', pn_w_h:'€288/night',
-      pn_wk_l:'€131/night', pn_wk_t:'€150/night', pn_wk_h:'€182/night',
-      pn_m_l:'€163/night', pn_m_t:'€180/night', pn_m_h:'€216/night',
       pn_n_lbl:'per night', pn_n_lbl2:'per night', pn_n_lbl3:'per night',
       prijs_footer:'All prices include cleaning · Bed and bath linen on request · Other periods on request (min. 2 nights) · *December = low season, unless Christmas',
       kerst_tag_title:'Christmas period',
@@ -1912,10 +1985,11 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       f_gezelschap:'Group', f_gelegenheid:'Occasion', f_periodesoort:'Type of stay',
       f_aankomst:'Arrival date',
       f_vertrek:'Departure date', f_nachten:'Number of nights',
+      period_weekend2:'Weekend (2n)', period_weekend2_s:'Fri–Sun or Sat–Mon · 2 nights',
       period_weekend:'Weekend', period_weekend_s:'Fri–Mon · 3 nights',
       period_midweek:'Midweek', period_midweek_s:'Mon–Fri · 4 nights',
       period_week:'Full week', period_week_s:'Fri–Fri or Sat–Sat · 7 nights',
-      period_verlengd:'Extended weekend', period_verlengd_s:'Thu/Fri–Mon · 3–4 nights',
+      period_verlengd:'Extended weekend', period_verlengd_s:'Thu/Fri–Mon · 4–5 nights',
       period_aanvraag:'Other period', period_aanvraag_s:'Min. 2 nights · price on request',
       f_prijsoverzicht:'Price overview',
       f_bij_bevestiging:'Due upon confirmation',
