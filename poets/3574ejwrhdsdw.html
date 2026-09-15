@@ -100,7 +100,11 @@
 
   .fbhead{font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
   .fbitem{background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:.6rem .75rem; font-size:.82rem; line-height:1.45}
-  .fbitem .fbdate{display:block; font-size:.66rem; color:var(--muted); margin-top:.3rem}
+  .fbmeta{display:flex; justify-content:space-between; align-items:center; gap:.5rem; margin-top:.3rem}
+  .fbdate{font-size:.66rem; color:var(--muted)}
+  .fbdel{font-family:var(--sans); font-size:.66rem; font-weight:600; color:var(--warn-text); background:none; border:none; cursor:pointer; padding:0; text-decoration:underline; flex:none}
+  .fbdel:hover{opacity:.75}
+  .fbdel:disabled{opacity:.5; cursor:default}
   .fbempty{font-size:.8rem; color:var(--muted); font-style:italic}
 
   .fbform{display:flex; flex-direction:column; gap:.5rem}
@@ -205,7 +209,7 @@ const BOOKINGS = [
   },
 ];
 
-const WHATSAPP_NUMBER = '32485153740';
+const WHATSAPP_GROUP_LINK = 'PLAK_HIER_WHATSAPP_GROEPSLINK';
 
 // LET OP: vul dit in nadat scripts/coincastor-poetsinfo.gs is gedeployed als
 // Apps Script-webapp (zie de instructies bovenaan dat bestand) — plak hier de
@@ -238,11 +242,13 @@ const STR = {
     linenNo:'Bed- en badlinnen: niet voorzien', linenNoSub:'Gasten brengen dit zelf mee.',
     linenUnknown:'Bed- en badlinnen: nog te bevestigen',
     feedbackHeading:'Feedback', feedbackEmpty:'Nog geen feedback bij deze boeking.',
+    feedbackDelete:'Verwijderen', feedbackDeleteConfirm:'Deze feedback verwijderen? Dit kan niet ongedaan gemaakt worden.',
+    feedbackDeleteError:'Verwijderen lukte niet — probeer opnieuw.',
     feedbackAdd:'Feedback toevoegen', feedbackPlaceholder:'Schrijf hier je bericht (bv. over schade)...',
     feedbackSave:'Opslaan', feedbackSaving:'Bezig met opslaan…', feedbackCancel:'Annuleren',
     feedbackNote:'Wordt automatisch vertaald — zichtbaar voor iedereen die deze pagina bekijkt.',
     feedbackSaveError:'Opslaan lukte niet — controleer je internetverbinding en probeer opnieuw.',
-    contact:'Vragen? WhatsApp Michiel',
+    contact:'Vragen? WhatsApp',
   },
   fr:{
     heading:'Réservations', sub:'Touchez une réservation pour plus d’infos',
@@ -255,11 +261,13 @@ const STR = {
     linenNo:'Linge de lit et de bain : non fourni', linenNoSub:'Les invités l’apportent eux-mêmes.',
     linenUnknown:'Linge de lit et de bain : à confirmer',
     feedbackHeading:'Retour', feedbackEmpty:'Pas encore de retour pour cette réservation.',
+    feedbackDelete:'Supprimer', feedbackDeleteConfirm:'Supprimer ce retour ? Cette action est irréversible.',
+    feedbackDeleteError:'Échec de la suppression — réessayez.',
     feedbackAdd:'Ajouter un retour', feedbackPlaceholder:'Écrivez votre message ici (par ex. des dégâts)...',
     feedbackSave:'Enregistrer', feedbackSaving:'Enregistrement…', feedbackCancel:'Annuler',
     feedbackNote:'Traduit automatiquement — visible par tous ceux qui consultent cette page.',
     feedbackSaveError:'Échec de l’enregistrement — vérifiez votre connexion et réessayez.',
-    contact:'Des questions ? WhatsApp Michiel',
+    contact:'Des questions ? WhatsApp',
   },
   ru:{
     heading:'Бронирования', sub:'Нажмите на бронирование, чтобы узнать больше',
@@ -272,11 +280,13 @@ const STR = {
     linenNo:'Постельное и банное бельё: не предоставлено', linenNoSub:'Гости привозят его сами.',
     linenUnknown:'Постельное и банное бельё: уточняется',
     feedbackHeading:'Отзыв', feedbackEmpty:'Пока нет отзывов по этому бронированию.',
+    feedbackDelete:'Удалить', feedbackDeleteConfirm:'Удалить этот отзыв? Это действие необратимо.',
+    feedbackDeleteError:'Не удалось удалить — попробуйте снова.',
     feedbackAdd:'Добавить отзыв', feedbackPlaceholder:'Напишите сообщение здесь (например, о повреждениях)...',
     feedbackSave:'Сохранить', feedbackSaving:'Сохранение…', feedbackCancel:'Отмена',
     feedbackNote:'Переводится автоматически — видно всем, кто открывает эту страницу.',
     feedbackSaveError:'Не удалось сохранить — проверьте интернет-соединение и попробуйте снова.',
-    contact:'Вопросы? WhatsApp Михилю',
+    contact:'Вопросы? WhatsApp',
   },
 };
 
@@ -363,7 +373,7 @@ function renderLinen(b, s){
 function renderFeedback(b, s){
   const list = FEEDBACK[b.id] || [];
   const items = list.length
-    ? list.map(f => `<div class="fbitem">${escapeHtml(f[lang]||f.ru||f.nl||f.fr||'')}<span class="fbdate">${fmtDateLong((f.at||'').slice(0,10) || todayISO(), lang)}</span></div>`).join('')
+    ? list.map(f => `<div class="fbitem">${escapeHtml(f[lang]||f.ru||f.nl||f.fr||'')}<div class="fbmeta"><span class="fbdate">${fmtDateLong((f.at||'').slice(0,10) || todayISO(), lang)}</span><button class="fbdel" data-delete="${f.id}" data-booking="${b.id}">${s.feedbackDelete}</button></div></div>`).join('')
     : `<p class="fbempty">${s.feedbackEmpty}</p>`;
 
   const formOpen = formOpenId === b.id;
@@ -418,7 +428,7 @@ function render(){
 
   document.getElementById('heading').textContent = s.heading;
   document.getElementById('subheading').textContent = s.sub;
-  document.getElementById('contact').innerHTML = `<a href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noopener">${s.contact}</a>`;
+  document.getElementById('contact').innerHTML = `<a href="${WHATSAPP_GROUP_LINK}" target="_blank" rel="noopener">${s.contact}</a>`;
 
   const list = futureBookings();
   document.getElementById('list').innerHTML = list.map(b => `
@@ -497,6 +507,39 @@ function bind(){
       } catch(err) {
         alert(s.feedbackSaveError);
         btn.disabled = false; if (cancelBtn) cancelBtn.disabled = false;
+        btn.textContent = prevLabel;
+      }
+    });
+  });
+  document.querySelectorAll('[data-delete]').forEach(btn=>{
+    btn.addEventListener('click', async (e)=>{
+      e.stopPropagation();
+      const id = btn.dataset.delete;
+      const bookingId = btn.dataset.booking;
+      const s = STR[lang];
+
+      if (!POETSINFO_API_URL || POETSINFO_API_URL.indexOf('PLAK_HIER') === 0) {
+        alert(s.feedbackDeleteError);
+        return;
+      }
+      if (!confirm(s.feedbackDeleteConfirm)) return;
+
+      btn.disabled = true;
+      const prevLabel = btn.textContent;
+
+      try {
+        const url = POETSINFO_API_URL + '?action=delete'
+          + '&id=' + encodeURIComponent(id);
+        const res = await fetch(url, { cache: 'no-store' });
+        const data = await res.json();
+        if (!data || !data.ok) throw new Error((data && data.error) || 'onbekende fout');
+        if (FEEDBACK[bookingId]) {
+          FEEDBACK[bookingId] = FEEDBACK[bookingId].filter(f => f.id !== id);
+        }
+        render();
+      } catch(err) {
+        alert(s.feedbackDeleteError);
+        btn.disabled = false;
         btn.textContent = prevLabel;
       }
     });

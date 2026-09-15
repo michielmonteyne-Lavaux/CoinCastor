@@ -40,6 +40,9 @@ function doGet(e) {
     if (action === 'save') {
       return _handleSave(e.parameter);
     }
+    if (action === 'delete') {
+      return _handleDelete(e.parameter);
+    }
 
     // default: 'list'
     const sheet = getSheet_();
@@ -90,6 +93,23 @@ function _handleSave(params) {
     entry: { id: id, bookingId: bookingId, at: at, sourceLang: sourceLang,
               nl: translations.nl, fr: translations.fr, ru: translations.ru },
   });
+}
+
+function _handleDelete(params) {
+  const id = (params.id || '').toString().trim();
+  if (!id) {
+    return _out({ ok: false, error: 'id is verplicht' });
+  }
+
+  const sheet = getSheet_();
+  const values = sheet.getDataRange().getValues();
+  for (let i = 1; i < values.length; i++) { // rij 0 = kopregel
+    if (values[i][0] === id) {
+      sheet.deleteRow(i + 1); // Sheets is 1-based
+      return _out({ ok: true });
+    }
+  }
+  return _out({ ok: false, error: 'niet gevonden' });
 }
 
 /**
