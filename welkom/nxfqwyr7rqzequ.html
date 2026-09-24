@@ -76,6 +76,19 @@
     .regel p { font-size: .9rem; line-height: 1.75; }
     .regels-outro { margin-top: 2.4rem; }
 
+    /* AGENDA */
+    .agenda-sec { background: var(--light); padding: 5rem 2rem; }
+    .agenda-list { max-width: 760px; margin: 2.4rem auto 0; border-top: 1px solid var(--border); text-align: left; }
+    .ag-item { display: flex; gap: 1.6rem; padding: 1.5rem 0; border-bottom: 1px solid var(--border); }
+    .ag-date { flex: 0 0 120px; font-size: .68rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--black); padding-top: .25rem; }
+    .ag-body h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; letter-spacing: .02em; margin-bottom: .2rem; }
+    .ag-body p { font-size: .9rem; line-height: 1.7; }
+    .ag-body .ag-place { font-size: .8rem; color: var(--gray); font-weight: 400; margin: 0 0 .4rem; }
+    .ag-body .ag-note { font-size: .8rem; background: var(--warn-bg, #fff8e6); border-left: 3px solid var(--warn-border, #e8c969); padding: .5rem .8rem; margin-top: .6rem; }
+    .ag-link { display: inline-block; margin-top: .6rem; font-size: .66rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--black); border-bottom: 1px solid var(--black); padding-bottom: 2px; text-decoration: none; }
+    .ag-link:hover { opacity: .55; }
+    @media (max-width: 720px) { .agenda-sec { padding: 3.6rem 1.2rem; } .ag-item { flex-direction: column; gap: .4rem; } .ag-date { flex: none; } }
+
     /* OUTRO */
     .outro { background: var(--black); color: white; padding: 4rem 2rem; text-align: center; }
     .outro h2 { color: white; margin-bottom: 1rem; }
@@ -176,6 +189,17 @@
     <p class="lead regels-outro">Geniet ervan, en als er iets is: stuur maar een berichtje 🙂</p>
   </div>
 </section>
+
+<!-- AGENDA -->
+<section class="agenda-sec">
+  <div class="wrap center">
+    <p class="tag">📅 Tijdens jullie verblijf</p>
+    <h2>Te doen in de buurt</h2>
+    <p>Markten, feesten en andere activiteiten in de omgeving die toevallig samenvallen met jullie verblijf.</p>
+    <div id="agenda" class="agenda-list" data-from="2026-10-16" data-to="2026-10-19"></div>
+  </div>
+</section>
+<script src="assets/agenda.js"></script>
 
 <!-- OUTRO -->
 <section class="outro">
