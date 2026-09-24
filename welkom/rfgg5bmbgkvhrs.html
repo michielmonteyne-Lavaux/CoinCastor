@@ -67,6 +67,15 @@
     /* WELKOM */
     .welkom-sec { background: var(--light); padding: 5rem 2rem; }
 
+    /* HUISREGELS */
+    .regels-sec { background: var(--white); padding: 5rem 2rem; border-top: 1px solid var(--border); }
+    .regels-intro { font-size: .95rem; margin-bottom: 2.4rem; }
+    .regels-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; text-align: left; }
+    .regel { background: var(--warn-bg, #fff8e6); border-left: 3px solid var(--warn-border, #e8c969); padding: 1.3rem 1.4rem; }
+    .regel h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; letter-spacing: .02em; margin-bottom: .45rem; }
+    .regel p { font-size: .9rem; line-height: 1.75; }
+    .regels-outro { margin-top: 2.4rem; }
+
     /* OUTRO */
     .outro { background: var(--black); color: white; padding: 4rem 2rem; text-align: center; }
     .outro h2 { color: white; margin-bottom: 1rem; }
@@ -81,7 +90,7 @@
     @media (max-width: 720px) {
       .hero { padding: 6rem 1.2rem 3rem; }
       .hero-btn { flex: 1 1 100%; max-width: 320px; }
-      .sec, .welkom-sec { padding: 3.6rem 1.2rem; }
+      .sec, .welkom-sec, .regels-sec { padding: 3.6rem 1.2rem; }
     }
   </style>
 </head>
@@ -133,6 +142,38 @@
     <p class="tag">🫶 Welkom</p>
     <h2>Welkom in ons huis!</h2>
     <p class="lead">We hopen dat jullie even verliefd worden op de streek en ons huis als wij. Laat maar weten rond hoe laat jullie aankomen, dan zorgen we dat het de perfecte temperatuur is. Hierboven vind je alles wat je nodig hebt — van sleutels tot fietsroutes. Veel plezier!</p>
+  </div>
+</section>
+
+<!-- HUISREGELS -->
+<section class="regels-sec">
+  <div class="wrap center">
+    <p class="tag">🏠 Even lezen a.u.b.</p>
+    <h2>Huisregels</h2>
+    <p class="regels-intro">Een paar dingen die helpen om het huis mooi te houden — voor jullie én voor de volgende gasten. Dank je wel!</p>
+    <div class="regels-grid">
+      <div class="regel">
+        <h3>🧽 Geen schuursponsjes op het aanrecht</h3>
+        <p>Maak het aanrecht enkel schoon met de doek die er ligt. Schuursponsjes beschadigen het werkblad.</p>
+      </div>
+      <div class="regel">
+        <h3>👟 Liefst schoenen uit</h3>
+        <p>Beneden aan de achterdeur is er een <strong>mud room</strong>: kom daar binnen en laat er schoenen en jassen achter.</p>
+      </div>
+      <div class="regel">
+        <h3>🚼 Geen kindjes op de lavabo's</h3>
+        <p>De lavabo's zijn zwevend en enkel in de muur verankerd. Zet er dus geen kinderen op.</p>
+      </div>
+      <div class="regel">
+        <h3>🌬️ Ventilatie &amp; badkamerdeuren</h3>
+        <p>De badkamers liggen volledig onder de grond, dus de ventilator draait er non-stop. Werkt hij echt op je zenuwen, dan kan je hem afzetten via het schermpje aan de voordeur. Laat de badkamerdeuren open als ze niet in gebruik zijn, en zeker <strong>bij vertrek</strong>.</p>
+      </div>
+      <div class="regel">
+        <h3>🔧 Iets kapot? Zeg het gewoon</h3>
+        <p>Er kan altijd iets misgaan. Laat het ons dan gewoon weten, zodat we het op tijd kunnen herstellen voor de volgende gasten.</p>
+      </div>
+    </div>
+    <p class="lead regels-outro">Geniet ervan, en als er iets is: stuur maar een berichtje 🙂</p>
   </div>
 </section>
 
