@@ -76,18 +76,42 @@
     .regel p { font-size: .9rem; line-height: 1.75; }
     .regels-outro { margin-top: 2.4rem; }
 
-    /* AGENDA */
-    .agenda-sec { background: var(--light); padding: 5rem 2rem; }
-    .agenda-list { max-width: 760px; margin: 2.4rem auto 0; border-top: 1px solid var(--border); text-align: left; }
-    .ag-item { display: flex; gap: 1.6rem; padding: 1.5rem 0; border-bottom: 1px solid var(--border); }
-    .ag-date { flex: 0 0 120px; font-size: .68rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--black); padding-top: .25rem; }
-    .ag-body h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; letter-spacing: .02em; margin-bottom: .2rem; }
-    .ag-body p { font-size: .9rem; line-height: 1.7; }
-    .ag-body .ag-place { font-size: .8rem; color: var(--gray); font-weight: 400; margin: 0 0 .4rem; }
-    .ag-body .ag-note { font-size: .8rem; background: var(--warn-bg, #fff8e6); border-left: 3px solid var(--warn-border, #e8c969); padding: .5rem .8rem; margin-top: .6rem; }
-    .ag-link { display: inline-block; margin-top: .6rem; font-size: .66rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--black); border-bottom: 1px solid var(--black); padding-bottom: 2px; text-decoration: none; }
-    .ag-link:hover { opacity: .55; }
-    @media (max-width: 720px) { .agenda-sec { padding: 3.6rem 1.2rem; } .ag-item { flex-direction: column; gap: .4rem; } .ag-date { flex: none; } }
+
+    /* LINNEN */
+    .linnen-sec { background: var(--white); padding: 4.5rem 2rem; }
+    .linnen-box { max-width: 760px; margin: 0 auto; background: var(--warn-bg, #fff8e6); border-left: 3px solid var(--warn-border, #e8c969); padding: 2.2rem 2.2rem 2rem; text-align: left; }
+    .linnen-box h2 { font-family: var(--serif); font-size: clamp(1.4rem,3vw,1.9rem); font-weight: 700; margin-bottom: .9rem; }
+    .linnen-box p { font-size: .95rem; line-height: 1.8; margin-bottom: 1rem; }
+    .bedden { list-style: none; margin: 0 0 1.2rem; border-top: 1px solid var(--warn-border, #e8c969); }
+    .bedden li { display: flex; justify-content: space-between; gap: 1rem; padding: .75rem 0; border-bottom: 1px solid var(--warn-border, #e8c969); font-size: .92rem; }
+    .bedden li span:last-child { font-weight: 600; white-space: nowrap; }
+    .linnen-prijs { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; }
+    .linnen-note { font-size: .82rem !important; color: #666; font-style: italic; margin-bottom: 0 !important; }
+
+    /* FIETSEN */
+    .fiets-sec { background: var(--light); padding: 5rem 2rem; }
+    .fiets-intro { max-width: 640px; margin: 0 auto 2.6rem; text-align: center; }
+    .fiets-intro p { font-size: .95rem; line-height: 1.8; }
+    .cr-card { max-width: 760px; margin: 0 auto 3rem; background: var(--white); border: 1px solid var(--border); padding: 2rem 2.2rem; text-align: left; }
+    .cr-card h3 { font-family: var(--serif); font-size: 1.35rem; font-weight: 700; margin-bottom: .2rem; }
+    .cr-card .cr-sub { font-size: .8rem; color: var(--gray); letter-spacing: .06em; margin-bottom: 1rem; }
+    .cr-card p { font-size: .92rem; line-height: 1.8; margin-bottom: .9rem; }
+    .cr-facts { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: .9rem 1.6rem; margin: 1.2rem 0 1.4rem; }
+    .cr-facts li { font-size: .88rem; line-height: 1.6; }
+    .cr-facts strong { display: block; font-size: .63rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gray); margin-bottom: .15rem; }
+    .cr-links { display: flex; flex-wrap: wrap; gap: 1.4rem; }
+    .cr-links a, .fiets-more a { display: inline-block; font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--black); border-bottom: 1px solid var(--black); padding-bottom: 2px; text-decoration: none; }
+    .cr-links a:hover, .fiets-more a:hover { opacity: .55; }
+    .routes { max-width: 760px; margin: 0 auto; }
+    .routes h3 { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; margin: 2rem 0 .3rem; text-align: left; }
+    .routes .rt-sub { font-size: .82rem; color: var(--gray); margin-bottom: .6rem; text-align: left; }
+    .routes table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    .routes th { font-size: .62rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--gray); text-align: left; padding: .5rem 0; border-bottom: 1px solid var(--black); }
+    .routes td { padding: .6rem 0; border-bottom: 1px solid var(--border); }
+    .routes th.n, .routes td.n { text-align: right; width: 22%; white-space: nowrap; }
+    .fiets-more { text-align: center; margin-top: 2.4rem; font-size: .9rem; }
+    .fiets-more p { margin-bottom: 1rem; }
+    @media (max-width: 720px) { .linnen-sec, .fiets-sec { padding: 3.6rem 1.2rem; } .linnen-box, .cr-card { padding: 1.6rem 1.3rem; } }
 
     /* OUTRO */
     .outro { background: var(--black); color: white; padding: 4rem 2rem; text-align: center; }
@@ -149,12 +173,113 @@
   </div>
 </section>
 
+<!-- LINNEN -->
+<section class="linnen-sec">
+  <div class="linnen-box">
+    <p class="tag">🛏 Belangrijk — even lezen a.u.b.</p>
+    <h2>Bed- en badlinnen is niet inbegrepen</h2>
+    <p>Breng zelf <strong>hoeslakens, dekbedovertrekken, kussenslopen en handdoeken</strong> mee. Dekbedden en kussens liggen klaar. Dit zijn de bedden in het huis:</p>
+    <ul class="bedden">
+      <li><span>2 tweepersoonsbedden</span><span>180 × 200 cm</span></li>
+      <li><span>1 tweepersoonsbed</span><span>160 × 200 cm</span></li>
+      <li><span>Overige bedden</span><span>eenpersoons</span></li>
+      <li><span>Donsdekens — ook op de tweepersoonsbedden</span><span>eenpersoons</span></li>
+    </ul>
+    <p>Tip: omdat alle donsdekens eenpersoons zijn, neem je best <strong>per persoon één eenpersoons dekbedovertrek</strong> mee.</p>
+    <p>Liever niet sleuren? Wij kunnen bed- en badlinnen voorzien aan <span class="linnen-prijs">€50 per persoon</span>. Laat het ons dan zo snel mogelijk weten via WhatsApp.</p>
+    <p class="linnen-note">(Het linnen ligt wel in het huis, maar is enkel bedoeld voor wie het bijboekt. Onze poetsvrouw geeft door wanneer het toch gebruikt werd — dan rekenen we de meerprijs alsnog aan.)</p>
+  </div>
+</section>
+
 <!-- WELKOM -->
 <section class="welkom-sec">
   <div class="narrow center">
     <p class="tag">🫶 Welkom</p>
     <h2>Welkom in ons huis!</h2>
-    <p class="lead">We hopen dat jullie even verliefd worden op de streek en ons huis als wij. Laat maar weten rond hoe laat jullie aankomen, dan zorgen we dat het de perfecte temperatuur is. Hierboven vind je alles wat je nodig hebt — van sleutels tot fietsroutes. Veel plezier!</p>
+    <p class="lead">We hopen dat jullie even verliefd worden op de streek en ons huis als wij. Laat maar weten rond hoe laat jullie aankomen, dan zorgen we dat het de perfecte temperatuur is. Hierboven vind je alles wat je nodig hebt — van sleutels tot handleidingen — en hieronder onze favoriete fietsroutes. Veel fietsplezier!</p>
+  </div>
+</section>
+
+<!-- FIETSEN -->
+<section class="fiets-sec">
+  <div class="wrap">
+    <div class="fiets-intro">
+      <p class="tag">🚴 Voor de fietsers</p>
+      <h2>Fietsen in de Ardennen</h2>
+      <p>Jullie komen fietsen — dan zitten jullie hier goed. Onze favoriete uitvalsbasis is <strong>Le Coffee Ride in Coo</strong>, op een kwartiertje rijden van het huis. Alle routes hieronder starten en eindigen daar.</p>
+    </div>
+
+    <div class="cr-card">
+      <p class="tag">☕ Start &amp; finish</p>
+      <h3>Le Coffee Ride — Café &amp; HQ</h3>
+      <p class="cr-sub">Avenue Pierre Clerdent 14, 4970 Coo – Stavelot</p>
+      <p>Hét trefpunt voor fietsers in de Ardennen: specialty coffee, taart, ontbijt en lunch, en een eigen kledingwinkel. Perfect om te starten met een koffie en na de rit na te genieten op het terras.</p>
+      <ul class="cr-facts">
+        <li><strong>Open tijdens jullie verblijf</strong>vr, za &amp; zo: 8u – 18u</li>
+        <li><strong>Ontbijtbuffet</strong>8u – 10u · €18 p.p.</li>
+        <li><strong>Voor je fiets</strong>Shimano-servicepunt: bandenspanning, snelle herstellingen en fietsen wassen na de rit</li>
+        <li><strong>Vanaf het huis</strong>± 15 minuten rijden</li>
+      </ul>
+      <div class="cr-links">
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Le+Coffee+Ride,+Avenue+Pierre+Clerdent+14,+4970+Stavelot" target="_blank" rel="noopener">Route naar Le Coffee Ride →</a>
+        <a href="https://www.lecoffeeride.cc/cafe" target="_blank" rel="noopener">Meer over het café →</a>
+      </div>
+    </div>
+
+    <div class="routes">
+      <p class="tag center">🗺️ De routes</p>
+      <h2 class="center">Welke rit wordt het?</h2>
+      <h3>Rustig op gang komen</h3>
+      <p class="rt-sub">47–75 km · ideaal voor de aankomstdag of een losse rit</p>
+      <table>
+        <thead><tr><th>Route</th><th class="n">Afstand</th><th class="n">Hoogtemeters</th></tr></thead>
+        <tbody>
+          <tr><td>The Short Loop</td><td class="n">47 km</td><td class="n">670 hm</td></tr>
+          <tr><td>The Sweet Loop</td><td class="n">60 km</td><td class="n">660 hm</td></tr>
+          <tr><td>The Mellow Ride</td><td class="n">63 km</td><td class="n">960 hm</td></tr>
+          <tr><td>Outside is Free</td><td class="n">75 km</td><td class="n">1.230 hm</td></tr>
+        </tbody>
+      </table>
+      <h3>Een stevige dag in het zadel</h3>
+      <p class="rt-sub">79–102 km · het echte Ardennenwerk</p>
+      <table>
+        <thead><tr><th>Route</th><th class="n">Afstand</th><th class="n">Hoogtemeters</th></tr></thead>
+        <tbody>
+          <tr><td>La Belle Route</td><td class="n">79 km</td><td class="n">1.270 hm</td></tr>
+          <tr><td>La Route des Sommets</td><td class="n">82 km</td><td class="n">1.600 hm</td></tr>
+          <tr><td>Old is Gold</td><td class="n">85 km</td><td class="n">910 hm</td></tr>
+          <tr><td>Out of Office</td><td class="n">86 km</td><td class="n">1.490 hm</td></tr>
+          <tr><td>La Martini</td><td class="n">90 km</td><td class="n">1.670 hm</td></tr>
+          <tr><td>La Baraque Fraiture</td><td class="n">91 km</td><td class="n">1.360 hm</td></tr>
+          <tr><td>The 2.0 Ride</td><td class="n">92 km</td><td class="n">1.500 hm</td></tr>
+          <tr><td>The Switchback Ride</td><td class="n">92 km</td><td class="n">1.470 hm</td></tr>
+          <tr><td>Eddy's Loop</td><td class="n">93 km</td><td class="n">1.720 hm</td></tr>
+          <tr><td>The Ardenne Escape</td><td class="n">98 km</td><td class="n">1.700 hm</td></tr>
+          <tr><td>La Magistrale</td><td class="n">100 km</td><td class="n">1.330 hm</td></tr>
+          <tr><td>C'est la Fête</td><td class="n">102 km</td><td class="n">1.200 hm</td></tr>
+          <tr><td>La Baraque Michel</td><td class="n">102 km</td><td class="n">1.660 hm</td></tr>
+        </tbody>
+      </table>
+      <h3>Voor de echte kilometervreters</h3>
+      <p class="rt-sub">118–154 km · van Monschau tot La Redoute</p>
+      <table>
+        <thead><tr><th>Route</th><th class="n">Afstand</th><th class="n">Hoogtemeters</th></tr></thead>
+        <tbody>
+          <tr><td>Monschau ist Schön</td><td class="n">118 km</td><td class="n">1.750 hm</td></tr>
+          <tr><td>The Perfect Day</td><td class="n">121 km</td><td class="n">2.280 hm</td></tr>
+          <tr><td>Coffee in Huy</td><td class="n">137 km</td><td class="n">2.050 hm</td></tr>
+          <tr><td>La Pas Normal</td><td class="n">140 km</td><td class="n">2.390 hm</td></tr>
+          <tr><td>Coffee in Valkenburg</td><td class="n">142 km</td><td class="n">1.820 hm</td></tr>
+          <tr><td>La Redoute and Back</td><td class="n">146 km</td><td class="n">2.660 hm</td></tr>
+          <tr><td>Hello Eifel</td><td class="n">154 km</td><td class="n">2.170 hm</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="fiets-more">
+      <p>Kaarten en GPX-bestanden van elke route vind je op de site van Le Coffee Ride.</p>
+      <a href="https://www.lecoffeeride.cc/road" target="_blank" rel="noopener">Bekijk alle routes &amp; download de GPX →</a>
+    </div>
   </div>
 </section>
 
@@ -190,16 +315,6 @@
   </div>
 </section>
 
-<!-- AGENDA -->
-<section class="agenda-sec">
-  <div class="wrap center">
-    <p class="tag">📅 Tijdens jullie verblijf</p>
-    <h2>Te doen in de buurt</h2>
-    <p>Markten, feesten en andere activiteiten in de omgeving die toevallig samenvallen met jullie verblijf.</p>
-    <div id="agenda" class="agenda-list" data-from="2026-10-16" data-to="2026-10-19"></div>
-  </div>
-</section>
-<script src="assets/agenda.js"></script>
 
 <!-- OUTRO -->
 <section class="outro">
