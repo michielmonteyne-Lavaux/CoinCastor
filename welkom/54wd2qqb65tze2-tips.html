@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <meta name="referrer" content="no-referrer"/>
+  <title>Que faire dans la région — Coin Castor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #1a1a1a; --gray: #888; --light: #f4f2ed; --white: #ffffff; --border: #e2dfd8;
+      --serif: 'Playfair Display', Georgia, serif; --sans: 'Raleway', sans-serif;
+    }
+    body { font-family: var(--sans); color: var(--black); background: var(--white); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+
+    /* SUBHERO */
+    .subhero { background: var(--black); color: white; padding: 4rem 1.5rem 2.4rem; text-align: center; }
+    .subhero .eyebrow { font-size: .66rem; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: .9rem; }
+    .subhero h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(1.9rem,5vw,2.8rem); text-transform: uppercase; letter-spacing: .04em; line-height: 1.1; margin-bottom: 1.8rem; }
+    .subnav { display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem; }
+    .subnav a { font-size: .64rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; color: rgba(255,255,255,.75); text-decoration: none; padding: .55rem 1.2rem; border: 1px solid rgba(255,255,255,.32); transition: all .2s; }
+    .subnav a:hover { border-color: rgba(255,255,255,.7); color: white; }
+    .subnav a.active { background: white; color: var(--black); border-color: white; }
+    .subnav a.back { color: rgba(255,255,255,.5); border-color: transparent; padding-left: .4rem; padding-right: .4rem; }
+    .subnav a.back:hover { color: white; }
+
+    /* SECTIONS */
+    .sec { padding: 4.5rem 2rem; }
+    .wrap { max-width: 1000px; margin: 0 auto; }
+    .tag { font-size: .63rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gray); margin-bottom: .6rem; }
+    h2 { font-family: var(--serif); font-size: clamp(1.4rem,2.6vw,1.95rem); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; margin-bottom: 1.4rem; }
+    h3 { font-family: var(--serif); font-size: 1.08rem; font-weight: 700; letter-spacing: .02em; margin-bottom: .5rem; }
+    p { font-size: .95rem; font-weight: 300; color: #3a3a3a; line-height: 1.85; }
+    strong { font-weight: 600; color: var(--black); }
+    .center { text-align: center; }
+    .light-sec { background: var(--light); }
+
+    /* RESTAURANTS */
+    .resto-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 2rem; }
+    .resto { background: white; padding: 1.8rem 1.6rem; }
+    .resto .icon { font-size: 1.4rem; display: block; margin-bottom: .6rem; }
+    .resto h3 { margin-bottom: .35rem; }
+    .resto .sub { font-size: .82rem; color: var(--gray); margin-bottom: .55rem; font-weight: 400; }
+    .resto p { font-size: .9rem; line-height: 1.65; margin-bottom: .8rem; }
+    .resto a.link { display: inline-block; font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--black); border-bottom: 1px solid var(--black); padding-bottom: 2px; text-decoration: none; }
+    .resto a.link:hover { opacity: .55; }
+    .resto.fav { background: #faf7ef; }
+    .closed-note { margin-top: .8rem; font-size: .78rem; font-weight: 500; color: #a8620e; background: #fff4e6; border-left: 3px solid #e0a355; padding: .55rem .75rem; line-height: 1.5; }
+
+    /* WANDELINGEN & FIETSEN */
+    .fietsen-intro { max-width: 640px; margin: 0 auto; text-align: center; }
+    .link-btn { display: inline-block; margin-top: 1.6rem; font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--black); text-decoration: none; background: transparent; border: 1px solid var(--black); padding: .9rem 2rem; transition: all .2s; }
+    .link-btn:hover { background: var(--black); color: white; }
+
+    /* ZWEMMEN (klikbare foto-tegels) */
+    .swim-intro { max-width: 640px; margin: 0 auto 2.2rem; text-align: center; }
+    .swim-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.4rem; }
+    .swim-tile { position: relative; aspect-ratio: 4 / 3; overflow: hidden; display: block; text-decoration: none; background: var(--black); }
+    .swim-tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s ease; }
+    .swim-tile:hover img { transform: scale(1.05); }
+    .swim-tile .tile-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.05) 60%); }
+    .swim-tile .tile-label { position: absolute; left: 0; right: 0; bottom: 0; padding: 1.1rem 1.2rem; text-align: left; color: white; }
+    .swim-tile .tile-eyebrow { font-size: .58rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: .3rem; }
+    .swim-tile .tile-title { font-family: var(--serif); font-weight: 700; font-size: 1.05rem; color: white; line-height: 1.2; }
+    .swim-tile.text-tile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .6rem; background: var(--black); padding: 1.2rem; text-align: center; }
+    .swim-tile.text-tile .tile-eyebrow-static { font-size: .58rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+    .swim-tile.text-tile .tile-title-static { font-family: var(--serif); font-weight: 700; font-size: 1.05rem; text-transform: uppercase; letter-spacing: .02em; color: white; }
+    .swim-tile.text-tile .tile-sub-static { font-size: .76rem; font-weight: 300; color: rgba(255,255,255,.65); line-height: 1.5; }
+
+    footer { background: var(--black); color: rgba(255,255,255,.38); text-align: center; padding: 1.6rem 2rem; font-size: .7rem; font-weight: 300; letter-spacing: .08em; border-top: 1px solid rgba(255,255,255,.08); }
+    footer a { color: rgba(255,255,255,.55); text-decoration: none; }
+
+    @media (max-width: 720px) {
+      .sec { padding: 3.4rem 1.2rem; }
+      .resto-grid { grid-template-columns: 1fr; }
+      .swim-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .swim-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SUBHERO -->
+<div class="subhero">
+  <p class="eyebrow">Coin Castor · Lavaux</p>
+  <h1>Que faire dans la région</h1>
+  <nav class="subnav">
+    <a class="back" href="54wd2qqb65tze2.html">← Aperçu</a>
+    <a href="54wd2qqb65tze2-algemeen.html">Informations générales</a>
+    <a class="active" href="54wd2qqb65tze2-tips.html">Que faire dans la région</a>
+    <a href="54wd2qqb65tze2-handleidingen.html">Modes d'emploi</a>
+    <a href="54wd2qqb65tze2-vertrek.html">Au départ</a>
+  </nav>
+</div>
+
+<!-- UIT ETEN -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center">
+      <p class="tag">🍽️ Dans les environs</p>
+      <h2>Restaurants</h2>
+    </div>
+    <div class="resto-grid">
+      <div class="resto fav">
+        <span class="icon">⭐</span>
+        <h3>Le Gastromme</h3>
+        <p class="sub">Notre préféré !</p>
+        <p>Restaurant intimiste (tenu par un couple néerlandais) avec une cuisine ardennaise, à Grand-Halleux. <strong>Réservation indispensable.</strong></p>
+        <a class="link" href="https://www.legastromme.be/" target="_blank" rel="noopener">legastromme.be →</a>
+      </div>
+      <div class="resto">
+        <span class="icon">🏔️</span>
+        <h3>Les Chalets de Loci</h3>
+        <p class="sub">Chalet au pied de la piste de ski</p>
+        <p>Chalet-restaurant au pied de la piste de ski avec un menu de saison. Tout à base de produits locaux.</p>
+        <a class="link" href="https://www.chalets-loci.com/nouveau-menu" target="_blank" rel="noopener">chalets-loci.com →</a>
+      </div>
+      <div class="resto">
+        <span class="icon">🐺</span>
+        <h3>Le Loup Gourmand</h3>
+        <p class="sub">Stavelot</p>
+        <p>Restaurant chaleureux et contemporain à Stavelot, près de l'abbaye et de Spa-Francorchamps.</p>
+        <a class="link" href="http://leloupgourmand.be/" target="_blank" rel="noopener">leloupgourmand.be →</a>
+      </div>
+      <div class="resto">
+        <span class="icon">🍟</span>
+        <h3>Friterie Sébastien</h3>
+        <p class="sub">Rapide et bon</p>
+        <p>La friterie du coin, pour un bon repas sur le pouce.</p>
+        <a class="link" href="http://www.friterie-sebastien.be/" target="_blank" rel="noopener">friterie-sebastien.be →</a>
+      </div>
+      <div class="resto" style="grid-column: 1 / -1">
+        <span class="icon">☕</span>
+        <h3>Le Coffee Ride Café</h3>
+        <p class="sub">Coo–Stavelot</p>
+        <p>L'endroit idéal pour un bon café et une part de gâteau — et un petit paradis pour les amateurs de vélo.</p>
+        <a class="link" href="https://www.lecoffeeride.cc/cafe" target="_blank" rel="noopener">lecoffeeride.cc →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WANDELINGEN -->
+<section class="sec light-sec">
+  <div class="wrap">
+    <div class="fietsen-intro">
+      <p class="tag">🥾 Pour les marcheurs</p>
+      <h2>Promenades</h2>
+      <p>Nos promenades préférées dans les environs, tracées par nos soins et enregistrées sur Komoot.</p>
+      <a class="link-btn" href="https://www.komoot.com/fr-fr/user/1688708408150/activities?type=recorded&location=50.355732,5.921397,30r" target="_blank" rel="noopener">Voir toutes les promenades →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FIETSEN -->
+<section class="sec">
+  <div class="wrap">
+    <div class="fietsen-intro">
+      <p class="tag">🚴 Pour les cyclistes</p>
+      <h2>Parcours vélo</h2>
+      <p>Tous les parcours partent du <strong>Coffee Ride HQ à Coo–Stavelot</strong>, à un quart d'heure en voiture. Consultez l'aperçu complet et téléchargez les fichiers GPX via le lien ci-dessous.</p>
+      <a class="link-btn" href="https://www.lecoffeeride.cc/road" target="_blank" rel="noopener">Voir tous les parcours vélo →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ZWEMMEN -->
+<section class="sec light-sec">
+  <div class="wrap">
+    <div class="swim-intro">
+      <p class="tag">🏊 Se rafraîchir</p>
+      <h2>Où se baigner</h2>
+      <p>Nos coins baignade préférés dans les environs — touchez pour plus d'infos ou la localisation sur Komoot.</p>
+    </div>
+    <div class="swim-grid">
+      <a class="swim-tile" href="https://www.komoot.com/fr-fr/tour/3111044351" target="_blank" rel="noopener">
+        <img src="../fotos/Welkomstpagina/Tips%20voor%20de%20omgeving/Zwemmen/Recht.JPG" alt="Baignade à Recht"/>
+        <div class="tile-overlay"></div>
+        <span class="tile-label">
+          <span class="tile-eyebrow">Route · Komoot</span>
+          <span class="tile-title">Recht</span>
+        </span>
+      </a>
+      <a class="swim-tile" href="https://www.komoot.com/fr-fr/tour/3106175894" target="_blank" rel="noopener">
+        <img src="../fotos/Welkomstpagina/Tips%20voor%20de%20omgeving/Zwemmen/Ambl%C3%A8ve.jpg" alt="Baignade dans l'Amblève"/>
+        <div class="tile-overlay"></div>
+        <span class="tile-label">
+          <span class="tile-eyebrow">Route · Komoot</span>
+          <span class="tile-title">Amblève</span>
+        </span>
+      </a>
+      <a class="swim-tile text-tile" href="https://www.robertville.be/index.php?rub=activites&amp;activite=lesBains" target="_blank" rel="noopener">
+        <span class="tile-eyebrow-static">Piscine · Robertville</span>
+        <span class="tile-title-static">Les Bains de Robertville</span>
+        <span class="tile-sub-static">Piscine extérieure avec petite plage &amp; kayaks — env. 25 min en voiture</span>
+      </a>
+      <a class="swim-tile text-tile" href="https://thermesdespa.com/" target="_blank" rel="noopener">
+        <span class="tile-eyebrow-static">Thermes · Spa</span>
+        <span class="tile-title-static">Thermes de Spa</span>
+        <span class="tile-sub-static">Bassins intérieurs et extérieurs d'eau thermale chaude, aussi en automne — env. 35 min en voiture</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITEITEN -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center">
+      <p class="tag">🎡 Pour une sortie</p>
+      <h2>Activités dans les environs</h2>
+    </div>
+    <div class="resto-grid">
+      <div class="resto">
+        <span class="icon">🎢</span>
+        <h3>Plopsaland Ardennes</h3>
+        <p class="sub">Parc d'attractions Studio 100 · Coo</p>
+        <p>Parc à thème juste à côté des cascades de Coo, avec des attractions pour petits et grands. À une dizaine de minutes en voiture de la maison.</p>
+        <a class="link" href="https://www.plopsa.com/fr/plopsaland-ardennes" target="_blank" rel="noopener">plopsa.com →</a>
+      </div>
+      <div class="resto">
+        <span class="icon">🛞</span>
+        <h3>Val de Wanne</h3>
+        <p class="sub">Activity center · Trois-Ponts</p>
+        <p>Devalkart, trike, labyrinthe géant et bien plus encore, avec une terrasse panoramique pour boire un verre ensuite. À moins de 10 minutes en voiture de la maison.</p>
+        <a class="link" href="https://www.levaldewanne.com/" target="_blank" rel="noopener">levaldewanne.com →</a>
+      </div>
+      <div class="resto" style="grid-column: 1 / -1">
+        <span class="icon">🏛️</span>
+        <h3>Abbaye de Stavelot</h3>
+        <p class="sub">Musées &amp; jardin du cloître · Stavelot</p>
+        <p>Abbaye millénaire avec un magnifique jardin de cloître et trois musées, dont le musée du Circuit de Spa-Francorchamps. À une quinzaine de minutes en voiture de la maison.</p>
+        <a class="link" href="https://abbayedestavelot.be/" target="_blank" rel="noopener">abbayedestavelot.be →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BROUWERIJEN -->
+<section class="sec light-sec">
+  <div class="wrap">
+    <div class="center">
+      <p class="tag">🍺 Pour les amateurs de bière</p>
+      <h2>Brasseries dans les environs</h2>
+      <p>Toutes testées par nous ! Voici nos coups de cœur, et un peu plus loin quelques-unes qui valent le détour.</p>
+    </div>
+    <div class="resto-grid">
+      <div class="resto">
+        <span class="icon">⭐</span>
+        <h3>Brasserie de la Lienne</h3>
+        <p class="sub">Notre coup de cœur · Lierneux · env. 13 min en voiture</p>
+        <p>Petite brasserie artisanale avec une nouvelle boutique à Verleumont. Ouverte du vendredi au dimanche pour dégustations et vente directe.</p>
+        <a class="link" href="https://www.brasseriedelalienne.be/main.php?lang=fr" target="_blank" rel="noopener">brasseriedelalienne.be →</a>
+      </div>
+      <div class="resto">
+        <span class="icon">⭐</span>
+        <h3>Brouwerij La THArée</h3>
+        <p class="sub">Notre coup de cœur · Vielsalm · env. 13 min en voiture</p>
+        <p>Bière bio inspirée des Ardennes. Passez simplement au bar ou en terrasse, ou réservez une visite avec dégustation d'une heure et demie.</p>
+        <a class="link" href="https://latharee.be/fr" target="_blank" rel="noopener">latharee.be →</a>
+      </div>
+      <div class="resto">
+        <span class="icon">🍻</span>
+        <h3>Brasserie de Bellevaux</h3>
+        <p class="sub">Un peu plus loin · Malmedy · env. 15 min en voiture</p>
+        <p>Salle de dégustation avec vue sur les cuves en cuivre, et une terrasse. Visites le samedi et le dimanche sur rendez-vous (12,50 €, une boisson comprise).</p>
+        <a class="link" href="https://www.brasseriedebellevaux.be/" target="_blank" rel="noopener">brasseriedebellevaux.be →</a>
+      </div>
+      <div class="resto">
+        <span class="icon">🧀</span>
+        <h3>Brasserie Lupulus</h3>
+        <p class="sub">Un peu plus loin · Bovigny (Gouvy) · env. 20 min en voiture</p>
+        <p>Dans une ancienne ferme ardennaise, avec une boutique, un resto-bar et même une fromagerie.</p>
+        <a class="link" href="https://www.lupulus.be/" target="_blank" rel="noopener">lupulus.be →</a>
+      </div>
+      <div class="resto" style="grid-column: 1 / -1">
+        <span class="icon">⛰️</span>
+        <h3>Belgium Peak Beer</h3>
+        <p class="sub">Un peu plus loin · Sourbrodt, Hautes Fagnes · env. 30 min en voiture</p>
+        <p>Brasserie avec restaurant en bordure des Hautes Fagnes. Goûtez leurs bières avec une planche de fromages et charcuteries régionales. Quatre promenades balisées partent de la terrasse à travers la réserve naturelle, et il y a une plaine de jeux. Visites sur demande.</p>
+        <a class="link" href="https://peakbeer.be/" target="_blank" rel="noopener">peakbeer.be →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © Coin Castor · <a href="../index.html">coincastor.be</a>
+</footer>
+
+<script>
+  document.querySelectorAll('[data-hide-after]').forEach(function (el) {
+    var deadline = new Date(el.getAttribute('data-hide-after') + 'T23:59:59');
+    if (new Date() > deadline) el.style.display = 'none';
+  });
+</script>
+
+</body>
+</html>

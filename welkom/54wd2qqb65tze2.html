@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <meta name="referrer" content="no-referrer"/>
+  <title>Bienvenue à Coin Castor — Guide pratique</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #1a1a1a;
+      --gray:  #888;
+      --light: #f4f2ed;
+      --white: #ffffff;
+      --border: #e2dfd8;
+      --accent: #a8880e;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Raleway', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--black); background: var(--white); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+
+    /* HERO */
+    .hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 7rem 1.2rem 4rem; overflow: hidden; }
+    .hero img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,.35) 0%, rgba(0,0,0,.15) 35%, rgba(0,0,0,.55) 100%); }
+    .hero-content { position: relative; z-index: 2; text-align: center; color: white; width: 100%; max-width: 640px; }
+    .hero-content .eyebrow { font-size: .68rem; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.85); margin-bottom: 1rem; }
+    .hero-content h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(2.4rem,7vw,4.4rem); text-transform: uppercase; letter-spacing: .04em; line-height: 1; margin-bottom: 1.4rem; }
+    .hero-content .sub { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(1rem,1.7vw,1.25rem); color: rgba(255,255,255,.9); margin-bottom: 2rem; }
+
+    .hero-meta { margin-bottom: 2.6rem; }
+    .hero-dates { display: inline-block; border: 1px solid rgba(255,255,255,.4); padding: .55rem 1.6rem; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.9); font-weight: 500; margin-bottom: 1rem; }
+    .hero-addr { font-size: .72rem; font-weight: 400; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: .9rem; }
+    .route-wrap { position: relative; display: inline-block; }
+    .route-btn { font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: white; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.55); padding: 1.1rem 1.4rem; cursor: pointer; transition: all .22s; }
+    .route-btn:hover { background: rgba(255,255,255,.95); color: var(--black); border-color: white; }
+    .route-menu { display: none; position: absolute; top: calc(100% + .5rem); left: 50%; transform: translateX(-50%); background: var(--white); border: 1px solid var(--border); min-width: 172px; z-index: 30; box-shadow: 0 6px 24px rgba(0,0,0,.15); }
+    .route-menu.open { display: block; }
+    .route-menu a { display: flex; align-items: center; gap: .6rem; padding: .7rem 1.1rem; font-size: .72rem; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--border); transition: background .15s; white-space: nowrap; }
+    .route-menu a:last-child { border-bottom: none; }
+    .route-menu a:hover { background: var(--light); }
+    .ri { width: 15px; height: 15px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* HERO BUTTONS */
+    .hero-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; width: 100%; }
+    .hero-btn { display: block; flex: 1 1 180px; max-width: 240px; font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: white; text-decoration: none; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.55); padding: 1.1rem 1.4rem; transition: all .22s; }
+    .hero-btn:hover { background: rgba(255,255,255,.95); color: var(--black); border-color: white; }
+
+    /* SECTIONS */
+    .sec { padding: 5rem 2rem; }
+    .wrap { max-width: 1000px; margin: 0 auto; }
+    .narrow { max-width: 640px; margin: 0 auto; }
+    .tag { font-size: .63rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gray); margin-bottom: .6rem; }
+    h2 { font-family: var(--serif); font-size: clamp(1.4rem,2.6vw,1.95rem); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; margin-bottom: 1.4rem; }
+    p { font-size: .95rem; font-weight: 300; color: #3a3a3a; line-height: 1.85; }
+    p + p { margin-top: .8rem; }
+    strong { font-weight: 600; color: var(--black); }
+    .center { text-align: center; }
+    .lead { font-family: var(--serif); font-style: italic; font-size: 1.08rem; line-height: 1.85; color: #555; }
+
+    /* WELKOM */
+    .welkom-sec { background: var(--light); padding: 5rem 2rem; }
+
+    /* HUISREGELS */
+    .regels-sec { background: var(--white); padding: 5rem 2rem; border-top: 1px solid var(--border); }
+    .regels-intro { font-size: .95rem; margin-bottom: 2.4rem; }
+    .regels-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; text-align: left; }
+    .regel { background: var(--warn-bg, #fff8e6); border-left: 3px solid var(--warn-border, #e8c969); padding: 1.3rem 1.4rem; }
+    .regel h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; letter-spacing: .02em; margin-bottom: .45rem; }
+    .regel p { font-size: .9rem; line-height: 1.75; }
+    .regels-outro { margin-top: 2.4rem; }
+
+
+    /* LINNEN */
+    .linnen-sec { background: var(--white); padding: 4.5rem 2rem; }
+    .linnen-box { max-width: 760px; margin: 0 auto; background: var(--warn-bg, #fff8e6); border-left: 3px solid var(--warn-border, #e8c969); padding: 2.2rem 2.2rem 2rem; text-align: left; }
+    .linnen-box h2 { font-family: var(--serif); font-size: clamp(1.4rem,3vw,1.9rem); font-weight: 700; margin-bottom: .9rem; }
+    .linnen-box p { font-size: .95rem; line-height: 1.8; margin-bottom: 1rem; }
+    .bedden { list-style: none; margin: 0 0 1.2rem; border-top: 1px solid var(--warn-border, #e8c969); }
+    .bedden li { display: flex; justify-content: space-between; gap: 1rem; padding: .75rem 0; border-bottom: 1px solid var(--warn-border, #e8c969); font-size: .92rem; }
+    .bedden li span:last-child { font-weight: 600; white-space: nowrap; }
+    .linnen-prijs { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; }
+    .linnen-note { font-size: .82rem !important; color: #666; font-style: italic; margin-bottom: 0 !important; }
+
+    /* FIETSEN */
+    .fiets-sec { background: var(--light); padding: 5rem 2rem; }
+    .fiets-intro { max-width: 640px; margin: 0 auto 2.6rem; text-align: center; }
+    .fiets-intro p { font-size: .95rem; line-height: 1.8; }
+    .cr-card { max-width: 760px; margin: 0 auto 3rem; background: var(--white); border: 1px solid var(--border); padding: 2rem 2.2rem; text-align: left; }
+    .cr-card h3 { font-family: var(--serif); font-size: 1.35rem; font-weight: 700; margin-bottom: .2rem; }
+    .cr-card .cr-sub { font-size: .8rem; color: var(--gray); letter-spacing: .06em; margin-bottom: 1rem; }
+    .cr-card p { font-size: .92rem; line-height: 1.8; margin-bottom: .9rem; }
+    .cr-facts { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: .9rem 1.6rem; margin: 1.2rem 0 1.4rem; }
+    .cr-facts li { font-size: .88rem; line-height: 1.6; }
+    .cr-facts strong { display: block; font-size: .63rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gray); margin-bottom: .15rem; }
+    .cr-links { display: flex; flex-wrap: wrap; gap: 1.4rem; }
+    .cr-links a, .fiets-more a { display: inline-block; font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--black); border-bottom: 1px solid var(--black); padding-bottom: 2px; text-decoration: none; }
+    .cr-links a:hover, .fiets-more a:hover { opacity: .55; }
+    .routes { max-width: 760px; margin: 0 auto; }
+    .routes h3 { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; margin: 2rem 0 .3rem; text-align: left; }
+    .routes .rt-sub { font-size: .82rem; color: var(--gray); margin-bottom: .6rem; text-align: left; }
+    .routes table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    .routes th { font-size: .62rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--gray); text-align: left; padding: .5rem 0; border-bottom: 1px solid var(--black); }
+    .routes td { padding: .6rem 0; border-bottom: 1px solid var(--border); }
+    .routes th.n, .routes td.n { text-align: right; width: 22%; white-space: nowrap; }
+    .fiets-more { text-align: center; margin-top: 2.4rem; font-size: .9rem; }
+    .fiets-more p { margin-bottom: 1rem; }
+    @media (max-width: 720px) { .linnen-sec, .fiets-sec { padding: 3.6rem 1.2rem; } .linnen-box, .cr-card { padding: 1.6rem 1.3rem; } }
+
+    /* AGENDA */
+    .agenda-sec { background: var(--light); padding: 5rem 2rem; }
+    .agenda-list { max-width: 760px; margin: 2.4rem auto 0; border-top: 1px solid var(--border); text-align: left; }
+    .ag-item { display: flex; gap: 1.6rem; padding: 1.5rem 0; border-bottom: 1px solid var(--border); }
+    .ag-date { flex: 0 0 120px; font-size: .68rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--black); padding-top: .25rem; }
+    .ag-body h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; letter-spacing: .02em; margin-bottom: .2rem; }
+    .ag-body p { font-size: .9rem; line-height: 1.7; }
+    .ag-body .ag-place { font-size: .8rem; color: var(--gray); font-weight: 400; margin: 0 0 .4rem; }
+    .ag-body .ag-note { font-size: .8rem; background: var(--warn-bg, #fff8e6); border-left: 3px solid var(--warn-border, #e8c969); padding: .5rem .8rem; margin-top: .6rem; }
+    .ag-link { display: inline-block; margin-top: .6rem; font-size: .66rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--black); border-bottom: 1px solid var(--black); padding-bottom: 2px; text-decoration: none; }
+    .ag-link:hover { opacity: .55; }
+    @media (max-width: 720px) { .agenda-sec { padding: 3.6rem 1.2rem; } .ag-item { flex-direction: column; gap: .4rem; } .ag-date { flex: none; } }
+
+
+    /* OUTRO */
+    .outro { background: var(--black); color: white; padding: 4rem 2rem; text-align: center; }
+    .outro h2 { color: white; margin-bottom: 1rem; }
+    .outro p { color: rgba(255,255,255,.7); font-size: 1rem; }
+    .outro .signature { font-family: var(--serif); font-style: italic; color: rgba(255,255,255,.55); margin-top: 1.6rem; font-size: .92rem; }
+
+    /* FOOTER */
+    footer { background: var(--black); color: rgba(255,255,255,.38); text-align: center; padding: 1.6rem 2rem; font-size: .7rem; font-weight: 300; letter-spacing: .08em; border-top: 1px solid rgba(255,255,255,.08); }
+    footer a { color: rgba(255,255,255,.55); text-decoration: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 720px) {
+      .hero { padding: 6rem 1.2rem 3rem; }
+      .hero-btn { flex: 1 1 100%; max-width: 320px; }
+      .sec, .welkom-sec, .regels-sec { padding: 3.6rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section id="top" class="hero">
+  <img class="bg" src="../fotos/vakantiehuis/Algemeen/Trampoline.jpg" alt="Trampoline dans le jardin de Coin Castor"/>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="eyebrow">Coin Castor · Lavaux</p>
+    <h1>Bienvenue, Marthe 🏡</h1>
+    <p class="sub">Votre maison dans les Ardennes</p>
+
+    <div class="hero-meta">
+      <div class="hero-dates">9 octobre – 11 octobre 2026</div>
+      <p class="hero-addr">Lavaux 18 — 4980 Trois-Ponts</p>
+      <div class="route-wrap">
+        <button class="route-btn" onclick="toggleRoute(event)">Route ↓</button>
+        <div class="route-menu" id="routeMenu">
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Lavaux+18,+4980+Trois-Ponts,+Belgium" target="_blank" rel="noopener">
+            <svg class="ri" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Google Maps
+          </a>
+          <a href="https://waze.com/ul?q=Lavaux+18,+4980+Trois-Ponts&navigate=yes" target="_blank" rel="noopener">
+            <svg class="ri" viewBox="0 0 24 24"><circle cx="12" cy="9" r="7"/><path d="M9.5 9a2.5 2.5 0 0 0 5 0"/><path d="M12 16v3"/><path d="M9 19h6"/></svg>
+            Waze
+          </a>
+          <a href="http://maps.apple.com/?daddr=Lavaux+18,+4980+Trois-Ponts,+Belgium&dirflg=d" target="_blank" rel="noopener">
+            <svg class="ri" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Apple Maps
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-btns">
+      <a class="hero-btn" href="54wd2qqb65tze2-algemeen.html">Informations générales</a>
+      <a class="hero-btn" href="54wd2qqb65tze2-tips.html">Que faire dans la région</a>
+      <a class="hero-btn" href="54wd2qqb65tze2-handleidingen.html">Modes d'emploi</a>
+      <a class="hero-btn" href="54wd2qqb65tze2-vertrek.html">Au départ</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- WELKOM -->
+<section class="welkom-sec">
+  <div class="narrow center">
+    <p class="tag">🫶 Bienvenue</p>
+    <h2>Bienvenue chez nous !</h2>
+    <p class="lead">Nous espérons que vous tomberez aussi amoureux de la région et de notre maison que nous. N'hésitez pas à nous dire vers quelle heure vous arrivez, pour que la maison soit à la bonne température. Ci-dessus, vous trouverez tout ce dont vous avez besoin — des clés aux modes d'emploi — et plus bas, ce qui se passe dans les environs pendant votre séjour. Profitez bien !</p>
+  </div>
+</section>
+
+<!-- LINNEN -->
+<section class="linnen-sec">
+  <div class="linnen-box">
+    <p class="tag">🛏 Important — à lire s.v.p.</p>
+    <h2>Linge de lit et de bain non compris</h2>
+    <p>Merci d'apporter vos <strong>draps-housses, housses de couette, taies d'oreiller et serviettes</strong>. Les couettes et les oreillers sont sur place. Voici les lits de la maison :</p>
+    <ul class="bedden">
+      <li><span>2 lits doubles</span><span>180 × 200 cm</span></li>
+      <li><span>1 lit double</span><span>160 × 200 cm</span></li>
+      <li><span>Autres lits</span><span>simples</span></li>
+      <li><span>Couettes — aussi sur les lits doubles</span><span>1 personne</span></li>
+    </ul>
+    <p>Astuce : comme toutes les couettes sont pour une personne, prévoyez <strong>une housse de couette 1 personne par personne</strong>.</p>
+    <p>Pas envie de tout transporter ? Nous pouvons fournir le linge de lit et de bain pour <span class="linnen-prijs">50 € par personne</span>. Prévenez-nous alors au plus vite via WhatsApp.</p>
+    <p class="linnen-note">(Le linge se trouve bien dans la maison, mais il est réservé à ceux qui l'ont réservé. Notre femme de ménage nous signale s'il a été utilisé — le supplément sera alors facturé.)</p>
+  </div>
+</section>
+
+<!-- HUISREGELS -->
+<section class="regels-sec">
+  <div class="wrap center">
+    <p class="tag">🏠 À lire s.v.p.</p>
+    <h2>Règles de la maison</h2>
+    <p class="regels-intro">Quelques petites choses pour garder la maison en bon état — pour vous comme pour les prochains hôtes. Merci beaucoup !</p>
+    <div class="regels-grid">
+      <div class="regel">
+        <h3>🧽 Pas d'éponge à récurer sur le plan de travail</h3>
+        <p>Nettoyez le plan de travail uniquement avec le chiffon prévu à cet effet. Les éponges à récurer abîment la surface.</p>
+      </div>
+      <div class="regel">
+        <h3>👟 De préférence sans chaussures</h3>
+        <p>En bas, près de la porte arrière, il y a un <strong>vestiaire (mud room)</strong> : entrez par là et laissez-y chaussures et manteaux.</p>
+      </div>
+      <div class="regel">
+        <h3>🚼 Ne pas s'asseoir sur les lavabos</h3>
+        <p>Les lavabos sont suspendus et uniquement ancrés dans le mur. Merci de ne pas vous y appuyer ni d'y asseoir qui que ce soit.</p>
+      </div>
+      <div class="regel">
+        <h3>🌬️ Ventilation &amp; portes des salles de bain</h3>
+        <p>Les salles de bain sont entièrement enterrées, la ventilation y tourne donc en continu. Si elle vous dérange vraiment, vous pouvez la couper via l'écran près de la porte d'entrée. Laissez les portes des salles de bain ouvertes quand elles ne sont pas utilisées, et surtout <strong>au départ</strong>.</p>
+      </div>
+      <div class="regel">
+        <h3>🔧 Quelque chose de cassé ? Dites-le simplement</h3>
+        <p>Un accident peut toujours arriver. Prévenez-nous simplement, pour que nous puissions réparer à temps pour les prochains hôtes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENDA -->
+<section class="agenda-sec">
+  <div class="wrap center">
+    <p class="tag">📅 Pendant votre séjour</p>
+    <h2>À faire dans les environs</h2>
+    <p>Concerts, événements et autres activités dans la région qui tombent pendant votre séjour.</p>
+    <div class="agenda-list">
+      <div class="ag-item">
+        <div class="ag-date">9 – 10 oct</div>
+        <div class="ag-body">
+          <h3>🎶 Concerts dans les caves de l'abbaye</h3>
+          <p class="ag-place">Abbaye de Stavelot · 15 min en voiture</p>
+          <p>Vendredi soir hip-hop (Cinsi + Nicou), samedi soir chanson française (Muriel d'Ailleurs + Saule).</p>
+          <a class="ag-link" href="https://www.ccstp.be/agenda/liste/" target="_blank" rel="noopener">Plus d'infos →</a>
+        </div>
+      </div>
+      <div class="ag-item">
+        <div class="ag-date">10 oct</div>
+        <div class="ag-body">
+          <h3>🏃 Night Marathon</h3>
+          <p class="ag-place">Circuit de Spa-Francorchamps · env. 20 min en voiture</p>
+          <p>Course de nuit sur le circuit, frontale sur la tête pour grimper le Raidillon : 7, 14, 21 ou 42 km. Sympa aussi pour venir encourager.</p>
+          <a class="ag-link" href="https://www.night-marathon.com/" target="_blank" rel="noopener">Plus d'infos →</a>
+        </div>
+      </div>
+      <div class="ag-item">
+        <div class="ag-date">Jusqu'au 15 oct</div>
+        <div class="ag-body">
+          <h3>🦌 Le brame du cerf</h3>
+          <p class="ag-place">Partout dans les bois autour de la maison</p>
+          <p>De mi-septembre à mi-octobre, les cerfs brament. À la tombée du jour, restez un moment dehors en silence ou marchez jusqu'à l'orée du bois : il y a de fortes chances que vous les entendiez !</p>
+        </div>
+      </div>
+      <div class="ag-item">
+        <div class="ag-date">Jusqu'au 1er déc</div>
+        <div class="ag-body">
+          <h3>🖼️ Expo « Cheveux &amp; autres poils »</h3>
+          <p class="ag-place">Espace culturel, Trois-Ponts · 5 min en voiture</p>
+          <p>Exposition d'art au centre culturel. Mar–ven 10h–17h, week-end 14h–17h.</p>
+          <a class="ag-link" href="https://www.ccstp.be/agenda/liste/" target="_blank" rel="noopener">Plus d'infos →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- OUTRO -->
+<section class="outro">
+  <h2>Profitez bien de votre séjour !</h2>
+  <p>N'hésitez pas à nous envoyer un message si vous avez la moindre question.</p>
+  <p class="signature">— Greet et Michiel · Anna et Lena</p>
+</section>
+
+<footer>
+  © Coin Castor · <a href="../index.html">coincastor.be</a>
+</footer>
+
+<script>
+  function toggleRoute(e) { e.stopPropagation(); document.getElementById('routeMenu').classList.toggle('open'); }
+  document.addEventListener('click', function() { var m = document.getElementById('routeMenu'); if (m) m.classList.remove('open'); });
+</script>
+
+</body>
+</html>
