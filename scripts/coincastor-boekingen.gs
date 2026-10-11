@@ -19,7 +19,9 @@
  */
 
 // ── INSTELLINGEN ──
-const CALENDAR_ID = 'b16df7230206f1834b7d72a891b32a4b272912885f40d28268df3f84ac658484@group.calendar.google.com';
+// Sinds okt 2026: de agenda van info@coincastor.be (gedeeld met michiel.monteyne@gmail.com,
+// met wijzigingsrechten). Vroeger: de aparte agenda "Coin Castor — Boekingen".
+const CALENDAR_ID = 'info@coincastor.be';
 
 const NIGHTS = { weekend: 3, midweek: 4, week: 7, verlengd: 4 };
 
