@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <meta name="referrer" content="no-referrer"/>
+  <title>Welkom in Coin Castor — Praktische gids</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #1a1a1a;
+      --gray:  #888;
+      --light: #f4f2ed;
+      --white: #ffffff;
+      --border: #e2dfd8;
+      --accent: #a8880e;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Raleway', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--black); background: var(--white); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+
+    /* HERO */
+    .hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 7rem 1.2rem 4rem; overflow: hidden; }
+    .hero img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,.35) 0%, rgba(0,0,0,.15) 35%, rgba(0,0,0,.55) 100%); }
+    .hero-content { position: relative; z-index: 2; text-align: center; color: white; width: 100%; max-width: 640px; }
+    .hero-content .eyebrow { font-size: .68rem; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.85); margin-bottom: 1rem; }
+    .hero-content h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(2.4rem,7vw,4.4rem); text-transform: uppercase; letter-spacing: .04em; line-height: 1; margin-bottom: 1.4rem; }
+    .hero-content .sub { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(1rem,1.7vw,1.25rem); color: rgba(255,255,255,.9); margin-bottom: 2rem; }
+
+    .hero-meta { margin-bottom: 2.6rem; }
+    .hero-dates { display: inline-block; border: 1px solid rgba(255,255,255,.4); padding: .55rem 1.6rem; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.9); font-weight: 500; margin-bottom: 1rem; }
+    .hero-addr { font-size: .72rem; font-weight: 400; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: .9rem; }
+    .route-wrap { position: relative; display: inline-block; }
+    .route-btn { font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: white; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.55); padding: 1.1rem 1.4rem; cursor: pointer; transition: all .22s; }
+    .route-btn:hover { background: rgba(255,255,255,.95); color: var(--black); border-color: white; }
+    .route-menu { display: none; position: absolute; top: calc(100% + .5rem); left: 50%; transform: translateX(-50%); background: var(--white); border: 1px solid var(--border); min-width: 172px; z-index: 30; box-shadow: 0 6px 24px rgba(0,0,0,.15); }
+    .route-menu.open { display: block; }
+    .route-menu a { display: flex; align-items: center; gap: .6rem; padding: .7rem 1.1rem; font-size: .72rem; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--border); transition: background .15s; white-space: nowrap; }
+    .route-menu a:last-child { border-bottom: none; }
+    .route-menu a:hover { background: var(--light); }
+    .ri { width: 15px; height: 15px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* HERO BUTTONS */
+    .hero-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; width: 100%; }
+    .hero-btn { display: block; flex: 1 1 180px; max-width: 240px; font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: white; text-decoration: none; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.55); padding: 1.1rem 1.4rem; transition: all .22s; }
+    .hero-btn:hover { background: rgba(255,255,255,.95); color: var(--black); border-color: white; }
+
+    /* SECTIONS */
+    .sec { padding: 5rem 2rem; }
+    .wrap { max-width: 1000px; margin: 0 auto; }
+    .narrow { max-width: 640px; margin: 0 auto; }
+    .tag { font-size: .63rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gray); margin-bottom: .6rem; }
+    h2 { font-family: var(--serif); font-size: clamp(1.4rem,2.6vw,1.95rem); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; margin-bottom: 1.4rem; }
+    p { font-size: .95rem; font-weight: 300; color: #3a3a3a; line-height: 1.85; }
+    p + p { margin-top: .8rem; }
+    strong { font-weight: 600; color: var(--black); }
+    .center { text-align: center; }
+    .lead { font-family: var(--serif); font-style: italic; font-size: 1.08rem; line-height: 1.85; color: #555; }
+
+    /* WELKOM */
+    .welkom-sec { background: var(--light); padding: 5rem 2rem; }
+    .baby-box { max-width: 640px; margin: 2.4rem auto 0; background: var(--warn-bg, #fff8e6); border-left: 3px solid var(--warn-border, #e8c969); padding: 1.4rem 1.6rem; text-align: left; }
+    .baby-box .baby-head { font-size: .65rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: #8a6f0e; margin-bottom: .5rem; }
+    .baby-box p { font-size: .92rem; line-height: 1.75; }
+
+    /* HUISREGELS */
+    .regels-sec { background: var(--white); padding: 5rem 2rem; border-top: 1px solid var(--border); }
+    .regels-intro { font-size: .95rem; margin-bottom: 2.4rem; }
+    .regels-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; text-align: left; }
+    .regel { background: var(--warn-bg, #fff8e6); border-left: 3px solid var(--warn-border, #e8c969); padding: 1.3rem 1.4rem; }
+    .regel h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; letter-spacing: .02em; margin-bottom: .45rem; }
+    .regel p { font-size: .9rem; line-height: 1.75; }
+    .regels-outro { margin-top: 2.4rem; }
+
+    /* AGENDA */
+    .agenda-sec { background: var(--light); padding: 5rem 2rem; }
+    .agenda-list { max-width: 760px; margin: 2.4rem auto 0; border-top: 1px solid var(--border); text-align: left; }
+    .ag-item { display: flex; gap: 1.6rem; padding: 1.5rem 0; border-bottom: 1px solid var(--border); }
+    .ag-date { flex: 0 0 120px; font-size: .68rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--black); padding-top: .25rem; }
+    .ag-body h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; letter-spacing: .02em; margin-bottom: .2rem; }
+    .ag-body p { font-size: .9rem; line-height: 1.7; }
+    .ag-body .ag-place { font-size: .8rem; color: var(--gray); font-weight: 400; margin: 0 0 .4rem; }
+    .ag-body .ag-note { font-size: .8rem; background: var(--warn-bg, #fff8e6); border-left: 3px solid var(--warn-border, #e8c969); padding: .5rem .8rem; margin-top: .6rem; }
+    .ag-link { display: inline-block; margin-top: .6rem; font-size: .66rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--black); border-bottom: 1px solid var(--black); padding-bottom: 2px; text-decoration: none; }
+    .ag-link:hover { opacity: .55; }
+    @media (max-width: 720px) { .agenda-sec { padding: 3.6rem 1.2rem; } .ag-item { flex-direction: column; gap: .4rem; } .ag-date { flex: none; } }
+
+    /* OUTRO */
+    .outro { background: var(--black); color: white; padding: 4rem 2rem; text-align: center; }
+    .outro h2 { color: white; margin-bottom: 1rem; }
+    .outro p { color: rgba(255,255,255,.7); font-size: 1rem; }
+    .outro .signature { font-family: var(--serif); font-style: italic; color: rgba(255,255,255,.55); margin-top: 1.6rem; font-size: .92rem; }
+
+
+    /* VRIENDINNENWEEKEND */
+    .weekend-sec { background: var(--white); padding: 5rem 2rem; border-top: 1px solid var(--border); }
+    .weekend-intro { font-size: .95rem; max-width: 640px; margin: 0 auto 2.4rem; }
+    .plan { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 2.4rem; }
+    .plan-day { background: var(--light); padding: 1.5rem 1.4rem; }
+    .plan-day p { font-size: .9rem; line-height: 1.7; }
+    .plan-label { font-size: .63rem !important; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--black); margin-bottom: .5rem; }
+    .idea-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .idea { background: white; padding: 1.8rem 1.6rem; }
+    .idea.fav { background: #faf7ef; }
+    .idea .icon { font-size: 1.4rem; display: block; margin-bottom: .6rem; }
+    .idea h3 { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; letter-spacing: .02em; margin-bottom: .35rem; }
+    .idea .sub { font-size: .82rem; color: var(--gray); margin-bottom: .55rem; font-weight: 400; }
+    .idea p { font-size: .9rem; line-height: 1.65; margin-bottom: .8rem; }
+    .idea p a { color: var(--black); }
+    .idea a.link { display: inline-block; font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--black); border-bottom: 1px solid var(--black); padding-bottom: 2px; text-decoration: none; }
+    .idea a.link:hover { opacity: .55; }
+    @media (max-width: 720px) { .weekend-sec { padding: 3.6rem 1.2rem; } .plan, .idea-grid { grid-template-columns: 1fr; } }
+
+    /* FOOTER */
+    footer { background: var(--black); color: rgba(255,255,255,.38); text-align: center; padding: 1.6rem 2rem; font-size: .7rem; font-weight: 300; letter-spacing: .08em; border-top: 1px solid rgba(255,255,255,.08); }
+    footer a { color: rgba(255,255,255,.55); text-decoration: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 720px) {
+      .hero { padding: 6rem 1.2rem 3rem; }
+      .hero-btn { flex: 1 1 100%; max-width: 320px; }
+      .sec, .welkom-sec, .regels-sec { padding: 3.6rem 1.2rem; }
+    }
+  
+    .lang-switch{position:fixed;top:.9rem;right:.9rem;z-index:60;display:flex;background:rgba(255,255,255,.94);border:1px solid #e2dfd8;font-family:'Raleway',sans-serif;font-size:.68rem;letter-spacing:.16em;font-weight:600}
+    .lang-switch a{padding:.42rem .75rem;color:#888;text-decoration:none}
+    .lang-switch a.on{background:#1a1a1a;color:#fff}
+    .ai-note{background:#f4f2ed;border-bottom:1px solid #e2dfd8;font-family:'Raleway',sans-serif;font-size:.74rem;color:#555;text-align:center;padding:.6rem 6.5rem .6rem 1rem;line-height:1.45}
+    @media (max-width:600px){.ai-note{padding:3rem 1rem .6rem;}}
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section id="top" class="hero">
+  <img class="bg" src="../fotos/vakantiehuis/Algemeen/Trampoline.jpg" alt="Trampoline in de tuin van Coin Castor"/>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="eyebrow">Coin Castor · Lavaux</p>
+    <h1>Welkom, Greet &amp; vriendinnen 🥂</h1>
+    <p class="sub">Een weekendje Ardennen onder vriendinnen</p>
+
+    <div class="hero-meta">
+      <div class="hero-dates">23 oktober – 25 oktober 2026</div>
+      <p class="hero-addr">Lavaux 18 — 4980 Trois-Ponts</p>
+      <div class="route-wrap">
+        <button class="route-btn" onclick="toggleRoute(event)">Route ↓</button>
+        <div class="route-menu" id="routeMenu">
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Lavaux+18,+4980+Trois-Ponts,+Belgium" target="_blank" rel="noopener">
+            <svg class="ri" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Google Maps
+          </a>
+          <a href="https://waze.com/ul?q=Lavaux+18,+4980+Trois-Ponts&navigate=yes" target="_blank" rel="noopener">
+            <svg class="ri" viewBox="0 0 24 24"><circle cx="12" cy="9" r="7"/><path d="M9.5 9a2.5 2.5 0 0 0 5 0"/><path d="M12 16v3"/><path d="M9 19h6"/></svg>
+            Waze
+          </a>
+          <a href="http://maps.apple.com/?daddr=Lavaux+18,+4980+Trois-Ponts,+Belgium&dirflg=d" target="_blank" rel="noopener">
+            <svg class="ri" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Apple Maps
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-btns">
+      <a class="hero-btn" href="cds5m23stgm8av-algemeen.html">Algemene informatie</a>
+      <a class="hero-btn" href="cds5m23stgm8av-tips.html">Tips voor de omgeving</a>
+      <a class="hero-btn" href="cds5m23stgm8av-handleidingen.html">Handleidingen</a>
+      <a class="hero-btn" href="cds5m23stgm8av-vertrek.html">Bij vertrek</a>
+    </div>
+  </div>
+</section>
+
+<!-- WELKOM -->
+<section class="welkom-sec">
+  <div class="narrow center">
+    <p class="tag">🫶 Welkom</p>
+    <h2>Welkom in Coin Castor!</h2>
+    <p class="lead">Wat fijn dat jullie er met z'n vieren een weekendje tussenuit trekken! Het huis staat klaar. Bovenaan vind je alle praktische info van sleutels tot handleidingen en hieronder een paar ideeën om het weekend te vullen. Veel plezier!</p>
+  </div>
+</section>
+
+<!-- VRIENDINNENWEEKEND -->
+<section class="weekend-sec">
+  <div class="wrap">
+    <div class="center">
+      <p class="tag">🥂 Jullie weekend</p>
+      <h2>Vier vriendinnen in de Ardennen</h2>
+      <p class="weekend-intro">Een paar ideeën die we speciaal voor jullie weekend bijeen zochten. Alles ligt op max. 35 minuten rijden. Of doe gewoon helemaal niks: dat mag hier ook.</p>
+    </div>
+
+    <div class="plan">
+      <div class="plan-day">
+        <p class="plan-label">Vrijdag</p>
+        <p>Aankomen, bubbels open en Sonos aan ("Eetkamer" in Spotify). Wie meteen wil tafelen: Le Gastromme is open vanaf 18u.</p>
+      </div>
+      <div class="plan-day">
+        <p class="plan-label">Zaterdag</p>
+        <p>'s Ochtends uitwaaien in de Hautes Fagnes. 's Namiddags warm water en sauna in de Thermes de Spa. 's Avonds lekker eten.</p>
+      </div>
+      <div class="plan-day">
+        <p class="plan-label">Zondag</p>
+        <p>Rustig ontbijten. Daarna koffie en taart in Coo, een kasteelbezoek of snuffelen op de kunstenaarsbeurs in Lierneux.</p>
+      </div>
+    </div>
+
+    <div class="idea-grid">
+      <div class="idea fav">
+        <span class="icon">♨️</span>
+        <h3>Thermes de Spa</h3>
+        <p class="sub">Wellness · Spa · ca. 35 min. rijden</p>
+        <p>Binnen- en buitenbaden met warm bronwater (33°C) hoog boven Spa, plus sauna's, hammams en relaxruimtes. Een sessie van 3 uur kost €35 p.p. in het weekend. Massages boek je er apart bij. <strong>Enkel op reservatie</strong> (online of +32 87 77 25 60) dus boek op tijd.</p>
+        <a class="link" href="https://thermesdespa.com/welkom/" target="_blank" rel="noopener">thermesdespa.com →</a>
+      </div>
+      <div class="idea fav">
+        <span class="icon">⭐</span>
+        <h3>Le Gastromme</h3>
+        <p class="sub">Diner · Grand-Halleux · 10 min. rijden</p>
+        <p>Ons favoriete adresje is na de zomersluiting weer open: vrijdag en zaterdag vanaf 18u, zondag vanaf 12u. Ardeense keuken en maar een handvol tafels. <strong>Reserveer nu al.</strong></p>
+        <a class="link" href="https://www.legastromme.be/reservation-1" target="_blank" rel="noopener">Reserveren →</a>
+      </div>
+      <div class="idea">
+        <span class="icon">🥾</span>
+        <h3>Hautes Fagnes</h3>
+        <p class="sub">Wandelen · Signal de Botrange · ca. 35 min. rijden</p>
+        <p>Het hoogveen rond het hoogste punt van België is in de herfst op z'n mooist: goudbruin gras en kilometers vlonderpaden. Stevige schoenen aan en een extra laagje mee, het is er frisser dan hier.</p>
+        <a class="link" href="https://www.botrange.be/" target="_blank" rel="noopener">botrange.be →</a>
+      </div>
+      <div class="idea">
+        <span class="icon">🍄</span>
+        <h3>Paddenstoelenwandeling</h3>
+        <p class="sub">Zaterdag 24 oktober · Wanne · 5 min. rijden</p>
+        <p>Begeleide wandeling vanuit het kasteel van Wanne. Om 13u30 uitleg en 13u45 vertrek. Rond 16u terug om de vondsten te sorteren en paddenstoelensoep te proeven. <strong>Reserveren verplicht:</strong> wanne@kaleo-asbl.be of 080 86 31 06.</p>
+        <a class="link" href="https://www.infoardenne.com/evenement/balade-guidee-champignons/" target="_blank" rel="noopener">Meer info →</a>
+      </div>
+      <div class="idea">
+        <span class="icon">🏰</span>
+        <h3>Kasteel Reinhardstein</h3>
+        <p class="sub">Ovifat · ca. 30 min. rijden</p>
+        <p>Sprookjeskasteel op een rots boven het dal van de Warche. In het weekend elk uur een rondleiding van 11u tot 16u (ook in het Nederlands) voor €12 p.p. Mooi te combineren met de Hautes Fagnes.</p>
+        <a class="link" href="https://www.reinhardstein.net/en/tour" target="_blank" rel="noopener">reinhardstein.net →</a>
+      </div>
+      <div class="idea">
+        <span class="icon">🎨</span>
+        <h3>Fête des artistes</h3>
+        <p class="sub">Za 24 & zo 25 oktober · Lierneux · ca. 15 min. rijden</p>
+        <p>Meer dan 30 lokale kunstenaars tonen en verkopen hun werk: schilderijen, juwelen, foto's, houtwerk en naaiwerk. Leuk om rond te snuffelen en een cadeautje mee naar huis te nemen. Van 10u tot 18u in de Salle du Vicinal.</p>
+        <a class="link" href="https://www.haute-ardenne.be/en/events" target="_blank" rel="noopener">Meer info →</a>
+      </div>
+      <div class="idea" style="grid-column: 1 / -1">
+        <span class="icon">☕</span>
+        <h3>Koffie, taart &amp; watervallen in Coo</h3>
+        <p class="sub">Coo · 10 min. rijden</p>
+        <p>Perfect voor zondagvoormiddag: een goede koffie met een stuk taart bij Le Coffee Ride en daarna een korte wandeling naar de watervallen van Coo. Meer restaurants, wandelingen en brouwerijen vind je bij <a href="cds5m23stgm8av-tips.html">Tips voor de omgeving</a>.</p>
+        <a class="link" href="https://www.lecoffeeride.cc/cafe" target="_blank" rel="noopener">lecoffeeride.cc →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENDA -->
+<section class="agenda-sec">
+  <div class="wrap center">
+    <p class="tag">📅 Tijdens jullie verblijf</p>
+    <h2>Te doen in de buurt</h2>
+    <p>Markten, feesten en andere activiteiten in de omgeving die toevallig samenvallen met jullie verblijf.</p>
+    <div id="agenda" class="agenda-list" data-from="2026-10-23" data-to="2026-10-25"></div>
+  </div>
+</section>
+<script src="assets/agenda.js"></script>
+
+
+<!-- HUISREGELS -->
+<section class="regels-sec">
+  <div class="wrap center">
+    <p class="tag">🏠 Even lezen a.u.b.</p>
+    <h2>Huisregels</h2>
+    <p class="regels-intro">Een paar dingen die helpen om het huis mooi te houden — voor jullie én voor de volgende gasten. Dank je wel!</p>
+    <div class="regels-grid">
+      <div class="regel">
+        <h3>🧽 Geen schuursponsjes op het aanrecht</h3>
+        <p>Maak het aanrecht enkel schoon met de doek die er ligt. Schuursponsjes beschadigen het werkblad.</p>
+      </div>
+      <div class="regel">
+        <h3>👟 Liefst schoenen uit</h3>
+        <p>Beneden aan de achterdeur is er een <strong>mud room</strong>: kom daar binnen en laat er schoenen en jassen achter.</p>
+      </div>
+      <div class="regel">
+        <h3>🚼 Geen kindjes op de lavabo's</h3>
+        <p>De lavabo's zijn zwevend en enkel in de muur verankerd. Zet er dus geen kinderen op.</p>
+      </div>
+      <div class="regel">
+        <h3>🌬️ Ventilatie &amp; badkamerdeuren</h3>
+        <p>De badkamers liggen volledig onder de grond, dus de ventilator draait er non-stop. Werkt hij echt op je zenuwen, dan kan je hem afzetten via het schermpje aan de voordeur. Laat de badkamerdeuren open als ze niet in gebruik zijn, en zeker <strong>bij vertrek</strong>.</p>
+      </div>
+      <div class="regel">
+        <h3>🔧 Iets kapot? Zeg het gewoon</h3>
+        <p>Er kan altijd iets misgaan. Laat het ons dan gewoon weten, zodat we het op tijd kunnen herstellen voor de volgende gasten.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTRO -->
+<section class="outro">
+  <h2>Geniet van jullie weekend!</h2>
+  <p>Twijfel niet om berichtjes te sturen als er vragen zijn.</p>
+  <p class="signature">— Michiel</p>
+</section>
+
+<footer>
+  © Coin Castor · <a href="../index.html">coincastor.be</a>
+</footer>
+
+<script>
+  function toggleRoute(e) { e.stopPropagation(); document.getElementById('routeMenu').classList.toggle('open'); }
+  document.addEventListener('click', function() { var m = document.getElementById('routeMenu'); if (m) m.classList.remove('open'); });
+</script>
+
+</body>
+</html>
