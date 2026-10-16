@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <meta name="referrer" content="no-referrer"/>
+  <title>Anleitungen — Coin Castor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #1a1a1a; --gray: #888; --light: #f4f2ed; --white: #ffffff; --border: #e2dfd8;
+      --serif: 'Playfair Display', Georgia, serif; --sans: 'Raleway', sans-serif;
+    }
+    body { font-family: var(--sans); color: var(--black); background: var(--white); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+
+    /* SUBHERO */
+    .subhero { background: var(--black); color: white; padding: 4rem 1.5rem 2.4rem; text-align: center; }
+    .subhero .eyebrow { font-size: .66rem; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: .9rem; }
+    .subhero h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(1.9rem,5vw,2.8rem); text-transform: uppercase; letter-spacing: .04em; line-height: 1.1; margin-bottom: 1.8rem; }
+    .subnav { display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem; }
+    .subnav a { font-size: .64rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; color: rgba(255,255,255,.75); text-decoration: none; padding: .55rem 1.2rem; border: 1px solid rgba(255,255,255,.32); transition: all .2s; }
+    .subnav a:hover { border-color: rgba(255,255,255,.7); color: white; }
+    .subnav a.active { background: white; color: var(--black); border-color: white; }
+    .subnav a.back { color: rgba(255,255,255,.5); border-color: transparent; padding-left: .4rem; padding-right: .4rem; }
+    .subnav a.back:hover { color: white; }
+
+    /* SECTIONS */
+    .sec { padding: 4.5rem 2rem; }
+    .wrap { max-width: 1000px; margin: 0 auto; }
+    .tag { font-size: .63rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gray); margin-bottom: .6rem; }
+    h2 { font-family: var(--serif); font-size: clamp(1.4rem,2.6vw,1.95rem); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; margin-bottom: 1.4rem; }
+    h3 { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; letter-spacing: .02em; margin-bottom: .6rem; }
+    p { font-size: .95rem; font-weight: 300; color: #3a3a3a; line-height: 1.85; }
+    p + p { margin-top: .8rem; }
+    strong { font-weight: 600; color: var(--black); }
+    .center { text-align: center; }
+    .hint { font-size: .78rem; color: var(--gray); margin-top: .6rem; }
+
+    /* GUIDE GRID (klikbare tegels) */
+    .guide-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.4rem; margin-top: 2.2rem; }
+    .guide-tile { position: relative; aspect-ratio: 4 / 3; overflow: hidden; cursor: pointer; border: none; padding: 0; display: block; width: 100%; background: var(--black); font-family: inherit; }
+    .guide-tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s ease; }
+    .guide-tile:hover img { transform: scale(1.05); }
+    .guide-tile .tile-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.05) 60%); }
+    .guide-tile .tile-label { position: absolute; left: 0; right: 0; bottom: 0; padding: 1.1rem 1.2rem; text-align: left; color: white; }
+    .guide-tile .tile-eyebrow { font-size: .58rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: .3rem; }
+    .guide-tile .tile-title { font-family: var(--serif); font-weight: 700; font-size: 1.05rem; color: white; line-height: 1.2; }
+    .guide-tile .play-badge { position: absolute; top: .8rem; right: .8rem; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,.92); display: flex; align-items: center; justify-content: center; font-size: .7rem; }
+    .guide-tile.text-tile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .7rem; }
+    .guide-tile.text-tile .big-icon { font-size: 2.2rem; }
+    .guide-tile.text-tile .tile-title-static { font-family: var(--serif); font-weight: 700; font-size: .98rem; text-transform: uppercase; letter-spacing: .04em; color: white; text-align: center; padding: 0 1rem; }
+    .guide-tile.text-tile .tile-eyebrow-static { font-size: .58rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+
+    /* MODAL */
+    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(15,15,15,.86); z-index: 200; align-items: center; justify-content: center; padding: 1.5rem; }
+    .modal-backdrop.open { display: flex; }
+    .modal-box { background: white; max-width: 480px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,.4); }
+    .modal-close { position: absolute; top: .7rem; right: .7rem; width: 34px; height: 34px; border-radius: 50%; background: rgba(0,0,0,.55); color: white; border: none; font-size: 1.1rem; cursor: pointer; z-index: 2; display: flex; align-items: center; justify-content: center; line-height: 1; }
+    .modal-close:hover { background: rgba(0,0,0,.8); }
+    .modal-media { width: 100%; display: block; background: var(--black); }
+    .modal-media img { width: 100%; display: block; }
+    .modal-body { padding: 1.6rem 1.8rem 1.9rem; }
+    .modal-body .tag { margin-bottom: .5rem; }
+    .modal-body h3 { margin-bottom: .8rem; }
+
+    .modal-body ul.modal-list { margin-top: .4rem; padding-left: 1.1rem; }
+    .modal-body ul.modal-list li { font-size: .95rem; font-weight: 300; color: #3a3a3a; line-height: 1.7; margin-bottom: .55rem; }
+    .modal-body ul.modal-list li:last-child { margin-bottom: 0; }
+
+    /* SUBMENU (within modal) */
+    .submenu { display: grid; grid-template-columns: repeat(2, 1fr); gap: .9rem; margin-top: .3rem; }
+    .submenu-item { position: relative; aspect-ratio: 4 / 3; overflow: hidden; cursor: pointer; border: none; padding: 0; display: block; width: 100%; background: var(--black); font-family: inherit; }
+    .submenu-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s ease; }
+    .submenu-item:hover img { transform: scale(1.05); }
+    .submenu-label { position: absolute; left: 0; right: 0; bottom: 0; padding: .55rem .7rem; background: linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,0) 100%); color: white; font-family: var(--serif); font-weight: 700; font-size: .82rem; text-align: left; }
+    .back-link { display: inline-block; font-size: .78rem; font-weight: 600; letter-spacing: .06em; color: var(--gray); text-decoration: none; margin-bottom: .8rem; }
+    .back-link:hover { color: var(--black); }
+
+    .light-sec { background: var(--light); }
+
+    footer { background: var(--black); color: rgba(255,255,255,.38); text-align: center; padding: 1.6rem 2rem; font-size: .7rem; font-weight: 300; letter-spacing: .08em; border-top: 1px solid rgba(255,255,255,.08); }
+    footer a { color: rgba(255,255,255,.55); text-decoration: none; }
+
+    @media (max-width: 720px) {
+      .sec { padding: 3.4rem 1.2rem; }
+      .guide-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .guide-grid { grid-template-columns: 1fr; }
+    }
+  
+    .lang-switch{position:fixed;top:.9rem;right:.9rem;z-index:60;display:flex;background:rgba(255,255,255,.94);border:1px solid #e2dfd8;font-family:'Raleway',sans-serif;font-size:.68rem;letter-spacing:.16em;font-weight:600}
+    .lang-switch a{padding:.42rem .75rem;color:#888;text-decoration:none}
+    .lang-switch a.on{background:#1a1a1a;color:#fff}
+    .ai-note{background:#f4f2ed;border-bottom:1px solid #e2dfd8;font-family:'Raleway',sans-serif;font-size:.74rem;color:#555;text-align:center;padding:.6rem 6.5rem .6rem 1rem;line-height:1.45}
+    @media (max-width:600px){.ai-note{padding:3rem 1rem .6rem;}}
+  </style>
+</head>
+<body>
+<div class="lang-switch"><a href="c3vncftdxw9y4e-handleidingen.html">NL</a><a href="c3vncftdxw9y4e-de-handleidingen.html" class="on">DE</a></div>
+<div class="ai-note">🌐 Diese Seite wurde mit Claude ins Deutsche übersetzt.</div>
+
+<!-- SUBHERO -->
+<div class="subhero">
+  <p class="eyebrow">Coin Castor · Lavaux</p>
+  <h1>Anleitungen</h1>
+  <nav class="subnav">
+    <a class="back" href="c3vncftdxw9y4e-de.html">← Übersicht</a>
+    <a href="c3vncftdxw9y4e-de-algemeen.html">Allgemeine Informationen</a>
+    <a href="c3vncftdxw9y4e-de-tips.html">Tipps für die Umgebung</a>
+    <a class="active" href="c3vncftdxw9y4e-de-handleidingen.html">Anleitungen</a>
+    <a href="c3vncftdxw9y4e-de-vertrek.html">Bei der Abreise</a>
+  </nav>
+</div>
+
+<!-- HANDLEIDINGEN -->
+<section class="sec">
+  <div class="wrap">
+    <div class="center">
+      <p class="tag">📖 So funktioniert's</p>
+      <h2>Anleitungen</h2>
+      <p class="hint">Tippt auf ein Foto für eine kurze Erklärung oder Demo.</p>
+    </div>
+
+    <div class="guide-grid">
+
+      <button class="guide-tile" onclick="openGuide('babybedje')" type="button">
+        <img src="../fotos/Welkomstpagina/Handleidingen/Babybedje/Babybedje.JPG" alt="Babybett"/>
+        <div class="tile-overlay"></div>
+        <span class="tile-label">
+          <span class="tile-eyebrow">Foto</span>
+          <span class="tile-title">Babybett</span>
+        </span>
+      </button>
+
+      <button class="guide-tile text-tile" onclick="openGuide('keuken')" type="button">
+        <span class="big-icon">🍳</span>
+        <span class="tile-eyebrow-static">Erklärung</span>
+        <span class="tile-title-static">Küche</span>
+      </button>
+
+      <button class="guide-tile" onclick="openGuide('kranen')" type="button">
+        <img src="../fotos/Welkomstpagina/Handleidingen/Kranen%20Badkamer/Kranen.jpg" alt="Wasserhahn im Badezimmer"/>
+        <div class="tile-overlay"></div>
+        <span class="play-badge">▶</span>
+        <span class="tile-label">
+          <span class="tile-eyebrow">Video</span>
+          <span class="tile-title">Wasserhähne in den Badezimmern</span>
+        </span>
+      </button>
+
+      <button class="guide-tile" onclick="openGuide('terrasstoeltje')" type="button">
+        <img src="../fotos/Welkomstpagina/Handleidingen/Terrasstoeltje/Terrasstoeltje.JPG" alt="Terrassenstuhl"/>
+        <div class="tile-overlay"></div>
+        <span class="tile-label">
+          <span class="tile-eyebrow">Foto</span>
+          <span class="tile-title">Terrassenstuhl</span>
+        </span>
+      </button>
+
+      <button class="guide-tile text-tile" onclick="openGuide('tvmuziek')" type="button">
+        <span class="big-icon">📺</span>
+        <span class="tile-eyebrow-static">Erklärung</span>
+        <span class="tile-title-static">TV &amp; Musik</span>
+      </button>
+
+      <button class="guide-tile" onclick="openGuide('verwarming')" type="button">
+        <img src="../fotos/Welkomstpagina/Handleidingen/Domotica/Digital%20Black.JPG" alt="Smart-Home-Panel für Heizung und Beleuchtung"/>
+        <div class="tile-overlay"></div>
+        <span class="tile-label">
+          <span class="tile-eyebrow">Foto</span>
+          <span class="tile-title">Heizung</span>
+        </span>
+      </button>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  © Coin Castor · <a href="../index.html">coincastor.be</a>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="if(event.target===this) closeGuide()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeGuide()" aria-label="Schließen">✕</button>
+    <div class="modal-media" id="modalMedia"></div>
+    <div class="modal-body">
+      <p class="tag" id="modalTag">Erklärung</p>
+      <h3 id="modalTitle"></h3>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var guides = {
+    kranen: {
+      title: 'Wasserhähne in den Badezimmern',
+      tag: '🚿 Video',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/Kranen%20Badkamer/Kranen.gif" alt="Demo: Wasserhahn bedienen"/>',
+      body: '<p>Die Wasserhähne funktionieren nicht ganz intuitiv — man dreht sie nicht wie erwartet. <strong>Kippt den Griff</strong> einfach wie im Video, dann kommt das Wasser.</p>'
+    },
+    verwarming: {
+      title: 'Heizung',
+      tag: '🌡️ Erklärung',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/Domotica/Digital%20Black.JPG" alt="Smart-Home-Panel für Heizung und Beleuchtung"/>',
+      body: '<p>Auf dem Bildschirm wählt ihr aus vier Optionen:</p><ul class="modal-list"><li><strong>Heat</strong> (oben links) — heizt jeden Raum automatisch auf 21 °C.</li><li><strong>Cool</strong> (oben rechts) — kühlt jeden Raum automatisch auf 24 °C.</li><li><strong>Ventilatie</strong> (unten links) — ist immer an und belüftet die Badezimmer ausreichend, damit die Luftfeuchtigkeit im Rahmen bleibt.</li><li><strong>Standaard alles uit</strong> (unten rechts) — drückt diese Taste vor der Abreise: Alle Lichter im Haus gehen automatisch aus, außer denen mit Lichtsensor, die sich nach einer Weile von selbst ausschalten.</li></ul>'
+    },
+    tvmuziek: {
+      title: 'TV & Musik',
+      tag: '📺 Wählt einen Bereich',
+      menu: [
+        { id: 'googletv', label: 'Google TV', img: '../fotos/Welkomstpagina/Handleidingen/TV%20%26%20Muziek/Televisie/Google%20TV.JPG' },
+        { id: 'sonos', label: 'Sonos', img: '../fotos/Welkomstpagina/Handleidingen/TV%20%26%20Muziek/Sonos/Sonos.JPG' }
+      ]
+    },
+    keuken: {
+      title: 'Küche',
+      tag: '🍳 Wählt einen Bereich',
+      menu: [
+        { id: 'dampkap', label: 'Dunstabzug', img: '../fotos/Welkomstpagina/Handleidingen/Keuken/Dampkap/Dampkap.JPG' },
+        { id: 'microgolf', label: 'Mikrowelle', img: '../fotos/Welkomstpagina/Handleidingen/Keuken/Microgolf.JPG' },
+        { id: 'oven', label: 'Oven', img: '../fotos/Welkomstpagina/Handleidingen/Keuken/Oven.JPG' },
+        { id: 'vuilnisbakken', label: 'Mülleimer', img: '../fotos/Welkomstpagina/Handleidingen/Keuken/Vuilnisbakken.JPG' }
+      ]
+    },
+    terrasstoeltje: {
+      title: 'Terrassenstuhl',
+      tag: '🪑 Erklärung',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/Terrasstoeltje/Terrasstoeltje.JPG" alt="Terrassenstuhl"/>',
+      body: '<p>Das Kissen für diesen Stuhl findet ihr im <strong>Schrank neben dem Kühlschrank</strong>.</p>'
+    },
+    babybedje: {
+      title: 'Babybett',
+      tag: '🍼 Erklärung',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/Babybedje/Babybedje.JPG" alt="Babybett"/>',
+      body: '<p>Im Haus gibt es <strong>ein Babybett</strong>. Für ein zweites Baby bringt bitte selbst ein Bett mit.</p><p>Es ist ein <strong>Reisebett</strong> mit einer eher dünnen Reisematratze. Wer eine dickere Matratze möchte, bringt sie bitte von zu Hause mit.</p>'
+    }
+  };
+
+  var subguides = {
+    googletv: {
+      title: 'Google TV',
+      tag: '📺 Erklärung',
+      parent: 'tvmuziek',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/TV%20%26%20Muziek/Televisie/Google%20TV.JPG" alt="Google TV"/>',
+      body: '<p>Streamt einfach vom Handy (YouTube, Netflix, Spotify, …), sobald ihr im WLAN seid — wählt in der App <strong>"Woonkamer TV"</strong>.</p>'
+    },
+    sonos: {
+      title: 'Sonos',
+      tag: '🎵 Erklärung',
+      parent: 'tvmuziek',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/TV%20%26%20Muziek/Sonos/Sonos.JPG" alt="Sonos"/>',
+      body: '<p>Die Sonos-Lautsprecher sind verfügbar, sobald ihr mit dem WLAN verbunden seid — wählt in Spotify <strong>"Eetkamer"</strong>.</p>'
+    },
+    dampkap: {
+      title: 'Dunstabzug',
+      tag: '💨 Erklärung',
+      parent: 'keuken',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/Keuken/Dampkap/Dampkap%20afstandsbediening.JPG" alt="Fernbedienung des Dunstabzugs"/>',
+      body: '<p>Richtet die Fernbedienung auf die Lichter an der <strong>rechten Seite</strong> des Dunstabzugs, um ihn einzuschalten.</p>'
+    },
+    microgolf: {
+      title: 'Mikrowelle',
+      tag: '📖 Erklärung',
+      parent: 'keuken',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/Keuken/Microgolf.JPG" alt="Mikrowelle"/>',
+      body: '<p>Wählt oben die Funktion: <strong>Mikrowelle</strong>, <strong>Ofen</strong> oder <strong>Kombi</strong> (Mikrowelle + Ofen). Mit der Einstelltaste wählt ihr die Leistung (Mikrowelle) oder die Temperatur (Ofen), mit den Pfeiltasten die Zeit, und unten rechts drückt ihr auf <strong>Start</strong>. Die Stopptaste pausiert oder bricht ab.</p><p>Unter der Mikrowelle findet ihr eine Schublade mit allen Backblechen und Rosten für beide Öfen.</p><p>Unter <a href="https://www.pelgrim.be/wp-content/uploads/sites/3/2024/09/839466-V2-IFU-Pelgrim-MAC214-OM140-NL_FR_DE_EN-nc.pdf" target="_blank" rel="noopener">diesem Link</a> findet ihr die vollständige Anleitung der Mikrowelle (auch auf Deutsch), falls etwas unklar ist.</p>'
+    },
+    oven: {
+      title: 'Backofen',
+      tag: '🔥 Erklärung',
+      parent: 'keuken',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/Keuken/Oven.JPG" alt="Oven"/>',
+      body: '<p>Haltet die <strong>Ein/Aus-Taste</strong> lange gedrückt, um den Ofen einzuschalten. Dreht am <strong>mittleren Knopf</strong>, um eine Heizart zu wählen (z. B. Heißluft), und drückt ihn zur Bestätigung. Dreht erneut, um die Temperatur einzustellen, und bestätigt wieder. Drückt zum Schluss rechts auf die <strong>Start/Stopp-Taste</strong>, um zu backen.</p><p>Unter <a href="https://www.pelgrim.be/wp-content/uploads/sites/3/2022/07/OP560ZWA_handleiding_nl-fr-de-en.pdf" target="_blank" rel="noopener">diesem Link</a> findet ihr die vollständige Anleitung des Ofens (auch auf Deutsch), falls etwas unklar ist.</p>'
+    },
+    vuilnisbakken: {
+      title: 'Mülleimer',
+      tag: '🗑️ Erklärung',
+      parent: 'keuken',
+      media: '<img src="../fotos/Welkomstpagina/Handleidingen/Keuken/Vuilnisbakken.JPG" alt="Mülleimer"/>',
+      body: '<p>Der <strong>linke Eimer</strong> ist für Restmüll, der <strong>rechte Eimer</strong> für PMD (Plastik, Metall, Getränkekartons). Zusätzliche Säcke liegen im Schrank neben dem Kühlschrank.</p><p>Restmüll wird <strong>montags</strong> abgeholt, PMD <strong>dienstags</strong>.</p><p>Lasst bitte keine Essensreste draußen auf der Terrasse liegen, im Wald leben Waschbären.</p>'
+    }
+  };
+
+  function openGuide(id) {
+    var g = guides[id];
+    if (!g) return;
+    document.getElementById('modalTag').textContent = g.tag;
+    document.getElementById('modalTitle').textContent = g.title;
+    var mediaEl = document.getElementById('modalMedia');
+    var bodyEl = document.getElementById('modalBody');
+    if (g.menu) {
+      mediaEl.innerHTML = '';
+      mediaEl.style.display = 'none';
+      var html = '<div class="submenu">';
+      g.menu.forEach(function (item) {
+        html += '<button class="submenu-item" onclick="openSubGuide(\'' + item.id + '\')" type="button">' +
+                  '<img src="' + item.img + '" alt="' + item.label + '"/>' +
+                  '<span class="submenu-label">' + item.label + '</span>' +
+                '</button>';
+      });
+      html += '</div>';
+      bodyEl.innerHTML = html;
+    } else {
+      bodyEl.innerHTML = g.body;
+      mediaEl.innerHTML = g.media;
+      mediaEl.style.display = g.media ? 'block' : 'none';
+    }
+    document.getElementById('modalBackdrop').classList.add('open');
+  }
+
+  function openSubGuide(id) {
+    var g = subguides[id];
+    if (!g) return;
+    document.getElementById('modalTag').textContent = g.tag;
+    document.getElementById('modalTitle').textContent = g.title;
+    var mediaEl = document.getElementById('modalMedia');
+    mediaEl.innerHTML = g.media;
+    mediaEl.style.display = g.media ? 'block' : 'none';
+    document.getElementById('modalBody').innerHTML =
+      '<a href="#" class="back-link" onclick="event.preventDefault(); openGuide(\'' + g.parent + '\');">← Zurück</a>' + g.body;
+  }
+
+  function closeGuide() {
+    document.getElementById('modalBackdrop').classList.remove('open');
+    document.getElementById('modalMedia').innerHTML = '';
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeGuide();
+  });
+</script>
+
+</body>
+</html>
