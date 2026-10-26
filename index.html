@@ -649,7 +649,7 @@
 
     <!-- Seizoenskalender -->
     <div class="r" style="transition-delay:.22s;margin-top:2rem">
-      <p class="tag" style="margin-bottom:1rem" data-i18n="kal_tag">Seizoenskalender 2025–2026</p>
+      <p class="tag" style="margin-bottom:1rem" data-i18n="kal_tag">Seizoenskalender 2026–2028</p>
 
       <!-- Navigatie + legenda -->
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;gap:1rem;flex-wrap:wrap">
@@ -903,6 +903,7 @@ const MONTHS_SHORT = {
 };
 
 let kalOffset = 0;
+const KAL_LAST_MONTH = new Date(2028, 8, 1); // september 2028
 
 // ── GEBOEKTE PERIODES ──────────────────────────────────────────────────
 // De geboekte periodes worden automatisch live opgehaald uit de gedeelde
@@ -1176,7 +1177,9 @@ function renderKal() {
   }
 
   document.getElementById('kal-prev').disabled = (kalOffset <= -6);
-  document.getElementById('kal-next').disabled = (kalOffset >= 12);
+  // Vooruit bladeren tot en met de zomer van 2028 (laatste getoonde maand: september 2028)
+  const lastShown = new Date(startYear, startMonth + 2, 1);
+  document.getElementById('kal-next').disabled = (lastShown >= KAL_LAST_MONTH);
 }
 
 function kalMove(dir) { kalOffset += (dir * 3); hideTooltip(); renderKal(); }
@@ -1772,7 +1775,7 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       kerst_w2:'Week 2', kerst_w2_s:'Aankomst vanaf 25 december · 7 nachten',
       kerst_vol:'Volle periode', kerst_vol_s:'Aankomst vanaf 18 december · 14 nachten',
       kerst_nacht:'Per nacht', kerst_nacht_s:'Op aanvraag · min. 2 nachten',
-      kal_tag:'Seizoenskalender 2025–2026',
+      kal_tag:'Seizoenskalender 2026–2028',
       leg_seizoen:'Seizoen', leg_beschik:'Beschikbaarheid',
       leg_vrij:'Beschikbaar', leg_geboekt:'Geboekt',
       leg_halve:'Halve dag (aankomst- of vertrekdag — contacteer ons voor de mogelijkheden)',
@@ -1876,7 +1879,7 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       kerst_w2:'Semaine 2', kerst_w2_s:'Arrivée à partir du 25 décembre · 7 nuits',
       kerst_vol:'Période complète', kerst_vol_s:'Arrivée à partir du 18 décembre · 14 nuits',
       kerst_nacht:'Par nuit', kerst_nacht_s:'Sur demande · min. 2 nuits',
-      kal_tag:'Calendrier des saisons 2025–2026',
+      kal_tag:'Calendrier des saisons 2026–2028',
       leg_seizoen:'Saison', leg_beschik:'Disponibilité',
       leg_vrij:'Disponible', leg_geboekt:'Réservé',
       leg_halve:'Demi-journée (jour d\'arrivée ou de départ — contactez-nous pour les possibilités)',
@@ -1980,7 +1983,7 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       kerst_w2:'Week 2', kerst_w2_s:'Arrival from 25 December · 7 nights',
       kerst_vol:'Full period', kerst_vol_s:'Arrival from 18 December · 14 nights',
       kerst_nacht:'Per night', kerst_nacht_s:'On request · min. 2 nights',
-      kal_tag:'Season calendar 2025–2026',
+      kal_tag:'Season calendar 2026–2028',
       leg_seizoen:'Season', leg_beschik:'Availability',
       leg_vrij:'Available', leg_geboekt:'Booked',
       leg_halve:'Half day (arrival or departure day — contact us for the options)',
