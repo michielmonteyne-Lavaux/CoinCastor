@@ -159,7 +159,19 @@
     /* Responsive grids voor seizoenen, kerstperiode en kalender */
     .season-defs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
     .kerst-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #e8e5de; border-radius: 6px; overflow: hidden; }
-    .kal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .kal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; touch-action: pan-y; }
+    .kal-head { display: flex; align-items: center; justify-content: space-between; gap: .4rem; margin-bottom: .75rem; }
+    .kal-head p { flex: 1; font-size: .78rem; font-weight: 600; color: #1a1a1a; text-align: center; margin: 0; }
+    .kal-arrow { width: 32px; height: 32px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; background: white; border: 1px solid #e8e5de; border-radius: 50%; color: #1a1a1a; font-size: .95rem; line-height: 1; cursor: pointer; padding: 0; transition: background .15s, border-color .15s; }
+    @media (hover: hover) { .kal-arrow:hover:not(:disabled) { background: #1a1a1a; border-color: #1a1a1a; color: white; } }
+    .kal-arrow:active:not(:disabled) { background: #f4f2ed; }
+    .kal-arrow:disabled { opacity: .25; cursor: default; }
+    .kal-arrow.ghost { visibility: hidden; }
+    .kal-hint { display: none; text-align: center; font-size: .68rem; font-weight: 300; color: #aaa; margin-top: .6rem; }
+    @media (max-width: 920px) {
+      .kal-arrow { width: 40px; height: 40px; font-size: 1.1rem; }
+      .kal-hint { display: block; }
+    }
 
     /* PRAKTISCH */
     .praktisch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
@@ -698,6 +710,7 @@
 
       <!-- Kalender grid — 3 maanden -->
       <div id="kal-grid" class="kal-grid"></div>
+      <p class="kal-hint" data-i18n="kal_hint">Swipe of gebruik de pijltjes om door de maanden te bladeren</p>
 
       <!-- Boekingsnota -->
       <p style="font-size:.72rem;font-weight:300;color:#aaa;margin-top:.75rem;text-align:center" data-i18n="kal_nota">Klik op een dag voor meer info · Kalender is indicatief, contacteer ons voor definitieve beschikbaarheid</p>
@@ -1043,8 +1056,11 @@ function renderKal() {
   const now = new Date();
   const startMonth = now.getMonth() + kalOffset;
   const startYear = now.getFullYear();
+  const n = kalMonthsPerView();
+  const prevDisabled = (kalOffset <= -6);
+  const nextDisabled = (new Date(startYear, startMonth + n - 1, 1) >= KAL_LAST_MONTH);
 
-  for (let mi = 0; mi < 3; mi++) {
+  for (let mi = 0; mi < n; mi++) {
     const totalMonth = startMonth + mi;
     const year = startYear + Math.floor(totalMonth / 12);
     const month = ((totalMonth % 12) + 12) % 12;
@@ -1053,11 +1069,25 @@ function renderKal() {
     const col = document.createElement('div');
     col.style.cssText = 'background:white;border:1px solid #e8e5de;border-radius:10px;padding:1rem';
 
-    // Maandtitel
+    // Maandtitel met pijltjes: ‹ op de eerste maand, › op de laatste
+    const head = document.createElement('div');
+    head.className = 'kal-head';
+    const mkArrow = (dir, show, disabled) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'kal-arrow' + (show ? '' : ' ghost');
+      b.innerHTML = dir < 0 ? '&#8249;' : '&#8250;';
+      b.setAttribute('aria-label', dir < 0 ? {nl:'Vorige maanden',fr:'Mois précédents',en:'Previous months'}[lang] : {nl:'Volgende maanden',fr:'Mois suivants',en:'Next months'}[lang]);
+      b.disabled = !show || disabled;
+      if (show) b.addEventListener('click', (e) => { e.stopPropagation(); kalMove(dir); });
+      return b;
+    };
+    head.appendChild(mkArrow(-1, mi === 0, prevDisabled));
     const title = document.createElement('p');
     title.textContent = `${MONTHS[lang][month]} ${year}`;
-    title.style.cssText = 'font-size:.78rem;font-weight:600;color:#1a1a1a;margin-bottom:.75rem;text-align:center';
-    col.appendChild(title);
+    head.appendChild(title);
+    head.appendChild(mkArrow(1, mi === n - 1, nextDisabled));
+    col.appendChild(head);
 
     // Dag-headers
     const hrow = document.createElement('div');
@@ -1176,13 +1206,29 @@ function renderKal() {
     grid.appendChild(col);
   }
 
-  document.getElementById('kal-prev').disabled = (kalOffset <= -6);
   // Vooruit bladeren tot en met de zomer van 2028 (laatste getoonde maand: september 2028)
-  const lastShown = new Date(startYear, startMonth + 2, 1);
-  document.getElementById('kal-next').disabled = (lastShown >= KAL_LAST_MONTH);
+  document.getElementById('kal-prev').disabled = prevDisabled;
+  document.getElementById('kal-next').disabled = nextDisabled;
 }
 
-function kalMove(dir) { kalOffset += (dir * 3); hideTooltip(); renderKal(); }
+// Desktop: 3 maanden per keer. Mobiel/tablet: 1 maand per keer, met swipen.
+const KAL_MQ = window.matchMedia('(max-width: 920px)');
+function kalMonthsPerView() { return KAL_MQ.matches ? 1 : 3; }
+function kalMove(dir) { kalOffset += dir * kalMonthsPerView(); hideTooltip(); renderKal(); }
+KAL_MQ.addEventListener('change', () => { hideTooltip(); renderKal(); });
+(function () {
+  const g = document.getElementById('kal-grid');
+  let x0 = null, y0 = null;
+  g.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+  g.addEventListener('touchend', e => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+    x0 = y0 = null;
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    const btn = document.getElementById(dx < 0 ? 'kal-next' : 'kal-prev');
+    if (!btn.disabled) kalMove(dx < 0 ? 1 : -1);
+  }, { passive: true });
+})();
 renderKal();
 
 // ── LIVE GEBOEKTE PERIODES UIT GOOGLE AGENDA ───────────────────────────
@@ -1775,7 +1821,7 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       kerst_w2:'Week 2', kerst_w2_s:'Aankomst vanaf 25 december · 7 nachten',
       kerst_vol:'Volle periode', kerst_vol_s:'Aankomst vanaf 18 december · 14 nachten',
       kerst_nacht:'Per nacht', kerst_nacht_s:'Op aanvraag · min. 2 nachten',
-      kal_tag:'Seizoenskalender 2026–2028',
+      kal_tag:'Seizoenskalender 2026–2028', kal_hint:'Swipe of gebruik de pijltjes om door de maanden te bladeren',
       leg_seizoen:'Seizoen', leg_beschik:'Beschikbaarheid',
       leg_vrij:'Beschikbaar', leg_geboekt:'Geboekt',
       leg_halve:'Halve dag (aankomst- of vertrekdag — contacteer ons voor de mogelijkheden)',
@@ -1879,7 +1925,7 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       kerst_w2:'Semaine 2', kerst_w2_s:'Arrivée à partir du 25 décembre · 7 nuits',
       kerst_vol:'Période complète', kerst_vol_s:'Arrivée à partir du 18 décembre · 14 nuits',
       kerst_nacht:'Par nuit', kerst_nacht_s:'Sur demande · min. 2 nuits',
-      kal_tag:'Calendrier des saisons 2026–2028',
+      kal_tag:'Calendrier des saisons 2026–2028', kal_hint:'Balayez ou utilisez les flèches pour parcourir les mois',
       leg_seizoen:'Saison', leg_beschik:'Disponibilité',
       leg_vrij:'Disponible', leg_geboekt:'Réservé',
       leg_halve:'Demi-journée (jour d\'arrivée ou de départ — contactez-nous pour les possibilités)',
@@ -1983,7 +2029,7 @@ document.getElementById('fb').addEventListener('submit', function(e) {
       kerst_w2:'Week 2', kerst_w2_s:'Arrival from 25 December · 7 nights',
       kerst_vol:'Full period', kerst_vol_s:'Arrival from 18 December · 14 nights',
       kerst_nacht:'Per night', kerst_nacht_s:'On request · min. 2 nights',
-      kal_tag:'Season calendar 2026–2028',
+      kal_tag:'Season calendar 2026–2028', kal_hint:'Swipe or use the arrows to browse the months',
       leg_seizoen:'Season', leg_beschik:'Availability',
       leg_vrij:'Available', leg_geboekt:'Booked',
       leg_halve:'Half day (arrival or departure day — contact us for the options)',
