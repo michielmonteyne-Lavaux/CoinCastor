@@ -1058,7 +1058,7 @@ function renderKal() {
   const startYear = now.getFullYear();
   const n = kalMonthsPerView();
   const prevDisabled = (kalOffset <= -6);
-  const nextDisabled = (new Date(startYear, startMonth + n - 1, 1) >= KAL_LAST_MONTH);
+  const nextDisabled = (kalOffset >= kalMaxOffset());
 
   for (let mi = 0; mi < n; mi++) {
     const totalMonth = startMonth + mi;
@@ -1082,11 +1082,14 @@ function renderKal() {
       if (show) b.addEventListener('click', (e) => { e.stopPropagation(); kalMove(dir); });
       return b;
     };
+    // Desktop: ‹ op de eerste maand, › op de laatste. Mobiel (maanden onder
+    // elkaar): beide pijltjes bovenaan op de eerste maand.
+    const stacked = KAL_MQ.matches;
     head.appendChild(mkArrow(-1, mi === 0, prevDisabled));
     const title = document.createElement('p');
     title.textContent = `${MONTHS[lang][month]} ${year}`;
     head.appendChild(title);
-    head.appendChild(mkArrow(1, mi === n - 1, nextDisabled));
+    head.appendChild(mkArrow(1, stacked ? mi === 0 : mi === n - 1, nextDisabled));
     col.appendChild(head);
 
     // Dag-headers
@@ -1211,11 +1214,22 @@ function renderKal() {
   document.getElementById('kal-next').disabled = nextDisabled;
 }
 
-// Desktop: 3 maanden per keer. Mobiel/tablet: 1 maand per keer, met swipen.
+// Desktop: 3 maanden zichtbaar, mobiel/tablet: 2 maanden onder elkaar.
+// Bij het bladeren blijft telkens één maand overlappen (okt-nov-dec → dec-jan-feb),
+// zodat een verblijf over de maandgrens altijd in beeld blijft.
 const KAL_MQ = window.matchMedia('(max-width: 920px)');
-function kalMonthsPerView() { return KAL_MQ.matches ? 1 : 3; }
-function kalMove(dir) { kalOffset += dir * kalMonthsPerView(); hideTooltip(); renderKal(); }
-KAL_MQ.addEventListener('change', () => { hideTooltip(); renderKal(); });
+function kalMonthsPerView() { return KAL_MQ.matches ? 2 : 3; }
+function kalMaxOffset() {
+  const now = new Date();
+  const monthsToLast = (KAL_LAST_MONTH.getFullYear() - now.getFullYear()) * 12 + (KAL_LAST_MONTH.getMonth() - now.getMonth());
+  return monthsToLast - (kalMonthsPerView() - 1);
+}
+function kalMove(dir) {
+  const step = kalMonthsPerView() - 1;
+  kalOffset = Math.max(-6, Math.min(kalMaxOffset(), kalOffset + dir * step));
+  hideTooltip(); renderKal();
+}
+KAL_MQ.addEventListener('change', () => { kalOffset = Math.min(kalOffset, kalMaxOffset()); hideTooltip(); renderKal(); });
 (function () {
   const g = document.getElementById('kal-grid');
   let x0 = null, y0 = null;
