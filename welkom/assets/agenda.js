@@ -8,7 +8,6 @@
  * niet bevestigd). Oude items mogen blijven staan, ze verschijnen niet meer.
  */
 var COIN_AGENDA = [
-  { start: '2026-09-01', end: '2026-12-01', icon: '🖼️', title: 'Expo "Cheveux & autres poils"', place: 'Espace culturel, Trois-Ponts', desc: 'Kunsttentoonstelling in het cultureel centrum. Di–vr 10u–17u, weekend 14u–17u.', url: 'https://www.ccstp.be/agenda/liste/' },
   { start: '2026-09-15', end: '2026-10-15', icon: '🦌', title: 'Bronstseizoen van de herten', place: 'Overal in de bossen rond het huis', desc: 'Half september tot half oktober burlen de herten. Ga bij valavond even stil buiten staan of wandel naar de bosrand. Kans is groot dat je ze hoort!' },
   { start: '2026-09-25', end: '2026-09-25', icon: '🎉', title: 'Groot feest op de Place du Marché', place: 'Trois-Ponts · 5 min. rijden', desc: 'Dorpsfeest op het marktplein van Trois-Ponts.', url: 'https://www.haute-ardenne.be/en/events' },
   { start: '2026-09-26', end: '2026-09-26', icon: '🚵', title: 'Be Activ-dag', place: 'Baraque de Fraiture · ca. 25 min. rijden', desc: 'Sport- en activiteitendag aan het skistation van Baraque de Fraiture.', url: 'https://www.haute-ardenne.be/en/events' },
