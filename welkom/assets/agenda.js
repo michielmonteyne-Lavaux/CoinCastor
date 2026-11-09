@@ -6,6 +6,8 @@
  * Nieuw item toevoegen: kopieer een regel, vul start/end in (YYYY-MM-DD, end mag
  * gelijk zijn aan start). 'note' = optionele extra waarschuwing (bv. data nog
  * niet bevestigd). Oude items mogen blijven staan, ze verschijnen niet meer.
+ * Optioneel 'fr: { title, place, desc, note }' = Franse tekst, gebruikt op
+ * pagina's met <html lang="fr">.
  */
 var COIN_AGENDA = [
   { start: '2026-09-15', end: '2026-10-15', icon: '🦌', title: 'Bronstseizoen van de herten', place: 'Overal in de bossen rond het huis', desc: 'Half september tot half oktober burlen de herten. Ga bij valavond even stil buiten staan of wandel naar de bosrand. Kans is groot dat je ze hoort!' },
@@ -36,7 +38,7 @@ var COIN_AGENDA = [
   { start: '2026-11-08', end: '2026-11-08', icon: '🧸', title: 'Speelgoedbeurs in Bovigny', place: 'Basisschool Bovigny (Gouvy) · ca. 25 min. rijden', desc: 'Binnen-speelgoedbeurs van de dorpsschool, van 9u tot 14u. Het beste speelgoed is meestal in het eerste uur weg.', url: 'https://www.haute-ardenne.be/en/events' },
   { start: '2026-11-08', end: '2026-11-08', icon: '🎸', title: 'Bluesconcert in de Ferme Madelonne', place: 'Sterpigny (Gouvy) · ca. 30 min. rijden', desc: 'Blues en boogiewoogie met Scarlett Andrews (zang) en Christian Christl (piano) in een sfeervolle brouwerij-boerderij. Om 15u, €10, niet reserveren.', url: 'https://madelonne.be' },
   { start: '2026-11-08', end: '2026-11-08', icon: '📖', title: 'Verhalenfestival Touzazimut: "Échappées"', place: 'Maison Lambert, Vielsalm · ca. 15 min. rijden', desc: 'Grappige en poëtische vertelvoorstelling (in het Frans) door Philippe Sizaire, vanaf 10 jaar. Na afloop een bar en gratis soep. €10, gratis onder 18 jaar.', url: 'https://www.quefaire.be/touzazimut-1-8776358.shtml', note: 'Startuur verschilt per bron (10u of 11u). Even checken.' },
-  { start: '2026-11-13', end: '2026-11-14', icon: '🎷', title: 'Jazzweekend "Hommage à Steve"', place: 'Abbaye de Stavelot · 15 min. rijden', desc: 'Expo en jazzconcerten ter ere van saxofonist Steve Houben.', url: 'https://www.ccstp.be/agenda/liste/' },
+  { start: '2026-11-13', end: '2026-11-14', icon: '🎷', title: 'Jazzweekend "Hommage à Steve"', place: 'Abbaye de Stavelot · 15 min. rijden', desc: 'Expo en jazzconcerten ter ere van saxofonist Steve Houben.', fr: { title: 'Week-end jazz « Hommage à Steve »', place: 'Abbaye de Stavelot · 15 min en voiture', desc: 'Expo et concerts de jazz en hommage au saxophoniste Steve Houben.' }, url: 'https://www.ccstp.be/agenda/liste/' },
   { start: '2026-11-27', end: '2026-12-20', icon: '🎄', title: 'Kerstmarkt Monschau', place: 'Monschau (DE) · ca. 45 min. rijden', desc: 'Sfeervolle kerstmarkt in het verlichte oude stadje. Enkel in de adventsweekends: vr & za 11u–21u, zo 11u–20u.', url: 'https://www.monschau.de/tourismus/weihnachtsmarkt/' },
   { start: '2026-11-27', end: '2027-01-03', icon: '🎄', title: 'Cité de Noël', place: 'Malmedy · 15 min. rijden', desc: 'Kerstmarkt in het centrum van Malmedy.', url: 'https://www.citedenoel.be/', note: 'Vorig jaar liep de markt tot begin januari. Check de website voor de data van dit jaar.' },
   { start: '2026-11-27', end: '2026-12-30', icon: '⛸️', title: 'Village de Noël & schaatsbaan', place: 'Luik · ca. 50 min. rijden', desc: 'Een van de grootste kerstmarkten van België, met een schaatsbaan die meestal tot begin januari open blijft.', url: 'https://www.villagedenoel.be/programme', note: 'Vorig jaar tot 30 december (schaatsbaan tot 3 januari). Check de website voor de data van dit jaar.' },
@@ -50,7 +52,8 @@ var COIN_AGENDA = [
   if (!el) return;
   var sec = el.closest('section');
   var from = el.getAttribute('data-from'), to = el.getAttribute('data-to');
-  var M = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+  var FR = document.documentElement.lang === 'fr';
+  var M = FR ? ['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'] : ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
   function d(s) { var p = s.split('-'); return new Date(+p[0], +p[1]-1, +p[2]); }
   function fmt(s) { var x = d(s); return x.getDate() + ' ' + M[x.getMonth()]; }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
@@ -58,6 +61,7 @@ var COIN_AGENDA = [
     .sort(function (a, b) { return a.start < b.start ? -1 : a.start > b.start ? 1 : 0; });
   if (!items.length) { if (sec) sec.style.display = 'none'; return; }
   el.innerHTML = items.map(function (e) {
+    if (FR && e.fr) e = Object.assign({}, e, e.fr);
     var when = e.start === e.end ? fmt(e.start) : fmt(e.start) + ' – ' + fmt(e.end);
     return '<div class="ag-item">' +
       '<div class="ag-date">' + esc(when) + '</div>' +
@@ -66,7 +70,7 @@ var COIN_AGENDA = [
         '<p class="ag-place">' + esc(e.place) + '</p>' +
         '<p>' + esc(e.desc) + '</p>' +
         (e.note ? '<p class="ag-note">⚠️ ' + esc(e.note) + '</p>' : '') +
-        (e.url ? '<a class="ag-link" href="' + esc(e.url) + '" target="_blank" rel="noopener">Meer info →</a>' : '') +
+        (e.url ? '<a class="ag-link" href="' + esc(e.url) + '" target="_blank" rel="noopener">' + (FR ? 'Plus d’infos →' : 'Meer info →') + '</a>' : '') +
       '</div></div>';
   }).join('');
 })();
