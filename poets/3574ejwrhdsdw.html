@@ -164,7 +164,15 @@
 </div>
 
 <script>
-// ── Boekingen — wordt bijgewerkt telkens er een nieuwe boeking bijkomt ──
+// ── Boekingen ──
+// Sinds nov 2026 komen de boekingen LIVE uit de agenda info@coincastor.be
+// (via POETSINFO_API_URL?action=bookings, zie loadBookings()). Deze lijst
+// hieronder is enkel nog:
+//  - reserve als de agenda even niet bereikbaar is;
+//  - aanvulling: velden die de agenda niet kent (bv. een vertaalde naam of
+//    linnen-info) worden hieruit overgenomen bij dezelfde aankomstdatum, en
+//    het id blijft hetzelfde zodat bestaande feedback/poetstijd gekoppeld blijft.
+// Hij hoeft dus niet meer bijgewerkt te worden bij een nieuwe boeking.
 // type: 'guest' (via Natuurhuisje of ander) of 'private' (Greet en/of Michiel zelf, evt. met vrienden).
 // guestName: gewone string (naam, blijft ongewijzigd in elke taal) OF {nl,fr,ru}
 // voor een beschrijvende label die wél vertaald moet worden (bv. "Greet met vriendinnen").
@@ -173,7 +181,7 @@
 // Feedback wordt NIET hier bewaard — die komt live uit de Apps Script-backend
 // (zie POETSINFO_API_URL hieronder), zodat Irina en Michiel elkaars berichten
 // meteen zien, automatisch vertaald.
-const BOOKINGS = [
+let BOOKINGS = [
   {
     id: 'sep18', type: 'private',
     arrival: '2026-09-18', arrivalTime: null,
@@ -772,7 +780,38 @@ function loadFeedback(){
     .catch(()=>{ /* feedback-server niet bereikbaar — pagina werkt verder zonder */ });
 }
 
+// Boekingen live uit de agenda halen en samenvoegen met de lijst hierboven.
+const FALLBACK_BOOKINGS = BOOKINGS;
+function mergeBooking(live){
+  const old = FALLBACK_BOOKINGS.find(b => b.arrival === live.arrival);
+  const b = Object.assign({}, live, { id: old ? old.id : 'b' + live.arrival });
+  if (old) {
+    ['arrivalTime','departureTime','adults','children','baby','linenProvided'].forEach(k => {
+      if (b[k] == null && old[k] != null) b[k] = old[k];
+    });
+    if (old.guestName && (typeof old.guestName === 'object' || !b.guestName)) b.guestName = old.guestName;
+  }
+  if (b.type === 'guest') {
+    if (!b.arrivalTime) b.arrivalTime = '15:00';
+    if (!b.departureTime) b.departureTime = '11:00';
+  }
+  return b;
+}
+function loadBookings(){
+  if (!POETSINFO_API_URL || POETSINFO_API_URL.indexOf('PLAK_HIER') === 0) return;
+  fetch(POETSINFO_API_URL + '?action=bookings&_=' + Date.now(), { cache: 'no-store' })
+    .then(r => r.json())
+    .then(data => {
+      if (data && data.ok && Array.isArray(data.bookings)) {
+        BOOKINGS = data.bookings.map(mergeBooking);
+        render();
+      }
+    })
+    .catch(()=>{ /* agenda niet bereikbaar — vaste lijst blijft staan */ });
+}
+
 render();
+loadBookings();
 loadFeedback();
 </script>
 </body>

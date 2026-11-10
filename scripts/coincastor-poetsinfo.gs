@@ -25,6 +25,19 @@
  *  6. Kopieer de /exec-URL die je krijgt en bezorg die aan Claude — die
  *     wordt ingevuld als POETSINFO_API_URL in poets/3574ejwrhdsdw.html.
  *
+ * ── BOEKINGEN LIVE UIT DE AGENDA (sinds nov 2026) ──
+ * ?action=bookings leest de agenda info@coincastor.be en geeft de boekingen
+ * terug (naam, data, uren, aantal gasten, linnen). De poetspagina haalt ze
+ * daar live op, dus nieuwe/gewijzigde/geannuleerde boekingen staan er
+ * automatisch op. Wat de pagina herkent in een agenda-afspraak:
+ *   - titel "Naam (6+2+1) — via ..." → volwassenen+kinderen+baby's
+ *     (of in de beschrijving: "6 volwassenen", "2 kinderen", "1 baby")
+ *   - beschrijving met "linnen ... voorzien/inclusief" of "linnen ... NIET"
+ *   - "Privé" in titel of beschrijving → eigen gebruik
+ *   - afspraken die met "AANVRAAG" beginnen worden overgeslagen.
+ * Na het plakken van deze versie: kies "testBoekingen" in de dropdown en
+ * klik Uitvoeren om de agenda-toestemming te geven.
+ *
  * ── NA ELKE CODE-WIJZIGING ──
  * Deploy > Implementaties beheren > potlood-icoon > Versie "Nieuwe versie"
  * > Implementeren. Zonder dit blijft de oude versie actief.
@@ -38,6 +51,9 @@ function doGet(e) {
   try {
     const action = (e.parameter.action || 'list').toString();
 
+    if (action === 'bookings') {
+      return _out({ ok: true, bookings: getBookings_() });
+    }
     if (action === 'save') {
       return _handleSave(e.parameter);
     }
@@ -210,6 +226,74 @@ function getCleanTimeSheet_() {
     sheet.appendRow(['id', 'bookingId', 'at', 'minutes']);
   }
   return sheet;
+}
+
+// ── Boekingen uit de agenda ──
+const BOOKING_CALENDAR_ID = 'info@coincastor.be';
+
+function getBookings_() {
+  const cal = CalendarApp.getCalendarById(BOOKING_CALENDAR_ID);
+  if (!cal) throw new Error('Agenda niet gevonden: ' + BOOKING_CALENDAR_ID);
+  const tz = 'Europe/Brussels';
+  const from = new Date(); from.setDate(from.getDate() - 60);
+  const to = new Date(); to.setFullYear(to.getFullYear() + 2);
+  const fmtD = d => Utilities.formatDate(d, tz, 'yyyy-MM-dd');
+  const fmtT = d => Utilities.formatDate(d, tz, 'HH:mm');
+
+  return cal.getEvents(from, to)
+    .filter(ev => !/^\s*AANVRAAG/i.test(ev.getTitle()))
+    .map(ev => {
+      const title = ev.getTitle() || '';
+      const desc = ev.getDescription() || '';
+      const allDay = ev.isAllDayEvent();
+      const start = ev.getStartTime();
+      let end = ev.getEndTime();
+      if (allDay) end = new Date(end.getTime() - 12 * 3600 * 1000); // einddatum is exclusief
+
+      // aantallen: eerst "(a+b+c)" in de titel, anders de beschrijving
+      let adults = null, children = null, baby = null;
+      const m = title.match(/\((\d+)\s*\+\s*(\d+)(?:\s*\+\s*(\d+))?\)/);
+      if (m) {
+        adults = +m[1]; children = +m[2]; baby = m[3] != null ? +m[3] : 0;
+      } else {
+        const a = desc.match(/(\d+)\s*volwassen/i);
+        const k = desc.match(/(\d+)\s*kind/i);
+        const b = desc.match(/(\d+)\s*bab/i);
+        if (a) { adults = +a[1]; children = k ? +k[1] : 0; baby = b ? +b[1] : 0; }
+      }
+
+      // linnen
+      let linen = null;
+      const lines = desc.split(/[\n.]/).filter(l => /linnen/i.test(l));
+      if (lines.some(l => /niet/i.test(l))) linen = false;
+      else if (lines.some(l => /voorzien|inclusief|inbegrepen/i.test(l))) linen = true;
+
+      const priv = /priv[ée]/i.test(title + ' ' + desc);
+
+      let name = title
+        .replace(/^\s*(GEBOEKT|Coin Castor)\s*[—–-]\s*/i, '')
+        .replace(/\s*\(.*?\)\s*/g, ' ')
+        .replace(/\s+[—–-]\s+.*$/, '') // alles na ' — ' weg (niet het streepje in 'Anna-Nora')
+        .trim();
+      if (/^priv[ée]/i.test(name)) name = null;
+
+      return {
+        type: priv ? 'private' : 'guest',
+        arrival: fmtD(start), arrivalTime: allDay ? null : fmtT(start),
+        departure: fmtD(end), departureTime: allDay ? null : fmtT(end),
+        guestName: name || null,
+        adults: adults, children: children, baby: baby,
+        linenProvided: priv ? null : linen,
+      };
+    });
+}
+
+/**
+ * TESTFUNCTIE — selecteer "testBoekingen" en klik Uitvoeren (geeft ook de
+ * nodige toestemming voor de agenda). Toont wat de poetspagina zal zien.
+ */
+function testBoekingen() {
+  Logger.log(JSON.stringify(getBookings_(), null, 2));
 }
 
 /**
